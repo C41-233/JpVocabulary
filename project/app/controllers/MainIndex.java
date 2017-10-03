@@ -1,16 +1,11 @@
 package controllers;
 
-import play.*;
-import play.mvc.*;
+import core.controller.HtmlControllerBase;
 
-import java.util.*;
-
-import models.*;
-
-public class MainIndex extends Controller {
+public final class MainIndex extends HtmlControllerBase {
 
     public static void index() {
-        render("application/index.html");
+        render("index");
     }
 
 }

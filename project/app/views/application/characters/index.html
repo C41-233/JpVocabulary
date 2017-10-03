@@ -1,0 +1,60 @@
+#{meta /}
+
+#{body}
+
+<div class="container">
+	<div class="row">
+		<div class="col-lg-2 col-sm-3 col-xs-6">
+			<div id="left-list">
+				#{list items:indexes, as:'index'}
+					<a class="left-list-header">${index.name}</a>
+					<ul class="left-list-content">
+						#{list items:index.items, as:'item'}
+							<li><a href="">${item}</a></li>
+						#{/list}
+					</ul>
+				#{/list}
+			</div>
+		</div>
+		<div class="col-lg-10 col-sm-9 col-lg-xs-6">
+			123
+		</div>
+	</div>
+</div>
+
+#{/body}
+
+#{stylesheet}
+	#left-list .left-list-header{
+		display:	inline-block;
+		width:		100%;
+		cursor:		pointer;
+		text-decoration:	none;
+	}
+	#left-list .left-list-content{
+		padding-left:	0;
+		padding-right:	0;
+	}
+	#left-list .left-list-content a{
+		display:	inline-block;
+		width:		100%;
+		text-decoration:	none;
+		padding-left:	15%;
+	}
+	#left-list .left-list-content{
+		background-color: #f6f6f6;
+	}
+	#left-list .left-list-content li:hover{
+		background-color:	#f0f0f0;
+	}
+#{/stylesheet}
+
+#{javascript}
+	$(function(){
+		$("#left-list").accordion({
+			header: ".left-list-header",
+			heightStyle: "content",
+			event: "hoverintent",
+		})
+	})
+#{/javascript}

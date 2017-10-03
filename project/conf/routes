@@ -6,4 +6,4 @@ GET		/public/images/							staticDir:public/images/
 GET		/public/fonts/							staticDir:public/fonts/
 
 GET     /                                       MainIndex.index
-GET		/characters								MainIndex.index
+GET		/characters								characters.CharacterIndex.index
