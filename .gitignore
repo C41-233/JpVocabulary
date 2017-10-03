@@ -1,2 +1,3 @@
-bytecode
-classes
+/project/tmp/bytecode/*
+/project/tmp/classes/*
+/project/eclipse/classes/*
