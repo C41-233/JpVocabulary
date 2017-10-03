@@ -1,0 +1,2 @@
+# JpVocabulary
+Japanese vocabulary
