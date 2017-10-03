@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>JpVocabulary</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+		<nature>org.playframework.playclipse.playNature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>public/docviewer</name>
+			<type>2</type>
+			<location>G:/workspace/JpVocabulary/play-1.4.4/modules/docviewer/public</location>
+		</link>
+	</linkedResources>
+</projectDescription>
