@@ -19,7 +19,7 @@
 		<link>
 			<name>public/docviewer</name>
 			<type>2</type>
-			<location>G:/workspace/JpVocabulary/play-1.4.4/modules/docviewer/public</location>
+			<location>play-1.4.4/modules/docviewer/public</location>
 		</link>
 	</linkedResources>
 </projectDescription>
