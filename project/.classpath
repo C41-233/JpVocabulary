@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry excluding="japidviews/**|rythm/**|views/**" kind="src" path="app"/>
+	<classpathentry kind="src" path="base"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="play-1.4.4/framework/play-1.4.4.jar" sourcepath="play-1.4.4/framework/src"/>
 	<classpathentry kind="lib" path="play-1.4.4/framework/lib/activation-1.1.1.jar"/>
