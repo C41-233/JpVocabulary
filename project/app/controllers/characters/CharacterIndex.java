@@ -1,16 +1,17 @@
 package controllers.characters;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-
-import com.sun.tracing.dtrace.ProviderAttributes;
 
 import base.utility.Strings;
 import core.controller.HtmlControllerBase;
 import core.controller.validation.Length;
 import logic.characters.CharacterIndexManager;
 import logic.characters.ICharacterIndexGroup;
+import sun.launcher.resources.launcher;
+import sun.security.mscapi.PRNG;
 
 public final class CharacterIndex extends HtmlControllerBase{
 
@@ -23,8 +24,9 @@ public final class CharacterIndex extends HtmlControllerBase{
 	){
 		String argGroup = String.valueOf(index.charAt(0)).toUpperCase();
 		
+		//索引
 		boolean find = false;
-		List<CharacterIndexVO> indexes = new ArrayList<>();
+		List<CharacterIndexVO> indexesVO = new ArrayList<>();
 		
 		{
 			int seq = 0;
@@ -38,12 +40,12 @@ public final class CharacterIndex extends HtmlControllerBase{
 						find = true;
 					}
 				}
-				indexes.add(vo);
+				indexesVO.add(vo);
 				seq++;
 			}
 		}
 		
-		renderArgs.put("indexes", indexes);
+		renderArgs.put("indexes", indexesVO);
 		
 		Arg arg = new Arg();
 		arg.group = argGroup;
@@ -54,6 +56,34 @@ public final class CharacterIndex extends HtmlControllerBase{
 			notFound(Strings.format("%s not found.", index));
 		}
 		
+		//汉字组
+		List<SimpleCharacterGroup> characterGroupsVO = new ArrayList<>();
+		//debug
+		{
+			SimpleCharacterGroup group = new SimpleCharacterGroup();
+			group.name = "ai1";
+			
+			SimpleCharacterVO character = new SimpleCharacterVO();
+			group.characters.add(character);
+			character.jp = "我";
+			character.cn = "我";
+			
+			SimpleCharacterSyllable pron = new SimpleCharacterSyllable();
+			character.syllables.add(pron);
+			pron.value = "あいお";
+			
+			WordPairVO pair = new WordPairVO();
+			pron.words.add(pair);
+			pron.words.add(pair);
+			pair.syllable = "いき";
+			pair.word = "生き";
+			
+			character.fixwords.add(pair);
+			character.fixwords.add(pair);
+			
+			characterGroupsVO.add(group);
+		}
+		renderArgs.put("characterGroups", characterGroupsVO);
 		render("characters/index");
 	}
 	
@@ -66,6 +96,28 @@ public final class CharacterIndex extends HtmlControllerBase{
 	private static class Arg{
 		String group;
 		String index;
+	}
+	
+	private static class SimpleCharacterGroup{
+		String name;
+		List<SimpleCharacterVO> characters = new ArrayList<>();
+	}
+	
+	private static class SimpleCharacterVO{
+		String jp;
+		String cn;
+		List<SimpleCharacterSyllable> syllables = new ArrayList<>();
+		List<WordPairVO> fixwords = new ArrayList<>();
+	}
+
+	private static class SimpleCharacterSyllable{
+		String value;
+		List<WordPairVO> words = new ArrayList<>();
+	}
+	
+	private static class WordPairVO{
+		String word;
+		String syllable;
 	}
 	
 }

@@ -2,4 +2,7 @@
 	#{js}
 		#{doBody /}
 	#{/js}
+	#{if _arg}
+		#{import-js _arg /}
+	#{/if}
 #{/set}

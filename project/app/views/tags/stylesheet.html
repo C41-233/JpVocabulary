@@ -2,4 +2,7 @@
 	#{css}
 		#{doBody/}
 	#{/css}
+	#{if _arg}
+		#{import-css _arg/}
+	#{/if}
 #{/set}

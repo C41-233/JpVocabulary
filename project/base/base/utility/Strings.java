@@ -1,9 +1,9 @@
 package base.utility;
 
-public final class Strings {
+import base.core.StaticClass;
 
-	private Strings() {}
-	
+public final class Strings extends StaticClass{
+
 	public static String format(String format, Object... args) {
 		if(args.length == 0) {
 			return format;

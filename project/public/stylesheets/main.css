@@ -6,3 +6,15 @@
 	display:	inline-block;
 }
 
+.font-jp{
+	font-family: "MS PGothic";
+}
+
+.vertical-middle{
+	vertical-align:	middle;
+}
+
+textarea{
+	width:	100%;
+	resize:	none;
+}

@@ -59,5 +59,62 @@
 		return $this
 	}
 	
-})(window.jQuery)
+})(window.jQuery);
 
+//validate
+(function($){
+
+	$.fn.extend({
+		"validate": function(option){
+			if(option === "clear"){
+				clear(this)
+				return this
+			}
+			else if(option === "hasError"){
+				return this.find(".validate-error").length>0
+			}
+			else if(typeof(option)=="object"){
+				for(var key in option){
+					this.find(key).each(function(){
+						bind($(this), option[key])
+					})
+				}
+				return this
+			}
+		}
+	})
+	
+	function clear(obj){
+		obj.find(".validate-error").tooltip("hide").data("tooltip-title", "")
+		obj.find(".validate-error").removeClass("validate-error")
+		obj.find("input, textarea").val("").trigger("validate.check")
+	}
+	
+	function bind(obj, func){
+		obj.on("validate.check", function(){
+			var rst = func($(this).val())
+			if(rst === true){
+				$(this).removeClass("validate-error")
+				$(this).data("tooltip-title", "").tooltip("hide")
+			}
+			else if(rst === false){
+				$(this).addClass("validate-error")
+				$(this).data("tooltip-title", "").tooltip("hide")
+			}
+			else if(typeof(rst)=="string"){
+				$(this).addClass("validate-error")
+				$(this).data("tooltip-title", rst).tooltip("show")
+			}
+		}).bind("input", function(){
+			$(this).trigger("validate.check")
+		}).trigger("validate.check")
+		
+		obj.tooltip({
+			title: function(){
+				return $(this).data("tooltip-title")
+			},
+			trigger: "manual",
+			animation: false
+		})
+	}
+})(window.jQuery);

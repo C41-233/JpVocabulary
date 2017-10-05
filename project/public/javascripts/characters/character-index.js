@@ -1,0 +1,64 @@
+$(function(){
+	$("#left-list").accordion({
+		header: ".left-list-header",
+		heightStyle: "content",
+		event: "hoverintent",
+		collapsible: true,
+		active: $("#left-list .left-list-header-active").data("seq"),
+	})
+	
+	$("#dialog-import-character").dialog({
+		autoOpen: false,
+		modal: true,
+		resizable: false,
+		draggable: false,
+		width:	260,
+		buttons: {
+			"创建": doImportCharacter,
+			"取消": function(){
+				$(this).dialog("close")
+			}
+		},
+		close: function(){
+			$(this).validate("clear")
+		}
+	})
+	$("#btn-import-character").click(function(){
+		$("#dialog-import-character").dialog("open")
+	})
+	
+	
+	$("#dialog-import-character").validate({
+		"#import-character-input-jp": function(val){
+			return val.length == 1
+		},
+		"#import-character-input-cn": function(val){
+			return val.length == 1
+		},
+		"#import-character-input-pinyin": function(val){
+			var tokens = []
+			var error = false
+			foreach(val.split("\n"), function(token){
+				token = token.trim()
+				if(token != ""){
+					if(!token.match(/^[a-z]{1,6}[1-4]$/)){
+						error = token
+						return false
+					}
+					tokens.push(token)
+				}
+			})
+			if(error){
+				return error + "不符合拼音规范"
+			}
+			if(tokens.length == 0){
+				return false
+			}
+			return true
+		}
+	})
+	
+	function doImportCharacter(){
+		return
+	}
+})

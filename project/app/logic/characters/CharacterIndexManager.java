@@ -6,9 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import base.core.StaticClass;
 import base.io.LineReader;
 
-public final class CharacterIndexManager {
+public final class CharacterIndexManager extends StaticClass{
 
 	private static final File file = new File("conf/index/characters.index");
 	

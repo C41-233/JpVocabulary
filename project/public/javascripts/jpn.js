@@ -13,7 +13,7 @@ global.foreach = function(obj, func){
 	}
 }
 
-global.Array.copy = function(){
+Array.copy = function(){
 	if(arguments.length == 2){
 		var array = arguments[0]
 		var start = arguments[1]
@@ -22,6 +22,12 @@ global.Array.copy = function(){
 			rst.push(array[i])
 		}
 		return rst
+	}
+}
+
+if(!String.prototype.trim){
+	String.prototype.trin = function(){
+		return this.replace(/(^\s*)|(\s*$)/g, "")
 	}
 }
 

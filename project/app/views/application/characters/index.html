@@ -1,10 +1,14 @@
 #{meta /}
 
+#{stylesheet "characters/character-index.css"/}
+#{javascript "characters/character-index.js"/}
+
 #{body}
 
 <div class="container">
 	<div class="row">
 		<div class="col-lg-2 col-sm-3 col-xs-6">
+			<h3>汉字</h3>
 			<div id="left-list">
 				#{list items:indexes, as:'index'}
 					<a class="left-list-header #{if arg.group==index.name}left-list-header-active#{/if}" data-seq="${index.seq}">${index.name}</a>
@@ -16,55 +20,68 @@
 				#{/list}
 			</div>
 		</div>
-		<div class="col-lg-10 col-sm-9 col-lg-xs-6">
-			123
+		<div class="col-lg-10 col-sm-9 col-xs-6">
+			<div class="row">
+				<div class="col-lg-10">
+					<h3>${arg.index}</h3>
+				</div>
+				<div class="col-lg-2">
+					<button class="btn btn-default" id="btn-import-character">添加汉字</button>
+				</div>
+			</div>
+			<hr/>
+			#{list items:characterGroups, as:'group'}
+				<div class="character-group">
+					<div class="character-group-name">${group.name}</div>
+					<div class="div-characters">
+						#{list items:group.characters, as:'character'}
+							<div class="div-character">
+								<span class="character-jp font-jp">${character.jp}</span>
+								<span class="character-cn">${character.cn}</span>
+								<div class="div-character-syllables">
+									#{list items:character.syllables, as:'syllable'}
+										<div class="syllable-value font-jp">${syllable.value}</div>
+										<div class="div-syallable-words">
+											#{list items:syllable.words, as:'word'}
+												<li class="syllable-word">
+													<span class="font-jp">${word.word}</span>
+													<span>(<span class="font-jp">${word.syllable}</span>)</span>
+												</li>
+											#{/list}
+										</div>
+									#{/list}
+								</div>
+								<div class="div-fixwords">
+									#{list items:character.fixwords, as:'word'}
+										<div class="fixword">
+											<span class="font-jp">${word.word}</span>
+											<span>(<span class="font-jp">${word.syllable}</span>)</span>
+										</div>
+									#{/list}
+								</div>
+							</div>
+						#{/list}
+					</div>
+				</div>
+			#{/list}
 		</div>
 	</div>
 </div>
 
+<div id="dialog-import-character" title="创建汉字">
+	<div>
+		<form class="form-inline">
+			<div class="form-group">
+				<input type="text" id="import-character-input-jp" class="form-control" placeholder="日式汉字">
+			</div>
+			<div class="form-group">
+				<input type="text" id="import-character-input-cn" class="form-control" placeholder="中式汉字">
+			</div>
+			<div class="form-group">
+				<textarea id="import-character-input-pinyin" class="form-control" placeholder="每行一个拼音"></textarea>
+			</div>
+		</form>
+	</div>
+</div>
+
 #{/body}
-
-#{stylesheet}
-	#left-list .left-list-header{
-		display:	inline-block;
-		width:		100%;
-		cursor:		pointer;
-		text-decoration:	none;
-	}
-	#left-list .left-list-content{
-		padding-left:	0;
-		padding-right:	0;
-	}
-	#left-list .left-list-content a{
-		display:	inline-block;
-		width:		100%;
-		text-decoration:	none;
-		padding-left:	15%;
-	}
-	#left-list .left-list-content{
-		background-color: #f6f6f6;
-	}
-	#left-list .left-list-content li.active{
-		background-color:	#faa523;
-		font-weight:		bold;
-	}
-	#left-list .left-list-content li:hover{
-		background-color:	#007fff;
-	}
-	#left-list .left-list-header-active{
-		font-weight:		bold;
-		background-color:	#faa523;
-	}
-#{/stylesheet}
-
-#{javascript}
-	$(function(){
-		$("#left-list").accordion({
-			header: ".left-list-header",
-			heightStyle: "content",
-			event: "hoverintent",
-			collapsible: true,
-			active: $("#left-list .left-list-header-active").data("seq"),
-		})
-	})
-#{/javascript}

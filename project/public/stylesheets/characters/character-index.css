@@ -1,0 +1,102 @@
+/*Ë÷Òý*/
+#left-list .left-list-header{
+	display:	inline-block;
+	width:		100%;
+	cursor:		pointer;
+	text-decoration:	none;
+}
+#left-list .left-list-content{
+	padding-left:	0;
+	padding-right:	0;
+}
+#left-list .left-list-content a{
+	display:	inline-block;
+	width:		100%;
+	text-decoration:	none;
+	padding-left:	15%;
+}
+#left-list .left-list-content{
+	background-color: #f6f6f6;
+}
+#left-list .left-list-content li.active{
+	background-color:	#faa523;
+	font-weight:		bold;
+}
+#left-list .left-list-content li:hover{
+	background-color:	#007fff;
+}
+#left-list .left-list-header-active{
+	font-weight:		bold;
+	background-color:	#faa523;
+}
+
+/*ºº×Ö×é*/
+.character-group-name{
+	background-color:	#f6f6f6;
+	font-weight:		bold;
+}
+.div-characters{
+	padding-left:	20px;
+}
+.character-jp, .character-cn{
+	display:	inline-block;
+}
+.character-jp{
+	font-size:		24px;
+}
+.character-cn{
+	font-size:		22px;
+}
+
+.div-character-syllables{
+	padding-left:	20px;
+}
+.syllable-value{
+	font-weight:	bold;
+}
+.div-syallable-words{
+	padding-left:	20px;
+}
+.syllable-word{
+	list-style-type:	none;
+	display:	inline-block;
+}
+
+.syllable-word+.syllable-word{
+	list-style-type:	none;
+	display:	inline-block;
+	margin-left:	20px;
+}
+
+.div-fixwords{
+	padding-left:	20px;
+}
+.fixword>span:nth-child(1){
+	font-weight:	bold;
+}
+
+#import-character-input-jp,
+#import-character-input-cn{
+	width:			100px;
+}
+
+#import-character-input-pinyin{
+	width:			205px;
+}
+
+#dialog-import-character .form-group{
+	margin-bottom:	10px;
+}
+
+.ui-widget-overlay{
+	opacity:		0.4;
+}
+.ui-dialog-titlebar-close{
+	display:		none;
+}
+.ui-dialog-buttonset button{
+	border:			1px solid transparent;
+	border-radius:	4px;
+	background-image: linear-gradient(to bottom,#fff 0,#e0e0e0 100%);
+	border-color:	#ccc;
+}

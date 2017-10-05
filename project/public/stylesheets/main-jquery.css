@@ -1,0 +1,3 @@
+.validate-error, .validate-error:focus{
+	border-color:	red;
+}
