@@ -7,10 +7,10 @@
 		<div class="col-lg-2 col-sm-3 col-xs-6">
 			<div id="left-list">
 				#{list items:indexes, as:'index'}
-					<a class="left-list-header">${index.name}</a>
+					<a class="left-list-header #{if arg.group==index.name}left-list-header-active#{/if}" data-seq="${index.seq}">${index.name}</a>
 					<ul class="left-list-content">
 						#{list items:index.items, as:'item'}
-							<li><a href="">${item}</a></li>
+							<li class="#{if arg.index==item}active#{/if}"><a href="@{characters.CharacterIndex.page(item)}">${item}</a></li>
 						#{/list}
 					</ul>
 				#{/list}
@@ -44,8 +44,16 @@
 	#left-list .left-list-content{
 		background-color: #f6f6f6;
 	}
+	#left-list .left-list-content li.active{
+		background-color:	#faa523;
+		font-weight:		bold;
+	}
 	#left-list .left-list-content li:hover{
-		background-color:	#f0f0f0;
+		background-color:	#007fff;
+	}
+	#left-list .left-list-header-active{
+		font-weight:		bold;
+		background-color:	#faa523;
 	}
 #{/stylesheet}
 
@@ -55,6 +63,8 @@
 			header: ".left-list-header",
 			heightStyle: "content",
 			event: "hoverintent",
+			collapsible: true,
+			active: $("#left-list .left-list-header-active").data("seq"),
 		})
 	})
 #{/javascript}
