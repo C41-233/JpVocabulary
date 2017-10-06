@@ -5,7 +5,7 @@
 <div class="container">
 	<form class="row" method="GET" action="/">
 		<div class="col-lg-12">
-			<h1 class="text-center">Japanese Vocabulary</h1>
+			<h1 class="text-center" id="logo">Japanese Vocabulary</h1>
 		</div>
 		<div class="col-lg-12">
 			<input type="text" class="form-control" name="q" value="${request.params.get('q')}" id="input-text">
@@ -16,7 +16,7 @@
 	</form>
 	<div class="row">
 		<div class="col-lg-6">
-			<table class="table input-table">
+			<table class="table input-table font-jp">
 				<tr>
 					<td>あ</td><td>い</td><td>う</td><td>え</td><td>お</td>
 				</tr>
@@ -29,15 +29,74 @@
 				<tr>
 					<td>た</td><td>ち</td><td>つ</td><td>て</td><td>と</td>
 				</tr>
+				<tr>
+					<td>な</td><td>に</td><td>ぬ</td><td>ね</td><td>の</td>
+				</tr>
+				<tr>
+					<td>は</td><td>ひ</td><td>ふ</td><td>へ</td><td>ほ</td>
+				</tr>
+				<tr>
+					<td>ま</td><td>み</td><td>む</td><td>め</td><td>も</td>
+				</tr>
+				<tr>
+					<td>や</td><td></td><td>ゆ</td><td></td><td>よ</td>
+				</tr>
+				<tr>
+					<td>ら</td><td>り</td><td>る</td><td>れ</td><td>ろ</td>
+				</tr>
+				<tr>
+					<td>わ</td><td></td><td></td><td></td><td>を</td>
+				</tr>
+				<tr>
+					<td>ん</td><td></td><td></td><td></td><td></td>
+				</tr>
+			</table>
+			<table class="table input-table font-jp">
+				<tr>
+					<td>ぁ</td><td>ぃ</td><td>ぅ</td><td>ぇ</td><td>ぉ</td>
+				</tr>
+				<tr>
+					<td>が</td><td>ぎ</td><td>ぐ</td><td>げ</td><td>ご</td>
+				</tr>
+				<tr>
+					<td>ざ</td><td>じ</td><td>ず</td><td>ぜ</td><td>ぞ</td>
+				</tr>
 			</table>
 		</div>
 		<div class="col-lg-6">
-			<table class="table input-table">
+			<table class="table input-table font-jp">
 				<tr>
 					<td>ア</td><td>イ</td><td>ウ</td><td>エ</td><td>オ</td>
 				</tr>
 				<tr>
 					<td>カ</td><td>キ</td><td>ク</td><td>ケ</td><td>コ</td>
+				</tr>
+				<tr>
+					<td>サ</td><td>シ</td><td>ス</td><td>セ</td><td>ソ</td>
+				</tr>
+				<tr>
+					<td>タ</td><td>チ</td><td>ツ</td><td>テ</td><td>ト</td>
+				</tr>
+				<tr>
+					<td>ナ</td><td>ニ</td><td>ヌ</td><td>ネ</td><td>ノ</td>
+				</tr>
+				<tr>
+					<td>ハ</td><td>ヒ</td><td>フ</td><td>ヘ</td><td>ホ</td>
+				</tr>
+				<tr>
+					<td>マ</td><td>ミ</td><td>ム</td><td>メ</td><td>モ</td>
+				</tr>
+				<tr>
+					<td>ヤ</td><td></td><td>ユ</td><td></td><td>ヨ</td>
+				</tr>
+				<tr>
+					<td>ラ</td><td>リ</td><td>ル</td><td>レ</td><td>ロ</td>
+				</tr>
+				<tr>
+					<td>ワ</td><td></td><td></td><td></td><td>ヲ</td>
+				</tr>
+				<tr>
+					<td>ン</td><td></td><td></td><td></td><td></td>
 				</tr>
 			</table>
 		</div>
@@ -52,8 +111,15 @@
 		margin-bottom:	5px;
 		width:	70px;
 	}
+	#logo{
+		margin-bottom:	15px;
+	}
 	.input-table td{
 		text-align:	center;
+	}
+	.input-table td.placeholder:hover{
+		background-color:	white;
+		cursor:	auto;
 	}
 	.input-table td:hover{
 		background-color:	#f5f5f5;
@@ -66,9 +132,16 @@
 		var $field = $("#input-text")
 		$field.focus()
 		
-		$(".input-table td").click(function(){
+		$(".input-table td").each(function(){
 			var value = $(this).text()
-			$field.selection("insert", value).focus()
+			if(!value){
+				$(this).addClass("placeholder")
+			}
+		}).click(function(){
+			var value = $(this).text()
+			if(value){
+				$field.selection("insert", value).focus()
+			}
 		})
 	})
 #{/javascript}
