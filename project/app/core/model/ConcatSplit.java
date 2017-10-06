@@ -19,4 +19,16 @@ public final class ConcatSplit extends StaticClass{
 		return rst;
 	}
 
+	public static String concat(List<String> s) {
+		StringBuilder sb = new StringBuilder();
+		for(String token : s) {
+			token = token.trim();
+			if(token.isEmpty()==false) {
+				sb.append("|").append(token);
+			}
+		}
+		sb.append("|");
+		return sb.toString();
+	}
+
 }

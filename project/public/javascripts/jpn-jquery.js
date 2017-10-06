@@ -71,7 +71,7 @@
 				return this
 			}
 			else if(option === "hasError"){
-				return this.find(".validate-error").length>0
+				return this.find(".validate-error").length > 0
 			}
 			else if(typeof(option)=="object"){
 				for(var key in option){
@@ -116,5 +116,35 @@
 			trigger: "manual",
 			animation: false
 		})
+	}
+})(window.jQuery);
+
+//ajax
+(function($){
+	global.Action = {
+		post: function(){
+			var url, data = {}, success, fail, complete
+			dispatch(
+				["string", "object", "function", function(_url, _data, _success){
+					url = _url
+					data = _data
+					success = _success
+				}],
+				["string", "function", function(_url, _success){
+					url = _url
+					success = _success
+				}]
+			)
+			$.post(url, data, function(data){
+				if(data.result == 0){
+					success(data)
+				}
+				else{
+					alert(data.message)
+				}
+			}).fail(function(data){
+				alert(data)
+			})
+		}
 	}
 })(window.jQuery);

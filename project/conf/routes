@@ -8,3 +8,5 @@ GET		/public/fonts/							staticDir:public/fonts/
 GET     /                                       MainIndex.index
 GET		/characters								characters.CharacterIndex.index
 GET		/characters/{index}						characters.CharacterIndex.page
+
+POST	/characters/create						characters.CharacterAPI.create

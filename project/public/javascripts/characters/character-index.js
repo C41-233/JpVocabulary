@@ -14,7 +14,25 @@ $(function(){
 		draggable: false,
 		width:	260,
 		buttons: {
-			"创建": doImportCharacter,
+			"创建": function(){
+				if($("#dialog-import-character").validate("hasError")){
+					return
+				}
+				var jp = $("#import-character-input-jp").val()
+				var cn = $("#import-character-input-cn").val()
+				
+				var tokens = []
+				foreach($("#import-character-input-pinyin").val().split("\n"), function(token){
+					token = token.trim()
+					if(token != ""){
+						tokens.push(token)
+					}
+				})
+				
+				Action.post("/characters/create", {jp: jp, cn: cn, pinyins: tokens}, function(data){
+					
+				})
+			},
 			"取消": function(){
 				$(this).dialog("close")
 			}
@@ -58,7 +76,4 @@ $(function(){
 		}
 	})
 	
-	function doImportCharacter(){
-		return
-	}
 })

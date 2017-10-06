@@ -7,12 +7,6 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.PARAMETER)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Length {
+public @interface Required {
 
-	int min() default 0;
-
-	int max() default Integer.MAX_VALUE;
-	
-	int value() default 0;
-	
 }
