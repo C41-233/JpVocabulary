@@ -1,5 +1,7 @@
 package models;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -7,13 +9,17 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import com.google.gson.JsonObject;
+import com.mysql.fabric.xmlrpc.base.Array;
 
 import base.utility.assertion.Assert;
 import core.model.ConcatSplit;
 import core.model.ModelBase;
+import core.model.ModelConstant;
 import groovy.json.JsonBuilder;
 import play.db.jpa.Model;
+import po.CharacterWord;
 import po.ICharacter;
+import po.ICharacterSyllable;
 
 @Entity
 @Table(name="characters")
@@ -26,13 +32,13 @@ public class Character extends ModelBase implements ICharacter{
 	private String cn;
 
 	@Column(name="pinyins")
-	private String pinyins = "|";
+	private String pinyins = ModelConstant.EmptyToken;
 
 	@Column(name="syllables", columnDefinition="TEXT")
-	private String syllables;
+	private String syllables = ModelConstant.EmptyJsonArray;
 
 	@Column(name="fixwords", columnDefinition="TEXT")
-	private String fixwords;
+	private String fixwords = ModelConstant.EmptyJsonArray;
 	
 	@Override
 	public String getJpValue() {
@@ -53,11 +59,28 @@ public class Character extends ModelBase implements ICharacter{
 	}
 	
 	@Override
-	public List<String> getPinyins() {
+	public Iterable<String> getPinyins() {
 		return ConcatSplit.split(pinyins);
 	}
 	public void setPinyins(List<String> pinyins) {
+		pinyins.forEach(token->{
+			Assert.require(token);
+		});
+		
+		Collections.sort(pinyins);
 		this.pinyins = ConcatSplit.concat(pinyins);
+	}
+	
+	@Override
+	public Iterable<ICharacterSyllable> getSyllables() {
+		ArrayList<ICharacterSyllable> syllables = new ArrayList<>();
+		return syllables;
+	}
+	
+	@Override
+	public Iterable<CharacterWord> getFixwords() {
+		ArrayList<CharacterWord> words = new ArrayList<>();
+		return words;
 	}
 	
 }

@@ -1,11 +1,13 @@
 package logic.characters;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.sun.imageio.spi.RAFImageInputStreamSpi;
 
 import base.core.StaticClass;
+import core.model.hql.HQL;
 import logic.LogicBase;
 import models.Character;
 import po.ICharacter;
@@ -13,7 +15,7 @@ import po.ICharacter;
 public final class CharactersLogic extends LogicBase{
 
 	public static List<ICharacter> findCharactersByIndex(String index){
-		return Character.find("pinyin like ?1", "|"+index+"|").fetch();
+		return Character.find("pinyins like ?1", "%|"+index+"|%").fetch();
 	}
 
 	public static ICharacter findCharacter(String jp) {

@@ -3,7 +3,7 @@ $(function(){
 		header: ".left-list-header",
 		heightStyle: "content",
 		event: "hoverintent",
-		collapsible: true,
+		collapsible: false,
 		active: $("#left-list .left-list-header-active").data("seq"),
 	})
 	

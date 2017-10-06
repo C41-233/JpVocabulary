@@ -28,7 +28,7 @@ public final class CharacterIndexManager extends StaticClass{
 	private static void load(){
 		cache.clear();
 		
-		try(LineReader scanner = new LineReader(file, LineReader.Trim | LineReader.SkipEmpty)){
+		try(LineReader scanner = new LineReader(file.toPath(), LineReader.Trim | LineReader.SkipEmpty)){
 			CharacterIndexGroup last = null;
 			String line;
 			while((line = scanner.readLine())!=null){

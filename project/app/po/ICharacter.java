@@ -10,5 +10,9 @@ public interface ICharacter extends IModel{
 	
 	public String getCnValue();
 	
-	public List<String> getPinyins();
+	public Iterable<String> getPinyins();
+	
+	public Iterable<ICharacterSyllable> getSyllables();
+
+	public Iterable<CharacterWord> getFixwords();
 }

@@ -2,6 +2,9 @@ package base.io;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Path;
 import java.util.Scanner;
 
 import base.core.ICloseable;
@@ -15,16 +18,16 @@ public class LineReader implements ICloseable{
 	private final boolean skip;
 	private final boolean trim;
 	
-	public LineReader(File file){
-		this(file, 0);
+	public LineReader(Path path){
+		this(path, 0);
 	}
 	
-	public LineReader(File file, int mask){
+	public LineReader(Path path, int mask){
 		try {
-			this.scanner = new Scanner(file);
+			this.scanner = new Scanner(path, "utf-8");
 			this.skip = (mask & SkipEmpty) != 0;
 			this.trim = (mask & Trim) != 0;
-		} catch (FileNotFoundException e) {
+		} catch (IOException e) {
 			throw new RuntimeIOException(e);
 		}
 	}

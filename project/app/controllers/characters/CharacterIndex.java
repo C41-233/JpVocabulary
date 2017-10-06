@@ -9,7 +9,13 @@ import core.controller.HtmlControllerBase;
 import core.controller.validation.Length;
 import core.controller.validation.Required;
 import logic.characters.CharacterIndexManager;
+import logic.characters.CharactersLogic;
 import logic.characters.ICharacterIndexGroup;
+import logic.pinyins.Pinyins;
+import po.CharacterWord;
+import po.ICharacter;
+import po.ICharacterSyllable;
+import sun.java2d.pipe.SpanShapeRenderer.Simple;
 
 public final class CharacterIndex extends HtmlControllerBase{
 
@@ -21,67 +27,90 @@ public final class CharacterIndex extends HtmlControllerBase{
 		@Required @Length(min=1, max=7) String index
 	){
 		String argGroup = String.valueOf(index.charAt(0)).toUpperCase();
-		
-		//索引
-		boolean find = false;
-		List<CharacterIndexVO> indexesVO = new ArrayList<>();
-		
+
 		{
-			int seq = 0;
-			for(ICharacterIndexGroup group : CharacterIndexManager.getCache()) {
-				CharacterIndexVO vo = new CharacterIndexVO();
-				vo.name = group.getName();
-				vo.seq = seq;
-				for(String item : group.getItems()) {
-					vo.items.add(item);
-					if(Objects.equals(argGroup, vo.name) && Objects.equals(item, index)) {
-						find = true;
+			//查询参数填充
+			ArgVO arg = new ArgVO();
+			arg.group = argGroup;
+			arg.index = index;
+			renderArgs.put("arg", arg);
+		}
+
+		{
+			//索引
+			boolean find = false;
+			List<CharacterIndexVO> indexesVO = new ArrayList<>();
+			
+			{
+				int seq = 0;
+				for(ICharacterIndexGroup group : CharacterIndexManager.getCache()) {
+					CharacterIndexVO vo = new CharacterIndexVO();
+					vo.name = group.getName();
+					vo.seq = seq;
+					for(String item : group.getItems()) {
+						vo.items.add(item);
+						if(Objects.equals(argGroup, vo.name) && Objects.equals(item, index)) {
+							find = true;
+						}
 					}
+					indexesVO.add(vo);
+					seq++;
 				}
-				indexesVO.add(vo);
-				seq++;
+			}
+			renderArgs.put("indexes", indexesVO);
+			if(find == false) {
+				notFound(Strings.format("%s not found.", index));
 			}
 		}
 		
-		renderArgs.put("indexes", indexesVO);
-		
-		Arg arg = new Arg();
-		arg.group = argGroup;
-		arg.index = index;
-		renderArgs.put("arg", arg);
-
-		if(find == false) {
-			notFound(Strings.format("%s not found.", index));
-		}
-		
-		//汉字组
-		List<SimpleCharacterGroup> characterGroupsVO = new ArrayList<>();
-		//debug
 		{
-			SimpleCharacterGroup group = new SimpleCharacterGroup();
-			group.name = "ai1";
+			//汉字组
+			List<CharacterGroupVO> characterGroupsVO = new ArrayList<>();
+			for(int i=1; i<=4; i++) {
+				String groupName = index + i;
+				List<ICharacter> characters = CharactersLogic.findCharactersByIndex(groupName);
+				if(characters.size() == 0) {
+					continue;
+				}
+				
+				CharacterGroupVO groupVO = new CharacterGroupVO();
+				groupVO.name = Pinyins.toPinyin(groupName);
+				characterGroupsVO.add(groupVO);
+				
+				//汉字
+				for(ICharacter character : characters) {
+					CharacterVO characterVO = new CharacterVO();
+					characterVO.jp = character.getJpValue();
+					characterVO.cn = character.getCnValue();
+					groupVO.characters.add(characterVO);
+					
+					//发音组
+					for(ICharacterSyllable syllable : character.getSyllables()) {
+						CharacterSyllableVO syllableVO = new CharacterSyllableVO();
+						syllableVO.value = syllable.getValue();
+						characterVO.syllables.add(syllableVO);
+						
+						for(CharacterWord word : syllable.getWords()) {
+							WordPairVO wordVO = new WordPairVO();
+							wordVO.word = word.getWord();
+							wordVO.syllable = word.getSyllable();
+							syllableVO.words.add(wordVO);
+						}
+					}
+					
+					//固有词组
+					for(CharacterWord word : character.getFixwords()) {
+						WordPairVO wordVO = new WordPairVO();
+						wordVO.word = word.getWord();
+						wordVO.syllable = word.getSyllable();
+						characterVO.fixwords.add(wordVO);
+					}
+				}
+			}
 			
-			SimpleCharacterVO character = new SimpleCharacterVO();
-			group.characters.add(character);
-			character.jp = "我";
-			character.cn = "我";
-			
-			SimpleCharacterSyllable pron = new SimpleCharacterSyllable();
-			character.syllables.add(pron);
-			pron.value = "あいお";
-			
-			WordPairVO pair = new WordPairVO();
-			pron.words.add(pair);
-			pron.words.add(pair);
-			pair.syllable = "いき";
-			pair.word = "生き";
-			
-			character.fixwords.add(pair);
-			character.fixwords.add(pair);
-			
-			characterGroupsVO.add(group);
+			renderArgs.put("characterGroups", characterGroupsVO);
 		}
-		renderArgs.put("characterGroups", characterGroupsVO);
+		
 		render("characters/index");
 	}
 	
@@ -91,24 +120,24 @@ public final class CharacterIndex extends HtmlControllerBase{
 		int seq;
 	}
 	
-	private static class Arg{
+	private static class ArgVO{
 		String group;
 		String index;
 	}
 	
-	private static class SimpleCharacterGroup{
+	private static class CharacterGroupVO{
 		String name;
-		List<SimpleCharacterVO> characters = new ArrayList<>();
+		List<CharacterVO> characters = new ArrayList<>();
 	}
 	
-	private static class SimpleCharacterVO{
+	private static class CharacterVO{
 		String jp;
 		String cn;
-		List<SimpleCharacterSyllable> syllables = new ArrayList<>();
+		List<CharacterSyllableVO> syllables = new ArrayList<>();
 		List<WordPairVO> fixwords = new ArrayList<>();
 	}
 
-	private static class SimpleCharacterSyllable{
+	private static class CharacterSyllableVO{
 		String value;
 		List<WordPairVO> words = new ArrayList<>();
 	}
