@@ -10,3 +10,5 @@ GET		/characters								characters.CharacterIndex.index
 GET		/characters/{index}						characters.CharacterIndex.page
 
 POST	/characters/create						characters.CharacterAPI.create
+
+GET		/test									Test.test

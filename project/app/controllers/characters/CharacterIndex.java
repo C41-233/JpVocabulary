@@ -1,7 +1,6 @@
 package controllers.characters;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -11,8 +10,6 @@ import core.controller.validation.Length;
 import core.controller.validation.Required;
 import logic.characters.CharacterIndexManager;
 import logic.characters.ICharacterIndexGroup;
-import sun.launcher.resources.launcher;
-import sun.security.mscapi.PRNG;
 
 public final class CharacterIndex extends HtmlControllerBase{
 
