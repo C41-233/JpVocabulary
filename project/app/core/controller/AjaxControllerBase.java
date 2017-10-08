@@ -5,6 +5,7 @@ import java.util.Map.Entry;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import core.controller.validation.ValidationFailException;
 import logic.LogicException;
 import play.mvc.After;
 import play.mvc.Catch;
@@ -66,6 +67,11 @@ public abstract class AjaxControllerBase extends ControllerBase{
 		jobj.addProperty("message", e.getMessage());
 		
 		renderText(jobj);
+	}
+	
+	@Catch(ValidationFailException.class)
+	private static void onValidationFailException(ValidationFailException e) {
+		badRequest(e.getMessage());
 	}
 	
 }

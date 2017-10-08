@@ -5,6 +5,7 @@ import java.util.List;
 
 import base.utility.Strings;
 import core.controller.HtmlControllerBase;
+import core.controller.validation.annotation.Id;
 import logic.characters.CharactersLogic;
 import logic.pinyins.Pinyins;
 import po.ICharacter;
@@ -12,11 +13,11 @@ import po.ICharacter;
 public class CharacterDetail extends HtmlControllerBase{
 
 	public static void index(
-		Long id
+		@Id long id
 	) {
 		ICharacter character = CharactersLogic.getCharacer(id);
 		if(character == null) {
-			notFound(Strings.format("%d not found", id));
+			notFound(Strings.format("汉字不存在: id=%d", id));
 		}
 		
 		CharacterVO vo = new CharacterVO();

@@ -219,7 +219,7 @@
 					result: data.status, 
 					message: data.statusText
 				}
-				alert(data.status+" "+data.statusText)
+				alert(data.status+" "+data.statusText+" "+data.responseText)
 				if(fail){
 					fail(jobj)
 				}

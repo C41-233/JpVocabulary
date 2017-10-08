@@ -5,13 +5,14 @@ import java.util.List;
 
 import base.utility.Strings;
 import core.controller.HtmlControllerBase;
+import core.controller.validation.annotation.Id;
 import logic.characters.CharactersLogic;
 import logic.pinyins.Pinyins;
 import po.ICharacter;
 
 public class CharacterEdit extends HtmlControllerBase{
 
-	public static void index(Long id) {
+	public static void index(@Id Long id) {
 		ICharacter character = CharactersLogic.getCharacer(id);
 		if(character == null) {
 			notFound(Strings.format("%d not found", id));

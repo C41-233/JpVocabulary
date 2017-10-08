@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import core.controller.AjaxControllerBase;
 import core.controller.Route;
 import core.controller.RouteArgs;
+import core.controller.validation.annotation.Id;
 import logic.characters.CharactersLogic;
 import po.ICharacter;
 
@@ -26,7 +27,7 @@ public final class CharacterAPI extends AjaxControllerBase {
 		jsonResult.put("href", Route.get(CharacterDetail.class, "index", new RouteArgs().put("id", character.getId())));
 	}
 	
-	public static void delete(Long id) {
+	public static void delete(@Id long id) {
 		CharactersLogic.deleteCharacater(id);
 	}
 	

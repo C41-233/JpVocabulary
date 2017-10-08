@@ -4,6 +4,9 @@ import java.util.Map.Entry;
 
 import com.google.gson.JsonObject;
 
+import core.controller.validation.ValidationFailException;
+import play.mvc.Catch;
+
 public abstract class HtmlControllerBase extends ControllerBase{
 
 	protected static final ArgProxy jsArgs = new ArgProxy();
@@ -27,6 +30,13 @@ public abstract class HtmlControllerBase extends ControllerBase{
 			}
 		}
 		
+	}
+
+	@Catch(ValidationFailException.class)
+	private static void onValidationFailException(ValidationFailException e) {
+		response.status = 400;
+		renderArgs.put("message", e.getMessage());
+		renderTemplate("errors/400.html");
 	}
 	
 }

@@ -2,6 +2,7 @@ package logic.characters;
 
 import java.util.List;
 
+import base.utility.Chars;
 import core.model.hql.HQL;
 import core.model.hql.HQLResult;
 import core.model.hql.Like;
@@ -35,6 +36,10 @@ public final class CharactersLogic extends LogicBase{
 	public static ICharacter createCharacter(String jp, String cn, List<String> pinyins) {
 		if(hasCharacter(jp)) {
 			raise("汉字%s已存在", jp);
+		}
+		
+		if(!Chars.isCJKCharacter(jp.charAt(0))) {
+			raise("%s不是汉字", jp.charAt(0));
 		}
 		
 		Character character = new Character();

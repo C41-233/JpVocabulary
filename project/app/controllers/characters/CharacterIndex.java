@@ -6,6 +6,7 @@ import java.util.Objects;
 
 import base.utility.Strings;
 import core.controller.HtmlControllerBase;
+import core.controller.validation.annotation.Required;
 import logic.characters.CharacterIndexManager;
 import logic.characters.CharactersLogic;
 import logic.characters.ICharacterIndexGroup;
@@ -21,7 +22,7 @@ public final class CharacterIndex extends HtmlControllerBase{
 	}
 	
 	public static void page(
-		String index
+		@Required String index
 	){
 		String argGroup = String.valueOf(index.charAt(0)).toUpperCase();
 
