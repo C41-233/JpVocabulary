@@ -8,7 +8,11 @@ GET		/public/fonts/							staticDir:public/fonts/
 GET     /                                       MainIndex.index
 GET		/characters								characters.CharacterIndex.index
 GET		/characters/{index}						characters.CharacterIndex.page
+GET		/character/{<[0-9]+>id}					characters.CharacterDetail.index
 
-POST	/characters/create						characters.CharacterAPI.create
+GET		/character/{<[0-9]+>id}/edit			characters.CharacterEdit.index
+
+POST	/characters/action/create				characters.CharacterAPI.create
+POST	/characters/action/delete				characters.CharacterAPI.delete
 
 GET		/test									Test.test

@@ -6,8 +6,6 @@ import java.util.Objects;
 
 import base.utility.Strings;
 import core.controller.HtmlControllerBase;
-import core.controller.validation.Length;
-import core.controller.validation.Required;
 import logic.characters.CharacterIndexManager;
 import logic.characters.CharactersLogic;
 import logic.characters.ICharacterIndexGroup;
@@ -15,7 +13,6 @@ import logic.pinyins.Pinyins;
 import po.CharacterWord;
 import po.ICharacter;
 import po.ICharacterSyllable;
-import sun.java2d.pipe.SpanShapeRenderer.Simple;
 
 public final class CharacterIndex extends HtmlControllerBase{
 
@@ -24,7 +21,7 @@ public final class CharacterIndex extends HtmlControllerBase{
 	}
 	
 	public static void page(
-		@Required @Length(min=1, max=7) String index
+		String index
 	){
 		String argGroup = String.valueOf(index.charAt(0)).toUpperCase();
 
@@ -80,6 +77,7 @@ public final class CharacterIndex extends HtmlControllerBase{
 				//汉字
 				for(ICharacter character : characters) {
 					CharacterVO characterVO = new CharacterVO();
+					characterVO.id = character.getId();
 					characterVO.jp = character.getJpValue();
 					characterVO.cn = character.getCnValue();
 					groupVO.characters.add(characterVO);
@@ -131,6 +129,7 @@ public final class CharacterIndex extends HtmlControllerBase{
 	}
 	
 	private static class CharacterVO{
+		long id;
 		String jp;
 		String cn;
 		List<CharacterSyllableVO> syllables = new ArrayList<>();

@@ -1,19 +1,19 @@
 package controllers.characters;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import core.controller.AjaxControllerBase;
-import core.controller.validation.Length;
-import core.controller.validation.Required;
+import core.controller.Route;
+import core.controller.RouteArgs;
 import logic.characters.CharactersLogic;
+import po.ICharacter;
 
 public final class CharacterAPI extends AjaxControllerBase {
 
 	public static void create(
-		@Required @Length(1) String jp, 
-		@Required @Length(1) String cn, 
-		@Required String[] pinyins
+		String jp, 
+		String cn, 
+		String[] pinyins
 	) {
 		ArrayList<String> pinyinList = new ArrayList<>();
 		for(String token: pinyins) {
@@ -22,7 +22,12 @@ public final class CharacterAPI extends AjaxControllerBase {
 				pinyinList.add(token);
 			}
 		}
-		CharactersLogic.createCharacter(jp, cn, pinyinList);
+		ICharacter character = CharactersLogic.createCharacter(jp, cn, pinyinList);
+		jsonResult.put("href", Route.get(CharacterDetail.class, "index", new RouteArgs().put("id", character.getId())));
+	}
+	
+	public static void delete(Long id) {
+		CharactersLogic.deleteCharacater(id);
 	}
 	
 }

@@ -1,11 +1,9 @@
 package logic.pinyins;
 
-import org.junit.internal.InexactComparisonCriteria;
+public final class Pinyins{
 
-import base.core.StaticClass;
-
-public final class Pinyins extends StaticClass{
-
+	private Pinyins() {}
+	
 	private static final char[][] ss = new char[][] {
 		{'a', 'ā', 'á', 'ǎ', 'à'},
 		{'e', 'ē', 'é', 'ě', 'è'},

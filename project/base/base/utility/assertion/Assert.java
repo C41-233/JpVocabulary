@@ -1,10 +1,11 @@
 package base.utility.assertion;
 
-import base.core.StaticClass;
 import base.utility.Strings;
 
-public final class Assert extends StaticClass{
+public final class Assert{
 
+	private Assert() {}
+	
 	public static void is(boolean value, String format, Object...args) {
 		if(value == false) {
 			throw new AssertionFailException(Strings.format(format, args));

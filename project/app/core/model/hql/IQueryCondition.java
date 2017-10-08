@@ -1,8 +1,10 @@
 package core.model.hql;
 
+import java.util.ArrayList;
+
 public interface IQueryCondition {
 
-	public String getSql();
-	public Object[] getParams();
+	public void appendSQL(StringBuilder sb);
+	public void appendParams(ArrayList<Object> ar);
 	
 }

@@ -1,23 +1,29 @@
 package logic.characters;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-import com.sun.imageio.spi.RAFImageInputStreamSpi;
-
-import base.core.StaticClass;
 import core.model.hql.HQL;
+import core.model.hql.HQLResult;
+import core.model.hql.Like;
 import logic.LogicBase;
 import models.Character;
 import po.ICharacter;
 
 public final class CharactersLogic extends LogicBase{
 
+	private CharactersLogic() {}
+	
 	public static List<ICharacter> findCharactersByIndex(String index){
-		return Character.find("pinyins like ?1", "%|"+index+"|%").fetch();
+		HQL hql = HQL.begin();
+		hql.where(Like.contains("pinyins", "|"+index+"|"));
+		HQLResult result = hql.end();
+		return Character.find(result.select, result.params).fetch();
 	}
 
+	public static ICharacter getCharacer(long id) {
+		return Character.findById(id);
+	}
+	
 	public static ICharacter findCharacter(String jp) {
 		return Character.find("jp=?1", jp).first();
 	}
@@ -38,5 +44,13 @@ public final class CharactersLogic extends LogicBase{
 		character.save();
 		return character;
 	}
-	
+
+	public static void deleteCharacater(long id) {
+		Character character = Character.findById(id);
+		if(character == null) {
+			raise("汉字不存在: id=%d", id);
+		}
+		character.delete();
+	}
+
 }

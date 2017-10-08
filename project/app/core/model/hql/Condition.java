@@ -1,22 +1,28 @@
 package core.model.hql;
 
+import java.util.ArrayList;
+
 public class Condition implements IQueryCondition{
 
 	private final String condition;
+	private final Object[] args;
 	
-	public Condition(String condition) {
-		this.condition = condition;
-	}
-	
-	@Override
-	public String getSql() {
-		return condition;
+	public Condition(String sql, Object...args) {
+		this.condition = sql;
+		this.args = args;
 	}
 
 	@Override
-	public Object[] getParams() {
-		// TODO Auto-generated method stub
-		return null;
+	public void appendSQL(StringBuilder sb) {
+		sb.append(condition);
 	}
+
+	@Override
+	public void appendParams(ArrayList<Object> ar) {
+		for(Object arg: args) {
+			ar.add(arg);
+		}
+	}
+	
 	
 }

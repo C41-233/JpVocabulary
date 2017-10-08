@@ -3,10 +3,10 @@ package core.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import base.core.StaticClass;
+public final class ConcatSplit{
 
-public final class ConcatSplit extends StaticClass{
-
+	private ConcatSplit() {}
+	
 	public static List<String> split(String s) {
 		String[] tokens = s.split("\\|");
 		List<String> rst = new ArrayList<>();

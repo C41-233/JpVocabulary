@@ -5,9 +5,9 @@ $(function(){
 		event: "hoverintent",
 		collapsible: false,
 		active: $("#left-list .left-list-header-active").data("seq"),
-	})
+	}).show()
 	
-	$("#dialog-import-character").dialog({
+	var dialog = $("#dialog-import-character").dialog({
 		autoOpen: false,
 		modal: true,
 		resizable: false,
@@ -29,8 +29,8 @@ $(function(){
 					}
 				})
 				
-				Action.post("/characters/create", {jp: jp, cn: cn, pinyins: tokens}, function(data){
-					
+				Action.post("/characters/action/create", {jp: jp, cn: cn, pinyins: tokens}, function(data){
+					location.href = data.href
 				})
 			},
 			"取消": function(){
@@ -44,7 +44,7 @@ $(function(){
 	$("#btn-import-character").click(function(){
 		$("#dialog-import-character").dialog("open")
 	})
-	
+	dialog.dialog("widget").find(".ui-dialog-buttonset button").addClass("btn btn-default btn-xs")
 	
 	$("#dialog-import-character").validate({
 		"#import-character-input-jp": function(val){

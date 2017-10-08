@@ -1,3 +1,7 @@
 .validate-error, .validate-error:focus{
 	border-color:	red;
 }
+
+.editable{
+	cursor:			pointer;
+}

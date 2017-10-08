@@ -1,0 +1,37 @@
+#{meta /}
+
+#{javascript 'characters/character-edit.js'/}
+
+#{body}
+
+<div class="container">
+	<div class="row">
+		<div class="col-lg-10">
+		</div>
+		<div class="col-lg-2 text-right">
+			<button class="btn btn-danger" id="btn-delete-character">删除</button>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-12">
+			<table class="table" id="main-table">
+				<tr>
+					<th>日式汉字</th>
+					<td><div id="editable-character-jp">${character.jp}</div></td>
+				</tr>
+				<tr>
+					<th>中式汉字</th>
+					<td><div id="editable-character-cn">${character.cn}</div></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>
+
+#{/body}
+
+#{stylesheet}
+#main-table th{
+	width:	120px;
+}
+#{/stylesheet}

@@ -21,6 +21,11 @@
 	#{import-js 'jquery-hoverintent.js' /}
 	#{import-js 'jpn.js' /}
 	#{import-js 'jpn-jquery.js' /}
+	
+	#{js}
+		global.DataMgr = ${jsArgs.raw()}
+	#{/js}
+	
 	#{get 'javascripts' /}
 </head>
 

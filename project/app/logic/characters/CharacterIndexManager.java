@@ -1,16 +1,14 @@
 package logic.characters;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 
-import base.core.StaticClass;
 import base.io.LineReader;
 
-public final class CharacterIndexManager extends StaticClass{
+public final class CharacterIndexManager{
 
+	private CharacterIndexManager() {}
+	
 	private static final File file = new File("conf/index/characters.index");
 	
 	private static ArrayList<ICharacterIndexGroup> cache = new ArrayList<>();

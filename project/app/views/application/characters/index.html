@@ -9,7 +9,7 @@
 	<div class="row">
 		<div class="col-lg-2 col-sm-3 col-xs-6">
 			<h3>汉字</h3>
-			<div id="left-list">
+			<div id="left-list" class="pre-hide">
 				#{list items:indexes, as:'index'}
 					<a class="left-list-header #{if arg.group==index.name}left-list-header-active#{/if}" data-seq="${index.seq}">${index.name}</a>
 					<ul class="left-list-content">
@@ -36,8 +36,10 @@
 					<div class="div-characters">
 						#{list items:group.characters, as:'character'}
 							<div class="div-character">
-								<span class="character-jp font-jp">${character.jp}</span>
-								<span class="character-cn">${character.cn}</span>
+								<a class="character-header" href="@{characters.CharacterDetail.index(character.id)}">
+									<span class="character-jp font-jp">${character.jp}</span>
+									<span class="character-cn">${character.cn}</span>
+								</a>
 								<div class="div-character-syllables">
 									#{list items:character.syllables, as:'syllable'}
 										<div class="syllable-value font-jp">${syllable.value}</div>
@@ -68,7 +70,7 @@
 	</div>
 </div>
 
-<div id="dialog-import-character" title="创建汉字">
+<div id="dialog-import-character" title="创建汉字" class="pre-hide">
 	<div>
 		<form class="form-inline">
 			<div class="form-group">

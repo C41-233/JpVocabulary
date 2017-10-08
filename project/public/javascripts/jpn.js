@@ -67,4 +67,10 @@ if(!String.prototype.trim){
 	}
 }
 
+//虚拟按键
+global.VK = {
+	ESC: 27,
+	ENTER: 13
+}
+
 })()

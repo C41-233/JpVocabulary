@@ -8,15 +8,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import com.google.gson.JsonObject;
-import com.mysql.fabric.xmlrpc.base.Array;
-
 import base.utility.assertion.Assert;
 import core.model.ConcatSplit;
 import core.model.ModelBase;
 import core.model.ModelConstant;
-import groovy.json.JsonBuilder;
-import play.db.jpa.Model;
 import po.CharacterWord;
 import po.ICharacter;
 import po.ICharacterSyllable;

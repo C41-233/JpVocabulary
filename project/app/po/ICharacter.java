@@ -1,7 +1,5 @@
 package po;
 
-import java.util.List;
-
 import core.model.IModel;
 
 public interface ICharacter extends IModel{

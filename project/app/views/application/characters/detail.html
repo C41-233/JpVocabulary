@@ -1,0 +1,34 @@
+#{meta /}
+
+#{body}
+
+<div class="container">
+	<div class="row">
+		<div class="col-lg-10">
+			<h1 class="font-jp">${character.jp}</h1>
+			<h1>${character.cn}</h1>
+		</div>
+		<div class="col-lg-2 text-right">
+			<a href="@{characters.CharacterEdit.index(character.id)}" class="btn btn-default">编辑</a>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-12">
+			#{list items:character.pinyins, as:'pinyin'}
+				<div class="pinyin">${pinyin}</div>
+			#{/list}
+		</div>
+	</div>
+</div>
+
+#{/body}
+
+#{stylesheet}
+	h1{
+		display:	inline-block;
+		margin-right:	10px;
+	}
+	.pinyin{
+		font-size:	16px;
+	}
+#{/stylesheet}
