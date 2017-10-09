@@ -3,6 +3,7 @@ package core.controller;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
@@ -10,8 +11,9 @@ import java.util.Map.Entry;
 import base.reflect.TypeBox;
 import base.utility.Strings;
 import base.utility.generator.SequenceLongGenerator;
+import core.controller.validation.NoSuchValidationException;
+import core.controller.validation.ProcessorManager;
 import core.controller.validation.ValidationFailException;
-import core.controller.validation.processor.ProcessorManager;
 import play.mvc.ActionInvoker;
 import play.mvc.Before;
 import play.mvc.Controller;
@@ -63,20 +65,20 @@ public abstract class ControllerBase extends Controller{
 	private static void before() throws Exception{
 		Method method = request.invokedMethod;
 		Parameter[] parameters = method.getParameters();
-		String[] names;
-		Object[] args;
-		try {
-			names = Java.parameterNames(method);
-			args = ActionInvoker.getActionMethodArgs(method, request.controllerInstance);
-		} catch (Exception e) {
-			throw e;
-		}
+		String[] names = Java.parameterNames(method);
+		Object[] args = ActionInvoker.getActionMethodArgs(method, request.controllerInstance);
 		
 		for(int i=0; i<parameters.length; i++) {
 			Parameter parameter = parameters[i];
 			Class parameterType = TypeBox.toBoxType(parameter.getType());
 			String name = names[i];
-			String raw = request.params.get(name);
+			String[] raw; 
+			if(parameterType.isArray()) {
+				raw = request.params.getAll(name+"[]");
+			}
+			else {
+				raw = request.params.getAll(name);
+			}
 			
 			if(args[i] != null && args[i].getClass() != parameterType) {
 				args[i] = null;
@@ -88,9 +90,19 @@ public abstract class ControllerBase extends Controller{
 					args[i] = validation.process(annotationType, parameterType, annotation, args[i], raw);
 				}
 				catch (ValidationFailException e) {
-					throw new ValidationFailException(
-						Strings.format("%s %s",  name, e.getMessage())
-					);
+					if(raw!=null && raw.length == 1) {
+						throw new ValidationFailException(
+							Strings.format("%s=%s %s",  name, raw[0], e.getMessage())
+						);
+					}
+					else {
+						throw new ValidationFailException(
+							Strings.format("%s=%s %s",  name, Arrays.toString(raw), e.getMessage())
+						);
+					}
+				}
+				catch (NoSuchValidationException e) {
+					throw new NoSuchValidationException(name+" "+e.getMessage());
 				}
 			}
 		}

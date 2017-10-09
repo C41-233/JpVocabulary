@@ -1,10 +1,10 @@
 package core.controller.validation.processor;
 
-import core.controller.validation.IValidationProcessor;
+import core.controller.validation.ISimpleValidationProcessor;
 import core.controller.validation.ValidationFailException;
 import core.controller.validation.annotation.Id;
 
-public class IdProcessor implements IValidationProcessor<Id, Long>{
+public class IdProcessor implements ISimpleValidationProcessor<Id, Long>{
 
 	@Override
 	public Long process(Id annotation, Long value, String arg) throws ValidationFailException {

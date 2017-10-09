@@ -6,15 +6,17 @@ import core.controller.AjaxControllerBase;
 import core.controller.Route;
 import core.controller.RouteArgs;
 import core.controller.validation.annotation.Id;
+import core.controller.validation.annotation.Required;
+import core.controller.validation.annotation.StringValue;
 import logic.characters.CharactersLogic;
 import po.ICharacter;
 
 public final class CharacterAPI extends AjaxControllerBase {
 
 	public static void create(
-		String jp, 
-		String cn, 
-		String[] pinyins
+		@Required @StringValue(length=1) String jp, 
+		@Required @StringValue(length=1) String cn, 
+		@Required @StringValue() String[] pinyins
 	) {
 		ArrayList<String> pinyinList = new ArrayList<>();
 		for(String token: pinyins) {

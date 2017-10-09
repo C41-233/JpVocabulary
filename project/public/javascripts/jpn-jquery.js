@@ -219,7 +219,12 @@
 					result: data.status, 
 					message: data.statusText
 				}
-				alert(data.status+" "+data.statusText+" "+data.responseText)
+				if(data.status == 400){
+					alert(data.status+" "+data.statusText+" "+data.responseText)
+				}
+				else{
+					alert(data.status+" "+data.statusText)
+				}
 				if(fail){
 					fail(jobj)
 				}

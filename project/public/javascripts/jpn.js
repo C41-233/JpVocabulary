@@ -62,8 +62,26 @@ Array.copy = function(){
 
 //字符串扩展
 if(!String.prototype.trim){
-	String.prototype.trin = function(){
+	String.prototype.trim = function(){
 		return this.replace(/(^\s*)|(\s*$)/g, "")
+	}
+}
+String.prototype.isCJKCharacter = function(){
+	if(this.length == 0){
+		return false
+	}
+	for(var i=0; i<this.length; i++){
+		var ch = this.charCodeAt(i)
+		if(!CharCode.isCJKCharacter(ch)){
+			return false
+		}
+	}
+	return true
+}
+
+global.CharCode = {
+	isCJKCharacter: function(code){
+		return code>=0x4E00 && code<=0x9FCC
 	}
 }
 

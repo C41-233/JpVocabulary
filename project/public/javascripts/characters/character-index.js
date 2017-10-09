@@ -48,10 +48,10 @@ $(function(){
 	
 	$("#dialog-import-character").validate({
 		"#import-character-input-jp": function(val){
-			return val.length == 1
+			return val.length == 1 && val.isCJKCharacter()
 		},
 		"#import-character-input-cn": function(val){
-			return val.length == 1
+			return val.length == 1 && val.isCJKCharacter()
 		},
 		"#import-character-input-pinyin": function(val){
 			var tokens = []

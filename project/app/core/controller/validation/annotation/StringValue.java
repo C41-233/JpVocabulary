@@ -9,5 +9,10 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface StringValue {
 
+	int maxLength() default Integer.MAX_VALUE;
+	int minLength() default 0;
+	int length() default 0;
+
+	boolean trim() default true;
 	
 }
