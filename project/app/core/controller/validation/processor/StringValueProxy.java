@@ -3,14 +3,21 @@ package core.controller.validation.processor;
 import core.controller.validation.ValidationFailException;
 import core.controller.validation.annotation.StringValue;
 
-public class StringValueProcessorBase{
+public class StringValueProxy{
 
+	private final int length;
+	private final int maxLength;
+	private final int minLength;
+	private final boolean trim;
+	
+	public StringValueProxy(StringValue annotation) {
+		this.length = annotation.length();
+		this.maxLength = annotation.maxLength();
+		this.minLength = annotation.minLength();
+		this.trim = annotation.trim();
+	}
+	
 	public String process(StringValue annotation, String value) throws ValidationFailException {
-		int length = annotation.length();
-		int maxLength = annotation.maxLength();
-		int minLength = annotation.minLength();
-		boolean trim = annotation.trim();
-		
 		if(trim) {
 			value = value.trim();
 		}

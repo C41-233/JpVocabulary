@@ -4,14 +4,16 @@ import core.controller.validation.ISimpleValidationProcessor;
 import core.controller.validation.ValidationFailException;
 import core.controller.validation.annotation.StringValue;
 
-public class StringValueProcessor extends StringValueProcessorBase implements ISimpleValidationProcessor<StringValue, String>{
+public class StringValueProcessor implements ISimpleValidationProcessor<StringValue, String>{
 
 	@Override
 	public String process(StringValue annotation, String value, String arg) throws ValidationFailException {
 		if(value == null) {
 			return value;
 		}
-		return process(annotation, value);
+		
+		StringValueProxy proxy = new StringValueProxy(annotation);
+		return proxy.process(annotation, value);
 	}
 
 }

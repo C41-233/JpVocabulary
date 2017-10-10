@@ -7,6 +7,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-lg-10">
+			<a href="@{characters.CharacterDetail.index(character.id)}">返回</a>
 		</div>
 		<div class="col-lg-2 text-right">
 			<button class="btn btn-danger" id="btn-delete-character">删除</button>
@@ -23,6 +24,44 @@
 					<th>中式汉字</th>
 					<td><div id="editable-character-cn">${character.cn}</div></td>
 				</tr>
+				<tr>
+					<th>拼音</th>
+					<td>
+						<div id="editable-character-pinyins" data-editable-value="${character.pinyinsText}">
+						#{list items:character.pinyins, as:'pinyin'}
+							<li>${pinyin}</li>
+						#{/list}
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<th>读音</th>
+					<td>
+						<table id="table-syllable">
+						#{list items:character.syllables, as:'syllable'}
+							<tr>
+								<th><span>${syllable.value}</span></th>
+							</tr>
+						#{/list}
+							<tr>
+								<th>
+									<div class="input-group">
+										<input class="form-control" type="text"/>
+										<span class="input-group-btn">
+											<button class="btn btn-default">添加</button>
+										</span>
+									</div>
+								</th>
+								<td></td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				</tr>
+				<tr>
+					<th>熟字訓</th>
+					<td></td>
+				</tr>
 			</table>
 		</div>
 	</div>
@@ -31,7 +70,16 @@
 #{/body}
 
 #{stylesheet}
+#main-table{
+	margin-top:	15px;
+}
 #main-table th{
-	width:	120px;
+	width:		120px;
+}
+#table-syllable{
+	width:		100%;
+}
+#table-syllable th{
+	width:		240px;
 }
 #{/stylesheet}

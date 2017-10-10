@@ -12,7 +12,9 @@ public @interface StringValue {
 	int maxLength() default Integer.MAX_VALUE;
 	int minLength() default 0;
 	int length() default 0;
-
+	
+	String match() default "";
+	
 	boolean trim() default true;
 	
 }

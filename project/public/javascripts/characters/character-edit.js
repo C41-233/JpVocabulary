@@ -30,4 +30,7 @@ $(function(){
 	$("#editable-character-cn").editable({
 		
 	})
+	$("#editable-character-pinyins").editable({
+		type: "textarea"
+	})
 })

@@ -250,7 +250,14 @@
 	function init(editable, options){
 		editable.addClass("editable")
 	
-		var input = $("<div class='input-group'><input class='form-control editable-input'/><span class='input-group-btn'><button class='btn btn-default editable-btn-ok' type='button'>修改</button></span></div>")
+		var input; 
+		if(options.type == "textarea"){
+			var height = editable.height() + 30
+			input = $("<div class='input-group'><textarea class='form-control editable-input' style='height:"+height+"px'/><span class='input-group-btn'><button class='btn btn-default editable-btn-ok' type='button' style='margin-left:10px'>修改</button></span></div>")
+		}
+		else{
+			input = $("<div class='input-group'><input class='form-control editable-input'/><span class='input-group-btn'><button class='btn btn-default editable-btn-ok' type='button'>修改</button></span></div>")
+		}
 		input.hide()
 		editable.after(input)
 		
@@ -260,7 +267,13 @@
 		editable.on("editable-active", function(){
 			editable.hide()
 			
-			var text = editable.text()
+			var text
+			if(editable.data("editable-value")){
+				text = editable.data("editable-value")
+			}
+			else{
+				text = editable.text()
+			}
 			inputField.val(text)
 			input.show()
 			
@@ -296,9 +309,17 @@
 			if(!editable.data("editable-active")){
 				return
 			}
-			if(e.target != editable[0] && e.target != inputField[0] && e.target != okButton[0]){
-				editable.trigger("editable-inactive")
+			if(e.target == editable[0] || e.target == input[0]){
+				return
 			}
+			var obj = $(e.target).parents()
+			for(var i=0; i<obj.length; i++){
+				if(obj[i]==editable[0] || obj[i]==input[0]){
+					return;
+				}
+			}
+			
+			editable.trigger("editable-inactive")
 		})
 	}
 })(window.jQuery);
