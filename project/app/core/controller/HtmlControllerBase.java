@@ -10,6 +10,10 @@ import play.mvc.Catch;
 public abstract class HtmlControllerBase extends ControllerBase{
 
 	protected static final ArgProxy jsArgs = new ArgProxy();
+
+	private static class ContextObject{
+		String refer;
+	}
 	
 	protected static void render(String name){
 		renderJsArgs();

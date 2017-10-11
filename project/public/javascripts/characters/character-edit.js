@@ -33,4 +33,11 @@ $(function(){
 	$("#editable-character-pinyins").editable({
 		type: "textarea"
 	})
+	
+	$("#btn-add-syllable").click(function(){
+		var value = $("#input-add-syllable").val()
+		Action.post("/characters/action/add-syllable", {id: DataMgr.id, syllable: value}, function(){
+			location.reload()
+		})
+	})
 })

@@ -27,4 +27,8 @@ public final class Pinyins{
 		return token;
 	}
 	
+	public static String toAlphaIndex(String index) {
+		return index.substring(0, index.length()-1);
+	}
+	
 }

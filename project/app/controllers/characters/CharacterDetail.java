@@ -28,7 +28,7 @@ public class CharacterDetail extends HtmlControllerBase{
 		for(String pinyin : character.getPinyins()) {
 			vo.pinyins.add(Pinyins.toPinyin(pinyin));
 		}
-		
+
 		renderArgs.put("character", vo);
 		render("characters/detail");
 	}

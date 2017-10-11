@@ -3,6 +3,8 @@ package logic.characters;
 import java.util.List;
 
 import base.utility.Chars;
+import base.utility.linq.CharPredicates;
+import base.utility.linq.Linq;
 import core.model.hql.HQL;
 import core.model.hql.HQLResult;
 import core.model.hql.Like;
@@ -38,11 +40,11 @@ public final class CharactersLogic extends LogicBase{
 			raise("汉字已存在：%s", jp);
 		}
 		
-		if(!Chars.isCJKCharacter(jp.codePointAt(0))) {
+		if(!Chars.isCJKUnifiedIdeograph(jp.codePointAt(0))) {
 			raise("不是汉字：%s", jp.charAt(0));
 		}
 
-		if(!Chars.isCJKCharacter(cn.codePointAt(0))) {
+		if(!Chars.isCJKUnifiedIdeograph(cn.codePointAt(0))) {
 			raise("不是汉字：%s", cn.charAt(0));
 		}
 		
@@ -61,5 +63,18 @@ public final class CharactersLogic extends LogicBase{
 		}
 		character.delete();
 	}
+
+	public static void AddSyllable(long id, String syllable) {
+		Character character = Character.findById(id);
+		if(character == null) {
+			raise("汉字不存在: id=%d", id);
+		}
+		
+		if(Linq.of(syllable).isAll(CharPredicates.or(Chars::isHiragana, Chars::isKatakana)) == false) {
+			raise("不符合读音规则: %s", syllable);
+		}
+		
+	}
+
 
 }

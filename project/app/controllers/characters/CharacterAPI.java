@@ -33,4 +33,11 @@ public final class CharacterAPI extends AjaxControllerBase {
 		CharactersLogic.deleteCharacater(id);
 	}
 	
+	public static void addSyllable(
+		@Id long id, 
+		@Required @StringValue(minLength=1) String syllable
+	) {
+		CharactersLogic.AddSyllable(id, syllable);
+	}
+	
 }

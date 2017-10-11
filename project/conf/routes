@@ -14,5 +14,6 @@ GET		/character/{<[0-9]+>id}/edit			characters.CharacterEdit.index
 
 POST	/characters/action/create				characters.CharacterAPI.create
 POST	/characters/action/delete				characters.CharacterAPI.delete
+POST	/characters/action/add-syllable			characters.CharacterAPI.addSyllable
 
 GET		/test									Test.test
