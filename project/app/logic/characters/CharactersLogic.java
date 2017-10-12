@@ -70,7 +70,7 @@ public final class CharactersLogic extends LogicBase{
 			raise("汉字不存在: id=%d", id);
 		}
 		
-		if(Linq.of(syllable).isAll(CharPredicates.or(Chars::isHiragana, Chars::isKatakana)) == false) {
+		if(Linq.from(syllable).notAll(CharPredicates.or(Chars::isHiragana, Chars::isKatakana))) {
 			raise("不符合读音规则: %s", syllable);
 		}
 		

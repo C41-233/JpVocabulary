@@ -10,12 +10,12 @@ public interface ICharIterator extends Iterator<Character>{
 	/**
 	 * 迭代器当前值
 	 */
-	public char value();
+	public char current();
 
 	/**
 	 * 移动迭代器
 	 */
-	public void move();
+	public void moveNext();
 	
 	/**
 	 * 是否可以移动迭代器
@@ -28,20 +28,15 @@ public interface ICharIterator extends Iterator<Character>{
 	 */
 	@Override
 	public default Character next() {
-		moveNext();
-		return value();
+		return nextChar();
 	}
-	
+
 	/**
-	 * 移动迭代器
-	 * @return 当前元素是否可以访问
+	 * 移动迭代器，并获取下一个元素
 	 */
-	public default boolean moveNext() {
-		if(hasNext()) {
-			move();
-			return true;
-		}
-		return false;
+	public default char nextChar() {
+		moveNext();
+		return current();
 	}
 	
 }
