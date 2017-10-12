@@ -1,6 +1,6 @@
 package controllers.characters;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 
 import core.controller.AjaxControllerBase;
 import core.controller.Route;
@@ -16,16 +16,9 @@ public final class CharacterAPI extends AjaxControllerBase {
 	public static void create(
 		@Required @StringValue(length=1) String jp, 
 		@Required @StringValue(length=1) String cn, 
-		@Required @StringValue() String[] pinyins
+		@Required @StringValue(minLength=1) String[] pinyins
 	) {
-		ArrayList<String> pinyinList = new ArrayList<>();
-		for(String token: pinyins) {
-			token = token.trim();
-			if(token.isEmpty()==false) {
-				pinyinList.add(token);
-			}
-		}
-		ICharacter character = CharactersLogic.createCharacter(jp, cn, pinyinList);
+		ICharacter character = CharactersLogic.createCharacter(jp, cn, Arrays.asList(pinyins));
 		jsonResult.put("href", Route.get(CharacterDetail.class, "index", new RouteArgs().put("id", character.getId())));
 	}
 	
@@ -39,5 +32,28 @@ public final class CharacterAPI extends AjaxControllerBase {
 	) {
 		CharactersLogic.AddSyllable(id, syllable);
 	}
+
+	public static void updateJp(
+		@Id long id,
+		@Required @StringValue(length=1) String value
+	) {
+		CharactersLogic.UpdateJp(id, value);
+	}
+	
+	public static void UpdateCn(
+		@Id long id,
+		@Required @StringValue(length=1) String value
+	) {
+		CharactersLogic.UpdateCn(id, value);
+	}
+
+	public static void UpdatePinyins(
+		@Id long id,
+		@Required @StringValue(minLength=1) String[] values
+	) {
+		CharactersLogic.UpdatePinyins(id, Arrays.asList(values));
+	}
+	
+	
 	
 }

@@ -2,9 +2,6 @@ package logic.characters;
 
 import java.util.List;
 
-import base.utility.Chars;
-import base.utility.linq.CharPredicates;
-import base.utility.linq.Linq;
 import core.model.hql.HQL;
 import core.model.hql.HQLResult;
 import core.model.hql.Like;
@@ -36,17 +33,10 @@ public final class CharactersLogic extends LogicBase{
 	}
 	
 	public static ICharacter createCharacter(String jp, String cn, List<String> pinyins) {
-		if(hasCharacter(jp)) {
-			raise("汉字已存在：%s", jp);
-		}
-		
-		if(!Chars.isCJKUnifiedIdeograph(jp.codePointAt(0))) {
-			raise("不是汉字：%s", jp.charAt(0));
-		}
-
-		if(!Chars.isCJKUnifiedIdeograph(cn.codePointAt(0))) {
-			raise("不是汉字：%s", cn.charAt(0));
-		}
+		raiseIfNotValidJpValue(jp);
+		raiseIfNotValidCnValue(cn);
+		raiseIfNotValidPinyins(pinyins);
+		raiseIfCharacterAlreadyExist(jp);
 		
 		Character character = new Character();
 		character.setJpValue(jp);
@@ -57,24 +47,57 @@ public final class CharactersLogic extends LogicBase{
 	}
 
 	public static void deleteCharacater(long id) {
-		Character character = Character.findById(id);
-		if(character == null) {
-			raise("汉字不存在: id=%d", id);
-		}
+		Character character = getCharacterOrRaiseIfNotFound(id);
 		character.delete();
 	}
 
 	public static void AddSyllable(long id, String syllable) {
+		raiseIfNotValidSyllable(syllable);
+		
+		Character character = getCharacterOrRaiseIfNotFound(id);
+		
+		//TODO
+	}
+
+	public static void UpdateJp(long id, String jp) {
+		raiseIfNotValidJpValue(jp);
+		raiseIfCharacterAlreadyExist(jp);
+
+		Character character = getCharacterOrRaiseIfNotFound(id);
+		character.setJpValue(jp);
+		character.save();
+	}
+
+	public static void UpdateCn(long id, String cn) {
+		raiseIfNotValidCnValue(cn);
+
+		Character character = getCharacterOrRaiseIfNotFound(id);
+		character.setCnValue(cn);
+		character.save();
+	}
+
+	public static void UpdatePinyins(long id, List<String> pinyins) {
+		raiseIfNotValidPinyins(pinyins);
+		
+		Character character = getCharacterOrRaiseIfNotFound(id);
+		character.setPinyins(pinyins);
+		character.save();
+		
+		//更新其他表的汉字索引
+	}
+
+	private static Character getCharacterOrRaiseIfNotFound(long id) {
 		Character character = Character.findById(id);
 		if(character == null) {
 			raise("汉字不存在: id=%d", id);
 		}
-		
-		if(Linq.from(syllable).notAll(CharPredicates.or(Chars::isHiragana, Chars::isKatakana))) {
-			raise("不符合读音规则: %s", syllable);
-		}
-		
+		return character;
 	}
 
-
+	private static void raiseIfCharacterAlreadyExist(String ch) {
+		if(hasCharacter(ch)) {
+			raise("汉字已存在：%s", ch);
+		}
+	}
+	
 }

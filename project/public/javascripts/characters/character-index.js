@@ -21,15 +21,9 @@ $(function(){
 				var jp = $("#import-character-input-jp").val()
 				var cn = $("#import-character-input-cn").val()
 				
-				var tokens = []
-				foreach($("#import-character-input-pinyin").val().split("\n"), function(token){
-					token = token.trim()
-					if(token != ""){
-						tokens.push(token)
-					}
-				})
+				var pinyins = Validate.parsePinyins($("#import-character-input-pinyin").val())
 				
-				Action.post("/characters/action/create", {jp: jp, cn: cn, pinyins: tokens}, function(data){
+				Action.post("/characters/action/create", {jp: jp, cn: cn, pinyins: pinyins}, function(data){
 					location.href = data.href
 				})
 			},
@@ -47,32 +41,18 @@ $(function(){
 	dialog.dialog("widget").find(".ui-dialog-buttonset button").addClass("btn btn-default btn-xs")
 	
 	$("#dialog-import-character").validate({
-		"#import-character-input-jp": function(val){
-			return val.length == 1 && val.isCJKCharacter()
-		},
-		"#import-character-input-cn": function(val){
-			return val.length == 1 && val.isCJKCharacter()
-		},
+		"#import-character-input-jp": Validate.isValidJpCharacter,
+		"#import-character-input-cn": Validate.isValidCnCharacter,
 		"#import-character-input-pinyin": function(val){
-			var tokens = []
-			var error = false
-			foreach(val.split("\n"), function(token){
-				token = token.trim()
-				if(token != ""){
-					if(!token.match(/^[a-z]{1,6}[1-4]$/)){
-						error = token
-						return false
-					}
-					tokens.push(token)
+			try{
+				var tokens = Validate.parsePinyins(val)
+				if(tokens.length == 0){
+					return false
 				}
-			})
-			if(error){
-				return error + "不符合拼音规范"
+				return true
+			} catch(e){
+				return e
 			}
-			if(tokens.length == 0){
-				return false
-			}
-			return true
 		}
 	})
 	

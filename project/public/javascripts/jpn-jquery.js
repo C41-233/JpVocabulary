@@ -250,13 +250,20 @@
 	function init(editable, options){
 		editable.addClass("editable")
 	
+		var type = options.type
+		var active = options.active
+	
 		var input; 
-		if(options.type == "textarea"){
-			var height = editable.height() + 30
-			input = $("<div class='input-group'><textarea class='form-control editable-input' style='height:"+height+"px'/><span class='input-group-btn'><button class='btn btn-default editable-btn-ok' type='button' style='margin-left:10px'>修改</button></span></div>")
+		if(type == "textarea"){
+			var height = editable.height()
+			var lineHeight = parseFloat(editable.css("line-height"))
+			
+			var newHeight = height + lineHeight
+			input = $("<div class='input-group'><textarea class='form-control editable-input' style='height:"+newHeight+"px'/><span class='input-group-btn'><button class='btn btn-default editable-btn-ok' type='button' style='margin-left:10px'>修改</button></span></div>")
 		}
 		else{
 			input = $("<div class='input-group'><input class='form-control editable-input'/><span class='input-group-btn'><button class='btn btn-default editable-btn-ok' type='button'>修改</button></span></div>")
+			type = 'text'
 		}
 		input.hide()
 		editable.after(input)
@@ -264,16 +271,20 @@
 		var inputField = input.find(".editable-input")
 		var okButton = input.find(".editable-btn-ok")
 		
+		function getText(){
+			var text = editable.data("editable-value")
+			if(text){
+				return text
+			}
+			else{
+				return editable.text()
+			}
+		}
+		
 		editable.on("editable-active", function(){
 			editable.hide()
 			
-			var text
-			if(editable.data("editable-value")){
-				text = editable.data("editable-value")
-			}
-			else{
-				text = editable.text()
-			}
+			var text = getText()
 			inputField.val(text)
 			input.show()
 			
@@ -285,8 +296,14 @@
 			editable.data("editable-active", false)
 		}).on("editable-do", function(){
 			var value = inputField.val()
-			if(options.active){
-				options.active(value, editable.text())
+			var oldValue = getText()
+			if(value == oldValue){
+				$(this).trigger("editable-inactive")
+				return
+			}
+			
+			if(active){
+				active(value, oldValue)
 			}
 		})
 		
@@ -299,9 +316,15 @@
 		inputField.keydown(function(e){
 			if(e.keyCode == VK.ESC){
 				editable.trigger("editable-inactive")
+				return
 			}
-			else if(e.keyCode == VK.ENTER){
+			if(type=='text' && e.keyCode == VK.ENTER){
 				editable.trigger("editable-do")
+				return
+			}
+			if(type=='textarea' && e.keyCode == VK.ENTER && e.ctrlKey){
+				editable.trigger("editable-do")
+				return
 			}
 		})
 		

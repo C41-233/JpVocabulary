@@ -24,14 +24,42 @@ $(function(){
 	
 	$("#editable-character-jp").editable({
 		active: function(val){
-			alert(val)
+			val = val.trim()
+			if(!Validate.isValidJpCharacter(val)){
+				return
+			}
+			Action.post("/characters/action/update-jp", {id: DataMgr.id, value: val}, function(){
+				location.reload()
+			})
 		}
 	})
 	$("#editable-character-cn").editable({
-		
+		active: function(val){
+			val = val.trim()
+			if(!Validate.isValidCnCharacter(val)){
+				return
+			}
+			Action.post("/characters/action/update-cn", {id: DataMgr.id, value: val}, function(){
+				location.reload()
+			})
+		}
 	})
 	$("#editable-character-pinyins").editable({
-		type: "textarea"
+		type: "textarea",
+		active: function(val){
+			try{
+				var pinyins = Validate.parsePinyins(val)
+				if(pinyins.length==0){
+					return
+				}
+				Action.post("/characters/action/update-pinyins", {id: DataMgr.id, values: pinyins}, function(){
+					location.reload()
+				})
+			}
+			catch(e){
+				return
+			}
+		}
 	})
 	
 	$("#btn-add-syllable").click(function(){
