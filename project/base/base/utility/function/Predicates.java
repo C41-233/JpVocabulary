@@ -1,6 +1,6 @@
-package base.utility.linq;
+package base.utility.function;
 
-public final class CharPredicates {
+public final class Predicates {
 
 	public static ICharPredicate and(ICharPredicate p1, ICharPredicate p2) {
 		return new CharPredicateAnd2(p1, p2);

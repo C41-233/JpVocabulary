@@ -1,4 +1,4 @@
-package base.utility.linq;
+package base.utility.function;
 
 @FunctionalInterface
 public interface ICharPredicate {

@@ -1,6 +1,9 @@
 package base.utility.linq;
 
 import java.util.Iterator;
+import java.util.Objects;
+
+import base.utility.function.ICharPredicate;
 
 public interface ICharQuery extends Iterable<Character> {
 
@@ -12,6 +15,8 @@ public interface ICharQuery extends Iterable<Character> {
 	}
 	
 	public default boolean isAll(ICharPredicate predicate) {
+		Objects.requireNonNull(predicate);
+		
 		ICharIterator iterator = iteratorChar();
 		while(iterator.hasNext()) {
 			char ch = iterator.nextChar();
@@ -23,6 +28,8 @@ public interface ICharQuery extends Iterable<Character> {
 	}
 	
 	public default boolean notAll(ICharPredicate predicate) {
+		Objects.requireNonNull(predicate);
+		
 		ICharIterator iterator = iteratorChar();
 		while(iterator.hasNext()) {
 			char ch = iterator.nextChar();

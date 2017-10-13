@@ -6,6 +6,21 @@ $(function(){
 		collapsible: false,
 		active: $("#left-list .left-list-header-active").data("seq"),
 	}).show()
+
+	function actionCreateCharacter(){
+		if($("#dialog-import-character").validate("hasError")){
+			return
+		}
+		
+		var jp = $("#import-character-input-jp").val()
+		var cn = $("#import-character-input-cn").val()
+		
+		var pinyins = Validate.parsePinyins($("#import-character-input-pinyin").val())
+		
+		Action.post("/characters/action/create", {jp: jp, cn: cn, pinyins: pinyins}, function(data){
+			location.href = data.href
+		})
+	}
 	
 	var dialog = $("#dialog-import-character").dialog({
 		autoOpen: false,
@@ -14,19 +29,7 @@ $(function(){
 		draggable: false,
 		width:	260,
 		buttons: {
-			"创建": function(){
-				if($("#dialog-import-character").validate("hasError")){
-					return
-				}
-				var jp = $("#import-character-input-jp").val()
-				var cn = $("#import-character-input-cn").val()
-				
-				var pinyins = Validate.parsePinyins($("#import-character-input-pinyin").val())
-				
-				Action.post("/characters/action/create", {jp: jp, cn: cn, pinyins: pinyins}, function(data){
-					location.href = data.href
-				})
-			},
+			"创建": actionCreateCharacter,
 			"取消": function(){
 				$(this).dialog("close")
 			}
@@ -39,6 +42,12 @@ $(function(){
 		$("#dialog-import-character").dialog("open")
 	})
 	dialog.dialog("widget").find(".ui-dialog-buttonset button").addClass("btn btn-default btn-xs")
+	
+	$("#import-character-input-jp, #import-character-input-cn, #import-character-input-pinyin").keydown(function(e){
+		if(e.keyCode == VK.ENTER && e.ctrlKey){
+			actionCreateCharacter()
+		}	
+	})
 	
 	$("#dialog-import-character").validate({
 		"#import-character-input-jp": Validate.isValidJpCharacter,

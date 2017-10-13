@@ -1,5 +1,7 @@
 package base.utility.linq;
 
+import java.util.NoSuchElementException;
+
 class StringCharQuery implements ICharQuery {
 
 	private final char[] value;
@@ -24,11 +26,17 @@ class StringCharQuery implements ICharQuery {
 
 		@Override
 		public char current() {
+			if(index >= value.length || index < 0) {
+				throw new NoSuchElementException();
+			}
 			return value[index];
 		}
 
 		@Override
 		public void moveNext() {
+			if(hasNext() == false) {
+				throw new NoSuchElementException();
+			}
 			++index;
 		}
 

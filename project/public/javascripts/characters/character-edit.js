@@ -26,6 +26,7 @@ $(function(){
 		active: function(val){
 			val = val.trim()
 			if(!Validate.isValidJpCharacter(val)){
+				$(this).editable("error")
 				return
 			}
 			Action.post("/characters/action/update-jp", {id: DataMgr.id, value: val}, function(){

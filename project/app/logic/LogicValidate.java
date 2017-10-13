@@ -1,9 +1,7 @@
 package logic;
 
-import java.util.List;
-
 import base.utility.Chars;
-import base.utility.linq.CharPredicates;
+import base.utility.function.Predicates;
 import base.utility.linq.Linq;
 
 public final class LogicValidate {
@@ -17,7 +15,7 @@ public final class LogicValidate {
 	}
 	
 	public static boolean isValidSyllable(String syllable) {
-		return syllable!=null && Linq.from(syllable).notAll(CharPredicates.or(Chars::isHiragana, Chars::isKatakana));
+		return syllable!=null && Linq.from(syllable).notAll(Predicates.or(Chars::isHiragana, Chars::isKatakana));
 	}
 
 	public static boolean isValidPinyin(String pinyin) {

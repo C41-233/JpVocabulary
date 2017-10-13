@@ -238,23 +238,33 @@
 
 //editable
 (function($){
+	var proxy = {
+		error: function($this){
+			$this.trigger("editable-error")
+		}
+	}
+
 	$.fn.extend({
 		"editable": function(method){
 			if(arguments.length == 1 && typeof(arguments[0])=="object"){
-				init(this, arguments[0])
-				return this
+				return init(this, arguments[0])
+			}
+			if(method == "error"){
+				return proxy.error(this)
 			}
 		}
 	})
 	
 	function init(editable, options){
+		var args = $.extend(
+			{type: 'text'}, 
+			options
+		)
+		
 		editable.addClass("editable")
 	
-		var type = options.type
-		var active = options.active
-	
-		var input; 
-		if(type == "textarea"){
+		var input
+		if(args.type == "textarea"){
 			var height = editable.height()
 			var lineHeight = parseFloat(editable.css("line-height"))
 			
@@ -262,8 +272,8 @@
 			input = $("<div class='input-group'><textarea class='form-control editable-input' style='height:"+newHeight+"px'/><span class='input-group-btn'><button class='btn btn-default editable-btn-ok' type='button' style='margin-left:10px'>修改</button></span></div>")
 		}
 		else{
+			args.type = 'text'
 			input = $("<div class='input-group'><input class='form-control editable-input'/><span class='input-group-btn'><button class='btn btn-default editable-btn-ok' type='button'>修改</button></span></div>")
-			type = 'text'
 		}
 		input.hide()
 		editable.after(input)
@@ -280,8 +290,11 @@
 				return editable.text()
 			}
 		}
+
+		var isActive = false
 		
-		editable.on("editable-active", function(){
+		function doActive(){
+			inputField.removeClass("validate-error")
 			editable.hide()
 			
 			var text = getText()
@@ -289,47 +302,59 @@
 			input.show()
 			
 			input.find(".editable-input").focus()
-			editable.data("editable-active", true)
-		}).on("editable-inactive", function(){
+			isActive = true
+		}
+		
+		function doInactive(){
+			inputField.removeClass("validate-error")
 			input.hide()
 			editable.show()
-			editable.data("editable-active", false)
-		}).on("editable-do", function(){
+			isActive = false
+		}
+		
+		function doEditable(){
+			inputField.removeClass("validate-error")
 			var value = inputField.val()
 			var oldValue = getText()
 			if(value == oldValue){
-				$(this).trigger("editable-inactive")
+				doInactive()
 				return
 			}
 			
-			if(active){
-				active(value, oldValue)
+			if(args.active){
+				editable.each(function(){
+					args.active.call(this, value, oldValue)
+				})
 			}
+		}
+		
+		editable.on("editable-error", function(){
+			inputField.addClass("validate-error")
 		})
 		
 		editable.click(function(){
-			editable.trigger("editable-active")
+			doActive()
 		})
 		okButton.click(function(){
-			editable.trigger("editable-do")
+			doEditable()
 		})
 		inputField.keydown(function(e){
 			if(e.keyCode == VK.ESC){
-				editable.trigger("editable-inactive")
+				doInactive()
 				return
 			}
-			if(type=='text' && e.keyCode == VK.ENTER){
-				editable.trigger("editable-do")
+			if(args.type=='text' && e.keyCode == VK.ENTER){
+				doEditable()
 				return
 			}
-			if(type=='textarea' && e.keyCode == VK.ENTER && e.ctrlKey){
-				editable.trigger("editable-do")
+			if(args.type=='textarea' && e.keyCode == VK.ENTER && e.ctrlKey){
+				doEditable()
 				return
 			}
 		})
 		
 		$(document).on("click", function(e){
-			if(!editable.data("editable-active")){
+			if(!isActive){
 				return
 			}
 			if(e.target == editable[0] || e.target == input[0]){
@@ -342,8 +367,9 @@
 				}
 			}
 			
-			editable.trigger("editable-inactive")
+			doInactive()
 		})
+		return editable
 	}
 })(window.jQuery);
 
