@@ -2,11 +2,13 @@ package logic.characters;
 
 import java.util.List;
 
+import base.utility.linq.Linq;
 import core.model.hql.HQL;
 import core.model.hql.HQLResult;
 import core.model.hql.Like;
 import logic.LogicBase;
 import models.Character;
+import po.CharacterWord;
 import po.ICharacter;
 import po.ICharacterSyllable;
 
@@ -92,6 +94,26 @@ public final class CharactersLogic extends LogicBase{
 		//更新其他表的汉字索引
 	}
 
+	public static void deleteSyllable(long id, String syllable) {
+		Character character = getCharacterOrRaiseIfNotFound(id);
+		raiseIfSyllableNotFound(character, syllable);
+		
+		character.deleteSyllable(syllable);
+		character.save();
+	}
+
+	public static void updateSyllableWords(long id, String syllable, List<CharacterWord> words) {
+		Character character = getCharacterOrRaiseIfNotFound(id);
+		raiseIfSyllableNotFound(character, syllable);
+		
+		for(CharacterWord word : words) {
+			raiseIfNotValidSyllable(word.getSyllable());
+		}
+		
+		character.setSyllableWords(syllable, words);
+		character.save();
+	}
+
 	private static Character getCharacterOrRaiseIfNotFound(long id) {
 		Character character = Character.findById(id);
 		if(character == null) {
@@ -103,6 +125,12 @@ public final class CharactersLogic extends LogicBase{
 	private static void raiseIfCharacterAlreadyExist(String ch) {
 		if(hasCharacter(ch)) {
 			raise("汉字已存在：%s", ch);
+		}
+	}
+
+	private static void raiseIfSyllableNotFound(Character character, String syllable) {
+		if(Linq.from(character.getSyllables()).notExist(s->s.getValue().equals(syllable))) {
+			raise("不存在读音: %s", syllable);
 		}
 	}
 	

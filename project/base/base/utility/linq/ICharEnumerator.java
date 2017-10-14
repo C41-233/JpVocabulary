@@ -3,21 +3,21 @@ package base.utility.linq;
 public interface ICharEnumerator extends IEnumerator<Character>{
 
 	@Override
-	public boolean hasNext();
-	
-	@Override
 	public default Character next() {
-		return nextChar();
-	}
-	
-	public default char nextChar() {
 		moveNext();
 		return current();
 	}
 	
-	@Override
-	public void moveNext();
+	public default char nextChar() {
+		moveNext();
+		return currentChar();
+	}
 	
-	public char current();
+	@Override
+	public default Character current() {
+		return currentChar();
+	}
+	
+	public char currentChar();
 	
 }

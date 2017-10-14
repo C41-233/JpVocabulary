@@ -3,7 +3,10 @@ package base.utility.linq;
 import java.util.List;
 import java.util.Objects;
 
+import base.utility.function.ICharAction;
+import base.utility.function.ICharForeach;
 import base.utility.function.ICharPredicate;
+import base.utility.function.ICharSelector;
 
 public interface ICharEnumerable extends IEnumerable<Character>{
 
@@ -39,6 +42,27 @@ public interface ICharEnumerable extends IEnumerable<Character>{
 			array[i] = list.get(i);
 		}
 		return array;
+	}
+	
+	public default void foreach(ICharForeach action) {
+		ICharEnumerator enumerator = iterator();
+		int i = 0;
+		while(enumerator.hasNext()) {
+			char ch = enumerator.nextChar();
+			action.action(ch, i++);
+		}
+	}
+
+	public default void foreach(ICharAction action) {
+		ICharEnumerator enumerator = iterator();
+		while(enumerator.hasNext()) {
+			char ch = enumerator.nextChar();
+			action.action(ch);
+		}
+	}
+	
+	public default <V> IReferenceEnumerable<V> select(ICharSelector<? extends V> selector){
+		return new CharSelectEnumerable(this, selector);
 	}
 	
 	@Override
@@ -92,7 +116,7 @@ class CharArrayEnumerable implements ICharEnumerable{
 		}
 
 		@Override
-		public char current() {
+		public char currentChar() {
 			return array[i];
 		}
 		

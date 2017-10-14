@@ -21,4 +21,8 @@ public final class Assert{
 		is(value.trim().isEmpty()==false, "require string");
 	}
 	
+	public static void require(Object obj) {
+		notNull(obj);
+	}
+	
 }

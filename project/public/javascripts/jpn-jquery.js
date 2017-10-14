@@ -118,30 +118,25 @@
 //Dialog
 (function($){
 	window.Dialog = {
-		confirm: function(options){
+		confirm: function(args){
+			var options = $.extend({
+				yes: "确定",
+				no: "取消"
+			}, args)
+		
 			var buttons = {}
-			if(options.yes){
-				buttons[options.yes] = function(){
-					if(options.onConfirm){
-						options.onConfirm({
-							close: function(){
-								dialog.dialog("close")
-							}
-						})
-					}
+			buttons[options.yes] = function(){
+				if(options.onConfirm){
+					options.onConfirm({
+						close: function(){
+							dialog.dialog("close")
+						}
+					})
 				}
-			}
-			else{
-				buttons["确定"] = function(){}
 			}
 			
-			if(options.no){
-				buttons[options.no] = function(){
-					dialog.dialog("close")
-				}
-			}
-			else{
-				buttons["取消"] = function(){}
+			buttons[options.no] = function(){
+				dialog.dialog("close")
 			}
 			
 			var dialog = $("<div>"+options.text+"</div>").dialog({
@@ -184,6 +179,10 @@
 		post: function(){
 			var url, data = {}, success, fail, complete
 			dispatch(
+				["string", "object", function(_url, _data){
+					url = _url
+					data = _data
+				}],
 				["string", "object", "function", function(_url, _data, _success){
 					url = _url
 					data = _data
@@ -255,122 +254,130 @@
 		}
 	})
 	
-	function init(editable, options){
+	function init(editables, options){
 		var args = $.extend(
 			{type: 'text'}, 
 			options
 		)
 		
-		editable.addClass("editable")
-	
-		var input
-		if(args.type == "textarea"){
-			input = $("<div class='input-group'><textarea class='form-control editable-input'/><span class='input-group-btn'><button class='btn btn-default editable-btn-ok' type='button' style='margin-left:10px'>修改</button></span></div>")
-		}
-		else{
-			args.type = 'text'
-			input = $("<div class='input-group'><input class='form-control editable-input'/><span class='input-group-btn'><button class='btn btn-default editable-btn-ok' type='button'>修改</button></span></div>")
-		}
-		input.hide()
-		editable.after(input)
+		editables.each(function(){
+			var editable = $(this)
+			
+			editable.addClass("editable")
 		
-		var inputField = input.find(".editable-input")
-		var okButton = input.find(".editable-btn-ok")
-		
-		function getText(){
-			var text = editable.data("editable-value")
-			if(text){
-				return text
+			var input
+			if(args.type == "textarea"){
+				input = $("<div class='input-group'><textarea class='form-control editable-input'/><span class='input-group-btn'><button class='btn btn-default editable-btn-ok' type='button' style='margin-left:10px'>修改</button></span></div>")
 			}
 			else{
-				return editable.text()
+				args.type = 'text'
+				input = $("<div class='input-group'><input class='form-control editable-input'/><span class='input-group-btn'><button class='btn btn-default editable-btn-ok' type='button'>修改</button></span></div>")
 			}
-		}
-
-		var isActive = false
-		
-		function doActive(){
-			inputField.removeClass("validate-error")
-			editable.hide()
-			
-			var text = getText()
-			inputField.val(text)
-			input.show()
-			
-			input.find(".editable-input").focus()
-			isActive = true
-			
-			if(args.type == "textarea"){
-				var rows = text.split("\n").length
-				inputField.attr("rows", rows)
-			}
-		}
-		
-		function doInactive(){
-			inputField.removeClass("validate-error")
 			input.hide()
-			editable.show()
-			isActive = false
-		}
-		
-		function doEditable(){
-			inputField.removeClass("validate-error")
-			var value = inputField.val()
-			var oldValue = getText()
-			if(value == oldValue){
-				doInactive()
-				return
+			editable.after(input)
+			
+			var inputField = input.find(".editable-input")
+			var okButton = input.find(".editable-btn-ok")
+			
+			if(args.placeholder){
+				inputField.attr("placeholder", args.placeholder)
 			}
 			
-			if(args.active){
-				editable.each(function(){
-					args.active.call(this, value, oldValue)
-				})
+			function getText(){
+				var text = editable.data("editable-value")
+				if(text != undefined){
+					return text
+				}
+				else{
+					return editable.text()
+				}
 			}
-		}
-		
-		editable.on("editable-error", function(){
-			inputField.addClass("validate-error")
-		})
-		
-		editable.click(function(){
-			doActive()
-		})
-		okButton.click(function(){
-			doEditable()
-		})
-		inputField.keydown(function(e){
-			if(e.keyCode == VK.ESC){
-				doInactive()
-				return
-			}
-			if(args.type=='text' && e.keyCode == VK.ENTER){
-				doEditable()
-				return
-			}
-			if(args.type=='textarea' && e.keyCode == VK.ENTER && e.ctrlKey){
-				doEditable()
-				return
-			}
-		})
-		
-		$(document).on("click", function(e){
-			if(!isActive){
-				return
-			}
-			if(e.target == editable[0] || e.target == input[0]){
-				return
-			}
-			var obj = $(e.target).parents()
-			for(var i=0; i<obj.length; i++){
-				if(obj[i]==editable[0] || obj[i]==input[0]){
-					return;
+
+			var isActive = false
+			
+			function doActive(){
+				inputField.removeClass("validate-error")
+				editable.hide()
+				
+				var text = getText()
+				inputField.val(text)
+				input.show()
+				
+				input.find(".editable-input").focus()
+				isActive = true
+				
+				if(args.type == "textarea"){
+					var rows = text.split("\n").length
+					inputField.attr("rows", rows)
 				}
 			}
 			
-			doInactive()
+			function doInactive(){
+				inputField.removeClass("validate-error")
+				input.hide()
+				editable.show()
+				isActive = false
+			}
+			
+			function doEditable(){
+				inputField.removeClass("validate-error")
+				var value = inputField.val()
+				var oldValue = getText()
+				if(value == oldValue){
+					doInactive()
+					return
+				}
+				
+				if(args.active){
+					editable.each(function(){
+						args.active.call(this, value, oldValue)
+					})
+				}
+			}
+			
+			editable.on("editable-error", function(){
+				inputField.addClass("validate-error")
+			})
+			
+			editable.click(function(){
+				doActive()
+			})
+			okButton.click(function(){
+				doEditable()
+			})
+			inputField.keydown(function(e){
+				if(e.keyCode == VK.ESC){
+					doInactive()
+					return
+				}
+				if(args.type=='text' && e.keyCode == VK.ENTER){
+					doEditable()
+					return
+				}
+				if(args.type=='textarea' && e.keyCode == VK.ENTER && e.ctrlKey){
+					doEditable()
+					return
+				}
+			})
+			
+			$(document).on("click", function(e){
+				if(!isActive){
+					return
+				}
+				if(e.target == editable[0] || e.target == input[0]){
+					return
+				}
+				var obj = $(e.target).parents()
+				for(var i=0; i<obj.length; i++){
+					if(obj[i]==editable[0] || obj[i]==input[0]){
+						return;
+					}
+				}
+				
+				doInactive()
+			})
 		})
-		return editable
+		return editables
 	}
 })(window.jQuery);
 

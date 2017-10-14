@@ -14,4 +14,8 @@ public final class Linq {
 		return new IterableEnumerable(iterable);
 	}
 	
+	public static <T> IReferenceEnumerable<T> from(T[] array){
+		return new ArrayEnumerable(array);
+	}
+	
 }

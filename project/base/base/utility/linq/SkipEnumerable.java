@@ -12,26 +12,13 @@ class SkipEnumerable<T> implements IEnumerable<T>{
 	
 	@Override
 	public IEnumerator<T> iterator() {
-		IEnumerator enumerator = enumerable.iterator();
+		IEnumerator<T> enumerator = enumerable.iterator();
 		for(int i=0; i<skip && enumerator.hasNext(); i++) {
 			enumerator.moveNext();
 		}
 		return enumerator;
 	}
 
-}
-
-class ReferenceSkipEnumerable<T> extends SkipEnumerable<T> implements IReferenceEnumerable<T>{
-	
-	public ReferenceSkipEnumerable(IReferenceEnumerable<T> enumerable, int skip) {
-		super(enumerable, skip);
-	}
-
-	@Override
-	public IReferenceEnumerator<T> iterator() {
-		return (IReferenceEnumerator<T>) super.iterator();
-	}
-	
 }
 
 class CharSkipEnumerable extends SkipEnumerable<Character> implements ICharEnumerable{

@@ -9,6 +9,7 @@ import core.controller.validation.ValidationFailException;
 import logic.LogicException;
 import play.mvc.After;
 import play.mvc.Catch;
+import play.mvc.Http;
 
 public abstract class AjaxControllerBase extends ControllerBase{
 
@@ -16,6 +17,10 @@ public abstract class AjaxControllerBase extends ControllerBase{
 	
 	@After
 	private static void after() {
+		if(response.status != Http.StatusCode.OK) {
+			return;
+		}
+		
 		if(response.contentType == null) {
 			response.contentType = "application/json";
 		}
@@ -72,6 +77,15 @@ public abstract class AjaxControllerBase extends ControllerBase{
 	@Catch(ValidationFailException.class)
 	private static void onValidationFailException(ValidationFailException e) {
 		badRequest(e.getMessage());
+	}
+
+	protected static void badRequest() {
+		badRequest("Bad Request");
+	}
+	
+	protected static void badRequest(String msg) {
+		response.status = Http.StatusCode.BAD_REQUEST;
+		renderText(msg);
 	}
 	
 }

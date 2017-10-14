@@ -18,5 +18,7 @@ POST	/characters/action/add-syllable			characters.CharacterAPI.addSyllable
 POST	/characters/action/update-jp			characters.CharacterAPI.updateJp
 POST	/characters/action/update-cn			characters.CharacterAPI.updateCn
 POST	/characters/action/update-pinyins		characters.CharacterAPI.updatePinyins
+POST	/characters/action/delete-syllable		characters.CharacterAPI.deleteSyllable
+POST	/characters/action/update-syllable-words characters.CharacterAPI.updateSyllableWords
 
 GET		/test									Test.test

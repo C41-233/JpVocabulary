@@ -4,7 +4,6 @@ $(function(){
 			text: "确定要删除汉字吗？",
 			yes: "删除",
 			yesClass: "btn-danger",
-			no: "取消",
 			onConfirm: function(handle){
 				Action.post(
 					"/characters/action/delete", 
@@ -81,5 +80,36 @@ $(function(){
 		}
 	}).on("input", function(){
 		$(this).removeClass("error")
+	})
+	
+	$(".btn-delete-syllable").click(function(){
+		var syllable = $(this).data("syllable")
+		Dialog.confirm({
+			text: "确定要删除读音"+syllable+"吗？",
+			yes: "删除",
+			yesClass: "btn-danger",
+			onConfirm: function(handle){
+				handle.close()
+				Action.post("/characters/action/delete-syllable", {id: DataMgr.id, syllable: syllable}, function(){
+					location.reload()
+				})
+			}
+		})
+	})
+	
+	$(".editable-syllable").editable({
+		type: "textarea",
+		placeholder: "单词 读音",
+		active: function(val){
+			var array = Linq.from(val.split("\n")).select(function(s){
+				return s.trim()
+			}).where(function(s){
+				return s!=""
+			}).toArray()
+			var syllable = $(this).data("syllable")
+			Action.post("/characters/action/update-syllable-words", {id: DataMgr.id, syllable: syllable, words: array}, function(){
+				location.reload()
+			})
+		}
 	})
 })

@@ -8,13 +8,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-
 import base.utility.assertion.Assert;
+import base.utility.linq.Linq;
 import core.model.ConcatSplit;
 import core.model.ModelBase;
 import core.model.ModelConstant;
@@ -35,6 +30,15 @@ public class Character extends ModelBase implements ICharacter{
 	@Column(name="pinyins")
 	private String pinyins = ModelConstant.EmptyToken;
 
+	/**
+	 * [{
+	 * 		value:string, 
+	 * 		words:[{
+	 * 			syllable:string, 
+	 * 			word:string
+	 * 		}]
+	 * }]
+	 */
 	@Column(name="syllables", columnDefinition="TEXT")
 	private String syllables = ModelConstant.EmptyJsonArray;
 
@@ -74,23 +78,36 @@ public class Character extends ModelBase implements ICharacter{
 	
 	@Override
 	public Iterable<ICharacterSyllable> getSyllables() {
-		JsonArray array = new JsonParser().parse(this.syllables).getAsJsonArray();
-		
-		ArrayList<ICharacterSyllable> syllables = new ArrayList<>();
-		return syllables;
+		Syllables syllables = new Syllables(this.syllables);
+		return Linq.from(syllables.getSyllables()).cast();
 	}
 
 	public void addSyllable(String syllable) {
 		Assert.require(syllable);
 		
-		JsonObject node = new JsonObject();
-		node.addProperty("value", syllable);
-		node.add("words", new JsonArray());
+		Syllables syllables = new Syllables(this.syllables);
+		syllables.addSyllable(syllable);
 		
-		JsonArray array = new JsonParser().parse(this.syllables).getAsJsonArray();
-		array.add(node);
+		this.syllables = syllables.toString();
+	}
+	
+	public void deleteSyllable(String syllable) {
+		Assert.require(syllable);
+
+		Syllables syllables = new Syllables(this.syllables);
+		syllables.removeSyllable(syllable);
 		
-		this.syllables = array.toString();
+		this.syllables = syllables.toString();
+	}
+
+	public void setSyllableWords(String syllable, List<CharacterWord> words) {
+		Assert.require(syllable);
+		Assert.require(words);
+		
+		Syllables syllables = new Syllables(this.syllables);
+		syllables.setSyllable(syllable, words);
+		
+		this.syllables = syllables.toString();
 	}
 	
 	@Override
@@ -98,5 +115,6 @@ public class Character extends ModelBase implements ICharacter{
 		ArrayList<CharacterWord> words = new ArrayList<>();
 		return words;
 	}
-	
+
 }
+

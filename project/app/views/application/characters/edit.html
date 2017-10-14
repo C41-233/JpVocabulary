@@ -37,17 +37,29 @@
 				<tr>
 					<th>读音</th>
 					<td>
-						<table id="table-syllable">
+						<table id="table-syllable" class="table table-bordered">
 						#{list items:character.syllables, as:'syllable'}
 							<tr>
-								<th><span>${syllable.value}</span></th>
+								<td><span>${syllable.value}</span></td>
+								<td>
+									<div class="editable-syllable" data-editable-value="${syllable.wordsValue}" data-syllable="${syllable.value}">
+										#{list items:syllable.words, as:'word'}
+											<li>${word.word}(${word.syllable})</li>
+										#{/list}
+										#{else}
+											（无）
+										#{/else}
+									</div>
+								</td>
+								<td><button class=" btn btn-danger btn-sm btn-delete-syllable" data-syllable="${syllable.value}">删除</button></td>
 							</tr>
 						#{/list}
 							<tr>
-								<th>
-									<input type="text" id="input-add-syllable"/>
+								<th colspan="3">
+									<div id="div-add-syllable">
+										<input type="text" id="input-add-syllable"/>
+									</div>
 								</th>
-								<td></td>
 							</tr>
 						</table>
 					</td>
@@ -75,7 +87,23 @@
 #table-syllable{
 	width:		100%;
 }
-#table-syllable th{
-	width:		240px;
+#table-syllable th, #table-syllable td{
+	vertical-align: middle;
+}
+#table-syllable td:nth-child(1){
+	width:		30%;
+}
+#table-syllable td:nth-child(2){
+	width:		50%;
+	padding-left:	5px;
+	padding-right:	5px;
+	padding-top:	5px;
+	padding-bottom:	5px;
+}
+#table-syllable td:nth-child(3){
+	text-align:	center;
+}
+#div-add-syllable{
+	width:	30%;
 }
 #{/stylesheet}

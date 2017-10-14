@@ -8,8 +8,13 @@ public interface IEnumerator<T> extends Iterator<T>{
 	public boolean hasNext();
 	
 	@Override
-	public T next();
+	public default T next() {
+		moveNext();
+		return current();
+	}
 	
 	public void moveNext();
+	
+	public T current();
 	
 }

@@ -95,12 +95,13 @@
 	global.Linq = {
 		from: function(obj){
 			if(obj instanceof String){
-				return new StringQuery(obj)
+				return new StringEnumerable(obj)
 			}
+			return new ArrayEnumerable(obj)
 		}
 	}
 
-	function IQuery(){
+	function IEnumerable(){
 		this.foreach = function(action){
 			var it = this.iterator()
 			while(it.moveNext()){
@@ -116,27 +117,26 @@
 			}
 			return true
 		}
+		this.toArray = function(){
+			var arr = []
+			this.foreach(function(e){
+				arr.push(e)
+			})
+			return arr
+		}
+		this.where = function(predicate){
+			return new WhereEnumerable(this, predicate)
+		}
+		this.select = function(selector){
+			return new SelectEnumerable(this, selector)
+		}
 	}
 	
-	function StringQuery(str){
-		IQuery.call(this)
-	
-		function Iterator(){
-			var index = -1
-			this.moveNext = function(){
-				return ++index < str.length
-			}
-			this.current = function(){
-				return str[index]
-			}
-		}
-		
-		this.iterator = function(){
-			return new Iterator()
-		}
+	function StringEnumerable(str){
+		ArrayEnumerable.call(this)
 		
 		function CharCodeQuery(){
-			IQuery.call(this)
+			IEnumerable.call(this)
 			
 			function Iterator(){
 				var index = -1
@@ -155,6 +155,65 @@
 		
 		this.charCode = function(){
 			return new CharCodeQuery()
+		}
+	}
+	
+	function ArrayEnumerable(arr){
+		IEnumerable.call(this)
+	
+		function Iterator(){
+			var index = -1
+			this.moveNext = function(){
+				return ++index < arr.length
+			}
+			this.current = function(){
+				return arr[index]
+			}
+		}
+		
+		this.iterator = function(){
+			return new Iterator()
+		}
+	}
+	
+	function WhereEnumerable(enumerable, predicate){
+		IEnumerable.call(this)
+		
+		function Iterator(){
+			var iterator = enumerable.iterator()
+			
+			var value
+			this.moveNext = function(){
+				while(iterator.moveNext()){
+					value = iterator.current()
+					if(predicate(value)){
+						return true
+					}
+				}
+				delete value
+				return false
+			}
+			this.current = function(){
+				return value
+			}
+		}
+		this.iterator = function(){
+			return new Iterator()
+		}
+	}
+	
+	function SelectEnumerable(enumerable, selector){
+		IEnumerable.call(this)
+		
+		function Iterator(){
+			var iterator = enumerable.iterator()
+			this.moveNext = iterator.moveNext
+			this.current = function(){
+				return selector(iterator.current())
+			}
+		}
+		this.iterator = function(){
+			return new Iterator()
 		}
 	}
 	

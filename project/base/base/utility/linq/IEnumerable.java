@@ -31,4 +31,8 @@ public interface IEnumerable<T> extends Iterable<T>{
 		return new SkipEnumerable(this, n);
 	}
 	
+	public default <V> IEnumerable<V> cast(){
+		return new SelectEnumerable(this, t->(V)t);
+	}
+	
 }

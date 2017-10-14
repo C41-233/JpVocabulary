@@ -8,6 +8,7 @@ import core.controller.HtmlControllerBase;
 import core.controller.validation.annotation.Id;
 import logic.characters.CharactersLogic;
 import logic.pinyins.Pinyins;
+import po.CharacterWord;
 import po.ICharacter;
 import po.ICharacterSyllable;
 
@@ -38,6 +39,17 @@ public class CharacterEdit extends HtmlControllerBase{
 			vo.syllables.add(syllableVO);
 			
 			syllableVO.value = syllable.getValue();
+			
+			StringBuilder sb = new StringBuilder();
+			for(CharacterWord word : syllable.getWords()) {
+				WordPairVO wordVO = new WordPairVO();
+				wordVO.syllable = word.getSyllable();
+				wordVO.word = word.getWord();
+				syllableVO.words.add(wordVO);
+				
+				sb.append(word.getWord()).append(" ").append(word.getSyllable()).append("\n");
+			}
+			syllableVO.wordsValue = sb.toString();
 		}
 		
 		renderArgs.put("character", vo);
@@ -56,10 +68,13 @@ public class CharacterEdit extends HtmlControllerBase{
 	
 	private static class SyllableVO{
 		String value;
+		List<WordPairVO> words = new ArrayList<>();
+		String wordsValue;
 	}
 	
 	private static class WordPairVO{
-		
+		String word;
+		String syllable;
 	}
 	
 }

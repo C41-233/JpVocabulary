@@ -10,5 +10,9 @@ public final class Strings{
 		}
 		return String.format(format, args);
 	}
+
+	public static String[] splitTokens(String string) {
+		return string.split("(\\s|　)+");
+	}
 	
 }
