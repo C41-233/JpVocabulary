@@ -265,11 +265,7 @@
 	
 		var input
 		if(args.type == "textarea"){
-			var height = editable.height()
-			var lineHeight = parseFloat(editable.css("line-height"))
-			
-			var newHeight = height + lineHeight
-			input = $("<div class='input-group'><textarea class='form-control editable-input' style='height:"+newHeight+"px'/><span class='input-group-btn'><button class='btn btn-default editable-btn-ok' type='button' style='margin-left:10px'>修改</button></span></div>")
+			input = $("<div class='input-group'><textarea class='form-control editable-input'/><span class='input-group-btn'><button class='btn btn-default editable-btn-ok' type='button' style='margin-left:10px'>修改</button></span></div>")
 		}
 		else{
 			args.type = 'text'
@@ -303,6 +299,11 @@
 			
 			input.find(".editable-input").focus()
 			isActive = true
+			
+			if(args.type == "textarea"){
+				var rows = text.split("\n").length
+				inputField.attr("rows", rows)
+			}
 		}
 		
 		function doInactive(){
@@ -371,6 +372,37 @@
 		})
 		return editable
 	}
+})(window.jQuery);
+
+//input-group
+(function($){
+	$.fn.extend({
+		inputable: function(options){
+			var args = $.extend({
+				label: "确定"
+			}, options)
+			var wrapper = $("<div class='input-group'></div>")
+			this.wrap(wrapper).after("<span class='input-group-btn'><button class='btn btn-default btn-ok'>"+args.label+"</button></span>")
+			
+			this.addClass("form-control")
+			
+			this.each(function(){
+				var self = this
+				var btn = $(this).parent().find(".btn-ok")
+				btn.click(function(){
+					if(args.active){
+						args.active.call(self, $(self).val())
+					}
+				})
+				$(this).keydown(function(e){
+					if(e.keyCode == VK.ENTER){
+						btn.click()
+					}
+				})
+			})
+			return this
+		}
+	})
 })(window.jQuery);
 
 //css

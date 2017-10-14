@@ -8,6 +8,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
 import base.utility.assertion.Assert;
 import core.model.ConcatSplit;
 import core.model.ModelBase;
@@ -68,8 +74,23 @@ public class Character extends ModelBase implements ICharacter{
 	
 	@Override
 	public Iterable<ICharacterSyllable> getSyllables() {
+		JsonArray array = new JsonParser().parse(this.syllables).getAsJsonArray();
+		
 		ArrayList<ICharacterSyllable> syllables = new ArrayList<>();
 		return syllables;
+	}
+
+	public void addSyllable(String syllable) {
+		Assert.require(syllable);
+		
+		JsonObject node = new JsonObject();
+		node.addProperty("value", syllable);
+		node.add("words", new JsonArray());
+		
+		JsonArray array = new JsonParser().parse(this.syllables).getAsJsonArray();
+		array.add(node);
+		
+		this.syllables = array.toString();
 	}
 	
 	@Override

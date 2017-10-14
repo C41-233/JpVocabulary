@@ -1,17 +1,17 @@
 package base.utility.linq;
 
-import java.util.Objects;
-
 public final class Linq {
 
-	public static ICharQuery from(String string) {
-		Objects.requireNonNull(string);
-		return new StringCharQuery(string);
+	public static ICharEnumerable from(String string) {
+		return new CharArrayEnumerable(string);
 	}
 	
-	public static <T> IQuery<T> from(Iterable<T> iterable){
-		Objects.requireNonNull(iterable);
-		return new IterableQuery<>(iterable);
+	public static ICharEnumerable from(char[] array) {
+		return new CharArrayEnumerable(array);
+	}
+	
+	public static <T> IReferenceEnumerable<T> from(Iterable<T> iterable){
+		return new IterableEnumerable(iterable);
 	}
 	
 }

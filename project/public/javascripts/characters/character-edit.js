@@ -38,6 +38,7 @@ $(function(){
 		active: function(val){
 			val = val.trim()
 			if(!Validate.isValidCnCharacter(val)){
+				$(this).editable("error")
 				return
 			}
 			Action.post("/characters/action/update-cn", {id: DataMgr.id, value: val}, function(){
@@ -51,6 +52,7 @@ $(function(){
 			try{
 				var pinyins = Validate.parsePinyins(val)
 				if(pinyins.length==0){
+					$(this).editable("error")
 					return
 				}
 				Action.post("/characters/action/update-pinyins", {id: DataMgr.id, values: pinyins}, function(){
@@ -58,15 +60,26 @@ $(function(){
 				})
 			}
 			catch(e){
+				$(this).editable("error")
 				return
 			}
 		}
 	})
 	
-	$("#btn-add-syllable").click(function(){
-		var value = $("#input-add-syllable").val()
-		Action.post("/characters/action/add-syllable", {id: DataMgr.id, syllable: value}, function(){
-			location.reload()
-		})
+	$("#input-add-syllable").inputable({
+		label: "添加",
+		active: function(value){
+			value = value.trim()
+			if(!Validate.isValidSyllable(value)){
+				$(this).addClass("error")
+				return
+			}
+			
+			Action.post("/characters/action/add-syllable", {id: DataMgr.id, syllable: value}, function(){
+				location.reload()
+			})
+		}
+	}).on("input", function(){
+		$(this).removeClass("error")
 	})
 })

@@ -1,5 +1,13 @@
 (function(){
 
+String.prototype.isCJKCharacter = function(){
+	return Linq.from(this).charCode().isAll(CharCode.isCJKCharacter)
+}
+
+String.prototype.isHiragana = function(){
+	return Linq.from(this).charCode().isAll(CharCode.isHiragana)
+}
+
 global.Validate = {
 	isValidJpCharacter: function(val){
 		return val.length == 1 && val.isCJKCharacter()
@@ -7,9 +15,13 @@ global.Validate = {
 	isValidCnCharacter: function(val){
 		return val.length == 1 && val.isCJKCharacter()
 	},
+	isValidSyllable: function(val){
+		return val.length > 0 && val.isHiragana()
+	},
 	parsePinyins: function(arr){
 		var tokens = []
 		var error = false
+		
 		foreach(arr.split("\n"), function(token){
 			token = token.trim()
 			if(token != ""){

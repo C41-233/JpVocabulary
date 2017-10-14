@@ -1,4 +1,5 @@
-.validate-error, .validate-error:focus{
+.validate-error, .validate-error:focus,
+input.error, input.error:focus{
 	border-color:	red;
 }
 

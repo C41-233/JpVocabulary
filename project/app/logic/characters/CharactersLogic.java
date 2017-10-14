@@ -8,6 +8,7 @@ import core.model.hql.Like;
 import logic.LogicBase;
 import models.Character;
 import po.ICharacter;
+import po.ICharacterSyllable;
 
 public final class CharactersLogic extends LogicBase{
 
@@ -55,8 +56,13 @@ public final class CharactersLogic extends LogicBase{
 		raiseIfNotValidSyllable(syllable);
 		
 		Character character = getCharacterOrRaiseIfNotFound(id);
-		
-		//TODO
+		for(ICharacterSyllable mySyllable : character.getSyllables()) {
+			if(mySyllable.getValue().equals(syllable)) {
+				raise("读音已存在: %s", syllable);
+			}
+		}
+		character.addSyllable(syllable);
+		character.save();
 	}
 
 	public static void UpdateJp(long id, String jp) {
