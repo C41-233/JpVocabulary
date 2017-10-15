@@ -29,8 +29,9 @@ public final class ProcessorManager {
 		init(StringValue.class, String[].class, new StringValueArrayProcessor());
 	}
 	
+	@SuppressWarnings("unchecked")
 	public Object process(Class annotationType, Class parameterType, Annotation annotation, Object arg, String[] raw) throws ValidationFailException {
-		IValidationProcessor processor = cache.get(annotationType, parameterType);
+		IValidationProcessor<Annotation, Object> processor = cache.get(annotationType, parameterType);
 		if(processor == null) {
 			throw new NoSuchValidationException(String.format("%s %s", annotationType.getSimpleName(), parameterType.getSimpleName()));
 		}

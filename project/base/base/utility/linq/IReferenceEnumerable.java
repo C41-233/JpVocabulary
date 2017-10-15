@@ -62,6 +62,7 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 		return -1;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public default T[] toArray(Class<T> type) {
 		List<T> list = toList();
 		T[] array = (T[]) Array.newInstance(type, list.size());
@@ -92,16 +93,19 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public default <V> IReferenceEnumerable<V> select(ISelector<? super T, ? extends V> selector){
 		return new SelectEnumerable(this, selector);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public default IReferenceEnumerable<T> orderBy(Comparator<? super T> comparator){
 		return new OrderByEnumerable(this, comparator);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public default IReferenceEnumerable<T> sort(){
-		return new OrderByEnumerable(this, (t1, t2)->{
+		return new OrderByEnumerable<T>(this, (t1, t2)->{
 			return Comparators.compare((Comparable)t1, (Comparable)t2);
 		});
 	}

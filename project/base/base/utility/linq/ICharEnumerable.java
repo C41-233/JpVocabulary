@@ -61,6 +61,7 @@ public interface ICharEnumerable extends IEnumerable<Character>{
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public default <V> IReferenceEnumerable<V> select(ICharSelector<? extends V> selector){
 		return new CharSelectEnumerable(this, selector);
 	}

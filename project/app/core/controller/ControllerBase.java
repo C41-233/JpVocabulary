@@ -43,6 +43,7 @@ public abstract class ControllerBase extends Controller{
 			return map().get(key);
 		}
 		
+		@SuppressWarnings("unchecked")
 		private HashMap<String, Object> map(){
 			Object dic = request.args.get(name);
 			if(dic == null) {

@@ -11,11 +11,11 @@ public final class Linq {
 	}
 	
 	public static <T> IReferenceEnumerable<T> from(Iterable<T> iterable){
-		return new IterableEnumerable(iterable);
+		return new IterableEnumerable<T>(iterable);
 	}
 	
 	public static <T> IReferenceEnumerable<T> from(T[] array){
-		return new ArrayEnumerable(array);
+		return new ArrayEnumerable<T>(array);
 	}
 	
 }

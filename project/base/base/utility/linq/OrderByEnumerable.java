@@ -8,7 +8,7 @@ class OrderByEnumerable<T> implements IReferenceEnumerable<T>{
 	private final IReferenceEnumerable<T> enumerable;
 	private final Comparator<T> comparator;
 	
-	public OrderByEnumerable(IReferenceEnumerable enumerable, Comparator<T> comparator) {
+	public OrderByEnumerable(IReferenceEnumerable<T> enumerable, Comparator<T> comparator) {
 		this.enumerable = enumerable;
 		this.comparator = comparator;
 	}

@@ -1,0 +1,29 @@
+<project default="all">
+	<property name="folder.classes.output" value="tmp/bin"/>
+	<property name="folder.lib" value="lib"/>
+	<property name="file.base.jar" value="${folder.lib}/base.jar"/>
+
+	<target name="folder">
+		<mkdir dir="${folder.classes.output}"/>
+	</target>
+    <target name="build-base" depends="folder">
+        <javac 
+			srcdir="base" 
+			destdir="${folder.classes.output}"
+			encoding="utf-8"
+			includeantruntime="false"
+		>
+			<compilerarg value="-Xlint:unchecked"/>
+        </javac>
+		<jar jarfile="${file.base.jar}" basedir="${folder.classes.output}" includes="base/**"/>
+    </target>
+	
+	<target name="clean">
+		<delete includeemptydirs="true">
+			<fileset file="${file.base.jar}"/>
+			<fileset dir="tmp" includes="**/*"/>
+		</delete>
+	</target>
+	
+	<target name="all" depends="clean,build-base"/>
+</project>

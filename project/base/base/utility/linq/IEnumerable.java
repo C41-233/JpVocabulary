@@ -28,11 +28,12 @@ public interface IEnumerable<T> extends Iterable<T>{
 	}
 	
 	public default IEnumerable<T> skip(int n){
-		return new SkipEnumerable(this, n);
+		return new SkipEnumerable<T>(this, n);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public default <V> IEnumerable<V> cast(){
-		return new SelectEnumerable(this, t->(V)t);
+		return new SelectEnumerable<T, V>(this, t->(V)t);
 	}
 	
 }
