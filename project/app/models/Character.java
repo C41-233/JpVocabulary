@@ -1,6 +1,5 @@
 package models;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -33,6 +32,7 @@ public class Character extends ModelBase implements ICharacter{
 	/**
 	 * [{
 	 * 		value:string, 
+	 * 		isMain:boolean
 	 * 		words:[{
 	 * 			syllable:string, 
 	 * 			word:string
@@ -42,6 +42,12 @@ public class Character extends ModelBase implements ICharacter{
 	@Column(name="syllables", columnDefinition="TEXT")
 	private String syllables = ModelConstant.EmptyJsonArray;
 
+	/**
+	 * [{
+	 * 		syllable:string,
+	 * 		word:string
+	 * }]
+	 */
 	@Column(name="fixwords", columnDefinition="TEXT")
 	private String fixwords = ModelConstant.EmptyJsonArray;
 	
@@ -100,6 +106,25 @@ public class Character extends ModelBase implements ICharacter{
 		this.syllables = syllables.toString();
 	}
 
+	public void updateSyllable(String from, String to) {
+		Assert.require(from);
+		Assert.require(to);
+	
+		Syllables syllables = new Syllables(this.syllables);
+		syllables.updateSyllable(from, to);
+		
+		this.syllables = syllables.toString();
+	}
+
+	public void updateSyllableMain(String syllable, boolean value) {
+		Assert.require(syllable);
+
+		Syllables syllables = new Syllables(this.syllables);
+		syllables.updateMain(syllable, value);
+		
+		this.syllables = syllables.toString();
+	}
+
 	public void setSyllableWords(String syllable, List<CharacterWord> words) {
 		Assert.require(syllable);
 		Assert.require(words);
@@ -112,9 +137,20 @@ public class Character extends ModelBase implements ICharacter{
 	
 	@Override
 	public Iterable<CharacterWord> getFixwords() {
-		ArrayList<CharacterWord> words = new ArrayList<>();
-		return words;
+		Fixwords fixwords = new Fixwords(this.fixwords);
+		return fixwords.getFixwords();
 	}
-
+	
+	public void addFixword(CharacterWord characterWord) {
+		Fixwords fixwords = new Fixwords(this.fixwords);
+		fixwords.add(characterWord);
+		this.fixwords = fixwords.toString();
+	}
+	
+	public void deleteFixword(String word, String syllable) {
+		Fixwords fixwords = new Fixwords(this.fixwords);
+		fixwords.delete(word, syllable);
+		this.fixwords = fixwords.toString();
+	}
 }
 

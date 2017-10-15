@@ -82,7 +82,7 @@
 			}
 			
 			var args = Array.copy(arguments, 1)
-			proxy[option](this, args)
+			return proxy[option](this, args)
 		}
 	})
 	
@@ -169,6 +169,9 @@
 			else{
 				noButton.addClass("btn-default")
 			}
+		},
+		wait: function(callback){
+			
 		}
 	}
 })(window.jQuery);
@@ -177,7 +180,7 @@
 (function($){
 	global.Action = {
 		post: function(){
-			var url, data = {}, success, fail, complete
+			var url, data = {}, success = function(){}, fail = function(){}, complete = function(){}
 			dispatch(
 				["string", "object", function(_url, _data){
 					url = _url
@@ -189,11 +192,16 @@
 					success = _success
 				}],
 				["string", "object", "object", function(_url, _data, _func){
+					var func = $.extend({
+						success: function(){},
+						fail: function(){},
+						complete: function(){}
+					}, _func)
 					url = _url
 					data = _data
-					success = _func.success
-					fail = _func.fail
-					complete = _func.complete
+					success = func.success
+					fail = func.fail
+					complete = func.complete
 				}],
 				["string", "function", function(_url, _success){
 					url = _url
@@ -206,13 +214,9 @@
 				}
 				else{
 					alert(data.message)
-					if(fail){
-						fail(data)
-					}
+					fail(data)
 				}
-				if(complete){
-					complete(data)
-				}
+				complete(data)
 			}).fail(function(data){
 				var jobj = {
 					result: data.status, 
@@ -224,12 +228,8 @@
 				else{
 					alert(data.status+" "+data.statusText)
 				}
-				if(fail){
-					fail(jobj)
-				}
-				if(complete){
-					complete(jobj)
-				}
+				fail(jobj)
+				complete(jobj)
 			})
 		}
 	}

@@ -1,13 +1,14 @@
 #{meta /}
 
 #{javascript 'characters/character-edit.js'/}
+#{stylesheet 'characters/character-edit.css'/}
 
 #{body}
 
 <div class="container">
 	<div class="row">
 		<div class="col-lg-10">
-			<a href="@{characters.CharacterDetail.index(character.id)}">返回</a>
+			<a href="@{characters.CharacterDetail.index(character.id, refer)}"><span class="glyphicon glyphicon-arrow-left"></span>返回</a>
 		</div>
 		<div class="col-lg-2 text-right">
 			<button class="btn btn-danger" id="btn-delete-character">删除</button>
@@ -39,10 +40,10 @@
 					<td>
 						<table id="table-syllable" class="table table-bordered">
 						#{list items:character.syllables, as:'syllable'}
-							<tr>
-								<td><span>${syllable.value}</span></td>
+							<tr data-syllable="${syllable.value}">
+								<td><div class="editable-syllable-value">${syllable.value}</div></td>
 								<td>
-									<div class="editable-syllable" data-editable-value="${syllable.wordsValue}" data-syllable="${syllable.value}">
+									<div class="editable-syllable" data-editable-value="${syllable.wordsValue}">
 										#{list items:syllable.words, as:'word'}
 											<li>${word.word}(${word.syllable})</li>
 										#{/list}
@@ -51,11 +52,18 @@
 										#{/else}
 									</div>
 								</td>
-								<td><button class=" btn btn-danger btn-sm btn-delete-syllable" data-syllable="${syllable.value}">删除</button></td>
+								<td>
+									<div class="checkbox">
+										<label>
+											<input type="checkbox" #{if syllable.isMain}checked#{/if} class="editable-syllable-main"> 汉字词
+										</label>
+									</div>
+								</td>
+								<td><button class="btn btn-danger btn-sm btn-delete-syllable">删除</button></td>
 							</tr>
 						#{/list}
 							<tr>
-								<th colspan="3">
+								<th colspan="4">
 									<div id="div-add-syllable">
 										<input type="text" id="input-add-syllable"/>
 									</div>
@@ -66,8 +74,20 @@
 				</tr>
 				</tr>
 				<tr>
-					<th>熟字訓</th>
-					<td></td>
+					<th>熟字训</th>
+					<td>
+						<table id="table-fixwords">
+							#{list items:character.fixwords, as:'fixword'}
+								<tr>
+									<td><div>${fixword.word}(${fixword.syllable})</div></td>
+									<td><button class="btn btn-danger btn-sm btn-delete-fixword" data-word="${fixword.word}" data-syllable="${fixword.syllable}">删除</button></td>
+								</tr>
+							#{/list}
+						</table>
+						<div id="div-input-fixword">
+							<input type="text" id="input-add-fixword"/>
+						</div>
+					</td>
 				</tr>
 			</table>
 		</div>
@@ -75,35 +95,3 @@
 </div>
 
 #{/body}
-
-#{stylesheet}
-#main-table{
-	margin-top:	15px;
-}
-#main-table th{
-	width:		120px;
-	vertical-align: middle;
-}
-#table-syllable{
-	width:		100%;
-}
-#table-syllable th, #table-syllable td{
-	vertical-align: middle;
-}
-#table-syllable td:nth-child(1){
-	width:		30%;
-}
-#table-syllable td:nth-child(2){
-	width:		50%;
-	padding-left:	5px;
-	padding-right:	5px;
-	padding-top:	5px;
-	padding-bottom:	5px;
-}
-#table-syllable td:nth-child(3){
-	text-align:	center;
-}
-#div-add-syllable{
-	width:	30%;
-}
-#{/stylesheet}

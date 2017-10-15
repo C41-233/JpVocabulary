@@ -89,6 +89,13 @@ public final class CharacterIndex extends HtmlControllerBase{
 						syllableVO.value = syllable.getValue();
 						characterVO.syllables.add(syllableVO);
 						
+						if(syllable.isMain()) {
+							WordPairVO wordVO = new WordPairVO();
+							wordVO.word = character.getJpValue();
+							wordVO.syllable = syllable.getValue();
+							syllableVO.words.add(wordVO);
+						}
+						
 						for(CharacterWord word : syllable.getWords()) {
 							WordPairVO wordVO = new WordPairVO();
 							wordVO.word = word.getWord();

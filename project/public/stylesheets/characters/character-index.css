@@ -64,6 +64,7 @@
 .syllable-word{
 	list-style-type:	none;
 	display:	inline-block;
+	min-width:	80px;
 }
 
 .syllable-word+.syllable-word{

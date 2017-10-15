@@ -5,11 +5,16 @@
 <div class="container">
 	<div class="row">
 		<div class="col-lg-10">
+			<a href="${refer}"><span class="glyphicon glyphicon-arrow-left">返回</span></a>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-10">
 			<h1 class="font-jp">${character.jp}</h1>
 			<h1>${character.cn}</h1>
 		</div>
 		<div class="col-lg-2 text-right">
-			<a href="@{characters.CharacterEdit.index(character.id)}" class="btn btn-default">编辑</a>
+			<a href="@{characters.CharacterEdit.index(character.id, refer)}" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-wrench"></span> 编辑</a>
 		</div>
 	</div>
 	<div class="row">
@@ -17,6 +22,39 @@
 			#{list items:character.pinyins, as:'pinyin'}
 				<div class="pinyin">${pinyin}</div>
 			#{/list}
+		</div>
+	</div>
+	<hr/>
+	<div class="row">
+		<div class="col-lg-12">
+			#{list items:character.syllables, as:'syllable'}
+			<div>
+				<div class="font-bold">${syllable.value}</div>
+				<div class="div-syllable-words">
+					#{list items:syllable.words, as:'word'}
+						<span class="span-word">
+							<span class="font-jp">${word.word}</span>
+							(<span class="font-jp">${word.syllable}</span>)
+						</span>
+					#{/list}
+				</div>
+			</div>
+			#{/list}
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-12">
+			<div>
+				<div>【熟字训】</div>
+				<div class="div-syllable-words">
+					#{list items:character.fixwords, as:'word'}
+						<span class="span-word">
+							<span class="font-jp">${word.word}</span>
+							(<span class="font-jp">${word.syllable}</span>)
+						</span>
+					#{/list}
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
@@ -30,5 +68,13 @@
 	}
 	.pinyin{
 		font-size:	16px;
+	}
+	.div-syllable-words{
+		padding-left:	20px;
+		margin-bottom:	10px;
+	}
+	.span-word{
+		display:	inline-block;
+		min-width:	100px;
 	}
 #{/stylesheet}

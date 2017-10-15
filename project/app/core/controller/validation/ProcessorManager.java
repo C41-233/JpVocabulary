@@ -2,6 +2,7 @@ package core.controller.validation;
 
 import java.lang.annotation.Annotation;
 
+import base.reflect.TypeBox;
 import base.utility.collection.PairHashMap;
 import core.controller.validation.annotation.Id;
 import core.controller.validation.annotation.Required;
@@ -18,13 +19,17 @@ public final class ProcessorManager {
 	
 	private <TAnnotation extends Annotation, TValue> 
 	void init(Class<TAnnotation> annotationType, Class<TValue> parameterType, IValidationProcessor<TAnnotation, ? super TValue> processor) {
-		cache.put(annotationType, parameterType, processor);
+		cache.put(annotationType, TypeBox.toBoxType(parameterType), processor);
 	}
 	
 	public ProcessorManager() {
-		init(Id.class, Long.class, new IdProcessor());
+		init(Id.class, long.class, new IdProcessor());
+
+		init(Required.class, long.class, new RequiredProcessor());
+		init(Required.class, boolean.class, new RequiredProcessor());
 		init(Required.class, String.class, new RequiredProcessor());
 		init(Required.class, String[].class, new RequiredArrayProcessor());
+		
 		init(StringValue.class, String.class, new StringValueProcessor());
 		init(StringValue.class, String[].class, new StringValueArrayProcessor());
 	}

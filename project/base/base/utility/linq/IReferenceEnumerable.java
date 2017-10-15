@@ -38,6 +38,17 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 		return false;
 	}
 	
+	public default boolean isExist(IReferencePredicate<? super T> predicate) {
+		IEnumerator<T> enumerator = iterator();
+		while(enumerator.hasNext()) {
+			T obj = enumerator.next();
+			if(predicate.is(obj)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public default boolean notExist(IReferencePredicate<? super T> predicate) {
 		IEnumerator<T> enumerator = iterator();
 		while(enumerator.hasNext()) {
@@ -48,8 +59,19 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 		}
 		return true;
 	}
-	
-	public default int indexOf(IReferencePredicate<? super T> predicate) {
+
+	public default T find(IReferencePredicate<? super T> predicate) {
+		IEnumerator<T> enumerator = iterator();
+		while(enumerator.hasNext()) {
+			T obj = enumerator.next();
+			if(predicate.is(obj)) {
+				return obj;
+			}
+		}
+		return null;
+	}
+
+	public default int findIndex(IReferencePredicate<? super T> predicate) {
 		int index = 0;
 		IEnumerator<T> enumerator = iterator();
 		while(enumerator.hasNext()) {
@@ -99,7 +121,7 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 	}
 	
 	@SuppressWarnings("unchecked")
-	public default IReferenceEnumerable<T> orderBy(Comparator<? super T> comparator){
+	public default IReferenceSortedEnumerable<T> orderBy(Comparator<? super T> comparator){
 		return new OrderByEnumerable(this, comparator);
 	}
 	
@@ -109,7 +131,7 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 			return Comparators.compare((Comparable)t1, (Comparable)t2);
 		});
 	}
-	
+
 }
 
 class IterableEnumerable<T> implements IReferenceEnumerable<T>{

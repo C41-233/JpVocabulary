@@ -6,6 +6,7 @@ import java.util.List;
 import base.utility.Strings;
 import core.controller.HtmlControllerBase;
 import core.controller.validation.annotation.Id;
+import core.controller.validation.annotation.StringValue;
 import logic.characters.CharactersLogic;
 import logic.pinyins.Pinyins;
 import po.CharacterWord;
@@ -14,7 +15,12 @@ import po.ICharacterSyllable;
 
 public class CharacterEdit extends HtmlControllerBase{
 
-	public static void index(@Id long id) {
+	public static void index(
+		@Id long id,
+		@StringValue String refer
+	) {
+		renderArgs.put("refer", refer);
+		
 		ICharacter character = CharactersLogic.getCharacer(id);
 		if(character == null) {
 			notFound(Strings.format("%d not found", id));
@@ -39,6 +45,7 @@ public class CharacterEdit extends HtmlControllerBase{
 			vo.syllables.add(syllableVO);
 			
 			syllableVO.value = syllable.getValue();
+			syllableVO.isMain = syllable.isMain();
 			
 			StringBuilder sb = new StringBuilder();
 			for(CharacterWord word : syllable.getWords()) {
@@ -50,6 +57,13 @@ public class CharacterEdit extends HtmlControllerBase{
 				sb.append(word.getWord()).append(" ").append(word.getSyllable()).append("\n");
 			}
 			syllableVO.wordsValue = sb.toString();
+		}
+		
+		for(CharacterWord word : character.getFixwords()) {
+			WordPairVO wordVO = new WordPairVO();
+			wordVO.word = word.getWord();
+			wordVO.syllable = word.getSyllable();
+			vo.fixwords.add(wordVO);
 		}
 		
 		renderArgs.put("character", vo);
@@ -64,12 +78,14 @@ public class CharacterEdit extends HtmlControllerBase{
 		String pinyinsText;
 		
 		List<SyllableVO> syllables = new ArrayList<>();
+		List<WordPairVO> fixwords = new ArrayList<>();
 	}
 	
 	private static class SyllableVO{
 		String value;
 		List<WordPairVO> words = new ArrayList<>();
 		String wordsValue;
+		boolean isMain;
 	}
 	
 	private static class WordPairVO{

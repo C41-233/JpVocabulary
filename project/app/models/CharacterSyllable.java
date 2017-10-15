@@ -14,15 +14,18 @@ class CharacterSyllable implements ICharacterSyllable{
 
 	private String value;
 	private final List<CharacterWord> words;
+	private boolean isMain;
 	
 	public CharacterSyllable(String syllable) {
 		this.value = syllable;
 		this.words = new ArrayList<>();
+		this.isMain = false;
 	}
 	
 	public CharacterSyllable(JsonObject json) {
 		this.value = json.get("value").getAsString();
 		this.words = Linq.from(json.get("words").getAsJsonArray()).select(j->new CharacterWord(j.getAsJsonObject())).toList();
+		this.isMain = json.get("isMain").getAsBoolean();
 	}
 
 	public void setValue(String value) {
@@ -43,6 +46,15 @@ class CharacterSyllable implements ICharacterSyllable{
 		this.words.add(word);
 	}
 
+	public void setMain(boolean b) {
+		this.isMain = b;
+	}
+	
+	@Override
+	public boolean isMain() {
+		return this.isMain;
+	}
+	
 	public JsonObject toJsonObject() {
 		JsonObject jobj = new JsonObject();
 		jobj.addProperty("value", this.value);
@@ -52,7 +64,9 @@ class CharacterSyllable implements ICharacterSyllable{
 		
 		words.forEach(word->jwords.add(word.toJsonObject()));
 		
+		jobj.addProperty("isMain", this.isMain);
+		
 		return jobj;
 	}
-	
+
 }

@@ -15,6 +15,7 @@ public final class TypeBox {
 	}
 	
 	static {
+		init(boolean.class, Boolean.class);
 		init(byte.class, Byte.class);
 		init(short.class, Short.class);
 		init(int.class, Integer.class);

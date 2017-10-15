@@ -97,11 +97,37 @@
 					</div>
 					<button type="submit" class="btn btn-default">搜索</button>
 				</form>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="javascript:void(0)" id="btn-mysqldump">导出</a></li>
+				</ul>
 			</div>
 		</div>
 	</nav>
 	
 	#{get 'body'/}
-		
+	
+	<div class="modal fade" id="myModal">
+	  <div class="modal-dialog">
+		<div class="modal-content dialog-wait-body">
+		  <div class="modal-body text-center">
+				<img src="/public/images/time.gif" ondragstart="return false;"></img>
+		  </div>
+		</div>
+	  </div>
+	</div>
+	
+	#{js}
+		$(function(){
+			$("#btn-mysqldump").click(function(){
+				$("#myModal").modal({
+					keyboard: false,
+					backdrop: "static"
+				})
+				Dialog.wait(function(handle){
+					
+				})
+			})
+		})
+	#{/js}
 </body>
 </html>

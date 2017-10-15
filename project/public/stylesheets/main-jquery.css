@@ -6,3 +6,10 @@ input.error, input.error:focus{
 .editable{
 	cursor:			pointer;
 }
+
+.dialog-wait-body{
+	background-color:	transparent;
+	border-color:		transparent;
+	box-shadow:			none;
+	margin-top:			30%;
+}

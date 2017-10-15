@@ -83,7 +83,7 @@ $(function(){
 	})
 	
 	$(".btn-delete-syllable").click(function(){
-		var syllable = $(this).data("syllable")
+		var syllable = $(this).parents("tr").eq(0).data("syllable")
 		Dialog.confirm({
 			text: "确定要删除读音"+syllable+"吗？",
 			yes: "删除",
@@ -106,10 +106,67 @@ $(function(){
 			}).where(function(s){
 				return s!=""
 			}).toArray()
-			var syllable = $(this).data("syllable")
+			var syllable = $(this).parents("tr").eq(0).data("syllable")
 			Action.post("/characters/action/update-syllable-words", {id: DataMgr.id, syllable: syllable, words: array}, function(){
 				location.reload()
 			})
 		}
 	})
+	
+	$(".editable-syllable-value").editable({
+		active: function(val){
+			var syllable = $(this).parents("tr").eq(0).data("syllable")
+			Action.post("/characters/action/update-syllable-value", {id: DataMgr.id, syllable: syllable, value: val}, function(){
+				location.reload()
+			})
+		}
+	})
+	
+	$(".editable-syllable-main").on("change", function(){
+		var value = $(this).is(":checked")
+		var syllable = $(this).parents("tr").eq(0).data("syllable")
+		Action.post("/characters/action/update-syllable-main", {id: DataMgr.id, syllable: syllable, value: value}, 
+			{complete:
+				function(){
+					location.reload
+				}
+			}
+		)
+	})
+	
+	$("#input-add-fixword").inputable({
+		label: "添加",
+		active: function(value){
+			value = value.trim()
+			var tokens = value.split(/\s+|　/)
+			
+			if(tokens.length != 2){
+				$(this).addClass("error")
+				return
+			}
+			
+			var word = tokens[0]
+			var syllable = tokens[1]
+			if(!Validate.isValidSyllable(syllable)){
+				$(this).addClass("error")
+				return
+			}
+			
+			Action.post("/characters/action/add-fixword", {id: DataMgr.id, word: word, syllable: syllable}, function(){
+				location.reload()
+			})
+		}
+	}).on("input", function(){
+		$(this).removeClass("error")
+	})
+	
+	$(".btn-delete-fixword").click(function(){
+		var word = $(this).data("word")
+		var syllable = $(this).data("syllable")
+		
+		Action.post("/characters/action/delete-fixword", {id: DataMgr.id, word: word, syllable: syllable}, function(){
+			location.reload()
+		})
+	})
+	
 })

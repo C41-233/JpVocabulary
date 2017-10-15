@@ -1,0 +1,47 @@
+#main-table{
+	margin-top:	15px;
+}
+#main-table th{
+	width:		120px;
+	vertical-align: middle;
+}
+#table-syllable{
+	width:		100%;
+}
+#table-syllable th, #table-syllable td{
+	vertical-align: middle;
+}
+#table-syllable td:nth-child(1){
+	width:		20%;
+}
+#table-syllable td:nth-child(2){
+	width:		50%;
+	padding-left:	5px;
+	padding-right:	5px;
+	padding-top:	5px;
+	padding-bottom:	5px;
+}
+#table-syllable td:nth-child(3){
+	width:		20%;
+}
+#table-syllable td:nth-child(4){
+	text-align:	center;
+}
+#div-add-syllable{
+	width:	30%;
+	min-width:	240px;
+}
+#div-input-fixword{
+	margin-top:	10px;
+	width:		30%;
+	min-width:	240px;
+}
+#table-fixwords{
+	width:		100%;
+}
+#table-fixwords td:nth-child(1){
+	width:		30%;
+}
+#table-fixwords td:nth-child(2){
+	padding-left:	20px;
+}

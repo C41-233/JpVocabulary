@@ -34,28 +34,28 @@ public final class CharacterAPI extends AjaxControllerBase {
 		@Id long id, 
 		@Required @StringValue(minLength=1) String syllable
 	) {
-		CharactersLogic.AddSyllable(id, syllable);
+		CharactersLogic.addSyllable(id, syllable);
 	}
 
 	public static void updateJp(
 		@Id long id,
 		@Required @StringValue(length=1) String value
 	) {
-		CharactersLogic.UpdateJp(id, value);
+		CharactersLogic.updateJp(id, value);
 	}
 	
 	public static void updateCn(
 		@Id long id,
 		@Required @StringValue(length=1) String value
 	) {
-		CharactersLogic.UpdateCn(id, value);
+		CharactersLogic.updateCn(id, value);
 	}
 
 	public static void updatePinyins(
 		@Id long id,
 		@Required @StringValue(minLength=1) String[] values
 	) {
-		CharactersLogic.UpdatePinyins(id, Arrays.asList(values));
+		CharactersLogic.updatePinyins(id, Arrays.asList(values));
 	}
 	
 	public static void deleteSyllable(
@@ -63,6 +63,22 @@ public final class CharacterAPI extends AjaxControllerBase {
 		@Required String syllable
 	) {
 		CharactersLogic.deleteSyllable(id, syllable);
+	}
+	
+	public static void updateSyllableValue(
+		@Id long id,
+		@Required @StringValue(minLength=1) String syllable,
+		@Required @StringValue(minLength=1) String value
+	) {
+		CharactersLogic.updateSyllable(id, syllable, value);
+	}
+
+	public static void updateSyllableMain(
+		@Id long id,
+		@Required @StringValue(minLength=1) String syllable,
+		@Required boolean value
+	) {
+		CharactersLogic.updateSyllableMain(id, syllable, value);
 	}
 	
 	public static void updateSyllableWords(
@@ -78,6 +94,22 @@ public final class CharacterAPI extends AjaxControllerBase {
 			return new CharacterWord(split[0], split[1]);
 		}).toList();
 		CharactersLogic.updateSyllableWords(id, syllable, wordList);
+	}
+	
+	public static void addFixword(
+		@Id long id,
+		@Required @StringValue(minLength=1) String word,
+		@Required @StringValue(minLength=1) String syllable
+	) {
+		CharactersLogic.addFixword(id, word, syllable);
+	}
+
+	public static void deleteFixword(
+		@Id long id,
+		@Required String word,
+		@Required String syllable
+	) {
+		CharactersLogic.deleteFixword(id, word, syllable);
 	}
 	
 }

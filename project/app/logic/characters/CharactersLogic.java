@@ -54,7 +54,7 @@ public final class CharactersLogic extends LogicBase{
 		character.delete();
 	}
 
-	public static void AddSyllable(long id, String syllable) {
+	public static void addSyllable(long id, String syllable) {
 		raiseIfNotValidSyllable(syllable);
 		
 		Character character = getCharacterOrRaiseIfNotFound(id);
@@ -67,7 +67,7 @@ public final class CharactersLogic extends LogicBase{
 		character.save();
 	}
 
-	public static void UpdateJp(long id, String jp) {
+	public static void updateJp(long id, String jp) {
 		raiseIfNotValidJpValue(jp);
 		raiseIfCharacterAlreadyExist(jp);
 
@@ -76,7 +76,7 @@ public final class CharactersLogic extends LogicBase{
 		character.save();
 	}
 
-	public static void UpdateCn(long id, String cn) {
+	public static void updateCn(long id, String cn) {
 		raiseIfNotValidCnValue(cn);
 
 		Character character = getCharacterOrRaiseIfNotFound(id);
@@ -84,7 +84,7 @@ public final class CharactersLogic extends LogicBase{
 		character.save();
 	}
 
-	public static void UpdatePinyins(long id, List<String> pinyins) {
+	public static void updatePinyins(long id, List<String> pinyins) {
 		raiseIfNotValidPinyins(pinyins);
 		
 		Character character = getCharacterOrRaiseIfNotFound(id);
@@ -94,11 +94,29 @@ public final class CharactersLogic extends LogicBase{
 		//更新其他表的汉字索引
 	}
 
+	public static void updateSyllable(long id, String from, String to) {
+		Character character = getCharacterOrRaiseIfNotFound(id);
+		raiseIfSyllableNotFound(character, from);
+		raiseIfSyllableFound(character, to);
+		raiseIfNotValidSyllable(to);
+		
+		character.updateSyllable(from, to);
+		character.save();
+	}
+	
 	public static void deleteSyllable(long id, String syllable) {
 		Character character = getCharacterOrRaiseIfNotFound(id);
 		raiseIfSyllableNotFound(character, syllable);
 		
 		character.deleteSyllable(syllable);
+		character.save();
+	}
+
+	public static void updateSyllableMain(long id, String syllable, boolean value) {
+		Character character = getCharacterOrRaiseIfNotFound(id);
+		raiseIfSyllableNotFound(character, syllable);
+		
+		character.updateSyllableMain(syllable, value);
 		character.save();
 	}
 
@@ -111,6 +129,23 @@ public final class CharactersLogic extends LogicBase{
 		}
 		
 		character.setSyllableWords(syllable, words);
+		character.save();
+	}
+
+	public static void addFixword(long id, String word, String syllable) {
+		raiseIfNotValidSyllable(syllable);
+		
+		Character character = getCharacterOrRaiseIfNotFound(id);
+		raiseIfFixwordFound(character, word, syllable);
+		character.addFixword(new CharacterWord(word, syllable));
+		character.save();
+	}
+
+	public static void deleteFixword(long id, String word, String syllable) {
+		Character character = getCharacterOrRaiseIfNotFound(id);
+		raiseIfFixwordNotFound(character, word, syllable);
+
+		character.deleteFixword(word, syllable);
 		character.save();
 	}
 
@@ -128,10 +163,28 @@ public final class CharactersLogic extends LogicBase{
 		}
 	}
 
+	private static void raiseIfSyllableFound(Character character, String syllable) {
+		if(Linq.from(character.getSyllables()).isExist(s->s.getValue().equals(syllable))) {
+			raise("已存在读音: %s", syllable);
+		}
+	}
+
 	private static void raiseIfSyllableNotFound(Character character, String syllable) {
 		if(Linq.from(character.getSyllables()).notExist(s->s.getValue().equals(syllable))) {
 			raise("不存在读音: %s", syllable);
 		}
 	}
-	
+
+	private static void raiseIfFixwordFound(Character character, String word, String syllable) {
+		if(Linq.from(character.getFixwords()).isExist(s->s.getWord().equals(word) && s.getSyllable().equals(syllable))) {
+			raise("单词已存在: %s %s", word, syllable);
+		}
+	}
+
+	private static void raiseIfFixwordNotFound(Character character, String word, String syllable) {
+		if(Linq.from(character.getFixwords()).notExist(s->s.getWord().equals(word) && s.getSyllable().equals(syllable))) {
+			raise("单词不存在: %s %s", word, syllable);
+		}
+	}
+
 }

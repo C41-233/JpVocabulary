@@ -19,6 +19,10 @@ POST	/characters/action/update-jp			characters.CharacterAPI.updateJp
 POST	/characters/action/update-cn			characters.CharacterAPI.updateCn
 POST	/characters/action/update-pinyins		characters.CharacterAPI.updatePinyins
 POST	/characters/action/delete-syllable		characters.CharacterAPI.deleteSyllable
+POST	/characters/action/update-syllable-value characters.CharacterAPI.updateSyllableValue
+POST	/characters/action/update-syllable-main	characters.CharacterAPI.updateSyllableMain
 POST	/characters/action/update-syllable-words characters.CharacterAPI.updateSyllableWords
+POST	/characters/action/add-fixword			characters.CharacterAPI.addFixword
+POST	/characters/action/delete-fixword		characters.CharacterAPI.deleteFixword
 
 GET		/test									Test.test

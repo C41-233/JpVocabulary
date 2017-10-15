@@ -36,7 +36,7 @@ class Syllables{
 	}
 
 	public void removeSyllable(String syllable) {
-		int index = Linq.from(syllables).indexOf(s->s.getValue().equals(syllable));
+		int index = Linq.from(syllables).findIndex(s->s.getValue().equals(syllable));
 		if(index >= 0) {
 			syllables.remove(index);
 		}
@@ -49,6 +49,24 @@ class Syllables{
 			obj.addWord(word);
 		}
 		this.syllables.add(obj);
+	}
+
+	public void updateSyllable(String from, String to) {
+		CharacterSyllable syllable = findSyllable(from);
+		if(syllable != null) {
+			syllable.setValue(to);
+		}
+	}
+
+	public void updateMain(String value, boolean isMain) {
+		CharacterSyllable syllable = findSyllable(value);
+		if(syllable != null) {
+			syllable.setMain(isMain);
+		}
+	}
+	
+	public CharacterSyllable findSyllable(String syllable) {
+		return Linq.from(syllables).find(s->s.getValue().equals(syllable));
 	}
 	
 }

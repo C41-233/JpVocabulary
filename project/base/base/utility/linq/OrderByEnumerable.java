@@ -3,7 +3,7 @@ package base.utility.linq;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
-class OrderByEnumerable<T> implements IReferenceEnumerable<T>{
+class OrderByEnumerable<T> implements IReferenceSortedEnumerable<T>{
 
 	private final IReferenceEnumerable<T> enumerable;
 	private final Comparator<T> comparator;
@@ -14,16 +14,18 @@ class OrderByEnumerable<T> implements IReferenceEnumerable<T>{
 	}
 	
 	@Override
-	public IEnumerator<T> iterator() {
+	public ISortedEnumerator<T> iterator() {
 		return new Enumerator();
 	}
 
-	private class Enumerator implements IEnumerator<T>{
+	private class Enumerator implements ISortedEnumerator<T>{
 
 		private final PriorityQueue<T> queue = new PriorityQueue<>(comparator);
 		
 		private T current;
 	
+		private boolean valid = false;
+		
 		public Enumerator() {
 			IEnumerator<T> enumerator = enumerable.iterator();
 			while(enumerator.hasNext()) {
@@ -37,15 +39,21 @@ class OrderByEnumerable<T> implements IReferenceEnumerable<T>{
 		}
 
 		@Override
+		public boolean hasNextEquals() {
+			return valid && hasNext() && comparator.compare(current, queue.peek()) == 0;
+		}
+		
+		@Override
 		public void moveNext() {
 			this.current = queue.poll();
+			valid = true;
 		}
 
 		@Override
 		public T current() {
 			return current;
 		}
-		
+
 	}
 	
 }
