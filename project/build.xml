@@ -8,7 +8,7 @@
 	</target>
     <target name="build-base" depends="folder">
         <javac 
-			srcdir="base" 
+			srcdir="../base/src" 
 			destdir="${folder.classes.output}"
 			encoding="utf-8"
 			includeantruntime="false"

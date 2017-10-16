@@ -22,8 +22,6 @@ class SelectEnumerable<T, V> implements IReferenceEnumerable<V>{
 
 		private final IEnumerator<T> enumerator = enumerable.iterator();
 		
-		private V current;
-
 		@Override
 		public boolean hasNext() {
 			return enumerator.hasNext();
@@ -62,8 +60,6 @@ class CharSelectEnumerable<V> implements IReferenceEnumerable<V>{
 
 		private final ICharEnumerator enumerator = enumerable.iterator();
 		
-		private V current;
-
 		@Override
 		public boolean hasNext() {
 			return enumerator.hasNext();
