@@ -6,6 +6,9 @@ GET		/public/images/							staticDir:public/images/
 GET		/public/fonts/							staticDir:public/fonts/
 
 GET     /                                       MainIndex.index
+
+POST	/action/dump							functions.Function.dump
+
 GET		/characters								characters.CharacterIndex.index
 GET		/characters/{index}						characters.CharacterIndex.page
 GET		/character/{<[0-9]+>id}					characters.CharacterDetail.index

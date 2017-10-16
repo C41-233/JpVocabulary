@@ -170,8 +170,44 @@
 				noButton.addClass("btn-default")
 			}
 		},
-		wait: function(callback){
-			
+		wait: function(){
+			var callback, options = {
+				image: "/public/images/time.gif"
+			}
+			dispatch(
+				["function", function(_callback){
+					callback = _callback
+				}], 
+				["object", "function", function(_options, _callback){
+					callback = _callback
+					options = $.extend(options, _options)
+				}]
+			)
+			var dom = $('\
+				<div class="modal fade"> \
+				  <div class="modal-dialog"> \
+					<div class="modal-content dialog-wait-body"> \
+					  <div class="modal-body text-center"> \
+							<img src="" ondragstart="return false;"></img> \
+					  </div> \
+					</div> \
+				  </div> \
+				</div> \
+			')
+			$(document.body).append(dom)
+			dom.find("img").attr("src", options.image)
+			dom.on("hidden.bs.modal", function(){
+				dom.remove()
+			}).on("shown.bs.modal", function(){
+				callback({
+					close: function(){
+						dom.modal("hide")
+					}
+				})
+			}).modal({
+				keyboard: false,
+				backdrop: "static"
+			})
 		}
 	}
 })(window.jQuery);

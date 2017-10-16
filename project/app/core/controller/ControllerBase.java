@@ -103,11 +103,8 @@ public abstract class ControllerBase extends Controller{
 					}
 				}
 				catch (NoSuchValidationException e) {
-					throw new NoSuchValidationException(name+" "+e.getMessage());
-				}
-				catch (Exception e) {
-					e.printStackTrace();
-					throw e;
+					//TODO
+					throw new NoSuchValidationException();
 				}
 			}
 		}

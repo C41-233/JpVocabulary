@@ -1,0 +1,1 @@
+mysqldump -ujpndb -p123456 --add-drop-table --hex-blob jpndb > db/data.sql

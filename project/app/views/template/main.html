@@ -106,25 +106,14 @@
 	
 	#{get 'body'/}
 	
-	<div class="modal fade" id="myModal">
-	  <div class="modal-dialog">
-		<div class="modal-content dialog-wait-body">
-		  <div class="modal-body text-center">
-				<img src="/public/images/time.gif" ondragstart="return false;"></img>
-		  </div>
-		</div>
-	  </div>
-	</div>
-	
 	#{js}
 		$(function(){
 			$("#btn-mysqldump").click(function(){
-				$("#myModal").modal({
-					keyboard: false,
-					backdrop: "static"
-				})
 				Dialog.wait(function(handle){
-					
+					Action.post("/action/dump", function(){
+						handle.close()
+						alert("备份完成")
+					})
 				})
 			})
 		})
