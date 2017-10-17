@@ -110,9 +110,11 @@
 		$(function(){
 			$("#btn-mysqldump").click(function(){
 				Dialog.wait(function(handle){
-					Action.post("/action/dump", function(){
-						handle.close()
-						alert("备份完成")
+					Action.post("/action/dump", {}, {
+						complete: function(){
+							handle.close()
+							alert("备份完成")
+						}	
 					})
 				})
 			})

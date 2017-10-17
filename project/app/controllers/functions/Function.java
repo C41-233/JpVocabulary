@@ -1,6 +1,5 @@
 package controllers.functions;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -47,6 +46,8 @@ public final class Function extends AjaxControllerBase{
 		cmds.add("--hex-blob");
 		
 		cmds.add(name);
+
+		Logs.Db.info(String.join(" ", cmds));
 		
 		Process process = Runtime.getRuntime().exec(cmds.toArray(new String[cmds.size()]));
 		InputStream is = process.getInputStream();
@@ -61,7 +62,7 @@ public final class Function extends AjaxControllerBase{
 		if(hasError) {
 			renderJsonError("备份失败");
 		}
-		
+
 		Path outputFolder = Config.getPath("dump.path.output");
 		if(outputFolder == null) {
 			Logs.Db.error("缺少备份输出目录配置");
@@ -89,7 +90,6 @@ public final class Function extends AjaxControllerBase{
 		}
 		Files.copy(is, outputFile);
 		
-		Logs.Db.info(String.join(" ", cmds));
 	}
 	
 }

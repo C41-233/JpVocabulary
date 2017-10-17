@@ -2,8 +2,6 @@ package core.controller;
 
 import java.util.Map.Entry;
 
-import javax.security.auth.login.LoginException;
-
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 

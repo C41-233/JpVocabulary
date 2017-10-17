@@ -33,6 +33,16 @@ public final class Logs {
 		public void info(String format, Object... args) {
 			this.logger.info(Strings.format(format, args));
 		}
+
+		@Override
+		public void debug(String format, Object... args) {
+			this.logger.debug(Strings.format(format, args));
+		}
+
+		@Override
+		public void warn(String format, Object... args) {
+			this.logger.warn(Strings.format(format, args));
+		}
 		
 	}
 	

@@ -14,6 +14,7 @@ import base.utility.generator.SequenceLongGenerator;
 import core.controller.validation.NoSuchValidationException;
 import core.controller.validation.ProcessorManager;
 import core.controller.validation.ValidationFailException;
+import core.logger.Logs;
 import play.mvc.ActionInvoker;
 import play.mvc.Before;
 import play.mvc.Controller;
@@ -91,20 +92,18 @@ public abstract class ControllerBase extends Controller{
 					args[i] = validation.process(annotationType, parameterType, annotation, args[i], raw);
 				}
 				catch (ValidationFailException e) {
+					String msg;
 					if(raw!=null && raw.length == 1) {
-						throw new ValidationFailException(
-							Strings.format("%s=%s %s",  name, raw[0], e.getMessage())
-						);
+						msg = Strings.format("%s=%s %s",  name, raw[0], e.getMessage());
 					}
 					else {
-						throw new ValidationFailException(
-							Strings.format("%s=%s %s",  name, Arrays.toString(raw), e.getMessage())
-						);
+						msg = Strings.format("%s=%s %s",  name, Arrays.toString(raw), e.getMessage());
 					}
+					Logs.Http.warn("%s: %s", request.url, msg);
+					throw new ValidationFailException(msg);
 				}
 				catch (NoSuchValidationException e) {
-					//TODO
-					throw new NoSuchValidationException();
+					Logs.Http.error("No validation %s", e.getMessage());
 				}
 			}
 		}
