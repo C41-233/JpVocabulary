@@ -115,14 +115,16 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 		}
 	}
 	
-	@SuppressWarnings("unchecked")
 	public default <V> IReferenceEnumerable<V> select(ISelector<? super T, ? extends V> selector){
-		return new SelectEnumerable(this, selector);
+		return new SelectEnumerable<T, V>(this, selector);
+	}
+
+	public default IReferenceEnumerable<T> where(IReferencePredicate<? super T> predicate){
+		return new WhereEnumerable<T>(this, predicate);
 	}
 	
-	@SuppressWarnings("unchecked")
 	public default IReferenceSortedEnumerable<T> orderBy(Comparator<? super T> comparator){
-		return new OrderByEnumerable(this, comparator);
+		return new OrderByEnumerable<T>(this, comparator);
 	}
 	
 	@SuppressWarnings("unchecked")

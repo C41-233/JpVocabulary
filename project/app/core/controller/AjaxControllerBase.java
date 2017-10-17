@@ -2,9 +2,12 @@ package core.controller;
 
 import java.util.Map.Entry;
 
+import javax.security.auth.login.LoginException;
+
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import base.utility.Strings;
 import core.controller.validation.ValidationFailException;
 import logic.LogicException;
 import play.mvc.After;
@@ -87,5 +90,9 @@ public abstract class AjaxControllerBase extends ControllerBase{
 		response.status = Http.StatusCode.BAD_REQUEST;
 		renderText(msg);
 	}
-	
+
+	protected static void renderJsonError(String format, Object...args) {
+		throw new LogicException(Strings.format(format, args));
+	}
+
 }

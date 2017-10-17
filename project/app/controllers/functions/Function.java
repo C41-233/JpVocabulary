@@ -1,16 +1,20 @@
 package controllers.functions;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.commons.io.IOUtils;
+import org.joda.time.DateTime;
 
 import base.utility.Charsets;
+import base.utility.linq.Linq;
 import core.config.Config;
 import core.controller.AjaxControllerBase;
-import core.logger.Log;
+import core.logger.Logs;
 
 public final class Function extends AjaxControllerBase{
 
@@ -18,17 +22,22 @@ public final class Function extends AjaxControllerBase{
 		ArrayList<String> cmds = new ArrayList<>();
 		cmds.add("mysqldump");
 		
+		String name = Config.getString("db.default.name");
 		String username = Config.getString("db.default.user");
 		String password = Config.getString("db.default.pass");
 		
+		if(name == null) {
+			Logs.Db.error("mysqldump缺少name");
+			renderJsonError("mysqldump缺少name");
+		}
 		if(username == null) {
-			Log.Function.error("mysqldump缺少username");
-			return;
+			Logs.Db.error("mysqldump缺少username");
+			renderJsonError("mysqldump缺少username");
 		}
 
 		if(password == null) {
-			Log.Function.error("mysqldump缺少password");
-			return;
+			Logs.Db.error("mysqldump缺少password");
+			renderJsonError("mysqldump缺少password");
 		}
 		
 		cmds.add("-u"+username);
@@ -37,16 +46,50 @@ public final class Function extends AjaxControllerBase{
 		cmds.add("--add-drop-table");
 		cmds.add("--hex-blob");
 		
+		cmds.add(name);
+		
 		Process process = Runtime.getRuntime().exec(cmds.toArray(new String[cmds.size()]));
 		InputStream is = process.getInputStream();
 		InputStream es = process.getErrorStream();
-		List<String> inLines = IOUtils.readLines(is, Charsets.UTF_8);
-		List<String> erLines = IOUtils.readLines(es, Charsets.UTF_8);
 		
-		for(String line : erLines) {
-			Log.Function.error(line);
+		boolean hasError = false;
+		for(String line : Linq.from(IOUtils.readLines(es, Charsets.UTF_8))
+				.where(line->line.equals("Warning: Using a password on the command line interface can be insecure.")==false)) {
+			hasError = true;
+			Logs.Db.error(line);
+		}
+		if(hasError) {
+			renderJsonError("备份失败");
 		}
 		
+		Path outputFolder = Config.getPath("dump.path.output");
+		if(outputFolder == null) {
+			Logs.Db.error("缺少备份输出目录配置");
+			renderJsonError("备份失败");
+		}
+		if(Files.exists(outputFolder)==false || Files.isDirectory(outputFolder)==false) {
+			Logs.Db.error("备份输出目录不存在: %s", outputFolder);
+			renderJsonError("备份失败");
+		}
+		
+		Path backupFolder = Config.getPath("dump.path.backup");
+		if(backupFolder == null) {
+			Logs.Db.error("缺少备份归档目录配置");
+			renderJsonError("备份失败");
+		}
+		if(Files.exists(backupFolder)==false || Files.isDirectory(backupFolder)==false) {
+			Logs.Db.error("备份归档目录不存在: %s", backupFolder);
+			renderJsonError("备份失败");
+		}
+		
+		Path outputFile = outputFolder.resolve("data.sql");
+		Path backupFile = backupFolder.resolve(DateTime.now().toString("yyyy-MM-dd-HHmmss")+".sql");
+		if(Files.exists(outputFile)) {
+			Files.move(outputFile, backupFile);
+		}
+		Files.copy(is, outputFile);
+		
+		Logs.Db.info(String.join(" ", cmds));
 	}
 	
 }

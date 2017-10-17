@@ -6,9 +6,9 @@ import base.utility.function.ISelector;
 class SelectEnumerable<T, V> implements IReferenceEnumerable<V>{
 
 	private final IEnumerable<T> enumerable;
-	private final ISelector<T, V> selector;
+	private final ISelector<? super T, ? extends V> selector;
 	
-	public SelectEnumerable(IEnumerable<T> enumerable, ISelector<T, V> selector) {
+	public SelectEnumerable(IEnumerable<T> enumerable, ISelector<? super T, ? extends V> selector) {
 		this.enumerable = enumerable;
 		this.selector = selector;
 	}

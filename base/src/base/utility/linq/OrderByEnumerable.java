@@ -3,12 +3,14 @@ package base.utility.linq;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
+import base.core.Reference;
+
 class OrderByEnumerable<T> implements IReferenceSortedEnumerable<T>{
 
 	private final IReferenceEnumerable<T> enumerable;
-	private final Comparator<T> comparator;
+	private final Comparator<? super T> comparator;
 	
-	public OrderByEnumerable(IReferenceEnumerable<T> enumerable, Comparator<T> comparator) {
+	public OrderByEnumerable(IReferenceEnumerable<T> enumerable, Comparator<? super T> comparator) {
 		this.enumerable = enumerable;
 		this.comparator = comparator;
 	}
@@ -22,10 +24,8 @@ class OrderByEnumerable<T> implements IReferenceSortedEnumerable<T>{
 
 		private final PriorityQueue<T> queue = new PriorityQueue<>(comparator);
 		
-		private T current;
+		private Reference<T> current;
 	
-		private boolean valid = false;
-		
 		public Enumerator() {
 			IEnumerator<T> enumerator = enumerable.iterator();
 			while(enumerator.hasNext()) {
@@ -40,18 +40,20 @@ class OrderByEnumerable<T> implements IReferenceSortedEnumerable<T>{
 
 		@Override
 		public boolean hasNextEquals() {
-			return valid && hasNext() && comparator.compare(current, queue.peek()) == 0;
+			return current!=null && hasNext() && comparator.compare(current.value, queue.peek()) == 0;
 		}
 		
 		@Override
 		public void moveNext() {
-			this.current = queue.poll();
-			valid = true;
+			if(this.current == null) {
+				this.current = new Reference<T>();
+			}
+			this.current.value = queue.poll();
 		}
 
 		@Override
 		public T current() {
-			return current;
+			return current.value;
 		}
 
 	}
