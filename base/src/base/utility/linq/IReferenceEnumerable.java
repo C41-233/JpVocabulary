@@ -4,6 +4,7 @@ import java.lang.reflect.Array;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 import base.utility.function.Comparators;
 import base.utility.function.IAction;
@@ -48,7 +49,11 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 		}
 		return false;
 	}
-	
+
+	public default boolean isExist(T value) {
+		return isExist(obj->Objects.equals(obj, value));
+	}
+
 	public default boolean notExist(IReferencePredicate<? super T> predicate) {
 		IEnumerator<T> enumerator = iterator();
 		while(enumerator.hasNext()) {
@@ -58,6 +63,10 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 			}
 		}
 		return true;
+	}
+	
+	public default boolean notExist(T value) {
+		return notExist(obj->Objects.equals(obj, value));
 	}
 
 	public default T find(IReferencePredicate<? super T> predicate) {
