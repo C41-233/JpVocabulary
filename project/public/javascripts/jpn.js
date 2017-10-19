@@ -117,6 +117,15 @@
 			}
 			return true
 		}
+		this.isExist = function(predicate){
+			var it = this.iterator()
+			while(it.moveNext()){
+				if(predicate(it.current())){
+					return true
+				}
+			}
+			return false
+		}
 		this.toArray = function(){
 			var arr = []
 			this.foreach(function(e){

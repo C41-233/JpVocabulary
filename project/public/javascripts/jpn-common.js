@@ -137,7 +137,7 @@ $(function(){
 		modal: true,
 		resizable: false,
 		draggable: false,
-		width:	320,
+		width:	420,
 		buttons: {
 			"创建": actionCreateNotional,
 			"取消": function(){
@@ -153,4 +153,15 @@ $(function(){
 	})
 	dialog.dialog("widget").find(".ui-dialog-buttonset button").addClass("btn btn-default btn-xs")
 	
+	$("#dialog-import-notional-word").validate({
+		"#import-notional-word-input-words": function(val){
+			return Linq.from(val.split("\n")).select(function(s){
+				return s.trim()
+			}).where(function(s){
+				return s != ""
+			}).isExist(function(s){
+				return Validate.isValidSyllable(s)
+			})
+		}
+	})
 })

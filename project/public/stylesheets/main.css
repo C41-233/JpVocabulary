@@ -79,6 +79,10 @@ textarea{
 /*添加基本词*/
 #import-notional-word-input-words,
 #import-notional-word-input-meanings{
-	width:			260px;
+	width:			380px;
 	margin-bottom:	5px;
+}
+
+#import-notional-word-types .checkbox{
+	width:			80px;
 }
