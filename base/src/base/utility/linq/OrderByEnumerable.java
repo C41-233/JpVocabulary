@@ -7,10 +7,10 @@ import base.core.Reference;
 
 class OrderByEnumerable<T> implements IReferenceSortedEnumerable<T>{
 
-	private final IReferenceEnumerable<T> enumerable;
+	private final IEnumerable<T> enumerable;
 	private final Comparator<? super T> comparator;
 	
-	public OrderByEnumerable(IReferenceEnumerable<T> enumerable, Comparator<? super T> comparator) {
+	public OrderByEnumerable(IEnumerable<T> enumerable, Comparator<? super T> comparator) {
 		this.enumerable = enumerable;
 		this.comparator = comparator;
 	}

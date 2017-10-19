@@ -6,10 +6,11 @@ import javax.persistence.Table;
 
 import core.model.ModelBase;
 import core.model.ModelConstant;
+import po.INotionalWordValue;
 
 @Entity
-@Table(name="national_values")
-public class NationalWordValue extends ModelBase{
+@Table(name="notional_values")
+public class NotionalWordValue extends ModelBase implements INotionalWordValue{
 
 	@Column(name="national_id")
 	private long refId;

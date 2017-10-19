@@ -10,10 +10,11 @@ import base.utility.linq.Linq;
 import core.model.ConcatSplit;
 import core.model.ModelBase;
 import core.model.ModelConstant;
+import po.INotionalWord;
 
 @Entity
 @Table(name="notionals")
-public class NotionalWord extends ModelBase{
+public class NotionalWord extends ModelBase implements INotionalWord{
 
 	@Column(name="meaning")
 	private String meaning;

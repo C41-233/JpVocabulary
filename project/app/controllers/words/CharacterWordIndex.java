@@ -54,6 +54,10 @@ public class CharacterWordIndex extends HtmlControllerBase{
 			}
 		}
 		
+		{
+			
+		}
+		
 		render("words/word-index");
 	}
 

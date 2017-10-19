@@ -128,6 +128,10 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 		return new SelectEnumerable<T, V>(this, selector);
 	}
 
+	public default <V> IReferenceEnumerable<V> selectMany(ISelector<? super T, ? extends Iterable<? extends V>> selector){
+		return new SelectManyEnumerable<T, V>(this, selector);
+	}
+	
 	public default IReferenceEnumerable<T> where(IReferencePredicate<? super T> predicate){
 		return new WhereEnumerable<T>(this, predicate);
 	}

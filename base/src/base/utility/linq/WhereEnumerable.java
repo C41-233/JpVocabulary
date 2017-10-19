@@ -5,10 +5,10 @@ import base.utility.function.IReferencePredicate;
 
 class WhereEnumerable<T> implements IReferenceEnumerable<T>{
 
-	private final IReferenceEnumerable<T> enumerable;
+	private final IEnumerable<T> enumerable;
 	private final IReferencePredicate<? super T> predicate;
 	
-	public WhereEnumerable(IReferenceEnumerable<T> enumerable, IReferencePredicate<? super T> predicate) {
+	public WhereEnumerable(IEnumerable<T> enumerable, IReferencePredicate<? super T> predicate) {
 		this.enumerable = enumerable;
 		this.predicate = predicate;
 	}

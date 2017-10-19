@@ -72,5 +72,5 @@ public class Test1 {
 			assertEquals((Integer)i, out.get(i));
 		}
 	}
-	
+
 }
