@@ -21,7 +21,7 @@
 	#{import-js 'jquery-hoverintent.js' /}
 	#{import-js 'jpn.js' /}
 	#{import-js 'jpn-jquery.js' /}
-	#{import-js 'jpn-validate.js' /}
+	#{import-js 'jpn-common.js' /}
 	
 	#{js}
 		global.DataMgr = ${jsArgs.raw()}
@@ -69,7 +69,7 @@
 					<li class="dropdown">
 						<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">实词 <span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="/">汉字词</a></li>
+							<li><a href="/words/character">汉字词</a></li>
 							<li><a href="/">平假名词</a></li>
 							<li><a href="/">片假名词</a></li>
 						</ul>
@@ -111,9 +111,11 @@
 			$("#btn-mysqldump").click(function(){
 				Dialog.wait(function(handle){
 					Action.post("/action/dump", {}, {
+						success: function(){
+							alert("备份完成")
+						},
 						complete: function(){
 							handle.close()
-							alert("备份完成")
 						}	
 					})
 				})

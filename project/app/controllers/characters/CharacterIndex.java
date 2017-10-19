@@ -117,7 +117,7 @@ public final class CharacterIndex extends HtmlControllerBase{
 			renderArgs.put("characterGroups", characterGroupsVO);
 		}
 		
-		render("characters/index");
+		render("characters/character-index");
 	}
 	
 	private static class CharacterIndexVO{

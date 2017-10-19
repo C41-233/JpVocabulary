@@ -67,7 +67,7 @@ public class CharacterEdit extends HtmlControllerBase{
 		}
 		
 		renderArgs.put("character", vo);
-		render("characters/edit");
+		render("characters/character-edit");
 	}
 
 	private static class CharacterVO{

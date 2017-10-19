@@ -69,7 +69,7 @@ public class CharacterDetail extends HtmlControllerBase{
 		}
 		
 		renderArgs.put("character", vo);
-		render("characters/detail");
+		render("characters/character-detail");
 	}
 	
 	private static class CharacterVO{

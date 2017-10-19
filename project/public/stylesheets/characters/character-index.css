@@ -1,35 +1,3 @@
-/*Ë÷Òý*/
-#left-list .left-list-header{
-	display:	inline-block;
-	width:		100%;
-	cursor:		pointer;
-	text-decoration:	none;
-}
-#left-list .left-list-content{
-	padding-left:	0;
-	padding-right:	0;
-}
-#left-list .left-list-content a{
-	display:	inline-block;
-	width:		100%;
-	text-decoration:	none;
-	padding-left:	15%;
-}
-#left-list .left-list-content{
-	background-color: #f6f6f6;
-}
-#left-list .left-list-content li.active{
-	background-color:	#faa523;
-	font-weight:		bold;
-}
-#left-list .left-list-content li:hover{
-	background-color:	#007fff;
-}
-#left-list .left-list-header-active{
-	font-weight:		bold;
-	background-color:	#faa523;
-}
-
 /*ºº×Ö×é*/
 .character-header, .character-header:hover{
 	color:			black;

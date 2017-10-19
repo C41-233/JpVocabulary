@@ -1,10 +1,12 @@
 package controllers.functions;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.io.IOUtils;
 import org.joda.time.DateTime;
@@ -53,14 +55,20 @@ public final class Function extends AjaxControllerBase{
 		InputStream is = process.getInputStream();
 		InputStream es = process.getErrorStream();
 		
-		boolean hasError = false;
-		for(String line : Linq.from(IOUtils.readLines(es, Charsets.UTF_8))
-				.where(line->line.equals("Warning: Using a password on the command line interface can be insecure.")==false)) {
-			hasError = true;
-			Logs.Db.error(line);
-		}
-		if(hasError) {
-			renderJsonError("备份失败");
+		ByteArrayOutputStream bos = new ByteArrayOutputStream();
+		IOUtils.copy(is, bos);
+
+		{
+			boolean hasError = false;
+			List<String> lines = IOUtils.readLines(es, Charsets.UTF_8);
+			for(String line : Linq.from(lines)
+					.where(line->line.equals("Warning: Using a password on the command line interface can be insecure.")==false)) {
+				hasError = true;
+				Logs.Db.error(line);
+			}
+			if(hasError) {
+				renderJsonError("备份失败");
+			}
 		}
 
 		Path outputFolder = Config.getPath("dump.path.output");
@@ -82,14 +90,14 @@ public final class Function extends AjaxControllerBase{
 			Logs.Db.error("备份归档目录不存在: %s", backupFolder);
 			renderJsonError("备份失败");
 		}
-		
+
 		Path outputFile = outputFolder.resolve("data.sql");
 		Path backupFile = backupFolder.resolve(DateTime.now().toString("yyyy-MM-dd-HHmmss")+".sql");
 		if(Files.exists(outputFile)) {
 			Files.move(outputFile, backupFile);
 		}
-		Files.copy(is, outputFile);
 		
+		Files.write(outputFile, bos.toByteArray());
 	}
 	
 }

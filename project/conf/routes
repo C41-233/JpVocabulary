@@ -28,4 +28,7 @@ POST	/characters/action/update-syllable-words characters.CharacterAPI.updateSyll
 POST	/characters/action/add-fixword			characters.CharacterAPI.addFixword
 POST	/characters/action/delete-fixword		characters.CharacterAPI.deleteFixword
 
+GET		/words/character						words.CharacterWordIndex.index
+GET		/words/character/{index}				words.CharacterWordIndex.page
+
 GET		/test									Test.test

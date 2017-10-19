@@ -36,3 +36,16 @@ global.Validate = {
 }
 
 })();
+
+
+$(function(){
+
+	$("#left-list").accordion({
+		header: ".left-list-header",
+		heightStyle: "content",
+		event: "hoverintent",
+		collapsible: false,
+		active: $("#left-list .left-list-header-active").data("seq"),
+	}).show()
+
+});
