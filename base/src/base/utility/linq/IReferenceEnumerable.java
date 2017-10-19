@@ -11,6 +11,7 @@ import base.utility.function.IAction;
 import base.utility.function.IActionForeach;
 import base.utility.function.IReferencePredicate;
 import base.utility.function.ISelector;
+import base.utility.function.ISelectorEx;
 
 public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 
@@ -128,6 +129,10 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 		return new SelectEnumerable<T, V>(this, selector);
 	}
 
+	public default <V> IReferenceEnumerable<V> select(ISelectorEx<? super T, ? extends V> selector){
+		return new SelectEnumerable<T, V>(this, selector);
+	}
+	
 	public default <V> IReferenceEnumerable<V> selectMany(ISelector<? super T, ? extends Iterable<? extends V>> selector){
 		return new SelectManyEnumerable<T, V>(this, selector);
 	}

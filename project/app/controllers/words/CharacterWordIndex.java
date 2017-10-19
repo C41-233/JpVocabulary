@@ -2,13 +2,12 @@ package controllers.words;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import base.utility.Strings;
+import base.utility.linq.Linq;
 import core.controller.HtmlControllerBase;
 import core.controller.validation.annotation.Required;
 import logic.characters.CharacterIndexManager;
-import logic.characters.ICharacterIndexGroup;
 
 public class CharacterWordIndex extends HtmlControllerBase{
 
@@ -17,46 +16,28 @@ public class CharacterWordIndex extends HtmlControllerBase{
 	}
 	
 	public static void page(@Required String index) {
-		String argGroup = String.valueOf(index.charAt(0)).toUpperCase();
-
-		{
-			//查询参数填充
-			ArgVO arg = new ArgVO();
-			arg.group = argGroup;
-			arg.index = index;
-			renderArgs.put("arg", arg);
-		}
-
-		{
-			//索引
-			boolean find = false;
-			List<CharacterIndexVO> indexesVO = new ArrayList<>();
-			
-			{
-				int seq = 0;
-				for(ICharacterIndexGroup group : CharacterIndexManager.getCache()) {
-					CharacterIndexVO vo = new CharacterIndexVO();
-					vo.name = group.getName();
-					vo.seq = seq;
-					for(String item : group.getItems()) {
-						vo.items.add(item);
-						if(Objects.equals(argGroup, vo.name) && Objects.equals(item, index)) {
-							find = true;
-						}
-					}
-					indexesVO.add(vo);
-					seq++;
-				}
-			}
-			renderArgs.put("indexes", indexesVO);
-			if(find == false) {
-				notFound(Strings.format("%s not found.", index));
-			}
+		if(CharacterIndexManager.isValidIndex(index) == false) {
+			notFound(Strings.format("%s not found.", index));
 		}
 		
-		{
+		ArgVO arg = new ArgVO();
+		arg.index = index;
+		renderArgs.put("arg", arg);
 			
-		}
+		List<CharacterIndexVO> indexesVO = Linq.from(CharacterIndexManager.getCache()).select((group, i)->{
+			CharacterIndexVO vo = new CharacterIndexVO();
+			vo.name = group.getName();
+			vo.seq = i;
+			for(String item : group.getItems()) {
+				vo.items.add(item);
+				if(item.equals(index)) {
+					arg.group = vo.name;
+				}
+			}
+			return vo;
+		}).toList();
+		
+		renderArgs.put("indexes", indexesVO);
 		
 		render("words/word-index");
 	}

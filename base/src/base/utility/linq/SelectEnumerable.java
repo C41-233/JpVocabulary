@@ -2,13 +2,18 @@ package base.utility.linq;
 
 import base.utility.function.ICharSelector;
 import base.utility.function.ISelector;
+import base.utility.function.ISelectorEx;
 
 class SelectEnumerable<T, V> implements IReferenceEnumerable<V>{
 
 	private final IEnumerable<T> enumerable;
-	private final ISelector<? super T, ? extends V> selector;
+	private final ISelectorEx<? super T, ? extends V> selector;
 	
 	public SelectEnumerable(IEnumerable<T> enumerable, ISelector<? super T, ? extends V> selector) {
+		this(enumerable,  (value, i)->selector.select(value));
+	}
+	
+	public SelectEnumerable(IEnumerable<T> enumerable, ISelectorEx<? super T, ? extends V> selector) {
 		this.enumerable = enumerable;
 		this.selector = selector;
 	}
@@ -21,6 +26,7 @@ class SelectEnumerable<T, V> implements IReferenceEnumerable<V>{
 	private class Enumerator implements IEnumerator<V>{
 
 		private final IEnumerator<T> enumerator = enumerable.iterator();
+		private int index = -1;
 		
 		@Override
 		public boolean hasNext() {
@@ -30,11 +36,12 @@ class SelectEnumerable<T, V> implements IReferenceEnumerable<V>{
 		@Override
 		public void moveNext() {
 			enumerator.moveNext();
+			index++;
 		}
 
 		@Override
 		public V current() {
-			return selector.select(enumerator.current());
+			return selector.select(enumerator.current(), index);
 		}
 		
 	}
