@@ -98,6 +98,13 @@
 					<button type="submit" class="btn btn-default">搜索</button>
 				</form>
 				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown">
+						<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">添加 <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="javascript:void(0)" id="btn-import-character">汉字</a></li>
+							<li><a href="javascript:void(0)" id="btn-import-notional-word">基本词</a></li>
+						</ul>
+					</li>
 					<li><a href="javascript:void(0)" id="btn-mysqldump">导出</a></li>
 				</ul>
 			</div>
@@ -106,21 +113,34 @@
 	
 	#{get 'body'/}
 	
-	#{js}
-		$(function(){
-			$("#btn-mysqldump").click(function(){
-				Dialog.wait(function(handle){
-					Action.post("/action/dump", {}, {
-						success: function(){
-							alert("备份完成")
-						},
-						complete: function(){
-							handle.close()
-						}	
-					})
-				})
-			})
-		})
-	#{/js}
+	<div id="dialog-import-character" title="创建汉字" class="pre-hide">
+		<div class="text-center">
+			<form class="form-inline">
+				<div class="form-group">
+					<input type="text" id="import-character-input-jp" class="form-control" placeholder="日式汉字">
+				</div>
+				<div class="form-group">
+					<input type="text" id="import-character-input-cn" class="form-control" placeholder="中式汉字">
+				</div>
+				<div class="form-group">
+					<textarea id="import-character-input-pinyin" class="form-control" placeholder="每行一个拼音"></textarea>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<div id="dialog-import-notional-word" title="创建基本词" class="pre-hide">
+		<div class="text-center">
+			<form class="form-inline">
+				<div class="form-group">
+					<textarea id="import-notional-word-input-words" class="form-control" placeholder="每行一个单词，至少包含一个读音" rows="3"></textarea>
+				</div>
+				<div class="form-group">
+					<textarea id="import-notional-word-input-meanings" class="form-control" placeholder="每行一个释义" rows="4"></textarea>
+				</div>
+			</form>
+		</div>
+	</div>
+
 </body>
 </html>

@@ -1,6 +1,7 @@
 package controllers.words;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import base.utility.Strings;
@@ -8,6 +9,7 @@ import base.utility.linq.Linq;
 import core.controller.HtmlControllerBase;
 import core.controller.validation.annotation.Required;
 import logic.characters.CharacterIndexManager;
+import logic.pinyins.Pinyins;
 
 public class CharacterWordIndex extends HtmlControllerBase{
 
@@ -39,7 +41,55 @@ public class CharacterWordIndex extends HtmlControllerBase{
 		
 		renderArgs.put("indexes", indexesVO);
 		
-		render("words/word-index");
+		List<CharacterWordSyllableGroupVO> syllableGroupsVO = new ArrayList<>();
+		for(int i=1; i<=4 ;i++) {
+			String groupName = index + i;
+			CharacterWordSyllableGroupVO syllableGroupVO = new CharacterWordSyllableGroupVO();
+			syllableGroupVO.name = Pinyins.toPinyin(groupName);
+			
+			{
+				CharacterWordGroupVO groupVO = new CharacterWordGroupVO();
+				syllableGroupVO.characters.add(groupVO);
+				
+				groupVO.name = "啊";
+				{
+					WordVO wordVO = new WordVO();
+					wordVO.value = "愛野";
+					wordVO.syllable = "あいの";
+					wordVO.meanings = (Arrays.asList("干","打（哈哈）"));
+					wordVO.types = Arrays.asList("名词", "自动词");
+					groupVO.words.add(wordVO);
+				}
+				{
+					WordVO wordVO = new WordVO();
+					wordVO.value = "愛野";
+					wordVO.syllable = "あいの";
+					wordVO.meanings = (Arrays.asList("干"));
+					wordVO.types = Arrays.asList("名词", "自动词", "副词");
+					groupVO.words.add(wordVO);
+				}
+			}
+			
+			{
+				CharacterWordGroupVO groupVO = new CharacterWordGroupVO();
+				syllableGroupVO.characters.add(groupVO);
+				
+				groupVO.name = "的";
+				{
+					WordVO wordVO = new WordVO();
+					wordVO.value = "愛野";
+					wordVO.syllable = "あいの";
+					wordVO.meanings = (Arrays.asList("干","打（哈哈）"));
+					wordVO.types = Arrays.asList("接头词");
+					groupVO.words.add(wordVO);
+				}
+			}
+
+			syllableGroupsVO.add(syllableGroupVO);
+		}
+		
+		renderArgs.put("syllables", syllableGroupsVO);
+		render("words/word-character-index");
 	}
 
 	private static class ArgVO{
@@ -51,6 +101,24 @@ public class CharacterWordIndex extends HtmlControllerBase{
 		String name;
 		List<String> items = new ArrayList<>();
 		int seq;
+	}
+	
+	
+	private static class CharacterWordSyllableGroupVO{
+		String name;
+		List<CharacterWordGroupVO> characters = new ArrayList<>();
+	}
+	
+	private static class CharacterWordGroupVO{
+		String name;
+		List<WordVO> words = new ArrayList<>();
+	}
+	
+	private static class WordVO{
+		String value;
+		String syllable;
+		List<String> meanings = new ArrayList<>();
+		List<String> types = new ArrayList<>();
 	}
 	
 }

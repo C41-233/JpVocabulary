@@ -61,3 +61,24 @@ textarea{
 	font-weight:		bold;
 	background-color:	#faa523;
 }
+
+/*添加汉字*/
+#import-character-input-jp,
+#import-character-input-cn{
+	width:			100px;
+}
+
+#import-character-input-pinyin{
+	width:			205px;
+}
+
+#dialog-import-character .form-group{
+	margin-bottom:	10px;
+}
+
+/*添加基本词*/
+#import-notional-word-input-words,
+#import-notional-word-input-meanings{
+	width:			260px;
+	margin-bottom:	5px;
+}

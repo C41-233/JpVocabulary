@@ -1,7 +1,6 @@
 #{meta /}
 
 #{stylesheet "characters/character-index.css"/}
-#{javascript "characters/character-index.js"/}
 
 #{body}
 
@@ -22,11 +21,8 @@
 		</div>
 		<div class="col-lg-10 col-sm-9 col-xs-6">
 			<div class="row">
-				<div class="col-lg-10">
+				<div class="col-lg-12">
 					<h3>${arg.index}</h3>
-				</div>
-				<div class="col-lg-2">
-					<button class="btn btn-default" id="btn-import-character">添加汉字</button>
 				</div>
 			</div>
 			<hr/>
@@ -67,22 +63,6 @@
 				</div>
 			#{/list}
 		</div>
-	</div>
-</div>
-
-<div id="dialog-import-character" title="创建汉字" class="pre-hide">
-	<div>
-		<form class="form-inline">
-			<div class="form-group">
-				<input type="text" id="import-character-input-jp" class="form-control" placeholder="日式汉字">
-			</div>
-			<div class="form-group">
-				<input type="text" id="import-character-input-cn" class="form-control" placeholder="中式汉字">
-			</div>
-			<div class="form-group">
-				<textarea id="import-character-input-pinyin" class="form-control" placeholder="每行一个拼音"></textarea>
-			</div>
-		</form>
 	</div>
 </div>
 

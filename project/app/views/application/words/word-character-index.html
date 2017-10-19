@@ -1,0 +1,62 @@
+#{meta /}
+
+#{stylesheet "words/word-index.css"/}
+
+#{body}
+
+<div class="container">
+	<div class="row">
+		<div class="col-lg-2 col-sm-3 col-xs-6">
+			<h3>汉字词</h3>
+			<div id="left-list" class="pre-hide">
+				#{list items:indexes, as:'index'}
+					<a class="left-list-header #{if arg.group==index.name}left-list-header-active#{/if}" data-seq="${index.seq}">${index.name}</a>
+					<ul class="left-list-content">
+						#{list items:index.items, as:'item'}
+							<li class="#{if arg.index==item}active#{/if}"><a href="@{words.CharacterWordIndex.page(item)}">${item}</a></li>
+						#{/list}
+					</ul>
+				#{/list}
+			</div>
+		</div>
+		<div class="col-lg-10 col-sm-9 col-xs-6">
+			<div class="row">
+				<div class="col-lg-10">
+					<h3>${arg.index}</h3>
+				</div>
+			</div>
+			<hr/>
+			#{list items:syllables, as:'syllable'}
+			<div class="div-syllable-groups">
+				<div class="syllable-value">${syllable.name}</div>
+				
+				#{list items:syllable.characters, as:'character'}
+				<div class="div-character-groups">
+					<div class="character-value font-jp">${character.name}</div>
+					<table class="table table-bordered table-words">
+						#{list items:character.words, as:'word'}
+							<tr>
+								<th class="font-jp">${word.value}</th>
+								<td>${word.syllable}</td>
+								<td>
+									#{list items:word.meanings, as:'meaning'}
+										<div>${meaning}</div>
+									#{/list}
+								</td>
+								<td>
+									#{list items:word.types, as:'type'}
+										<span>${type}</span>
+									#{/list}
+								</td>
+							</tr>
+						#{/list}
+					</table>
+				</div>
+				#{/list}
+			</div>
+			#{/list}
+		</div>
+	</div>
+</div>
+
+#{/body}

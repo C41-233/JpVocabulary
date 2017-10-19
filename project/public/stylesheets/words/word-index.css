@@ -1,0 +1,25 @@
+.div-syllable-groups{
+	margin-bottom:	10px;
+}
+
+.div-character-groups{
+	padding-left:	20px;
+}
+
+.syllable-value{
+	font-weight:	bold;
+}
+
+.character-value{
+	font-weight:	bold;
+}
+
+.table-words th:nth-child(1){
+	width:		20%;
+}
+.table-words td:nth-child(2){
+	width:		20%;
+}
+.table-words td:nth-child(3){
+	width:		40%;
+}

@@ -47,16 +47,3 @@
 .fixword>span:nth-child(1){
 	font-weight:	bold;
 }
-
-#import-character-input-jp,
-#import-character-input-cn{
-	width:			100px;
-}
-
-#import-character-input-pinyin{
-	width:			205px;
-}
-
-#dialog-import-character .form-group{
-	margin-bottom:	10px;
-}
