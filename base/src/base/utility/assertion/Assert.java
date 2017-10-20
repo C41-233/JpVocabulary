@@ -25,4 +25,18 @@ public final class Assert{
 		notNull(obj);
 	}
 	
+	public static void require(String[] values) {
+		notNull(values);
+		for(String value : values) {
+			require(value);
+		}
+	}
+	
+	public static void require(Iterable<String> values) {
+		notNull(values);
+		for(String value : values) {
+			require(value);
+		}
+	}
+	
 }

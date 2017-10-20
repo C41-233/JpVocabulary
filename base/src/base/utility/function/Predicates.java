@@ -41,4 +41,8 @@ public final class Predicates {
 			return p1.is(ch) || p2.is(ch);
 		}
 	}
+	
+	public static <T> IReferencePredicate<T> not(IReferencePredicate<T> predicate){
+		return s->predicate.is(s) == false;
+	}
 }

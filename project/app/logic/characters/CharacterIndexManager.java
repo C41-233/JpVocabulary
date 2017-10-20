@@ -2,9 +2,9 @@ package logic.characters;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import base.io.LineReader;
-import base.utility.linq.Linq;
 
 public final class CharacterIndexManager{
 
@@ -12,7 +12,9 @@ public final class CharacterIndexManager{
 	
 	private static final File file = new File("conf/index/characters.index");
 	
-	private static ArrayList<ICharacterIndexGroup> cache = new ArrayList<>();
+	private static final ArrayList<ICharacterIndexGroup> cache = new ArrayList<>();
+	private static final HashSet<String> indexSet = new HashSet<>();
+	
 	private static long lastTime = 0;
 	
 	public static Iterable<ICharacterIndexGroup> getCache(){
@@ -22,7 +24,7 @@ public final class CharacterIndexManager{
 	
 	public static boolean isValidIndex(String index) {
 		tryLoad();
-		return Linq.from(cache).selectMany(group->group.getItems()).isExist(item->item.equals(index));
+		return indexSet.contains(index);
 	}
 	
 	private static void tryLoad(){
@@ -34,6 +36,7 @@ public final class CharacterIndexManager{
 		tryLoad();
 		
 		cache.clear();
+		indexSet.clear();
 		
 		try(LineReader scanner = new LineReader(file.toPath(), LineReader.Trim | LineReader.SkipEmpty)){
 			CharacterIndexGroup last = null;
@@ -47,6 +50,7 @@ public final class CharacterIndexManager{
 				}
 				else{
 					last.items.add(line);
+					indexSet.add(line);
 				}
 			}
 		}

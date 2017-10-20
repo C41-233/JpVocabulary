@@ -74,9 +74,7 @@ public class Character extends ModelBase implements ICharacter{
 		return ConcatSplit.split(pinyins);
 	}
 	public void setPinyins(List<String> pinyins) {
-		pinyins.forEach(token->{
-			Assert.require(token);
-		});
+		Assert.require(pinyins);
 		
 		Collections.sort(pinyins);
 		this.pinyins = ConcatSplit.concat(pinyins);

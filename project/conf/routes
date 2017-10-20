@@ -31,4 +31,6 @@ POST	/characters/action/delete-fixword		characters.CharacterAPI.deleteFixword
 GET		/words/character						words.CharacterWordIndex.index
 GET		/words/character/{index}				words.CharacterWordIndex.page
 
+POST	/words/action/create					words.WordAPI.create
+
 GET		/test									Test.test

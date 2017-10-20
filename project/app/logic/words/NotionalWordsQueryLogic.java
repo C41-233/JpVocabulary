@@ -8,7 +8,7 @@ import core.model.hql.Like;
 import models.NotionalWordValue;
 import po.INotionalWordValue;
 
-public final class NotionalWordsLogic {
+public final class NotionalWordsQueryLogic {
 
 	public static List<INotionalWordValue> findNotionalWordValuesByIndex(String index){
 		HQL hql = HQL.begin();
@@ -16,6 +16,10 @@ public final class NotionalWordsLogic {
 		HQLResult result = hql.end();
 		
 		return NotionalWordValue.find(result.select, result.params).fetch();
+	}
+
+	public static boolean hasNotionalWordValue(String value) {
+		return NotionalWordValue.find("value=?1", value).first() != null;
 	}
 	
 }

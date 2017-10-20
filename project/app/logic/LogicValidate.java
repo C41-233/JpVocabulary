@@ -21,4 +21,8 @@ public final class LogicValidate {
 		return pinyin!=null && pinyin.matches("^[a-z]+[1-4]$");
 	}
 
+	public static boolean isCharacterWord(String word) {
+		return word != null && word.length() >0 && Linq.from(word).isAll(Chars::isCJKUnifiedIdeograph);
+	}
+	
 }

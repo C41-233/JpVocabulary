@@ -8,6 +8,14 @@ String.prototype.isHiragana = function(){
 	return Linq.from(this).charCode().isAll(CharCode.isHiragana)
 }
 
+String.prototype.toLines = function(){
+	return Linq.from(this.split("\n")).select(function(s){
+		return s.trim()
+	}).where(function(s){
+		return s != ""
+	}).toArray()
+}
+
 global.Validate = {
 	isValidJpCharacter: function(val){
 		return val.length == 1 && val.isCJKCharacter()
@@ -32,6 +40,33 @@ global.Validate = {
 			}
 		})
 		return tokens
+	}
+}
+
+$.fn.jpDialog = function(args){
+	var options = {
+		autoOpen: false,
+		modal: true,
+		resizable: false,
+		draggable: false,
+		closeOnEscape: false,
+		close: function(){
+			$(this).validate("clear")
+		}
+	}
+	if(args.width){
+		options.width = args.width
+	}
+	if(args.buttons){
+		options.buttons = args.buttons
+	}
+	
+	var dialog = this.dialog(options)
+	dialog.dialog("widget").find(".ui-dialog-buttonset button").addClass("btn btn-default btn-xs")
+	if(args.trigger){
+		$(args.trigger).click(function(){
+			dialog.dialog("open")
+		})
 	}
 }
 
@@ -81,11 +116,7 @@ $(function(){
 		})
 	}
 	
-	var dialog = $("#dialog-import-character").dialog({
-		autoOpen: false,
-		modal: true,
-		resizable: false,
-		draggable: false,
+	var dialog = $("#dialog-import-character").jpDialog({
 		width:	260,
 		buttons: {
 			"创建": actionCreateCharacter,
@@ -93,14 +124,8 @@ $(function(){
 				$(this).dialog("close")
 			}
 		},
-		close: function(){
-			$(this).validate("clear")
-		}
+		trigger: "#btn-import-character"
 	})
-	$("#btn-import-character").click(function(){
-		$("#dialog-import-character").dialog("open")
-	})
-	dialog.dialog("widget").find(".ui-dialog-buttonset button").addClass("btn btn-default btn-xs")
 	
 	$("#import-character-input-jp, #import-character-input-cn, #import-character-input-pinyin").keydown(function(e){
 		if(e.keyCode == VK.ENTER && e.ctrlKey){
@@ -129,14 +154,21 @@ $(function(){
 //添加基本词
 $(function(){
 	function actionCreateNotional(){
-	
+		if($("#dialog-import-notional-word").validate("hasError")){
+			return
+		}
+		var values = $("#import-notional-word-input-words").val().toLines()
+		var meanings = $("#import-notional-word-input-meanings").val().toLines()
+		var types = Linq.from($("#import-notional-word-types input[type='checkbox']:checked")).select(function(q){
+			return $(q).parent().text().trim()
+		}).toArray()
+		
+		Action.post("/words/action/create", {values: values, meanings: meanings, types: types}, function(){
+			
+		})
 	}
 
-	var dialog = $("#dialog-import-notional-word").dialog({
-		autoOpen: false,
-		modal: true,
-		resizable: false,
-		draggable: false,
+	var dialog = $("#dialog-import-notional-word").jpDialog({
 		width:	420,
 		buttons: {
 			"创建": actionCreateNotional,
@@ -144,14 +176,8 @@ $(function(){
 				$(this).dialog("close")
 			}
 		},
-		close: function(){
-			$(this).validate("clear")
-		}
+		trigger: "#btn-import-notional-word"
 	})
-	$("#btn-import-notional-word").click(function(){
-		$("#dialog-import-notional-word").dialog("open")
-	})
-	dialog.dialog("widget").find(".ui-dialog-buttonset button").addClass("btn btn-default btn-xs")
 	
 	$("#dialog-import-notional-word").validate({
 		"#import-notional-word-input-words": function(val){

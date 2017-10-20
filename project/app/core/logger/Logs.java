@@ -9,6 +9,7 @@ public final class Logs {
 
 	public static final ILogger Http = new JpLogger("http");
 	public static final ILogger Db = new JpLogger("db");
+	public static final ILogger Logic = new JpLogger("logic");
 	
 	private static class JpLogger implements ILogger{
 		

@@ -104,8 +104,9 @@
 	function IEnumerable(){
 		this.foreach = function(action){
 			var it = this.iterator()
+			var i = 0
 			while(it.moveNext()){
-				action(it.current())
+				action(it.current(), i++)
 			}
 		}
 		this.isAll = function(predicate){
@@ -133,6 +134,7 @@
 			})
 			return arr
 		}
+		
 		this.where = function(predicate){
 			return new WhereEnumerable(this, predicate)
 		}
@@ -142,9 +144,9 @@
 	}
 	
 	function StringEnumerable(str){
-		ArrayEnumerable.call(this)
+		ArrayEnumerable.call(this, str)
 		
-		function CharCodeQuery(){
+		function CharCodeEnumerable(){
 			IEnumerable.call(this)
 			
 			function Iterator(){
@@ -163,7 +165,7 @@
 		}
 		
 		this.charCode = function(){
-			return new CharCodeQuery()
+			return new CharCodeEnumerable()
 		}
 	}
 	
@@ -215,10 +217,14 @@
 		IEnumerable.call(this)
 		
 		function Iterator(){
-			var iterator = enumerable.iterator()
-			this.moveNext = iterator.moveNext
+			var it = enumerable.iterator()
+			var i = -1
+			this.moveNext = function(){
+				i++
+				return it.moveNext()
+			}
 			this.current = function(){
-				return selector(iterator.current())
+				return selector(it.current(), i)
 			}
 		}
 		this.iterator = function(){

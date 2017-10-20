@@ -4,12 +4,14 @@ import java.lang.annotation.Annotation;
 
 import base.reflect.TypeBox;
 import base.utility.collection.PairHashMap;
+import core.controller.validation.annotation.Array;
 import core.controller.validation.annotation.Id;
 import core.controller.validation.annotation.Required;
 import core.controller.validation.annotation.StringValue;
 import core.controller.validation.processor.IdProcessor;
 import core.controller.validation.processor.RequiredArrayProcessor;
 import core.controller.validation.processor.RequiredProcessor;
+import core.controller.validation.processor.StringArrayProcessor;
 import core.controller.validation.processor.StringValueArrayProcessor;
 import core.controller.validation.processor.StringValueProcessor;
 
@@ -32,6 +34,8 @@ public final class ProcessorManager {
 		
 		init(StringValue.class, String.class, new StringValueProcessor());
 		init(StringValue.class, String[].class, new StringValueArrayProcessor());
+		
+		init(Array.class, String[].class, new StringArrayProcessor());
 	}
 	
 	@SuppressWarnings("unchecked")
