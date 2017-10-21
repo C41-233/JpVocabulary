@@ -41,6 +41,11 @@ public class NotionalWordValue extends ModelBase implements INotionalWordValue{
 		Assert.notNull(type);
 		this.type = type.value();
 	}
+
+	@Override
+	public NotionalWordValueType getType() {
+		return NotionalWordValueType.valueOf(this.type);
+	}
 	
 	@Column(name="`index`")
 	private String index = ModelConstant.EmptyToken;
@@ -49,6 +54,10 @@ public class NotionalWordValue extends ModelBase implements INotionalWordValue{
 		this.index = ConcatSplit.concat(
 			Linq.from(indexes).sort()
 		);
+	}
+	@Override
+	public Iterable<String> getIndexes(){
+		return ConcatSplit.split(this.index);
 	}
 
 	@Override
@@ -60,5 +69,5 @@ public class NotionalWordValue extends ModelBase implements INotionalWordValue{
 	public Iterable<String> getSyllables() {
 		return getWord().getSyllables();
 	}
-	
+
 }

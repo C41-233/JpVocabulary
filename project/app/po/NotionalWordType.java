@@ -22,6 +22,10 @@ public final class NotionalWordType {
 		"叹词",
 	};
 	
+	public static Iterable<String> all(){
+		return Linq.from(types);
+	}
+	
 	public static int getValue(String type) {
 		return Linq.from(types).findIndex(type);
 	}

@@ -1,7 +1,9 @@
 package base.utility.linq;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public interface IEnumerable<T> extends Iterable<T>{
 
@@ -27,6 +29,15 @@ public interface IEnumerable<T> extends Iterable<T>{
 		return list;
 	}
 	
+	public default Set<T> toSet(){
+		HashSet<T> set = new HashSet<>();
+		IEnumerator<T> enumerator = iterator();
+		while(enumerator.hasNext()) {
+			set.add(enumerator.next());
+		}
+		return set;
+	}
+
 	public default IEnumerable<T> skip(int n){
 		return new SkipEnumerable<T>(this, n);
 	}

@@ -7,16 +7,27 @@ import logic.LogicValidate;
 
 public enum NotionalWordValueType {
 
-	Syllable(0), //纯假名的注音
+	Syllable(0, "注音"), //纯假名的注音
 	
-	Character(1), //纯汉字词
+	Character(1, "汉字词"), //纯汉字词
 	
-	Mixed(2); //汉字与假名的混合词
+	Mixed(2, "平假名词"); //汉字与假名的混合词
 	
 	private final int value;
+	private final String name;
 	
-	NotionalWordValueType(int value) {
+	NotionalWordValueType(int value, String name) {
 		this.value = value;
+		this.name = name;
+	}
+	
+	public static NotionalWordValueType valueOf(int value) {
+		for(NotionalWordValueType e : NotionalWordValueType.values()) {
+			if(e.value == value) {
+				return e;
+			}
+		}
+		return null;
 	}
 	
 	public static NotionalWordValueType getWordValueType(String value) {
@@ -34,6 +45,10 @@ public enum NotionalWordValueType {
 
 	public int value() {
 		return this.value;
+	}
+	
+	public String getName() {
+		return this.name;
 	}
 	
 }

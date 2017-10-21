@@ -9,5 +9,9 @@ public interface INotionalWordValue extends IModel{
 	public INotionalWord getWord();
 	
 	public Iterable<String> getSyllables();
+
+	public NotionalWordValueType getType();
+
+	public Iterable<String> getIndexes();
 	
 }

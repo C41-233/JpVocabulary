@@ -19,11 +19,28 @@
 			<table class="table" id="main-table">
 				<tr>
 					<th>单词</th>
-					<td><div id="editable-values" data-editable-value="${word.valuesText}">
+					<td>
+						<table id="table-values">
 						#{list items:values, as:'value'}
-							<div>${value.value}</div>
+							<tr>
+								<td>${value.value}</td>
+								<td>${value.type}</td>
+								<td>
+									#{list items:value.indexes, as:'index'}
+										<span>${index}</span>
+									#{/list}
+								</td>
+								<td><button class="btn btn-danger btn-sm">删除</button></td>
+							</tr>
 						#{/list}
-					</div></td>
+							<tr>	
+								<td><input type="text" class="form-control"/></td>
+								<td></td>
+								<td></td>
+								<td><button class="btn btn-default btn-sm">添加</button></td>
+							</tr>
+						</table>
+					</td>
 				</tr>
 				<tr>
 					<th>含义</th>
@@ -35,6 +52,20 @@
 							（无）
 						#{/else}
 					</div></td>
+				</tr>
+				<tr>
+					<th>词性</th>
+					<td>
+						<div class="form-inline">
+							#{list items:types, as:'type'}
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" #{if type.has}checked#{/if}> ${type.name}
+									</label>
+								</div>
+							#{/list}
+						</div>
+					</td>
 				</tr>
 			</table>
 		</div>
