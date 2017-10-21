@@ -37,13 +37,13 @@ public class GroupByTest {
 		
 		List<IReferenceGroup<Integer, Value>> out = Linq.from(list).groupBy(v->v.key).toList();
 		assertEquals(3, out.size());
-		assertEquals(11, (int) out.get(0).at(0).value);
-		assertEquals(12, (int) out.get(0).at(1).value);
-		assertEquals(13, (int) out.get(0).at(2).value);
-		assertEquals(21, (int) out.get(1).at(0).value);
-		assertEquals(22, (int) out.get(1).at(1).value);
-		assertEquals(23, (int) out.get(1).at(2).value);
-		assertEquals(31, (int) out.get(2).at(0).value);
+		assertEquals(11, out.get(0).select(v->v.value).toInt().at(0));
+		assertEquals(12, out.get(0).select(v->v.value).toInt().at(1));
+		assertEquals(13, out.get(0).select(v->v.value).toInt().at(2));
+		assertEquals(21, out.get(1).select(v->v.value).toInt().at(0));
+		assertEquals(22, out.get(1).select(v->v.value).toInt().at(1));
+		assertEquals(23, out.get(1).select(v->v.value).toInt().at(2));
+		assertEquals(31, out.get(2).select(v->v.value).toInt().at(0));
 	}
 
 }

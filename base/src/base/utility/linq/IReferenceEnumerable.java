@@ -9,7 +9,7 @@ import java.util.Objects;
 import base.utility.collection.DefaultValueHashMap;
 import base.utility.function.Comparators;
 import base.utility.function.IAction;
-import base.utility.function.IActionForeach;
+import base.utility.function.IForeachAction;
 import base.utility.function.IReferencePredicate;
 import base.utility.function.ISelector;
 import base.utility.function.ISelectorEx;
@@ -73,7 +73,7 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 
 	public default T at(int index) {
 		IEnumerator<T> enumerator = iterator();
-		for(int i=0; i<index && enumerator.hasNext(); i++, enumerator.next());
+		for(int i=0; i<index && enumerator.hasNext(); i++, enumerator.moveNext());
 		if(enumerator.hasNext()) {
 			return enumerator.next();
 		}
@@ -124,11 +124,11 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 		IEnumerator<T> enumerator = iterator();
 		while(enumerator.hasNext()) {
 			T obj = enumerator.next();
-			action.action(obj);
+			action.call(obj);
 		}
 	}
 	
-	public default void foreach(IActionForeach<? super T> action) {
+	public default void foreach(IForeachAction<? super T> action) {
 		IEnumerator<T> enumerator = iterator();
 		int index = 0;
 		while(enumerator.hasNext()) {

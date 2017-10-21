@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Objects;
 
 import base.utility.function.ICharAction;
-import base.utility.function.ICharForeach;
+import base.utility.function.IForeachCharAction;
 import base.utility.function.ICharPredicate;
 import base.utility.function.ICharSelector;
 
@@ -44,7 +44,7 @@ public interface ICharEnumerable extends IEnumerable<Character>{
 		return array;
 	}
 	
-	public default void foreach(ICharForeach action) {
+	public default void foreach(IForeachCharAction action) {
 		ICharEnumerator enumerator = iterator();
 		int i = 0;
 		while(enumerator.hasNext()) {

@@ -1,7 +1,7 @@
 package base.utility.function;
 
 @FunctionalInterface
-public interface IActionForeach<T> {
+public interface IForeachAction<T> {
 
 	public void action(T t, int i);
 	

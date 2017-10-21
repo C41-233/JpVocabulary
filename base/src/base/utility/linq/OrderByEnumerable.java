@@ -1,9 +1,7 @@
 package base.utility.linq;
 
+import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.PriorityQueue;
-
-import base.core.Reference;
 
 class OrderByEnumerable<T> implements IReferenceSortedEnumerable<T>{
 
@@ -22,38 +20,35 @@ class OrderByEnumerable<T> implements IReferenceSortedEnumerable<T>{
 
 	private class Enumerator implements ISortedEnumerator<T>{
 
-		private final PriorityQueue<T> queue = new PriorityQueue<>(comparator);
-		
-		private Reference<T> current;
+		private final ArrayList<T> queue = new ArrayList<>();
+		private int index = -1;
 	
 		public Enumerator() {
 			IEnumerator<T> enumerator = enumerable.iterator();
 			while(enumerator.hasNext()) {
 				queue.add(enumerator.next());
 			}
+			queue.sort(comparator);
 		}
 		
 		@Override
 		public boolean hasNext() {
-			return queue.isEmpty() == false;
+			return index+1 < queue.size();
 		}
 
 		@Override
 		public boolean hasNextEquals() {
-			return current!=null && hasNext() && comparator.compare(current.value, queue.peek()) == 0;
+			return hasNext() && comparator.compare(current(), queue.get(index+1)) == 0;
 		}
 		
 		@Override
 		public void moveNext() {
-			if(this.current == null) {
-				this.current = new Reference<T>();
-			}
-			this.current.value = queue.poll();
+			++index;
 		}
 
 		@Override
 		public T current() {
-			return current.value;
+			return queue.get(index);
 		}
 
 	}
