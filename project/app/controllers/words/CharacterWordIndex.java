@@ -10,6 +10,9 @@ import core.controller.HtmlControllerBase;
 import core.controller.validation.annotation.Required;
 import logic.characters.CharacterIndexManager;
 import logic.pinyins.Pinyins;
+import logic.words.NotionalWordsQueryLogic;
+import logic.words.NotionalWordsUpdateLogic;
+import po.INotionalWordValue;
 
 public class CharacterWordIndex extends HtmlControllerBase{
 
@@ -42,10 +45,14 @@ public class CharacterWordIndex extends HtmlControllerBase{
 		renderArgs.put("indexes", indexesVO);
 		
 		List<CharacterWordSyllableGroupVO> syllableGroupsVO = new ArrayList<>();
+		
+		
 		for(int i=1; i<=4 ;i++) {
-			String groupName = index + i;
+			String pinyinGroupName = index + i;
+			List<INotionalWordValue> notionalWordValues = NotionalWordsQueryLogic.findCharacterWordValuesByPinyin(pinyinGroupName);
+			
 			CharacterWordSyllableGroupVO syllableGroupVO = new CharacterWordSyllableGroupVO();
-			syllableGroupVO.name = Pinyins.toPinyin(groupName);
+			syllableGroupVO.name = Pinyins.toPinyin(pinyinGroupName);
 			
 			{
 				CharacterWordGroupVO groupVO = new CharacterWordGroupVO();

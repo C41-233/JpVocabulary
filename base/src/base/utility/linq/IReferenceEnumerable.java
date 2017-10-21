@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
+import base.utility.collection.DefaultValueHashMap;
 import base.utility.function.Comparators;
 import base.utility.function.IAction;
 import base.utility.function.IActionForeach;
@@ -70,6 +71,17 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 		return notExist(obj->Objects.equals(obj, value));
 	}
 
+	public default T at(int index) {
+		IEnumerator<T> enumerator = iterator();
+		for(int i=0; i<index && enumerator.hasNext(); i++, enumerator.next());
+		if(enumerator.hasNext()) {
+			return enumerator.next();
+		}
+		else {
+			throw new IndexOutOfBoundsException();
+		}
+	}
+	
 	public default T find(IReferencePredicate<? super T> predicate) {
 		IEnumerator<T> enumerator = iterator();
 		while(enumerator.hasNext()) {
@@ -143,6 +155,19 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 	
 	public default IReferenceSortedEnumerable<T> orderBy(Comparator<? super T> comparator){
 		return new OrderByEnumerable<T>(this, comparator);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public default <V> IReferenceEnumerable<IReferenceGroup<V, T>> groupBy(ISelector<T, V> selector){
+		DefaultValueHashMap<V, ReferenceGroup<V, T>> hashMap = new DefaultValueHashMap<>(key->new ReferenceGroup(key));
+		IEnumerator<T> enumerator = iterator();
+		while(enumerator.hasNext()) {
+			T value = enumerator.next();
+			V key = selector.select(value);
+			ReferenceGroup<V, T> group = hashMap.get(key);
+			group.values.add(value);
+		}
+		return new IterableEnumerable(hashMap.values());
 	}
 	
 	@SuppressWarnings("unchecked")

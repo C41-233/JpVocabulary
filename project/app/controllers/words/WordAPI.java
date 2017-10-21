@@ -7,7 +7,7 @@ import core.controller.AjaxControllerBase;
 import core.controller.validation.annotation.Array;
 import core.controller.validation.annotation.Required;
 import core.controller.validation.annotation.StringValue;
-import logic.words.WordsUpdateLogic;
+import logic.words.NotionalWordsUpdateLogic;
 
 public final class WordAPI extends AjaxControllerBase{
 
@@ -19,7 +19,7 @@ public final class WordAPI extends AjaxControllerBase{
 		List<String> valuesList = Arrays.asList(values);
 		List<String> meaingsList = Arrays.asList(meanings);
 		List<String> typesList = Arrays.asList(types);
-		WordsUpdateLogic.create(valuesList, meaingsList, typesList);
+		NotionalWordsUpdateLogic.create(valuesList, meaingsList, typesList);
 	}
 	
 }

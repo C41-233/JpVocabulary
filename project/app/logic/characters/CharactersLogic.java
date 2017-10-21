@@ -16,9 +16,9 @@ public final class CharactersLogic extends LogicBase{
 
 	private CharactersLogic() {}
 	
-	public static List<ICharacter> findCharactersByIndex(String index){
+	public static List<ICharacter> findCharactersByPinyin(String pinyin){
 		HQL hql = HQL.begin();
-		hql.where(Like.contains("pinyins", "|"+index+"|"));
+		hql.where(Like.contains("pinyins", "|"+pinyin+"|"));
 		HQLResult result = hql.end();
 		return Character.find(result.select, result.params).fetch();
 	}

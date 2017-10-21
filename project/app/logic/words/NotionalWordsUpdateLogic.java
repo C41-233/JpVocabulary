@@ -13,7 +13,7 @@ import po.INotionalWord;
 import po.NotionalWordType;
 import po.NotionalWordValueType;
 
-public final class WordsUpdateLogic extends LogicBase{
+public final class NotionalWordsUpdateLogic extends LogicBase{
 
 	public static INotionalWord create(List<String> values, List<String> meanings, List<String> types) {
 		//必须至少有一个注音

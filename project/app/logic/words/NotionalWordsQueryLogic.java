@@ -10,9 +10,9 @@ import po.INotionalWordValue;
 
 public final class NotionalWordsQueryLogic {
 
-	public static List<INotionalWordValue> findNotionalWordValuesByIndex(String index){
+	public static List<INotionalWordValue> findCharacterWordValuesByPinyin(String pinyin){
 		HQL hql = HQL.begin();
-		hql.where(Like.contains("index", "|"+index+"|"));
+		hql.where(Like.contains("index", "|"+pinyin+"|"));
 		HQLResult result = hql.end();
 		
 		return NotionalWordValue.find(result.select, result.params).fetch();
@@ -21,5 +21,6 @@ public final class NotionalWordsQueryLogic {
 	public static boolean hasNotionalWordValue(String value) {
 		return NotionalWordValue.find("value=?1", value).first() != null;
 	}
+	
 	
 }

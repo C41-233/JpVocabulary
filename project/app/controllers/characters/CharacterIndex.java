@@ -50,7 +50,7 @@ public final class CharacterIndex extends HtmlControllerBase{
 		List<CharacterGroupVO> characterGroupsVO = new ArrayList<>();
 		for(int i=1; i<=4; i++) {
 			String groupName = index + i;
-			List<ICharacter> characters = CharactersLogic.findCharactersByIndex(groupName);
+			List<ICharacter> characters = CharactersLogic.findCharactersByPinyin(groupName);
 			if(characters.size() == 0) {
 				continue;
 			}
