@@ -23,10 +23,8 @@ public final class NotionalWordsUpdateLogic extends LogicBase{
 		
 		//词性必须全部合法
 		if(Linq.from(types).notAll(NotionalWordType::isValidType)) {
-			raise("不合法的词性：%s", Linq.from(types).find(Predicates.not(NotionalWordType::isValidType)));
+			raise("不合法的词性：%s", Linq.from(types).findFirst(Predicates.not(NotionalWordType::isValidType)));
 		}
-		
-		//todo 检查本身不重复
 		
 		for(String value : values) {
 			//检查每个单词都存在索引
@@ -59,6 +57,32 @@ public final class NotionalWordsUpdateLogic extends LogicBase{
 		}
 		
 		return word;
+	}
+	
+	public static void addValue(long id, String value) {
+		NotionalWord word = getNotionalWordOrRaiseIfNotFound(id);
+		//todo
+	}
+
+	public static void deleteValue(long id) {
+		NotionalWordValue value = getNotionalWordValueOrRaiseIfNotFound(id);
+		value.delete();
+	}
+
+	private static NotionalWord getNotionalWordOrRaiseIfNotFound(long id) {
+		NotionalWord word = NotionalWord.findById(id);
+		if(word == null) {
+			raise("不存在单词：id=%d", id);
+		}
+		return word;
+	}
+
+	private static NotionalWordValue getNotionalWordValueOrRaiseIfNotFound(long id) {
+		NotionalWordValue value = NotionalWordValue.findById(id);
+		if(value == null) {
+			raise("不存在单词：id=%d", id);
+		}
+		return value;
 	}
 	
 }

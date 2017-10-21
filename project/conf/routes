@@ -33,6 +33,7 @@ GET		/words/character/{index}				words.CharacterWordIndex.page
 
 GET		/words/notional/{<[0-9]+>id}/edit		words.NotionalWordEdit.index
 
-POST	/words/action/create-notional			words.NotionalWordAPI.create
+POST	/words/notional/action/create			words.NotionalWordAPI.create
+POST	/words/notional/action/delete-value		words.NotionalWordAPI.deleteValue
 
 GET		/test									Test.test

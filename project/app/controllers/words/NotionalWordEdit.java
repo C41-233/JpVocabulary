@@ -24,6 +24,8 @@ public final class NotionalWordEdit extends HtmlControllerBase{
 			notFound("基本词不存在：id="+id);
 		}
 		
+		jsArgs.put("id", id);
+		
 		WordVO wordVO = new WordVO();
 		
 		StringBuilder meaningsSb = new StringBuilder();
@@ -38,6 +40,7 @@ public final class NotionalWordEdit extends HtmlControllerBase{
 		List<ValueVO> valuesVO = new ArrayList<>();
 		for(INotionalWordValue value : word.getValues()) {
 			ValueVO valueVO = new ValueVO();
+			valueVO.id = value.getId();
 			valueVO.value = value.getValue();
 			valueVO.type = value.getType().getName();
 			for(String index : value.getIndexes()) {
@@ -73,14 +76,12 @@ public final class NotionalWordEdit extends HtmlControllerBase{
 	}
 	
 	private static class WordVO{
-
 		public List<String> meanings = new ArrayList<>();
 		public String meaningsText;
-		
 	}
 	
 	private static class ValueVO{
-		
+		public long id;
 		public String value;
 		public String type;
 		public List<String> indexes = new ArrayList<>();

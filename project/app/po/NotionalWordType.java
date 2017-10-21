@@ -27,7 +27,7 @@ public final class NotionalWordType {
 	}
 	
 	public static int getValue(String type) {
-		return Linq.from(types).findIndex(type);
+		return Linq.from(types).findFirstIndex(type);
 	}
 	
 	public static boolean isValidType(String type) {

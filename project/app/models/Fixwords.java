@@ -48,7 +48,7 @@ class Fixwords {
 	}
 
 	public void delete(String word, String syllable) {
-		int index = Linq.from(words).findIndex(w->w.getWord().equals(word)&&w.getSyllable().equals(syllable));
+		int index = Linq.from(words).findFirstIndex(w->w.getWord().equals(word)&&w.getSyllable().equals(syllable));
 		if(index >= 0) {
 			this.words.remove(index);
 		}

@@ -163,8 +163,8 @@ $(function(){
 			return $(q).parent().text().trim()
 		}).toArray()
 		
-		Action.post("/words/action/create-notional", {values: values, meanings: meanings, types: types}, function(){
-			
+		Action.post("/words/notional/action/create", {values: values, meanings: meanings, types: types}, function(data){
+			location.href = data.href
 		})
 	}
 

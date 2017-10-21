@@ -38,7 +38,7 @@ class Syllables{
 	}
 
 	public void removeSyllable(String syllable) {
-		int index = Linq.from(syllables).findIndex(s->s.getValue().equals(syllable));
+		int index = Linq.from(syllables).findFirstIndex(s->s.getValue().equals(syllable));
 		if(index >= 0) {
 			syllables.remove(index);
 		}
@@ -75,7 +75,7 @@ class Syllables{
 	}
 	
 	public CharacterSyllable findSyllable(String syllable) {
-		return Linq.from(syllables).find(s->s.getValue().equals(syllable));
+		return Linq.from(syllables).findFirst(s->s.getValue().equals(syllable));
 	}
 	
 }
