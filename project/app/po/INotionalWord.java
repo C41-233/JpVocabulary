@@ -10,4 +10,6 @@ public interface INotionalWord extends IModel{
 	
 	public Iterable<String> getSyllables();
 
+	public Iterable<? extends INotionalWordValue> getValues();
+
 }

@@ -5,7 +5,9 @@ import java.util.List;
 import core.model.hql.HQL;
 import core.model.hql.HQLResult;
 import core.model.hql.Like;
+import models.NotionalWord;
 import models.NotionalWordValue;
+import po.INotionalWord;
 import po.INotionalWordValue;
 
 public final class NotionalWordsQueryLogic {
@@ -22,12 +24,8 @@ public final class NotionalWordsQueryLogic {
 		return NotionalWordValue.find("value=?1", value).first() != null;
 	}
 
-	public static boolean hasNotionalWordStartOfCharacter(String character) {
-		return NotionalWordValue.find("value like ?1", character+"%").first() != null;
+	public static INotionalWord getNotionalWord(long id) {
+		return NotionalWord.findById(id);
 	}
-	
-	public static List<INotionalWordValue> getNotionalWordsStartOfCharacter(String character){
-		return NotionalWordValue.find("value like ?1", character+"%").fetch();
-	}
-	
+
 }

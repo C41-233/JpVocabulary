@@ -9,7 +9,7 @@ import core.controller.validation.annotation.Required;
 import core.controller.validation.annotation.StringValue;
 import logic.words.NotionalWordsUpdateLogic;
 
-public final class WordAPI extends AjaxControllerBase{
+public final class NotionalWordAPI extends AjaxControllerBase{
 
 	public static void create(
 		@Required @StringValue(minLength=1) String[] values,

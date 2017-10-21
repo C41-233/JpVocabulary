@@ -7,8 +7,8 @@ import core.model.hql.HQL;
 import core.model.hql.HQLResult;
 import core.model.hql.Like;
 import logic.LogicBase;
-import logic.words.NotionalWordsQueryLogic;
 import models.Character;
+import models.NotionalWordValue;
 import po.CharacterWord;
 import po.ICharacter;
 import po.ICharacterSyllable;
@@ -52,11 +52,6 @@ public final class CharactersLogic extends LogicBase{
 
 	public static void deleteCharacter(long id) {
 		Character character = getCharacterOrRaiseIfNotFound(id);
-		
-		if(NotionalWordsQueryLogic.hasNotionalWordStartOfCharacter(character.getJpValue())) {
-			raise("存在相关的基本词：%s", NotionalWordsQueryLogic.getNotionalWordsStartOfCharacter(character.getJpValue()).get(0).getValue());
-		}
-		
 		character.delete();
 	}
 
@@ -97,7 +92,12 @@ public final class CharactersLogic extends LogicBase{
 		character.setPinyins(pinyins);
 		character.save();
 		
-		//更新其他表的汉字索引
+		//更新基本词的汉字索引
+		List<NotionalWordValue> notionalWordValues = NotionalWordValue.find("value like ?1", character.getJpValue()+"%").fetch();
+		for(NotionalWordValue notionalWordValue : notionalWordValues) {
+			notionalWordValue.setIndexes(pinyins);
+			notionalWordValue.save();
+		}
 	}
 
 	public static void updateSyllable(long id, String from, String to) {

@@ -58,5 +58,10 @@ public class NotionalWord extends ModelBase implements INotionalWord{
 		List<NotionalWordValue> wordValue = NotionalWordValue.find("refId=?1 and type=?2 order by value", id, NotionalWordValueType.Syllable.value()).fetch();
 		return Linq.from(wordValue).select(v->v.getValue());
 	}
+
+	@Override
+	public Iterable<NotionalWordValue> getValues() {
+		return NotionalWordValue.find("refId=?1", id).fetch();
+	}
 	
 }

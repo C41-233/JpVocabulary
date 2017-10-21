@@ -26,17 +26,17 @@
 				</div>
 			</div>
 			<hr/>
-			#{list items:syllables, as:'syllable'}
-			<div class="div-syllable-groups">
-				<div class="syllable-value">${syllable.name}</div>
+			#{list items:pinyins, as:'pinyin'}
+			<div class="div-pinyin-groups">
+				<div class="pinyin-value">${pinyin.name}</div>
 				
-				#{list items:syllable.characters, as:'character'}
+				#{list items:pinyin.characters, as:'character'}
 				<div class="div-character-groups">
 					<div class="character-value font-jp">${character.name}</div>
 					<table class="table table-bordered table-words">
 						#{list items:character.words, as:'word'}
 							<tr>
-								<th class="font-jp">${word.value}</th>
+								<th class="word-value font-jp"><a href="@{words.NotionalWordEdit.index(word.id, request.url)}">${word.value}</a></th>
 								<td>
 									#{list items:word.syllables, as:'syllable'}
 										<div>${syllable}</div>

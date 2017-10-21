@@ -44,14 +44,14 @@ public class CharacterWordIndex extends HtmlControllerBase{
 		
 		renderArgs.put("indexes", indexesVO);
 		
-		List<CharacterWordSyllableGroupVO> syllableGroupsVO = new ArrayList<>();
-		renderArgs.put("syllables", syllableGroupsVO);
+		List<CharacterWordPinyinGroupVO> pinyinGroupsVO = new ArrayList<>();
+		renderArgs.put("pinyins", pinyinGroupsVO);
 		
 		for(int i=1; i<=4 ;i++) {
 			String pinyinGroupName = index + i;
 			List<INotionalWordValue> notionalWordValues = NotionalWordsQueryLogic.findCharacterWordValuesByPinyin(pinyinGroupName);
 			//按汉字分组
-			CharacterWordSyllableGroupVO syllableGroupVO = new CharacterWordSyllableGroupVO();
+			CharacterWordPinyinGroupVO syllableGroupVO = new CharacterWordPinyinGroupVO();
 			syllableGroupVO.name = Pinyins.toPinyin(pinyinGroupName);
 			
 			for(IReferenceGroup<String, INotionalWordValue> characterGroup : Linq.from(notionalWordValues)
@@ -64,6 +64,7 @@ public class CharacterWordIndex extends HtmlControllerBase{
 						INotionalWord word = wordValue.getWord();
 						
 						WordVO wordVO = new WordVO();
+						wordVO.id = word.getId();
 						wordVO.value = wordValue.getValue();
 						wordVO.syllables = Linq.from(word.getSyllables()).toList();
 						wordVO.meanings = Linq.from(word.getMeanings()).toList();
@@ -78,7 +79,7 @@ public class CharacterWordIndex extends HtmlControllerBase{
 			
 			//仅存在的读音才加入分组
 			if(syllableGroupVO.characters.size() > 0) {
-				syllableGroupsVO.add(syllableGroupVO);
+				pinyinGroupsVO.add(syllableGroupVO);
 			}
 		}
 		
@@ -96,8 +97,7 @@ public class CharacterWordIndex extends HtmlControllerBase{
 		int seq;
 	}
 	
-	
-	private static class CharacterWordSyllableGroupVO{
+	private static class CharacterWordPinyinGroupVO{
 		String name;
 		List<CharacterWordGroupVO> characters = new ArrayList<>();
 	}
@@ -108,6 +108,7 @@ public class CharacterWordIndex extends HtmlControllerBase{
 	}
 	
 	private static class WordVO{
+		long id;
 		String value;
 		List<String> syllables;
 		List<String> meanings = new ArrayList<>();
