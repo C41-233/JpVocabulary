@@ -19,17 +19,21 @@ public enum NotionalWordValueType {
 		this.value = value;
 	}
 	
-	public static int getWordValueType(String value) {
+	public static NotionalWordValueType getWordValueType(String value) {
 		if(LogicValidate.isValidSyllable(value)) {
-			return 0;
+			return Syllable;
 		}
 		if(LogicValidate.isCharacterWord(value)) {
-			return 1;
+			return Character;
 		}
 		if(value.length() > 0 && Linq.from(value).isAll(Predicates.or(Chars::isCJKUnifiedIdeograph, Chars::isHiragana))) {
-			return 2;
+			return Mixed;
 		}
-		return -1;
+		return null;
+	}
+
+	public int value() {
+		return this.value;
 	}
 	
 }

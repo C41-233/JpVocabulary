@@ -26,6 +26,8 @@ public final class NotionalWordsUpdateLogic extends LogicBase{
 			raise("不合法的词性：%s", Linq.from(types).find(Predicates.not(NotionalWordType::isValidType)));
 		}
 		
+		//todo 检查本身不重复
+		
 		for(String value : values) {
 			//检查每个单词都存在索引
 			if(WordQueryIndex.getWordQueryIndex(value).size() == 0) {
@@ -34,6 +36,10 @@ public final class NotionalWordsUpdateLogic extends LogicBase{
 			//检查非读音的单词是否重复
 			if(LogicValidate.isValidSyllable(value)==false && NotionalWordsQueryLogic.hasNotionalWordValue(value)) {
 				raise("单词已存在：%s", value);
+			}
+			//必须是合法的基本词
+			if(NotionalWordValueType.getWordValueType(value) == null) {
+				raise("不是合法的基本词：%s", value);
 			}
 		}
 		
@@ -46,7 +52,7 @@ public final class NotionalWordsUpdateLogic extends LogicBase{
 			NotionalWordValue notionalWordValue = new NotionalWordValue();
 			notionalWordValue.setValue(value);
 			notionalWordValue.setNotionalWordId(word.getId());
-			notionalWordValue.setTypes(NotionalWordValueType.getWordValueType(value));
+			notionalWordValue.setType(NotionalWordValueType.getWordValueType(value));
 			notionalWordValue.setIndexes(WordQueryIndex.getWordQueryIndex(value));
 			
 			notionalWordValue.save();

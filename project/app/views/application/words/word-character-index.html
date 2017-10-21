@@ -1,6 +1,6 @@
 #{meta /}
 
-#{stylesheet "words/word-index.css"/}
+#{stylesheet "words/word-character-index.css"/}
 
 #{body}
 
@@ -37,7 +37,11 @@
 						#{list items:character.words, as:'word'}
 							<tr>
 								<th class="font-jp">${word.value}</th>
-								<td>${word.syllable}</td>
+								<td>
+									#{list items:word.syllables, as:'syllable'}
+										<div>${syllable}</div>
+									#{/list}
+								</td>
 								<td>
 									#{list items:word.meanings, as:'meaning'}
 										<div>${meaning}</div>

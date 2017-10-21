@@ -105,7 +105,19 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 		}
 		return -1;
 	}
-	
+
+	public default int count(IReferencePredicate<T> predicate) {
+		int count = 0;
+		IEnumerator<T> enumerator = iterator();
+		while(enumerator.hasNext()) {
+			T obj = enumerator.next();
+			if(predicate.is(obj)) {
+				count++;
+			}
+		}
+		return count;
+	}
+
 	@SuppressWarnings("unchecked")
 	public default T[] toArray(Class<T> type) {
 		List<T> list = toList();

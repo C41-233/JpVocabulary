@@ -13,6 +13,7 @@ import core.model.ConcatSplit;
 import core.model.ModelBase;
 import core.model.ModelConstant;
 import po.INotionalWord;
+import po.NotionalWordValueType;
 
 @Entity
 @Table(name="notionals")
@@ -41,6 +42,12 @@ public class NotionalWord extends ModelBase implements INotionalWord{
 	public void setTypes(List<String> types) {
 		Assert.require(types);
 		this.types = ConcatSplit.concat(types);
+	}
+
+	@Override
+	public Iterable<String> getSyllables() {
+		List<NotionalWordValue> wordValue = NotionalWordValue.find("refId=?1 and type=?2", id, NotionalWordValueType.Syllable.value()).fetch();
+		return Linq.from(wordValue).select(v->v.getValue());
 	}
 	
 }
