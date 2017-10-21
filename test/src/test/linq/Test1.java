@@ -9,7 +9,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import base.utility.function.Comparators;
+import base.utility.comparator.Comparators;
 import base.utility.linq.Linq;
 
 public class Test1 {

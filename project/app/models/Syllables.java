@@ -5,7 +5,7 @@ import java.util.List;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
 
-import base.utility.function.Comparators;
+import base.utility.comparator.Comparators;
 import base.utility.linq.Linq;
 import po.CharacterWord;
 
@@ -16,6 +16,7 @@ class Syllables{
 	public Syllables(String string) {
 		JsonArray jsyllables = new JsonParser().parse(string).getAsJsonArray();
 		this.syllables = Linq.from(jsyllables).select(jsyllable->new CharacterSyllable(jsyllable.getAsJsonObject())).toList();
+		onChange();
 	}
 	
 	@Override
@@ -28,11 +29,12 @@ class Syllables{
 	}
 	
 	public Iterable<CharacterSyllable> getSyllables(){
-		return Linq.from(syllables).orderBy((c1,c2)->Comparators.compare(c1.getValue(), c2.getValue()));
+		return Linq.from(syllables);
 	}
 
 	public void addSyllable(String syllable) {
 		this.syllables.add(new CharacterSyllable(syllable));
+		onChange();
 	}
 
 	public void removeSyllable(String syllable) {
@@ -40,8 +42,13 @@ class Syllables{
 		if(index >= 0) {
 			syllables.remove(index);
 		}
+		onChange();
 	}
 
+	private void onChange() {
+		this.syllables.sort((c1,c2)->Comparators.compare(c1.getValue(), c2.getValue()));
+	}
+	
 	public void setSyllable(String syllable, List<CharacterWord> words) {
 		removeSyllable(syllable);
 		CharacterSyllable obj = new CharacterSyllable(syllable);
@@ -49,6 +56,7 @@ class Syllables{
 			obj.addWord(word);
 		}
 		this.syllables.add(obj);
+		onChange();
 	}
 
 	public void updateSyllable(String from, String to) {
@@ -56,6 +64,7 @@ class Syllables{
 		if(syllable != null) {
 			syllable.setValue(to);
 		}
+		onChange();
 	}
 
 	public void updateMain(String value, boolean isMain) {

@@ -137,7 +137,7 @@ $(function(){
 	$("#input-add-fixword").inputable({
 		label: "添加",
 		active: function(value){
-			/*value = value.trim()
+			value = value.trim()
 			var tokens = value.split(/\s+|　/)
 			
 			if(tokens.length != 2){
@@ -152,10 +152,7 @@ $(function(){
 				return
 			}
 			
-			Action.post("/characters/action/add-fixword", {id: DataMgr.id, word: word}, function(){
-				location.reload()
-			})*/
-			Action.post("/characters/action/add-fixword", {}, function(){
+			Action.post("/characters/action/add-fixword", {id: DataMgr.id, word: word, syllable: syllable}, function(){
 				location.reload()
 			})
 		}

@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Objects;
 
 import base.utility.collection.DefaultValueHashMap;
-import base.utility.function.Comparators;
+import base.utility.comparator.Comparators;
 import base.utility.function.IAction;
 import base.utility.function.IForeachAction;
 import base.utility.function.IReferencePredicate;
@@ -93,6 +93,19 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 		return null;
 	}
 
+	public default int findIndex(T value) {
+		int index = 0;
+		IEnumerator<T> enumerator = iterator();
+		while(enumerator.hasNext()) {
+			T obj = enumerator.next();
+			if(Objects.equals(obj, value)) {
+				return index;
+			}
+			index++;
+		}
+		return -1;
+	}
+	
 	public default int findIndex(IReferencePredicate<? super T> predicate) {
 		int index = 0;
 		IEnumerator<T> enumerator = iterator();

@@ -13,6 +13,7 @@ import core.controller.validation.annotation.Required;
 import logic.characters.CharacterIndexManager;
 import logic.pinyins.Pinyins;
 import logic.words.NotionalWordsQueryLogic;
+import po.INotionalWord;
 import po.INotionalWordValue;
 
 public class CharacterWordIndex extends HtmlControllerBase{
@@ -62,11 +63,13 @@ public class CharacterWordIndex extends HtmlControllerBase{
 					groupVO.name = characterGroup.getKey();
 					
 					for(INotionalWordValue wordValue : characterGroup) {
+						INotionalWord word = wordValue.getWord();
+						
 						WordVO wordVO = new WordVO();
 						wordVO.value = wordValue.getValue();
-						wordVO.syllables = Linq.from(wordValue.getSyllables()).toList();
-						wordVO.meanings = (Arrays.asList("干","打（哈哈）"));
-						wordVO.types = Arrays.asList("名词", "自动词");
+						wordVO.syllables = Linq.from(word.getSyllables()).toList();
+						wordVO.meanings = Linq.from(word.getMeanings()).toList();
+						wordVO.types = Linq.from(word.getTypes()).toList();
 						groupVO.words.add(wordVO);
 					}
 					

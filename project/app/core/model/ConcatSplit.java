@@ -19,7 +19,7 @@ public final class ConcatSplit{
 		return rst;
 	}
 
-	public static String concat(List<String> s) {
+	public static String concat(Iterable<String> s) {
 		StringBuilder sb = new StringBuilder();
 		for(String token : s) {
 			token = token.trim();

@@ -1,12 +1,11 @@
 package models;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import base.utility.assertion.Assert;
+import base.utility.linq.Linq;
 import core.model.ConcatSplit;
 import core.model.ModelBase;
 import core.model.ModelConstant;
@@ -45,9 +44,11 @@ public class NotionalWordValue extends ModelBase implements INotionalWordValue{
 	
 	@Column(name="`index`")
 	private String index = ModelConstant.EmptyToken;
-	public void setIndexes(List<String> indexes) {
+	public void setIndexes(Iterable<String> indexes) {
 		Assert.require(indexes);
-		this.index = ConcatSplit.concat(indexes);
+		this.index = ConcatSplit.concat(
+			Linq.from(indexes).sort()
+		);
 	}
 
 	@Override

@@ -22,6 +22,10 @@ public final class NotionalWordType {
 		"叹词",
 	};
 	
+	public static int getValue(String type) {
+		return Linq.from(types).findIndex(type);
+	}
+	
 	public static boolean isValidType(String type) {
 		return Linq.from(types).isExist(type);
 	}
