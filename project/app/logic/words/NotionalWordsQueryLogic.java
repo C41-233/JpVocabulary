@@ -21,6 +21,13 @@ public final class NotionalWordsQueryLogic {
 	public static boolean hasNotionalWordValue(String value) {
 		return NotionalWordValue.find("value=?1", value).first() != null;
 	}
+
+	public static boolean hasNotionalWordStartOfCharacter(String character) {
+		return NotionalWordValue.find("value like ?1", character+"%").first() != null;
+	}
 	
+	public static List<INotionalWordValue> getNotionalWordsStartOfCharacter(String character){
+		return NotionalWordValue.find("value like ?1", character+"%").fetch();
+	}
 	
 }

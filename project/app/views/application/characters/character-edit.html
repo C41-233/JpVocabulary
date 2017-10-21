@@ -11,7 +11,7 @@
 			<a href="@{characters.CharacterDetail.index(character.id, refer)}"><span class="glyphicon glyphicon-arrow-left"></span>返回</a>
 		</div>
 		<div class="col-lg-2 text-right">
-			<button class="btn btn-danger" id="btn-delete-character">删除</button>
+			<button class="btn btn-danger" id="btn-delete-character" #{if !canDelete}disabled#{/if}>删除</button>
 		</div>
 	</div>
 	<div class="row">
@@ -80,7 +80,12 @@
 							#{list items:character.fixwords, as:'fixword'}
 								<tr>
 									<td><div>${fixword.word}(${fixword.syllable})</div></td>
-									<td><button class="btn btn-danger btn-sm btn-delete-fixword" data-word="${fixword.word}" data-syllable="${fixword.syllable}">删除</button></td>
+									<td><button 
+											class="btn btn-danger btn-sm btn-delete-fixword" 
+											data-word="${fixword.word}" 
+											data-syllable="${fixword.syllable}"
+										>删除</button>
+									</td>
 								</tr>
 							#{/list}
 						</table>

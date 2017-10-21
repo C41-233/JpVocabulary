@@ -27,7 +27,7 @@ public final class CharacterAPI extends AjaxControllerBase {
 	}
 	
 	public static void delete(@Id long id) {
-		CharactersLogic.deleteCharacater(id);
+		CharactersLogic.deleteCharacter(id);
 	}
 	
 	public static void addSyllable(

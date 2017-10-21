@@ -7,6 +7,7 @@ import core.model.hql.HQL;
 import core.model.hql.HQLResult;
 import core.model.hql.Like;
 import logic.LogicBase;
+import logic.words.NotionalWordsQueryLogic;
 import models.Character;
 import po.CharacterWord;
 import po.ICharacter;
@@ -49,8 +50,13 @@ public final class CharactersLogic extends LogicBase{
 		return character;
 	}
 
-	public static void deleteCharacater(long id) {
+	public static void deleteCharacter(long id) {
 		Character character = getCharacterOrRaiseIfNotFound(id);
+		
+		if(NotionalWordsQueryLogic.hasNotionalWordStartOfCharacter(character.getJpValue())) {
+			raise("存在相关的基本词：%s", NotionalWordsQueryLogic.getNotionalWordsStartOfCharacter(character.getJpValue()).get(0).getValue());
+		}
+		
 		character.delete();
 	}
 

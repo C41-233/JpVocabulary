@@ -7,7 +7,7 @@ $(function(){
 			onConfirm: function(handle){
 				Action.post(
 					"/characters/action/delete", 
-					{}, 
+					{id: DataMgr.id}, 
 					{
 						success: function(){
 							location.href = "/characters"

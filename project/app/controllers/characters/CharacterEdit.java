@@ -9,6 +9,7 @@ import core.controller.validation.annotation.Id;
 import core.controller.validation.annotation.StringValue;
 import logic.characters.CharactersLogic;
 import logic.pinyins.Pinyins;
+import logic.words.NotionalWordsQueryLogic;
 import po.CharacterWord;
 import po.ICharacter;
 import po.ICharacterSyllable;
@@ -66,6 +67,12 @@ public class CharacterEdit extends HtmlControllerBase{
 			vo.fixwords.add(wordVO);
 		}
 		
+		boolean canDelete = true;
+		if(NotionalWordsQueryLogic.hasNotionalWordStartOfCharacter(character.getJpValue())) {
+			canDelete = false;
+		}
+		
+		renderArgs.put("canDelete", canDelete);
 		renderArgs.put("character", vo);
 		render("characters/character-edit");
 	}
