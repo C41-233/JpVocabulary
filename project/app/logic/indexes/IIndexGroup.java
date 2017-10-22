@@ -1,6 +1,6 @@
-package logic.characters;
+package logic.indexes;
 
-public interface ICharacterIndexGroup {
+public interface IIndexGroup {
 
 	public String getName();
 	public Iterable<String> getItems();

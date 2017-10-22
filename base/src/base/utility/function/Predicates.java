@@ -6,6 +6,10 @@ public final class Predicates {
 		return new CharPredicateAnd2(predicate1, predicate2);
 	}
 
+	public static ICharPredicate and(ICharPredicate... predicates) {
+		return new CharPredicateAndN(predicates);
+	}
+	
 	public static ICharPredicate or(ICharPredicate predicate1, ICharPredicate predicate2) {
 		return new CharPredicateOr2(predicate1, predicate2);
 	}
@@ -30,6 +34,26 @@ public final class Predicates {
 		}
 	}
 
+	private static class CharPredicateAndN implements ICharPredicate{
+		
+		private final ICharPredicate[] predicates;
+		
+		public CharPredicateAndN(ICharPredicate... predicates) {
+			this.predicates = predicates;
+		}
+
+		@Override
+		public boolean is(char ch) {
+			for(ICharPredicate predicate : predicates) {
+				if(predicate.is(ch) == false) {
+					return false;
+				}
+			}
+			return true;
+		}
+		
+	}
+	
 	private static class CharPredicateOr2 implements ICharPredicate{
 	
 		private final ICharPredicate predicate1;

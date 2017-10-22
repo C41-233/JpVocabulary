@@ -1,13 +1,13 @@
-package logic.characters;
+package logic.indexes;
 
 import java.util.ArrayList;
 import java.util.List;
 
-class CharacterIndexGroup implements ICharacterIndexGroup{
+class IndexGroup implements IIndexGroup{
 	
-	String name;
+	public String name;
 	
-	List<String> items = new ArrayList<>();
+	public List<String> items = new ArrayList<>();
 
 	@Override
 	public String getName() {

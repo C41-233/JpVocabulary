@@ -11,7 +11,7 @@ public enum NotionalWordValueType {
 	
 	Character(1, "汉字词"), //纯汉字词
 	
-	Mixed(2, "平假名词"); //汉字与假名的混合词，假名可以是平假名也可以是片假名
+	Mixed(2, "平假名词"); //汉字与假名的混合词，假名可以是平假名也可以是片假名，但不可以是片假名开头
 	
 	private final int value;
 	private final String name;
@@ -45,8 +45,8 @@ public enum NotionalWordValueType {
 			return Character;
 		}
 		
-		//排除纯片假名
-		if(Linq.from(value).isAll(Chars::isKatakana)) {
+		//排除片假名开头的词
+		if(Chars.isKatakana(value.codePointAt(0))) {
 			return null;
 		}
 		

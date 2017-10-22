@@ -38,11 +38,14 @@ class OrderByEnumerable<T> implements IReferenceSortedEnumerable<T>{
 
 		@Override
 		public boolean hasNextEquals() {
-			return hasNext() && comparator.compare(current(), queue.get(index+1)) == 0;
+			return index >= 0 && index+1 < queue.size() && comparator.compare(current(), queue.get(index+1)) == 0;
 		}
 		
 		@Override
 		public void moveNext() {
+			if(index >= 0) {
+				queue.set(index, null); //gc
+			}
 			++index;
 		}
 

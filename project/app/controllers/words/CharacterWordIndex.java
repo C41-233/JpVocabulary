@@ -8,7 +8,7 @@ import base.utility.linq.IReferenceGroup;
 import base.utility.linq.Linq;
 import core.controller.HtmlControllerBase;
 import core.controller.validation.annotation.Required;
-import logic.characters.CharacterIndexManager;
+import logic.indexes.IndexManager;
 import logic.pinyins.Pinyins;
 import logic.words.NotionalWordsQueryLogic;
 import po.INotionalWord;
@@ -21,7 +21,7 @@ public class CharacterWordIndex extends HtmlControllerBase{
 	}
 	
 	public static void page(@Required String index) {
-		if(CharacterIndexManager.isValidIndex(index) == false) {
+		if(IndexManager.Character.isValidIndex(index) == false) {
 			notFound(Strings.format("%s not found.", index));
 		}
 		
@@ -29,7 +29,7 @@ public class CharacterWordIndex extends HtmlControllerBase{
 		arg.index = index;
 		renderArgs.put("arg", arg);
 			
-		List<CharacterIndexVO> indexesVO = Linq.from(CharacterIndexManager.getCache()).select((group, i)->{
+		List<CharacterIndexVO> indexesVO = Linq.from(IndexManager.Character.getGroups()).select((group, i)->{
 			CharacterIndexVO vo = new CharacterIndexVO();
 			vo.name = group.getName();
 			vo.seq = i;

@@ -1,49 +1,57 @@
-package logic.characters;
+package logic.indexes;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashSet;
 
 import base.io.LineReader;
+import base.io.RuntimeIOException;
 
-public final class CharacterIndexManager{
+class IndexManagerImplement implements IIndexManager{
 
-	private CharacterIndexManager() {}
+	public IndexManagerImplement(String filename) {
+		this.file = new File(filename);
+		if(file.exists() == false || file.isFile() == false) {
+			throw new RuntimeIOException(new FileNotFoundException());
+		}
+	}
 	
-	private static final File file = new File("conf/index/characters.index");
+	private final File file;
 	
-	private static final ArrayList<ICharacterIndexGroup> cache = new ArrayList<>();
-	private static final HashSet<String> indexSet = new HashSet<>();
+	private final ArrayList<IIndexGroup> cache = new ArrayList<>();
+	private final HashSet<String> indexSet = new HashSet<>();
 	
 	private static long lastTime = 0;
 	
-	public static Iterable<ICharacterIndexGroup> getCache(){
+	@Override
+	public Iterable<IIndexGroup> getGroups(){
 		tryLoad();
 		return cache;
 	}
 	
-	public static boolean isValidIndex(String index) {
+	@Override
+	public boolean isValidIndex(String index) {
 		tryLoad();
 		return indexSet.contains(index);
 	}
 	
-	private static void tryLoad(){
+	private void tryLoad(){
 		long modified = file.lastModified();
 		if(modified <= lastTime){
 			return;
 		}
 		lastTime = modified;
-		tryLoad();
 		
 		cache.clear();
 		indexSet.clear();
 		
 		try(LineReader scanner = new LineReader(file.toPath(), LineReader.Trim | LineReader.SkipEmpty)){
-			CharacterIndexGroup last = null;
+			IndexGroup last = null;
 			String line;
 			while((line = scanner.readLine())!=null){
 				if(line.startsWith("[") && line.endsWith("]")){
-					last = new CharacterIndexGroup();
+					last = new IndexGroup();
 					cache.add(last);
 					
 					last.name = line.substring(1, line.length()-1);
