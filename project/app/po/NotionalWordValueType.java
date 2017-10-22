@@ -7,11 +7,11 @@ import logic.LogicValidate;
 
 public enum NotionalWordValueType {
 
-	Syllable(0, "注音"), //纯假名的注音
+	Syllable(0, "注音"), //纯假名的注音，只能是平假名
 	
 	Character(1, "汉字词"), //纯汉字词
 	
-	Mixed(2, "平假名词"); //汉字与假名的混合词
+	Mixed(2, "平假名词"); //汉字与假名的混合词，假名可以是平假名也可以是片假名
 	
 	private final int value;
 	private final String name;
@@ -31,15 +31,30 @@ public enum NotionalWordValueType {
 	}
 	
 	public static NotionalWordValueType getWordValueType(String value) {
+		if(value.length() == 0) {
+			return null;
+		}
+		
+		//纯平假名
 		if(LogicValidate.isValidSyllable(value)) {
 			return Syllable;
 		}
+		
+		//纯汉字
 		if(LogicValidate.isCharacterWord(value)) {
 			return Character;
 		}
-		if(value.length() > 0 && Linq.from(value).isAll(Predicates.or(Chars::isCJKUnifiedIdeograph, Chars::isHiragana))) {
+		
+		//排除纯片假名
+		if(Linq.from(value).isAll(Chars::isKatakana)) {
+			return null;
+		}
+		
+		//汉字与假名混合
+		if(Linq.from(value).isAll(Predicates.or(Chars::isCJKUnifiedIdeograph, Chars::isHiragana, Chars::isKatakana))) {
 			return Mixed;
 		}
+		
 		return null;
 	}
 

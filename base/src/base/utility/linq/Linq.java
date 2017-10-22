@@ -6,6 +6,8 @@ import java.util.Iterator;
 
 public final class Linq {
 
+	private Linq() {}
+	
 	public static ICharEnumerable from(String string) {
 		return new CharArrayEnumerable(string);
 	}

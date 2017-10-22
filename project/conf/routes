@@ -38,5 +38,6 @@ POST	/words/notional/action/delete			words.NotionalWordAPI.delete
 POST	/words/notional/action/add-value		words.NotionalWordAPI.addValue
 POST	/words/notional/action/delete-value		words.NotionalWordAPI.deleteValue
 POST	/words/notional/action/update-meanings	words.NotionalWordAPI.updateMeanings
+POST	/words/notional/action/update-type		words.NotionalWordAPI.updateType
 
 GET		/test									Test.test

@@ -35,8 +35,9 @@ public abstract class ModelBase extends Model implements IModel{
 	@SuppressWarnings("unchecked")
 	@Override
 	public ModelBase save() {
+		boolean persistent = this.isPersistent();
 		ModelBase entity = super.save();
-		if(entity.isPersistent()) {
+		if(persistent) {
 			log("update");
 		}
 		else {
@@ -56,9 +57,19 @@ public abstract class ModelBase extends Model implements IModel{
 	private void log(String action) {
 		try {
 			StringBuilder sb = new StringBuilder();
-			sb.append(action).append(" ").append(name).append("[").append(id).append("]");
+			sb.append(action)
+			.append(" ")
+			.append(name)
+			.append("[")
+			.append(id)
+			.append("]");
 			for(Field field : fields) {
-				sb.append(" ").append(field.getName()).append("[").append(field.get(this)).append("]");
+				Object value = field.get(this);
+				sb.append(" ")
+				.append(field.getName())
+				.append("=[")
+				.append(value.toString().replace("\n", "\\n"))
+				.append("]");
 			}
 			Logs.Db.debug(sb.toString());
 		}

@@ -11,7 +11,6 @@ import models.NotionalWord;
 import models.NotionalWordValue;
 import po.INotionalWord;
 import po.INotionalWordValue;
-import sun.launcher.resources.launcher;
 
 public final class NotionalWordsQueryLogic {
 

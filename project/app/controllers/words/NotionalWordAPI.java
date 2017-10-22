@@ -43,4 +43,8 @@ public final class NotionalWordAPI extends AjaxControllerBase{
 		NotionalWordsUpdateLogic.updateMeanings(id, Arrays.asList(meanings));
 	}
 	
+	public static void updateType(@Id long id, @Required String type, @Required boolean value) {
+		NotionalWordsUpdateLogic.updateType(id, type, value);
+	}
+	
 }

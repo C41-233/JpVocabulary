@@ -2,47 +2,72 @@ package base.utility.function;
 
 public final class Predicates {
 
-	public static ICharPredicate and(ICharPredicate p1, ICharPredicate p2) {
-		return new CharPredicateAnd2(p1, p2);
+	public static ICharPredicate and(ICharPredicate predicate1, ICharPredicate predicate2) {
+		return new CharPredicateAnd2(predicate1, predicate2);
 	}
 
-	public static ICharPredicate or(ICharPredicate p1, ICharPredicate p2) {
-		return new CharPredicateOr2(p1, p2);
+	public static ICharPredicate or(ICharPredicate predicate1, ICharPredicate predicate2) {
+		return new CharPredicateOr2(predicate1, predicate2);
+	}
+
+	public static ICharPredicate or(ICharPredicate... predicates) {
+		return new CharPredicateOrN(predicates);
 	}
 	
 	private static class CharPredicateAnd2 implements ICharPredicate{
 	
-		private final ICharPredicate p1;
-		private final ICharPredicate p2;
+		private final ICharPredicate predicate1;
+		private final ICharPredicate predicate2;
 		
-		public CharPredicateAnd2(ICharPredicate p1, ICharPredicate p2) {
-			this.p1 = p1;
-			this.p2 = p2;
+		public CharPredicateAnd2(ICharPredicate predicate1, ICharPredicate predicate2) {
+			this.predicate1 = predicate1;
+			this.predicate2 = predicate2;
 		}
 	
 		@Override
 		public boolean is(char ch) {
-			return p1.is(ch) && p2.is(ch);
+			return predicate1.is(ch) && predicate2.is(ch);
 		}
 	}
 
 	private static class CharPredicateOr2 implements ICharPredicate{
 	
-		private final ICharPredicate p1;
-		private final ICharPredicate p2;
+		private final ICharPredicate predicate1;
+		private final ICharPredicate predicate2;
 		
-		public CharPredicateOr2(ICharPredicate p1, ICharPredicate p2) {
-			this.p1 = p1;
-			this.p2 = p2;
+		public CharPredicateOr2(ICharPredicate predicate1, ICharPredicate predicate2) {
+			this.predicate1 = predicate1;
+			this.predicate2 = predicate2;
 		}
 	
 		@Override
 		public boolean is(char ch) {
-			return p1.is(ch) || p2.is(ch);
+			return predicate1.is(ch) || predicate2.is(ch);
 		}
+	}
+	
+	private static class CharPredicateOrN implements ICharPredicate{
+		
+		private final ICharPredicate[] predicates;
+		
+		public CharPredicateOrN(ICharPredicate... predicates) {
+			this.predicates = predicates;
+		}
+
+		@Override
+		public boolean is(char ch) {
+			for (ICharPredicate predicate : predicates) {
+				if(predicate.is(ch)) {
+					return true;
+				}
+			}
+			return false;
+		}
+		
 	}
 	
 	public static <T> IReferencePredicate<T> not(IReferencePredicate<T> predicate){
 		return s->predicate.is(s) == false;
 	}
+
 }

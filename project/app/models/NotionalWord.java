@@ -63,5 +63,5 @@ public class NotionalWord extends ModelBase implements INotionalWord{
 	public Iterable<NotionalWordValue> getValues() {
 		return NotionalWordValue.find("refId=?1 order by value", id).fetch();
 	}
-	
+
 }

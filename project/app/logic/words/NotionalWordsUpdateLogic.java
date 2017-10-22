@@ -1,6 +1,7 @@
 package logic.words;
 
 import java.util.List;
+import java.util.Set;
 
 import base.utility.function.Predicates;
 import base.utility.linq.Linq;
@@ -105,6 +106,22 @@ public final class NotionalWordsUpdateLogic extends LogicBase{
 		word.save();
 	}
 
+	public static void updateType(long id, String type, boolean value) {
+		NotionalWord word = getNotionalWordOrRaiseIfNotFound(id);
+		if(NotionalWordType.isValidType(type) == false) {
+			raise("不合法的词性：%s", type);
+		}
+		Set<String> types = Linq.from(word.getTypes()).toSet();
+		if(value) {
+			types.add(type);
+		}
+		else {
+			types.remove(type);
+		}
+		word.setTypes(types);
+		word.save();
+	}
+	
 	private static NotionalWord getNotionalWordOrRaiseIfNotFound(long id) {
 		NotionalWord word = NotionalWord.findById(id);
 		if(word == null) {
