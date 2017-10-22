@@ -6,5 +6,6 @@ public interface ILogger {
 	public void warn(String format, Object...args);
 	public void error(String format, Object...args);
 	public void info(String format, Object...args);
+	public void error(Exception e, String format, Object...args);
 	
 }

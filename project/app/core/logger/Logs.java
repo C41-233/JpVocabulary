@@ -44,6 +44,11 @@ public final class Logs {
 		public void warn(String format, Object... args) {
 			this.logger.warn(Strings.format(format, args));
 		}
+
+		@Override
+		public void error(Exception e, String format, Object...args) {
+			this.logger.error(Strings.format(format, args), e);
+		}
 		
 	}
 	
