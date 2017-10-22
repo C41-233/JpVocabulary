@@ -59,14 +59,50 @@ public final class NotionalWordsUpdateLogic extends LogicBase{
 		return word;
 	}
 	
+	public static void delete(long id) {
+		NotionalWord word = getNotionalWordOrRaiseIfNotFound(id);
+		for(NotionalWordValue value : word.getValues()) {
+			value.delete();
+		}
+		word.delete();
+	}
+	
 	public static void addValue(long id, String value) {
 		NotionalWord word = getNotionalWordOrRaiseIfNotFound(id);
-		//todo
+		if(Linq.from(word.getValues()).isExist(v->v.getValue().equals(value))) {
+			raise("重复添加单词：%s", value);
+		}
+		
+		NotionalWordValueType type = NotionalWordValueType.getWordValueType(value);
+		if(type == null) {
+			raise("不合法的基本词：%s", value);
+		}
+		
+		List<String> indexes = WordQueryIndex.getWordQueryIndex(value);
+		if(indexes.isEmpty()) {
+			raise("无法创建索引，请先添加汉字：%s", value);
+		}
+		
+		NotionalWordValue notionalWordValue = new NotionalWordValue();
+		notionalWordValue.setValue(value);
+		notionalWordValue.setType(type);
+		notionalWordValue.setNotionalWordId(word.getId());
+		notionalWordValue.setIndexes(indexes);
+		notionalWordValue.save();
 	}
 
 	public static void deleteValue(long id) {
 		NotionalWordValue value = getNotionalWordValueOrRaiseIfNotFound(id);
+		if(value.getType() == NotionalWordValueType.Syllable && Linq.from(value.getSyllables()).count() == 1) {
+			raise("不能删除全部注音");
+		}
 		value.delete();
+	}
+	
+	public static void updateMeanings(long id, List<String> meanings) {
+		NotionalWord word = getNotionalWordOrRaiseIfNotFound(id);
+		word.setMeanings(meanings);
+		word.save();
 	}
 
 	private static NotionalWord getNotionalWordOrRaiseIfNotFound(long id) {

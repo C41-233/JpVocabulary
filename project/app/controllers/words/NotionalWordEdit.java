@@ -15,16 +15,15 @@ import logic.words.NotionalWordsQueryLogic;
 import po.INotionalWord;
 import po.INotionalWordValue;
 import po.NotionalWordType;
+import po.NotionalWordValueType;
 
 public final class NotionalWordEdit extends HtmlControllerBase{
 
 	public static void index(@Id long id, String refer) {
-		INotionalWord word = NotionalWordsQueryLogic.getNotionalWord(id);
+		INotionalWord word = NotionalWordsQueryLogic.getNotionalWordAndUpdate(id);
 		if(word == null) {
 			notFound("基本词不存在：id="+id);
 		}
-		
-		jsArgs.put("id", id);
 		
 		WordVO wordVO = new WordVO();
 		
@@ -37,6 +36,8 @@ public final class NotionalWordEdit extends HtmlControllerBase{
 		
 		renderArgs.put("word", wordVO);
 
+		boolean syllableDelete = Linq.from(word.getSyllables()).count() > 1;
+		
 		List<ValueVO> valuesVO = new ArrayList<>();
 		for(INotionalWordValue value : word.getValues()) {
 			ValueVO valueVO = new ValueVO();
@@ -48,6 +49,9 @@ public final class NotionalWordEdit extends HtmlControllerBase{
 					index = Pinyins.toPinyin(index);
 				}
 				valueVO.indexes.add(index);
+			}
+			if(syllableDelete == false && value.getType() == NotionalWordValueType.Syllable) {
+				valueVO.canDelete = false;
 			}
 			valuesVO.add(valueVO);
 		}
@@ -71,6 +75,9 @@ public final class NotionalWordEdit extends HtmlControllerBase{
 			refer = Route.get(MainIndex.class, "index");
 		}
 		renderArgs.put("refer", refer);
+
+		jsArgs.put("id", id);
+		jsArgs.put("refer", refer);
 		
 		render("words/notional-edit");
 	}
@@ -85,7 +92,7 @@ public final class NotionalWordEdit extends HtmlControllerBase{
 		public String value;
 		public String type;
 		public List<String> indexes = new ArrayList<>();
-		
+		public boolean canDelete = true;
 	}
 	
 	private static class TypeVO{

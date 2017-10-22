@@ -2,13 +2,16 @@ package logic.words;
 
 import java.util.List;
 
+import base.utility.collection.Iterables;
 import core.model.hql.HQL;
 import core.model.hql.HQLResult;
 import core.model.hql.Like;
+import logic.pinyins.WordQueryIndex;
 import models.NotionalWord;
 import models.NotionalWordValue;
 import po.INotionalWord;
 import po.INotionalWordValue;
+import sun.launcher.resources.launcher;
 
 public final class NotionalWordsQueryLogic {
 
@@ -28,4 +31,22 @@ public final class NotionalWordsQueryLogic {
 		return NotionalWord.findById(id);
 	}
 
+	public static INotionalWord getNotionalWordAndUpdate(long id) {
+		NotionalWord word = NotionalWord.findById(id);
+		if(word == null) {
+			return null;
+		}
+		
+		//更新单词的索引
+		for(NotionalWordValue value : word.getValues()) {
+			List<String> indexes = WordQueryIndex.getWordQueryIndex(value.getValue());
+			if(Iterables.equals(value.getIndexes(), indexes) == false) {
+				value.setIndexes(indexes);
+				value.save();
+			}
+		}
+		
+		return word;
+	}
+	
 }

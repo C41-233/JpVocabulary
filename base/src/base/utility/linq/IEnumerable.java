@@ -38,9 +38,30 @@ public interface IEnumerable<T> extends Iterable<T>{
 		return set;
 	}
 
+	public default boolean hasDuplicate() {
+		HashSet<T> set = new HashSet<>();
+		IEnumerator<T> enumerator = iterator();
+		while(enumerator.hasNext()) {
+			if(set.add(enumerator.next()) == false) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public default boolean isEmpty() {
+		IEnumerator<T> enumerator = iterator();
+		return enumerator.hasNext() == false;
+	}
+	
+	public default boolean notEmpty() {
+		return isEmpty() == false;
+	}
+
 	public default IEnumerable<T> skip(int n){
 		return new SkipEnumerable<T>(this, n);
 	}
+	
 	
 	@SuppressWarnings("unchecked")
 	public default <V> IEnumerable<V> cast(){

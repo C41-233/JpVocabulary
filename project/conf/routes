@@ -34,6 +34,9 @@ GET		/words/character/{index}				words.CharacterWordIndex.page
 GET		/words/notional/{<[0-9]+>id}/edit		words.NotionalWordEdit.index
 
 POST	/words/notional/action/create			words.NotionalWordAPI.create
+POST	/words/notional/action/delete			words.NotionalWordAPI.delete
+POST	/words/notional/action/add-value		words.NotionalWordAPI.addValue
 POST	/words/notional/action/delete-value		words.NotionalWordAPI.deleteValue
+POST	/words/notional/action/update-meanings	words.NotionalWordAPI.updateMeanings
 
 GET		/test									Test.test

@@ -30,14 +30,14 @@
 										<span>${index}</span>
 									#{/list}
 								</td>
-								<td><button class="btn btn-danger btn-sm btn-delete-value" data-id="${value.id}">删除</button></td>
+								<td><button class="btn btn-danger btn-sm btn-delete-value" data-id="${value.id}" #{if !value.canDelete}disabled#{/if}>删除</button></td>
 							</tr>
 						#{/list}
 							<tr>	
-								<td><input type="text" class="form-control"/></td>
+								<td><input type="text" class="form-control" id="input-value"/></td>
 								<td></td>
 								<td></td>
-								<td><button class="btn btn-default btn-sm">添加</button></td>
+								<td><button class="btn btn-default btn-sm" id="btn-add-value">添加</button></td>
 							</tr>
 						</table>
 					</td>

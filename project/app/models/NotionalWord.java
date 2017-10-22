@@ -61,7 +61,7 @@ public class NotionalWord extends ModelBase implements INotionalWord{
 
 	@Override
 	public Iterable<NotionalWordValue> getValues() {
-		return NotionalWordValue.find("refId=?1", id).fetch();
+		return NotionalWordValue.find("refId=?1 order by value", id).fetch();
 	}
 	
 }

@@ -27,8 +27,20 @@ public final class NotionalWordAPI extends AjaxControllerBase{
 		jsonResult.put("href", Route.get(NotionalWordEdit.class, "index", new RouteArgs().put("id", word.getId())));
 	}
 	
+	public static void delete(@Id long id) {
+		NotionalWordsUpdateLogic.delete(id);
+	}
+	
+	public static void addValue(@Id long id, @Required @StringValue(minLength=1) String value) {
+		NotionalWordsUpdateLogic.addValue(id, value);
+	}
+	
 	public static void deleteValue(@Id long id) {
 		NotionalWordsUpdateLogic.deleteValue(id);
+	}
+
+	public static void updateMeanings(@Id long id, @Array @StringValue(minLength=1) String[] meanings) {
+		NotionalWordsUpdateLogic.updateMeanings(id, Arrays.asList(meanings));
 	}
 	
 }

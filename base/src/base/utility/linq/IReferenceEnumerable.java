@@ -2,11 +2,12 @@ package base.utility.linq;
 
 import java.lang.reflect.Array;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
-import base.utility.collection.DefaultValueHashMap;
+import base.utility.collection.map.DefaultValueHashMap;
 import base.utility.comparator.Comparators;
 import base.utility.function.IAction;
 import base.utility.function.IForeachAction;
@@ -82,7 +83,7 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 		}
 	}
 	
-	public default T find(IReferencePredicate<? super T> predicate) {
+	public default T findFirst(IReferencePredicate<? super T> predicate) {
 		IEnumerator<T> enumerator = iterator();
 		while(enumerator.hasNext()) {
 			T obj = enumerator.next();
@@ -93,7 +94,7 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 		return null;
 	}
 
-	public default int findIndex(T value) {
+	public default int findFirstIndex(T value) {
 		int index = 0;
 		IEnumerator<T> enumerator = iterator();
 		while(enumerator.hasNext()) {
@@ -106,7 +107,7 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 		return -1;
 	}
 	
-	public default int findIndex(IReferencePredicate<? super T> predicate) {
+	public default int findFirstIndex(IReferencePredicate<? super T> predicate) {
 		int index = 0;
 		IEnumerator<T> enumerator = iterator();
 		while(enumerator.hasNext()) {
@@ -117,6 +118,18 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 			index++;
 		}
 		return -1;
+	}
+
+	public default T findFirstDuplicate() {
+		HashSet<T> set = new HashSet<>();
+		IEnumerator<T> enumerator = iterator();
+		while(enumerator.hasNext()) {
+			T obj = enumerator.next();
+			if(set.add(obj) == false) {
+				return obj;
+			}
+		}
+		return null;
 	}
 
 	public default int count(IReferencePredicate<T> predicate) {

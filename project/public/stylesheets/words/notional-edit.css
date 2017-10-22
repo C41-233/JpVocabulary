@@ -13,10 +13,12 @@
 #table-values td:nth-child(2){
 	padding-left:	10px;
 	text-align:		center;
+	min-width:		120px;
 }
 
 #table-values td:nth-child(3){
 	padding-left:	20px;
+	min-width:		120px;
 }
 
 #table-values td:nth-child(4){
