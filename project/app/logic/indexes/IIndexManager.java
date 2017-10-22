@@ -6,4 +6,6 @@ public interface IIndexManager {
 
 	public Iterable<IIndexGroup> getGroups();
 
+	public String getFirst();
+
 }

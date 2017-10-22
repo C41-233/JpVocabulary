@@ -7,6 +7,7 @@ import java.util.HashSet;
 
 import base.io.LineReader;
 import base.io.RuntimeIOException;
+import base.utility.linq.Linq;
 
 class IndexManagerImplement implements IIndexManager{
 
@@ -34,6 +35,12 @@ class IndexManagerImplement implements IIndexManager{
 	public boolean isValidIndex(String index) {
 		tryLoad();
 		return indexSet.contains(index);
+	}
+
+	@Override
+	public String getFirst() {
+		tryLoad();
+		return Linq.from(cache).selectMany(group->group.getItems()).first();
 	}
 	
 	private void tryLoad(){
@@ -63,5 +70,5 @@ class IndexManagerImplement implements IIndexManager{
 			}
 		}
 	}
-	
+
 }

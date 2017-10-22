@@ -17,7 +17,7 @@ import po.ICharacterSyllable;
 public final class CharacterIndex extends HtmlControllerBase{
 
 	public static void index(){
-		page("ai");
+		page(IndexManager.Character.getFirst());
 	}
 	
 	public static void page(

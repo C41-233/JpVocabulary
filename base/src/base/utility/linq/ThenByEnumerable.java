@@ -2,7 +2,6 @@ package base.utility.linq;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.PriorityQueue;
 
 class ThenByEnumerable<T> implements IReferenceSortedEnumerable<T>{
 

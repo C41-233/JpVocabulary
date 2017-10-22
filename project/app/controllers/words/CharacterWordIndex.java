@@ -17,7 +17,7 @@ import po.INotionalWordValue;
 public class CharacterWordIndex extends HtmlControllerBase{
 
 	public static void index() {
-		page("ai");
+		page(IndexManager.Character.getFirst());
 	}
 	
 	public static void page(@Required String index) {
