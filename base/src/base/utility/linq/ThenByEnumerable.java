@@ -1,5 +1,6 @@
 package base.utility.linq;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
@@ -20,36 +21,51 @@ class ThenByEnumerable<T> implements IReferenceSortedEnumerable<T>{
 	
 	private class Enumerator implements ISortedEnumerator<T>{
 
-		private final PriorityQueue<T> list = new PriorityQueue<>(comparator);
-		
+		private final ArrayList<T> list = new ArrayList<>();
 		private ISortedEnumerator<T> enumerator = enumerable.iterator();
-		
-		private T current;
+		private int index = -1;
 
-		@Override
-		public boolean hasNext() {
-			return list.isEmpty() == false || enumerator.hasNext();
-		}
-
-		@Override
-		public void moveNext() {
-			if(list.isEmpty()) {
+		public Enumerator() {
+			if(enumerator.hasNext()) {
 				list.add(enumerator.next());
 				while(enumerator.hasNextEquals()) {
 					list.add(enumerator.next());
 				}
+				list.sort(comparator);
 			}
-			this.current = list.poll();
+		}
+		
+		@Override
+		public boolean hasNext() {
+			return index+1 < list.size() || enumerator.hasNext();
+		}
+
+		@Override
+		public void moveNext() {
+			if(index >= 0) {
+				list.set(index, null); //gc
+			}
+			index++;
+			
+			if(index >= list.size()) {
+				list.clear();
+				list.add(enumerator.next());
+				while(enumerator.hasNextEquals()) {
+					list.add(enumerator.next());
+				}
+				list.sort(comparator);
+				index = 0;
+			}
 		}
 
 		@Override
 		public T current() {
-			return current;
+			return list.get(index);
 		}
 
 		@Override
 		public boolean hasNextEquals() {
-			return list.isEmpty() == false && comparator.compare(current, list.peek()) == 0;
+			return index >=0 && index+1 < list.size() && comparator.compare(current(), list.get(index+1)) == 0;
 		}
 		
 	}
