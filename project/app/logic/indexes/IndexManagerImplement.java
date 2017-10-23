@@ -23,7 +23,7 @@ class IndexManagerImplement implements IIndexManager{
 	private final ArrayList<IIndexGroup> cache = new ArrayList<>();
 	private final HashSet<String> indexSet = new HashSet<>();
 	
-	private static long lastTime = 0;
+	private long lastTime = 0;
 	
 	@Override
 	public Iterable<IIndexGroup> getGroups(){

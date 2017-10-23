@@ -88,17 +88,6 @@ $(function(){
 	})
 })
 
-$(function(){
-	//左侧列表
-	$("#left-list").accordion({
-		header: ".left-list-header",
-		heightStyle: "content",
-		event: "hoverintent",
-		collapsible: false,
-		active: $("#left-list .left-list-header-active").data("seq"),
-	}).show()
-})
-	
 //添加汉字
 $(function(){
 	function actionCreateCharacter(){

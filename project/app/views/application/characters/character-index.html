@@ -8,21 +8,12 @@
 	<div class="row">
 		<div class="col-lg-2 col-sm-3 col-xs-6">
 			<h3>汉字</h3>
-			<div id="left-list" class="pre-hide">
-				#{list items:indexes, as:'index'}
-					<a class="left-list-header #{if arg.group==index.name}left-list-header-active#{/if}" data-seq="${index.seq}">${index.name}</a>
-					<ul class="left-list-content">
-						#{list items:index.items, as:'item'}
-							<li class="#{if arg.index==item}active#{/if}"><a href="@{characters.CharacterIndex.page(item)}">${item}</a></li>
-						#{/list}
-					</ul>
-				#{/list}
-			</div>
+			#{component.left-side-index indexes/}
 		</div>
 		<div class="col-lg-10 col-sm-9 col-xs-6">
 			<div class="row">
 				<div class="col-lg-12">
-					<h3>${arg.index}</h3>
+					<h3>${index}</h3>
 				</div>
 			</div>
 			<hr/>

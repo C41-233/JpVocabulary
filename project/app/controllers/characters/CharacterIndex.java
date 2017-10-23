@@ -3,9 +3,9 @@ package controllers.characters;
 import java.util.ArrayList;
 import java.util.List;
 
-import base.utility.Strings;
-import base.utility.linq.Linq;
-import core.controller.HtmlControllerBase;
+import controllers.components.HTMLComponentsControllerBase;
+import core.controller.Route;
+import core.controller.RouteArgs;
 import core.controller.validation.annotation.Required;
 import logic.characters.CharactersLogic;
 import logic.indexes.IndexManager;
@@ -14,7 +14,7 @@ import po.CharacterWord;
 import po.ICharacter;
 import po.ICharacterSyllable;
 
-public final class CharacterIndex extends HtmlControllerBase{
+public final class CharacterIndex extends HTMLComponentsControllerBase{
 
 	public static void index(){
 		page(IndexManager.Character.getFirst());
@@ -23,28 +23,10 @@ public final class CharacterIndex extends HtmlControllerBase{
 	public static void page(
 		@Required String index
 	){
-		if(IndexManager.Character.isValidIndex(index) == false) {
-			notFound(Strings.format("%s not found.", index));
-		}
-		
-		ArgVO arg = new ArgVO();
-		arg.index = index;
-		renderArgs.put("arg", arg);
-			
-		List<CharacterIndexVO> indexesVO = Linq.from(IndexManager.Character.getGroups()).select((group, i)->{
-			CharacterIndexVO vo = new CharacterIndexVO();
-			vo.name = group.getName();
-			vo.seq = i;
-			for(String item : group.getItems()) {
-				vo.items.add(item);
-				if(item.equals(index)) {
-					arg.group = vo.name;
-				}
-			}
-			return vo;
-		}).toList();
-		
-		renderArgs.put("indexes", indexesVO);
+		LeftIndexGroup indexes = LeftIndexGroup.compile(index, IndexManager.Character);
+		indexes.url(s->Route.get(CharacterIndex.class, "page", new RouteArgs().put("index", s)));
+		renderArgs.put("indexes", indexes);
+		renderArgs.put("index", index);
 		
 		//汉字组
 		List<CharacterGroupVO> characterGroupsVO = new ArrayList<>();
