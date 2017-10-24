@@ -14,6 +14,10 @@ public class And implements IQueryCondition{
 		return this;
 	}
 	
+	public And and(String sql, Object...args) {
+		return and(new Condition(sql, args));
+	}
+	
 	@Override
 	public void appendSQL(StringBuilder sb) {
 		if(conditions.size() == 0) {

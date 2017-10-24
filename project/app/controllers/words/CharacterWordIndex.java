@@ -38,7 +38,9 @@ public class CharacterWordIndex extends HTMLComponentsControllerBase{
 			syllableGroupVO.name = Pinyins.toPinyin(pinyinGroupName);
 			
 			for(IReferenceGroup<String, INotionalWordValue> characterGroup : Linq.from(notionalWordValues)
-					.groupBy(word->word.getValue().substring(0, 1))) {
+					.groupBy(word->word.getValue().substring(0, 1))
+					.orderBy(group->group.getKey())
+			) {
 				{
 					CharacterWordGroupVO groupVO = new CharacterWordGroupVO();
 					groupVO.name = characterGroup.getKey();

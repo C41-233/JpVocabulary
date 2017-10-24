@@ -3,6 +3,7 @@ package logic.characters;
 import java.util.List;
 
 import base.utility.linq.Linq;
+import core.model.ConcatSplit;
 import core.model.hql.HQL;
 import core.model.hql.HQLResult;
 import core.model.hql.Like;
@@ -19,7 +20,7 @@ public final class CharactersLogic extends LogicBase{
 	
 	public static List<ICharacter> findCharactersByPinyin(String pinyin){
 		HQL hql = HQL.begin();
-		hql.where(Like.contains("pinyins", "|"+pinyin+"|"));
+		hql.where(Like.contains("pinyins", ConcatSplit.getToken(pinyin)));
 		HQLResult result = hql.end();
 		return Character.find(result.select, result.params).fetch();
 	}

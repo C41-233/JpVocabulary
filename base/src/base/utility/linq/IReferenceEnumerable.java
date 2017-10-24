@@ -1,10 +1,13 @@
 package base.utility.linq;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import base.utility.collection.map.DefaultValueHashMap;
@@ -165,6 +168,23 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 	public default T[] toArray(T[] array) {
 		return toList().toArray(array);
 	}
+
+	public default <K> Map<K, IReferenceEnumerable<T>> toMap(ISelector<T, K> selector){
+		Map<K, ArrayListEnumerable<T>> map = new HashMap<>();
+		IEnumerator<T> enumerator = iterator();
+		while(enumerator.hasNext()) {
+			T obj = enumerator.next();
+			K key = selector.select(obj);
+			ArrayListEnumerable<T> list = map.get(key);
+			if(list == null) {
+				list = new ArrayListEnumerable<>();
+				map.put(key, list);
+			}
+			list.add(obj);
+		}
+		
+		return base.core.Objects.cast(map);
+	}
 	
 	public default void foreach(IAction<? super T> action) {
 		IEnumerator<T> enumerator = iterator();
@@ -201,6 +221,10 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 	
 	public default IReferenceSortedEnumerable<T> orderBy(Comparator<? super T> comparator){
 		return new OrderByEnumerable<T>(this, comparator);
+	}
+	
+	public default <V extends Comparable<? super V>> IReferenceSortedEnumerable<T> orderBy(ISelector<? super T, V> selector){
+		return new OrderByEnumerable<T>(this, (t1, t2)->Comparators.compare(selector.select(t1), selector.select(t2)));
 	}
 
 	@SuppressWarnings("unchecked")
@@ -297,6 +321,44 @@ class ArrayEnumerable<T> implements IReferenceEnumerable<T>{
 		@Override
 		public T current() {
 			return array[index];
+		}
+		
+	}
+	
+}
+
+class ArrayListEnumerable<T> implements IReferenceEnumerable<T>{
+	
+	private final ArrayList<T> list = new ArrayList<>(); 
+	
+	@Override
+	public IEnumerator<T> iterator() {
+		return new Enumerator();
+	}
+
+	public void add(T obj) {
+		list.add(obj);
+	}
+	
+	private class Enumerator implements IEnumerator<T>{
+
+		private final Iterator<T> iterator = list.iterator();
+		
+		private T current;
+		
+		@Override
+		public boolean hasNext() {
+			return iterator.hasNext();
+		}
+
+		@Override
+		public void moveNext() {
+			current = iterator.next();
+		}
+
+		@Override
+		public T current() {
+			return current;
 		}
 		
 	}

@@ -6,10 +6,12 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 
 import base.utility.comparator.Comparators;
+import base.utility.linq.IReferenceEnumerable;
 import base.utility.linq.Linq;
 
 public class Test1 {
@@ -70,6 +72,28 @@ public class Test1 {
 		List<Integer> out = Linq.from(list).sort().toList();
 		for(int i=0; i<=10000; i++) {
 			assertEquals((Integer)i, out.get(i));
+		}
+	}
+
+	@Test
+	public void toMap() {
+		List<Integer> list = new ArrayList<>();
+		for(int i=0; i<10000; i++) {
+			list.add(i);
+		}
+		
+		Map<Boolean, IReferenceEnumerable<Integer>> map = Linq.from(list).toMap(v->v%2==0);
+		assertEquals(2, map.size());
+		
+		List<Integer> even = map.get(true).toList();
+		assertEquals(5000, even.size());
+		for(int i=0, j=0; i<10000; i+=2, j++) {
+			assertEquals((Integer)i, even.get(j));
+		}
+		List<Integer> odd = map.get(false).toList();
+		assertEquals(5000, odd.size());
+		for(int i=1, j=0; i<10000; i+=2, j++) {
+			assertEquals((Integer)i, odd.get(j));
 		}
 	}
 

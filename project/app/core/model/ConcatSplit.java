@@ -31,4 +31,8 @@ public final class ConcatSplit{
 		return sb.toString();
 	}
 
+	public static String getToken(String value) {
+		return "|"+value+"|";
+	}
+	
 }

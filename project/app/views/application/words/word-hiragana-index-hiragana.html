@@ -1,0 +1,20 @@
+<div>
+	<table class="table table-bordered table-words">
+		#{list items:words, as:'word'}
+			<tr>
+				<th>${word.value}</th>
+				<td>
+					#{list items:word.alias, as:'alias'}
+						<div>${alias}</div>
+					#{/list}
+				</td>
+				<td>
+					#{list items:word.meanings, as:'meaning'}
+						<div>${meaning}</div>
+					#{/list}
+				</td>
+				<td></td>
+			</tr>
+		#{/list}
+	</table>
+</div>

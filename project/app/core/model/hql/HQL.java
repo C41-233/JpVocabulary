@@ -47,7 +47,7 @@ public class HQL {
 		String rawSql = to.toString();
 		
 		if(orderBy != null) {
-			to.append(" order by").append(orderBy);
+			to.append(" order by ").append(orderBy);
 		}
 		
 		String orderSql = to.toString();

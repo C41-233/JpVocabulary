@@ -3,6 +3,8 @@ package logic.words;
 import java.util.List;
 
 import base.utility.collection.Iterables;
+import core.model.ConcatSplit;
+import core.model.hql.And;
 import core.model.hql.HQL;
 import core.model.hql.HQLResult;
 import core.model.hql.Like;
@@ -11,12 +13,14 @@ import models.NotionalWord;
 import models.NotionalWordValue;
 import po.INotionalWord;
 import po.INotionalWordValue;
+import po.NotionalWordValueType;
 
 public final class NotionalWordsQueryLogic {
 
 	public static List<INotionalWordValue> findCharacterWordValuesByPinyin(String pinyin){
 		HQL hql = HQL.begin();
-		hql.where(Like.contains("index", "|"+pinyin+"|"));
+		hql.where(Like.contains("index", ConcatSplit.getToken(pinyin)));
+		hql.orderBy("value");
 		HQLResult result = hql.end();
 		
 		return NotionalWordValue.find(result.select, result.params).fetch();
@@ -46,6 +50,18 @@ public final class NotionalWordsQueryLogic {
 		}
 		
 		return word;
+	}
+
+	public static List<INotionalWordValue> findHiraganaWordValuesByIndex(String index) {
+		HQL hql = HQL.begin();
+		And and = new And();
+		and.and("type=? or type=?", NotionalWordValueType.Mixed.value(), NotionalWordValueType.Syllable.value());
+		and.and(Like.contains("index", ConcatSplit.getToken(index)));
+		hql.where(and);
+		hql.orderBy("value");
+		
+		HQLResult rst = hql.end();
+		return NotionalWordValue.find(rst.select, rst.params).fetch();
 	}
 	
 }

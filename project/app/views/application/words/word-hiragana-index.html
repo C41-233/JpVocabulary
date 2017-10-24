@@ -17,39 +17,12 @@
 				</div>
 			</div>
 			<hr/>
-			#{list items:pinyins, as:'pinyin'}
-			<div class="div-pinyin-groups">
-				<div class="pinyin-value">${pinyin.name}</div>
-				
-				#{list items:pinyin.characters, as:'character'}
-				<div class="div-character-groups">
-					<div class="character-value font-jp">${character.name}</div>
-					<table class="table table-bordered table-words">
-						#{list items:character.words, as:'word'}
-							<tr>
-								<th class="word-value font-jp"><a href="@{words.NotionalWordEdit.index(word.id, request.url)}">${word.value}</a></th>
-								<td>
-									#{list items:word.syllables, as:'syllable'}
-										<div>${syllable}</div>
-									#{/list}
-								</td>
-								<td>
-									#{list items:word.meanings, as:'meaning'}
-										<div>${meaning}</div>
-									#{/list}
-								</td>
-								<td>
-									#{list items:word.types, as:'type'}
-										<span>${type}</span>
-									#{/list}
-								</td>
-							</tr>
-						#{/list}
-					</table>
-				</div>
-				#{/list}
-			</div>
-			#{/list}
+			#{if model=="pinyin"}
+				#{include "application/words/word-hiragana-index-pinyin.html"/}
+			#{/if}
+			#{if model=="hiragana"}
+				#{include "application/words/word-hiragana-index-hiragana.html"/}
+			#{/if}
 		</div>
 	</div>
 </div>

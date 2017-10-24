@@ -1,0 +1,26 @@
+#{list items:pinyins, as:'pinyin'}
+
+<div>
+	<div>${pinyin.value}</div>
+	<div>
+		#{list items:pinyin.characters, as:'character'}
+			<div>${character.name}</div>
+			<table class="table table-bordered table-words">
+				#{list items:character.words, as:'word'}
+					<tr>
+						<th>${word.value}</th>
+						<td>${word.alias}</td>
+						<td>
+							#{list items:word.meanings, as:'meaning'}
+								<div>${meaning}</div>
+							#{/list}
+						</td>
+						<td></td>
+					</tr>
+				#{/list}
+			</table>
+		#{/list}
+	</div>
+</div>
+
+#{/list}
