@@ -7,6 +7,7 @@ import core.model.ConcatSplit;
 import core.model.hql.And;
 import core.model.hql.HQL;
 import core.model.hql.HQLResult;
+import core.model.hql.In;
 import core.model.hql.Like;
 import logic.pinyins.WordQueryIndex;
 import models.NotionalWord;
@@ -57,6 +58,7 @@ public final class NotionalWordsQueryLogic {
 		And and = new And();
 		and.and("type=? or type=?", NotionalWordValueType.Mixed.value(), NotionalWordValueType.Syllable.value());
 		and.and(Like.contains("index", ConcatSplit.getToken(index)));
+		and.and(new In("refId", "select id from NotionalWord where types like '%"+ConcatSplit.getToken("名词")+"%')"));
 		hql.where(and);
 		hql.orderBy("value");
 		

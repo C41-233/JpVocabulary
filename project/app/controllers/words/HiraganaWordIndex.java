@@ -79,6 +79,16 @@ public final class HiraganaWordIndex extends HTMLComponentsControllerBase{
 				break;
 			}
 			
+			for(String meaning : word.getMeanings()) {
+				wordVO.meanings.add(meaning);
+			}
+			
+			for(String type : word.getTypes()) {
+				wordVO.types.add(type);
+			}
+			
+			wordVO.href = Route.get(NotionalWordEdit.class, "index", new RouteArgs().put("id", word.getId()).put("refer", request.url));
+			
 			wordsVO.add(wordVO);
 		}
 		
@@ -106,8 +116,22 @@ public final class HiraganaWordIndex extends HTMLComponentsControllerBase{
 					groupVO.characters.add(characterGroupVO);
 					
 					for(INotionalWordValue value : group) {
+						INotionalWord word = value.getWord();
+						
 						WordVO wordVO = new WordVO();
 						wordVO.value = value.getValue();
+						for(String syllable : word.getSyllables()) {
+							wordVO.alias.add(syllable);
+						}
+						
+						for(String meaning : word.getMeanings()) {
+							wordVO.meanings.add(meaning);
+						}
+						
+						for(String type : word.getTypes()) {
+							wordVO.types.add(type);
+						}
+						
 						characterGroupVO.words.add(wordVO);
 					}
 				});
@@ -137,6 +161,9 @@ public final class HiraganaWordIndex extends HTMLComponentsControllerBase{
 		public String value;
 		public List<String> alias = new ArrayList<>();
 		public List<String> meanings = new ArrayList<>();
+		public List<String> types = new ArrayList<>();
+		public String href;
+		
 	}
 	
 }

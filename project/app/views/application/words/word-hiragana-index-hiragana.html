@@ -2,7 +2,7 @@
 	<table class="table table-bordered table-words">
 		#{list items:words, as:'word'}
 			<tr>
-				<th>${word.value}</th>
+				<th><a href="${word.href}">${word.value}</a></th>
 				<td>
 					#{list items:word.alias, as:'alias'}
 						<div>${alias}</div>
@@ -13,7 +13,11 @@
 						<div>${meaning}</div>
 					#{/list}
 				</td>
-				<td></td>
+				<td>
+					#{list items:word.types, as:'type'}
+						<span>${type}</span>
+					#{/list}
+				</td>
 			</tr>
 		#{/list}
 	</table>
