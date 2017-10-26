@@ -21,7 +21,7 @@ import po.NotionalWordValueType;
 @Table(name="notionals")
 public class NotionalWord extends ModelBase implements INotionalWord{
 
-	@Column(name="meaning")
+	@Column(name="meaning", columnDefinition="TEXT")
 	private String meaning;
 	@Override
 	public Iterable<String> getMeanings(){
