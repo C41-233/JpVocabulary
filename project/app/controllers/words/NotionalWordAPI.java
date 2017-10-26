@@ -18,7 +18,7 @@ public final class NotionalWordAPI extends AjaxControllerBase{
 	public static void create(
 		@Required @Array(duplicate=false) @StringValue(minLength=1) String[] values,
 		@Array @StringValue(minLength=1) String[] meanings,
-		@Array(duplicate=false) String[] types
+		@Array(duplicate=false, minLength=1) String[] types
 	) {
 		List<String> valuesList = Arrays.asList(values);
 		List<String> meaingsList = Arrays.asList(meanings);

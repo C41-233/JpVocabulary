@@ -7,18 +7,18 @@ import core.controller.validation.annotation.Required;
 import logic.indexes.IndexManager;
 import logic.words.NotionalWordsQueryLogic;
 
-public final class HiraganaWordIndex extends NotionalWordIndex{
+public final class FunctionWordIndex extends NotionalWordIndex{
 
 	public static void index() {
 		page(IndexManager.Hiragana.getFirst());
 	}
-
+	
 	public static void page(@Required String index) {
 		process(
 			index, 
-			s -> NotionalWordsQueryLogic.findHiraganaWordValuesByIndex(s),
+			s -> NotionalWordsQueryLogic.findFunctionWordValuesByIndex(s),
 			s -> Route.get(Objects.cast(request.controllerClass), "page", new RouteArgs().put("index", s))
 		);
 	}
-
+	
 }

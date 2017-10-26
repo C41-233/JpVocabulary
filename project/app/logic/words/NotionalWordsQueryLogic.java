@@ -5,10 +5,12 @@ import java.util.List;
 import base.utility.collection.Iterables;
 import core.model.ConcatSplit;
 import core.model.hql.And;
+import core.model.hql.Clause;
 import core.model.hql.HQL;
 import core.model.hql.HQLResult;
 import core.model.hql.In;
 import core.model.hql.Like;
+import core.model.hql.Or;
 import logic.pinyins.WordQueryIndex;
 import models.NotionalWord;
 import models.NotionalWordValue;
@@ -58,9 +60,36 @@ public final class NotionalWordsQueryLogic {
 		And and = new And();
 		and.and("type=? or type=?", NotionalWordValueType.Mixed.value(), NotionalWordValueType.Syllable.value());
 		and.and(Like.contains("index", ConcatSplit.getToken(index)));
-		and.and(new In("refId", "select id from NotionalWord where types like '%"+ConcatSplit.getToken("名词")+"%')"));
+		
+		Clause clause = new Clause("id", "NotionalWord", Like.contains("types", ConcatSplit.getToken("名词")));
+		and.and(new In("refId", clause));
+		
 		hql.where(and);
 		hql.orderBy("value");
+		
+		HQLResult rst = hql.end();
+		return NotionalWordValue.find(rst.select, rst.params).fetch();
+	}
+	
+	public static List<INotionalWordValue> findFunctionWordValuesByIndex(String index){
+		HQL hql = HQL.begin();
+		
+		And and = new And();
+		and.and(Like.contains("index", ConcatSplit.getToken(index)));
+		
+		Or orTypes = new Or();
+		orTypes.or(Like.contains("types", "副词"));
+		orTypes.or(Like.contains("types", "代词"));
+		orTypes.or(Like.contains("types", "连体词"));
+		orTypes.or(Like.contains("types", "接续词"));
+		orTypes.or(Like.contains("types", "疑问词"));
+		orTypes.or(Like.contains("types", "接头词"));
+		orTypes.or(Like.contains("types", "数量词"));
+		
+		Clause clause = new Clause("id", "NotionalWord", orTypes);
+		and.and(new In("refId", clause));
+		
+		hql.where(and);
 		
 		HQLResult rst = hql.end();
 		return NotionalWordValue.find(rst.select, rst.params).fetch();

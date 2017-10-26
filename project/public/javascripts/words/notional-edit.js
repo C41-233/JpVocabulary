@@ -59,8 +59,10 @@ $(function(){
 	$("#div-word-types input[type='checkbox']").change(function(){
 		var value = $(this).is(":checked")
 		var type = $(this).parent().text().trim()
-		Action.post("/words/notional/action/update-type", {id: DataMgr.id, type: type, value: value}, function(){
-			location.reload()
+		Action.post("/words/notional/action/update-type", {id: DataMgr.id, type: type, value: value}, {
+			complete: function(){
+				location.reload()
+			}
 		})
 	})
 	

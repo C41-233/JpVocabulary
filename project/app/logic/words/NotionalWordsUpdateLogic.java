@@ -42,6 +42,10 @@ public final class NotionalWordsUpdateLogic extends LogicBase{
 			}
 		}
 		
+		if(types.size() == 0) {
+			raise("至少包含一个词性", types);
+		}
+		
 		NotionalWord word = new NotionalWord();
 		word.setMeanings(meanings);
 		word.setTypes(types);
@@ -118,6 +122,11 @@ public final class NotionalWordsUpdateLogic extends LogicBase{
 		else {
 			types.remove(type);
 		}
+		
+		if(types.size() == 0) {
+			raise("至少包含一个词性");
+		}
+		
 		word.setTypes(types);
 		word.save();
 	}

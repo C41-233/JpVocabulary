@@ -13,7 +13,7 @@
 			<table class="table table-bordered table-words">
 				#{list items:character.words, as:'word'}
 					<tr>
-						<th>${word.value}</th>
+						<th><a href="${word.href}">${word.value}</a></th>
 						<td>
 							#{list items:word.alias, as:'alias'}
 								<div>${alias}</div>

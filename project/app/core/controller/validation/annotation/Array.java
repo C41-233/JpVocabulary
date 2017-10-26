@@ -10,5 +10,7 @@ import java.lang.annotation.Target;
 public @interface Array {
 
 	boolean duplicate() default true;
+
+	int minLength() default 0;
 	
 }

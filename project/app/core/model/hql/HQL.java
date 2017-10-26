@@ -53,7 +53,9 @@ public class HQL {
 		String orderSql = to.toString();
 		
 		ArrayList<Object> params = new ArrayList<>();
-		where.appendParams(params);
+		if(where != null) {
+			where.appendParams(params);
+		}
 		
 		return new HQLResult(orderSql, rawSql, params.toArray(new Object[params.size()]));
 	}
