@@ -84,9 +84,9 @@ public abstract class AjaxControllerBase extends ControllerBase{
 		badRequest("Bad Request");
 	}
 	
-	protected static void badRequest(String msg) {
+	protected static void badRequest(String format, Object...args) {
 		response.status = Http.StatusCode.BAD_REQUEST;
-		renderText(msg);
+		renderText(Strings.format(format, args));
 	}
 
 	protected static void renderJsonError(String format, Object...args) {

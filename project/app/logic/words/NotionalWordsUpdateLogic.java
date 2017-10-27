@@ -3,7 +3,6 @@ package logic.words;
 import java.util.List;
 import java.util.Set;
 
-import base.utility.function.Predicates;
 import base.utility.linq.Linq;
 import logic.LogicBase;
 import logic.LogicValidate;
@@ -16,15 +15,10 @@ import po.NotionalWordValueType;
 
 public final class NotionalWordsUpdateLogic extends LogicBase{
 
-	public static INotionalWord create(List<String> values, List<String> meanings, List<String> types) {
+	public static INotionalWord create(List<String> values, List<String> meanings, List<NotionalWordType> types) {
 		//必须至少有一个注音
 		if(Linq.from(values).notExist(LogicValidate::isValidSyllable)) {
 			raise("基本词必须至少有一个读音");
-		}
-		
-		//词性必须全部合法
-		if(Linq.from(types).notAll(NotionalWordType::isValidType)) {
-			raise("不合法的词性：%s", Linq.from(types).findFirst(Predicates.not(NotionalWordType::isValidType)));
 		}
 		
 		for(String value : values) {
@@ -110,12 +104,9 @@ public final class NotionalWordsUpdateLogic extends LogicBase{
 		word.save();
 	}
 
-	public static void updateType(long id, String type, boolean value) {
+	public static void updateType(long id, NotionalWordType type, boolean value) {
 		NotionalWord word = getNotionalWordOrRaiseIfNotFound(id);
-		if(NotionalWordType.isValidType(type) == false) {
-			raise("不合法的词性：%s", type);
-		}
-		Set<String> types = Linq.from(word.getTypes()).toSet();
+		Set<NotionalWordType> types = Linq.from(word.getTypes()).toSet();
 		if(value) {
 			types.add(type);
 		}

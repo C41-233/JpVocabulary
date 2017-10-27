@@ -22,12 +22,7 @@ public enum NotionalWordValueType {
 	}
 	
 	public static NotionalWordValueType valueOf(int value) {
-		for(NotionalWordValueType e : NotionalWordValueType.values()) {
-			if(e.value == value) {
-				return e;
-			}
-		}
-		return null;
+		return Linq.from(NotionalWordValueType.values()).findFirst(e->e.value == value);
 	}
 	
 	public static NotionalWordValueType getWordValueType(String value) {

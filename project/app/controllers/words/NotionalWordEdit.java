@@ -59,11 +59,11 @@ public final class NotionalWordEdit extends HtmlControllerBase{
 		
 		List<TypeVO> typesVO = new ArrayList<>();
 		
-		Set<String> types = Linq.from(word.getTypes()).toSet();
+		Set<NotionalWordType> types = Linq.from(word.getTypes()).toSet();
 		
-		for(String type : NotionalWordType.all()) {
+		for(NotionalWordType type : NotionalWordType.values()) {
 			TypeVO typeVO = new TypeVO();
-			typeVO.name = type;
+			typeVO.name = type.toString();
 			if(types.contains(type)) {
 				typeVO.has = true;
 			}

@@ -53,7 +53,7 @@ public class CharacterWordIndex extends HTMLComponentsControllerBase{
 						wordVO.value = wordValue.getValue();
 						wordVO.syllables = Linq.from(word.getSyllables()).toList();
 						wordVO.meanings = Linq.from(word.getMeanings()).toList();
-						wordVO.types = Linq.from(word.getTypes()).toList();
+						wordVO.types = Linq.from(word.getTypes()).select(t->t.toString()).toList();
 						groupVO.words.add(wordVO);
 					}
 					

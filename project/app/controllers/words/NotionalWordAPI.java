@@ -3,6 +3,8 @@ package controllers.words;
 import java.util.Arrays;
 import java.util.List;
 
+import base.utility.function.Predicates;
+import base.utility.linq.Linq;
 import core.controller.AjaxControllerBase;
 import core.controller.Route;
 import core.controller.RouteArgs;
@@ -12,6 +14,7 @@ import core.controller.validation.annotation.Required;
 import core.controller.validation.annotation.StringValue;
 import logic.words.NotionalWordsUpdateLogic;
 import po.INotionalWord;
+import po.NotionalWordType;
 
 public final class NotionalWordAPI extends AjaxControllerBase{
 
@@ -20,9 +23,15 @@ public final class NotionalWordAPI extends AjaxControllerBase{
 		@Array @StringValue(minLength=1) String[] meanings,
 		@Array(duplicate=false, minLength=1) String[] types
 	) {
+		
+		//词性必须全部合法
+		if(Linq.from(types).notAll(NotionalWordType::isValidType)) {
+			badRequest("不合法的词性：%s", Linq.from(types).findFirst(Predicates.not(NotionalWordType::isValidType)));
+		}
 		List<String> valuesList = Arrays.asList(values);
 		List<String> meaingsList = Arrays.asList(meanings);
-		List<String> typesList = Arrays.asList(types);
+		List<NotionalWordType> typesList = Linq.from(types).select(t->NotionalWordType.valueOf(t)).toList();
+		
 		INotionalWord word = NotionalWordsUpdateLogic.create(valuesList, meaingsList, typesList);
 		jsonResult.put("href", Route.get(NotionalWordEdit.class, "index", new RouteArgs().put("id", word.getId())));
 	}
@@ -44,7 +53,10 @@ public final class NotionalWordAPI extends AjaxControllerBase{
 	}
 	
 	public static void updateType(@Id long id, @Required String type, @Required boolean value) {
-		NotionalWordsUpdateLogic.updateType(id, type, value);
+		if(NotionalWordType.isValidType(type) == false) {
+			badRequest("不合法的词性：%s", type);
+		}
+		NotionalWordsUpdateLogic.updateType(id, NotionalWordType.valueOf(type), value);
 	}
 	
 }

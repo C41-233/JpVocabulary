@@ -13,6 +13,7 @@ import logic.indexes.IndexManager;
 import logic.pinyins.Pinyins;
 import po.INotionalWord;
 import po.INotionalWordValue;
+import po.NotionalWordType;
 import po.NotionalWordValueType;
 
 public abstract class NotionalWordIndex extends HTMLComponentsControllerBase{
@@ -87,8 +88,8 @@ public abstract class NotionalWordIndex extends HTMLComponentsControllerBase{
 				wordVO.meanings.add(meaning);
 			}
 			
-			for(String type : word.getTypes()) {
-				wordVO.types.add(type);
+			for(NotionalWordType type : word.getTypes()) {
+				wordVO.types.add(type.toString());
 			}
 			
 			wordVO.href = Route.get(NotionalWordEdit.class, "index", new RouteArgs().put("id", word.getId()).put("refer", request.url));
@@ -132,8 +133,8 @@ public abstract class NotionalWordIndex extends HTMLComponentsControllerBase{
 							wordVO.meanings.add(meaning);
 						}
 						
-						for(String type : word.getTypes()) {
-							wordVO.types.add(type);
+						for(NotionalWordType type : word.getTypes()) {
+							wordVO.types.add(type.toString());
 						}
 						
 						wordVO.href = Route.get(NotionalWordEdit.class, "index", new RouteArgs().put("id", word.getId()).put("refer", request.url));

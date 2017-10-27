@@ -6,7 +6,7 @@ public interface INotionalWord extends IModel{
 
 	public Iterable<String> getMeanings();
 	
-	public Iterable<String> getTypes();
+	public Iterable<NotionalWordType> getTypes();
 	
 	public Iterable<String> getSyllables();
 

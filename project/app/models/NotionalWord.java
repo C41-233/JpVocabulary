@@ -39,17 +39,19 @@ public class NotionalWord extends ModelBase implements INotionalWord{
 	@Column(name="types")
 	private String types = ModelConstant.EmptyToken;
 	@Override
-	public Iterable<String> getTypes(){
-		return ConcatSplit.split(types);
+	public Iterable<NotionalWordType> getTypes(){
+		return Linq.from(ConcatSplit.split(types)).select(t->NotionalWordType.valueOf(t));
 	}
 	
 	//带排序
-	public void setTypes(Iterable<String> types) {
+	public void setTypes(Iterable<NotionalWordType> types) {
 		Assert.require(types);
 		this.types = ConcatSplit.concat(
-			Linq.from(types).orderBy(
-				(t1,t2)->Comparators.compare(NotionalWordType.getValue(t1), NotionalWordType.getValue(t2))
-			)
+			Linq.from(types)
+				.orderBy(
+					(t1,t2)->Comparators.compare(t1.ordinal(), t2.ordinal())
+				)
+				.select(t->t.toString())
 		);
 	}
 	
