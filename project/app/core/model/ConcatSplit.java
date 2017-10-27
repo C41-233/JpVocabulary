@@ -1,13 +1,16 @@
 package core.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+
+import base.utility.linq.Linq;
 
 public final class ConcatSplit{
 
 	private ConcatSplit() {}
 	
-	public static List<String> split(String s) {
+	public static List<String> splitAsTokens(String s) {
 		String[] tokens = s.split("\\|");
 		List<String> rst = new ArrayList<>();
 		for(String token : tokens) {
@@ -19,7 +22,7 @@ public final class ConcatSplit{
 		return rst;
 	}
 
-	public static String concat(Iterable<String> s) {
+	public static String concatTokens(Iterable<String> s) {
 		StringBuilder sb = new StringBuilder();
 		for(String token : s) {
 			token = token.trim();
@@ -33,6 +36,17 @@ public final class ConcatSplit{
 
 	public static String getToken(String value) {
 		return "|"+value+"|";
+	}
+	
+	public static List<String> splitAsLines(String s){
+		if(s.isEmpty()) {
+			return Collections.emptyList();
+		}
+		return Linq.from(s.split("\n")).toList();
+	}
+	
+	public static String concatLines(Iterable<String> s) {
+		return String.join("\n", s);
 	}
 	
 }

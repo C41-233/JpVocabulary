@@ -1,7 +1,5 @@
 package po;
 
-import base.utility.linq.Linq;
-
 public enum NotionalWordType {
 
 		//实词
@@ -19,9 +17,5 @@ public enum NotionalWordType {
 		接头词,
 		数量词,
 		叹词;
-	
-	public static boolean isValidType(String type) {
-		return Linq.from(NotionalWordType.values()).isExist(t->t.toString().equals(type));
-	}
 	
 }

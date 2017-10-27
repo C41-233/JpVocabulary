@@ -77,13 +77,13 @@ public class Character extends ModelBase implements ICharacter{
 	
 	@Override
 	public Iterable<String> getPinyins() {
-		return ConcatSplit.split(pinyins);
+		return ConcatSplit.splitAsTokens(pinyins);
 	}
 	public void setPinyins(List<String> pinyins) {
 		Assert.require(pinyins);
 		
 		Collections.sort(pinyins);
-		this.pinyins = ConcatSplit.concat(pinyins);
+		this.pinyins = ConcatSplit.concatTokens(pinyins);
 	}
 	
 	@Override

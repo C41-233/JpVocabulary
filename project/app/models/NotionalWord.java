@@ -1,6 +1,5 @@
 package models;
 
-import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -25,28 +24,25 @@ public class NotionalWord extends ModelBase implements INotionalWord{
 	private String meaning;
 	@Override
 	public Iterable<String> getMeanings(){
-		if(meaning.isEmpty()) {
-			return Collections.emptyList();
-		}
-		return Linq.from(meaning.split("\n"));
+		return ConcatSplit.splitAsLines(this.meaning);
 	}
 	
 	public void setMeanings(Iterable<String> meanings) {
 		Assert.require(meanings);
-		this.meaning = String.join("\n", meanings);
+		this.meaning = ConcatSplit.concatLines(meanings);
 	}
 	
 	@Column(name="types")
 	private String types = ModelConstant.EmptyToken;
 	@Override
 	public Iterable<NotionalWordType> getTypes(){
-		return Linq.from(ConcatSplit.split(types)).select(t->NotionalWordType.valueOf(t));
+		return Linq.from(ConcatSplit.splitAsTokens(types)).select(t->NotionalWordType.valueOf(t));
 	}
 	
 	//带排序
 	public void setTypes(Iterable<NotionalWordType> types) {
 		Assert.require(types);
-		this.types = ConcatSplit.concat(
+		this.types = ConcatSplit.concatTokens(
 			Linq.from(types)
 				.orderBy(
 					(t1,t2)->Comparators.compare(t1.ordinal(), t2.ordinal())
