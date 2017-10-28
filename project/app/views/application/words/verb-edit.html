@@ -8,7 +8,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-lg-10">
-			<a href="${refer}"><span class="glyphicon glyphicon-arrow-left"></span>返回</a>
+			<a href="@{words.VerbWordDetail.index(id, refer)}"><span class="glyphicon glyphicon-arrow-left"></span>返回</a>
 		</div>
 		<div class="col-lg-2 text-right">
 			<button class="btn btn-danger" id="btn-delete-word">删除</button>
@@ -44,14 +44,16 @@
 				</tr>
 				<tr>
 					<th>含义</th>
-					<td><div id="editable-meanings" data-editable-value="${word.meaningsText}">
-						#{list items:word.meanings, as:'meaning'}
-							<div>${meaning}</div>
-						#{/list}
-						#{else}
-							（无）
-						#{/else}
-					</div></td>
+					<td>
+						<div id="editable-meanings" data-editable-value="${word.meaningsText}">
+							#{list items:word.meanings, as:'meaning'}
+								<div>${meaning}</div>
+							#{/list}
+							#{else}
+								（无）
+							#{/else}
+						</div>
+					</td>
 				</tr>
 				<tr>
 					<th>词性</th>
@@ -60,7 +62,7 @@
 							#{list items:types, as:'type'}
 								<div class="checkbox">
 									<label>
-										<input type="checkbox" #{if type.has}checked#{/if}> ${type.name}
+										<input type="checkbox" data-value="${type.value}" #{if type.has}checked#{/if}> ${type.name}
 									</label>
 								</div>
 							#{/list}

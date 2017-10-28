@@ -13,7 +13,7 @@ $(function(){
 					{id: DataMgr.id}, 
 					{
 						success: function(){
-							location.href = DataMgr.refer
+							location.href = "/words/verb"
 						},
 						complete: function(){
 							handle.close()
@@ -56,6 +56,15 @@ $(function(){
 		}
 	})
 	
+	$("#div-word-types input[type='checkbox']").change(function(){
+		var value = $(this).is(":checked")
+		var type = $(this).data("value")
+		Action.post("/words/verb/action/update-type", {id: DataMgr.id, type: type, value: value}, {
+			complete: function(){
+				location.reload()
+			}
+		})
+	})
 })
 
 })()

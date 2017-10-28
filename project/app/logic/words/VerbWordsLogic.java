@@ -1,17 +1,23 @@
 package logic.words;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 import base.utility.Chars;
 import base.utility.collection.Iterables;
+import base.utility.comparator.Comparators;
 import base.utility.function.Predicates;
 import base.utility.linq.Linq;
+import core.model.hql.HQL;
+import core.model.hql.HQLResult;
 import logic.LogicBase;
 import logic.LogicValidate;
 import logic.pinyins.WordQueryIndex;
 import models.VerbWord;
 import models.VerbWordValue;
 import po.IVerbWord;
+import po.IVerbWordValue;
 import po.VerbWordType;
 
 public final class VerbWordsLogic extends LogicBase{
@@ -32,6 +38,14 @@ public final class VerbWordsLogic extends LogicBase{
 		}
 		
 		return word;
+	}
+	
+	public static List<IVerbWordValue> findVerbWordValuesByIndex(String index) {
+		HQL hql = HQL.begin();
+		
+		hql.orderBy("value");
+		HQLResult result = hql.end();
+		return VerbWordValue.find(result.select, result.params).fetch();
 	}
 	
 	public static IVerbWord create(List<String> values, List<String> meanings, List<VerbWordType> types) {
@@ -110,6 +124,28 @@ public final class VerbWordsLogic extends LogicBase{
 		word.save();
 	}
 
+	public static void updateType(long id, VerbWordType type, boolean value) {
+		VerbWord word = getVerbWordOrRaiseIfNotExist(id);
+		Set<VerbWordType> types = Linq.from(word.getTypes()).toSet();
+		if(value) {
+			types.add(type);
+		}
+		else {
+			types.remove(type);
+		}
+		
+		if(types.contains(VerbWordType.一类动词) == false
+			&& types.contains(VerbWordType.二类动词) == false
+			&& types.contains(VerbWordType.カ变动词) == false
+			&& types.contains(VerbWordType.ラ变动词) == false
+		) {
+			raise("至少包含一个基本词性");
+		}
+		
+		word.setTypes(types);
+		word.save();
+	}
+	
 	private static VerbWord getVerbWordOrRaiseIfNotExist(long id) {
 		VerbWord word = VerbWord.findById(id);
 		if(word == null) {
@@ -142,5 +178,17 @@ public final class VerbWordsLogic extends LogicBase{
 			raise("动词已存在：%s", value);
 		}
 	}
+
+	public static final Comparator<String> ValueComparator = (t1, t2)->{
+		boolean b1 = Chars.isCJKUnifiedIdeograph(t1.charAt(0));
+		boolean b2 = Chars.isCJKUnifiedIdeograph(t2.charAt(0));
+		if(b1 && !b2) {
+			return -1;
+		}
+		if(b2 && !b1) {
+			return 1;
+		}
+		return Comparators.compare(t1, t2);
+	};
 	
 }

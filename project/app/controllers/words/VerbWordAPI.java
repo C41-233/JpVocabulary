@@ -32,7 +32,7 @@ public class VerbWordAPI extends AjaxControllerBase{
 		List<VerbWordType> typesList = Linq.from(types).select(t->VerbWordType.valueOf(t)).toList();
 		
 		IVerbWord word = VerbWordsLogic.create(valuesList, meaingsList, typesList);
-		jsonResult.put("href", Route.get(VerbWordEdit.class, "index", new RouteArgs().put("id", word.getId())));
+		jsonResult.put("href", Route.get(VerbWordDetail.class, "index", new RouteArgs().put("id", word.getId())));
 	}
 
 	public static void delete(@Id long id) {
@@ -43,6 +43,14 @@ public class VerbWordAPI extends AjaxControllerBase{
 		VerbWordsLogic.updateMeanings(id, Arrays.asList(meanings));
 	}
 
+	public static void updateType(@Id long id, @Required String type, @Required boolean value) {
+		VerbWordType enumType = Objects.asEnum(VerbWordType.class, type);
+		if(enumType == null) {
+			badRequest("不合法的词性：%s", type);
+		}
+		VerbWordsLogic.updateType(id, enumType, value);
+	}
+	
 	public static void addValue(@Id long id, @Required @StringValue(minLength=1) String value) {
 		VerbWordsLogic.addValue(id, value);
 	}

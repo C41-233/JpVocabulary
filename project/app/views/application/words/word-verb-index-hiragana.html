@@ -1,0 +1,29 @@
+<div>
+	#{if words}
+	<table class="table table-bordered table-words">
+		#{list items:words, as:'word'}
+			<tr>
+				<th><a href="${word.href}">${word.value}</a></th>
+				<td>
+					#{list items:word.alias, as:'alias'}
+						<div>${alias}</div>
+					#{/list}
+				</td>
+				<td>
+					#{list items:word.meanings, as:'meaning'}
+						<div>${meaning}</div>
+					#{/list}
+				</td>
+				<td>
+					#{list items:word.types, as:'type'}
+						<span>${type}</span>
+					#{/list}
+				</td>
+			</tr>
+		#{/list}
+	</table>
+	#{/if}
+	#{else}
+		<p>£¨ÎÞ£©</p>
+	#{/else}
+</div>

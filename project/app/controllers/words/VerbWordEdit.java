@@ -6,7 +6,6 @@ import java.util.Set;
 
 import base.utility.linq.Linq;
 import core.controller.HtmlControllerBase;
-import core.controller.Route;
 import core.controller.validation.annotation.Id;
 import logic.LogicValidate;
 import logic.pinyins.Pinyins;
@@ -24,6 +23,7 @@ public final class VerbWordEdit extends HtmlControllerBase{
 		}
 		
 		jsArgs.put("id", id);
+		renderArgs.put("id", id);
 		
 		WordVO wordVO = new WordVO();
 
@@ -61,7 +61,8 @@ public final class VerbWordEdit extends HtmlControllerBase{
 		Set<VerbWordType> types = Linq.from(word.getTypes()).toSet();
 		for(VerbWordType type : VerbWordType.values()){
 			TypeVO typeVO = new TypeVO();
-			typeVO.name = type.toString();
+			typeVO.name = type.toFull();
+			typeVO.value = type.toString();
 			if(types.contains(type)) {
 				typeVO.has = true;
 			}
@@ -69,9 +70,6 @@ public final class VerbWordEdit extends HtmlControllerBase{
 		}
 		renderArgs.put("types", typesVO);
 		
-		if(refer == null) {
-			refer = Route.get(VerbWordIndex.class, "index");
-		}
 		renderArgs.put("refer", refer);
 		jsArgs.put("refer", refer);
 		
@@ -93,6 +91,7 @@ public final class VerbWordEdit extends HtmlControllerBase{
 	
 	private static class TypeVO{
 		public String name;
+		public String value;
 		public boolean has;
 	}
 	

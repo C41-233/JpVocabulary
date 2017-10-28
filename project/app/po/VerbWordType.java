@@ -13,7 +13,7 @@ public enum VerbWordType {
 	否定动词,
 	补助动词,
 	尊敬动词,
-	自谦动词;
+	自谦动词("谦", null);
 	
 	VerbWordType() {
 		this.simple = toString().substring(0, 1);

@@ -53,10 +53,11 @@ public final class NotionalWordAPI extends AjaxControllerBase{
 	}
 	
 	public static void updateType(@Id long id, @Required String type, @Required boolean value) {
-		if(Objects.asEnum(NotionalWordType.class, type) == null) {
+		NotionalWordType enumType = Objects.asEnum(NotionalWordType.class, type);
+		if(enumType == null) {
 			badRequest("不合法的词性：%s", type);
 		}
-		NotionalWordsUpdateLogic.updateType(id, NotionalWordType.valueOf(type), value);
+		NotionalWordsUpdateLogic.updateType(id, enumType, value);
 	}
 	
 }
