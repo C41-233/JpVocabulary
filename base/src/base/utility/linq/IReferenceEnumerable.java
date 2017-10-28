@@ -228,12 +228,27 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 	}
 
 	@SuppressWarnings("unchecked")
-	public default IReferenceEnumerable<T> orderBySelf(){
+	public default IReferenceSortedEnumerable<T> orderBySelf(){
 		return new OrderByEnumerable<T>(this, (t1, t2)->{
 			return Comparators.compare((Comparable)t1, (Comparable)t2);
 		});
 	}
 
+	public default IReferenceSortedEnumerable<T> orderByCondition(IReferencePredicate<T> predicate){
+		return new OrderByEnumerable<T>(this, (t1, t2)->{
+			boolean b1 = predicate.is(t1);
+			boolean b2 = predicate.is(t2);
+			
+			if(b1 && !b2) {
+				return -1; 
+			}
+			if(b2 && !b1) {
+				return 1;
+			}
+			return 0;
+		});
+	}
+	
 	@SuppressWarnings("unchecked")
 	public default <V> IReferenceEnumerable<IReferenceGroup<V, T>> groupBy(ISelector<T, V> selector){
 		DefaultValueHashMap<V, ReferenceGroup<V, T>> hashMap = new DefaultValueHashMap<>(key->new ReferenceGroup(key));

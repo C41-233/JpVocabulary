@@ -6,9 +6,9 @@ import java.util.Comparator;
 class ThenByEnumerable<T> implements IReferenceSortedEnumerable<T>{
 
 	private final IReferenceSortedEnumerable<T> enumerable;
-	private final Comparator<T> comparator;
+	private final Comparator<? super T> comparator;
 	
-	public ThenByEnumerable(IReferenceSortedEnumerable<T> enumerable, Comparator<T> comparator) {
+	public ThenByEnumerable(IReferenceSortedEnumerable<T> enumerable, Comparator<? super T> comparator) {
 		this.enumerable = enumerable;
 		this.comparator = comparator;
 	}
@@ -68,5 +68,5 @@ class ThenByEnumerable<T> implements IReferenceSortedEnumerable<T>{
 		}
 		
 	}
-	
+
 }

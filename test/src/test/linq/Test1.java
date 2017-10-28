@@ -10,7 +10,6 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import base.utility.comparator.Comparators;
 import base.utility.linq.IReferenceEnumerable;
 import base.utility.linq.Linq;
 
@@ -49,32 +48,6 @@ public class Test1 {
 		}
 	}
 	
-	@Test
-	public void orderBy() {
-		List<Integer> list = new ArrayList<>();
-		for(int i=10000; i>=0; i--) {
-			list.add(i);
-		}
-		
-		List<Integer> out = Linq.from(list).orderBy((t1,t2)->Comparators.compare(t1, t2)).toList();
-		for(int i=0; i<=10000; i++) {
-			assertEquals((Integer)i, out.get(i));
-		}
-	}
-
-	@Test
-	public void sort() {
-		List<Integer> list = new ArrayList<>();
-		for(int i=10000; i>=0; i--) {
-			list.add(i);
-		}
-		
-		List<Integer> out = Linq.from(list).orderBySelf().toList();
-		for(int i=0; i<=10000; i++) {
-			assertEquals((Integer)i, out.get(i));
-		}
-	}
-
 	@Test
 	public void toMap() {
 		List<Integer> list = new ArrayList<>();
