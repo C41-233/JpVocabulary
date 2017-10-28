@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 
 import base.utility.Strings;
+import logic.pinyins.WordQueryIndex;
 
 public abstract class LogicBase{
 
@@ -39,6 +40,12 @@ public abstract class LogicBase{
 				raise("重复的数据: %s", pinyin);
 			}
 			values.add(pinyin);
+		}
+	}
+	
+	protected static void raiseIfNotExistQueryIndex(String value) {
+		if(WordQueryIndex.getWordQueryIndex(value).size() == 0) {
+			raise("汉字无法生成索引，需要先添加汉字：%s", value);
 		}
 	}
 	

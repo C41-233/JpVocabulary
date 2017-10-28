@@ -9,6 +9,7 @@ import base.utility.linq.Linq;
 import core.model.ConcatSplit;
 import core.model.ModelBase;
 import core.model.ModelConstant;
+import logic.LogicValidate;
 import po.IVerbWord;
 import po.VerbWordType;
 
@@ -49,6 +50,13 @@ public class VerbWord extends ModelBase implements IVerbWord{
 	@Override
 	public Iterable<VerbWordValue> getValues() {
 		return VerbWordValue.find("refId=?1 order by value", id).fetch();
+	}
+
+	@Override
+	public Iterable<String> getSyllables() {
+		return Linq.from(getValues())
+				.select(v->v.getValue())
+				.where(s->LogicValidate.isValidSyllable(s));
 	}
 	
 }

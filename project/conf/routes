@@ -39,6 +39,7 @@ GET		/words/verb								words.VerbWordIndex.index
 GET		/words/verb/{index}						words.VerbWordIndex.page
 
 GET		/words/notional/{<[0-9]+>id}/edit		words.NotionalWordEdit.index
+GET		/words/verb/{<[0-9]+>id}/edit			words.VerbWordEdit.index
 
 POST	/words/notional/action/create			words.NotionalWordAPI.create
 POST	/words/notional/action/delete			words.NotionalWordAPI.delete
@@ -48,5 +49,9 @@ POST	/words/notional/action/update-meanings	words.NotionalWordAPI.updateMeanings
 POST	/words/notional/action/update-type		words.NotionalWordAPI.updateType
 
 POST	/words/verb/action/create				words.VerbWordAPI.create
+POST	/words/verb/action/delete				words.VerbWordAPI.delete
+POST	/words/verb/action/update-meanings		words.VerbWordAPI.updateMeanings
+POST	/words/verb/action/add-value			words.VerbWordAPI.addValue
+POST	/words/verb/action/delete-value			words.VerbWordAPI.deleteValue
 
 GET		/test									Test.test

@@ -22,18 +22,9 @@ public final class NotionalWordsUpdateLogic extends LogicBase{
 		}
 		
 		for(String value : values) {
-			//检查每个单词都存在索引
-			if(WordQueryIndex.getWordQueryIndex(value).size() == 0) {
-				raise("单词无法生成索引，需要先添加汉字：%s", value);
-			}
-			//检查非读音的单词是否重复
-			if(LogicValidate.isValidSyllable(value)==false && NotionalWordsQueryLogic.hasNotionalWordValue(value)) {
-				raise("单词已存在：%s", value);
-			}
-			//必须是合法的基本词
-			if(NotionalWordValueType.getWordValueType(value) == null) {
-				raise("不是合法的基本词：%s", value);
-			}
+			raiseIfNotExistQueryIndex(value);
+			raiseIfDuplicateNotionalWordValue(value);
+			raiseIfNotValidNotionalWordValue(value);
 		}
 		
 		if(types.size() == 0) {
@@ -67,26 +58,20 @@ public final class NotionalWordsUpdateLogic extends LogicBase{
 	}
 	
 	public static void addValue(long id, String value) {
+		raiseIfDuplicateNotionalWordValue(value);
+		raiseIfNotValidNotionalWordValue(value);
+		raiseIfNotExistQueryIndex(value);
+		
 		NotionalWord word = getNotionalWordOrRaiseIfNotFound(id);
-		if(Linq.from(word.getValues()).isExist(v->v.getValue().equals(value))) {
-			raise("重复添加单词：%s", value);
-		}
-		
-		NotionalWordValueType type = NotionalWordValueType.getWordValueType(value);
-		if(type == null) {
-			raise("不合法的基本词：%s", value);
-		}
-		
-		List<String> indexes = WordQueryIndex.getWordQueryIndex(value);
-		if(indexes.isEmpty()) {
-			raise("无法创建索引，请先添加汉字：%s", value);
+		if(Linq.from(word.getValues()).select(v->v.getValue()).isExist(value)) {
+			raise("重复添加基本词：%s", value);
 		}
 		
 		NotionalWordValue notionalWordValue = new NotionalWordValue();
 		notionalWordValue.setValue(value);
-		notionalWordValue.setType(type);
+		notionalWordValue.setType(NotionalWordValueType.getWordValueType(value));
 		notionalWordValue.setNotionalWordId(word.getId());
-		notionalWordValue.setIndexes(indexes);
+		notionalWordValue.setIndexes(WordQueryIndex.getWordQueryIndex(value));
 		notionalWordValue.save();
 	}
 
@@ -125,7 +110,7 @@ public final class NotionalWordsUpdateLogic extends LogicBase{
 	private static NotionalWord getNotionalWordOrRaiseIfNotFound(long id) {
 		NotionalWord word = NotionalWord.findById(id);
 		if(word == null) {
-			raise("不存在单词：id=%d", id);
+			raise("不存在基本词：id=%d", id);
 		}
 		return word;
 	}
@@ -133,9 +118,22 @@ public final class NotionalWordsUpdateLogic extends LogicBase{
 	private static NotionalWordValue getNotionalWordValueOrRaiseIfNotFound(long id) {
 		NotionalWordValue value = NotionalWordValue.findById(id);
 		if(value == null) {
-			raise("不存在单词：id=%d", id);
+			raise("不存在基本词：id=%d", id);
 		}
 		return value;
+	}
+	
+	private static void raiseIfNotValidNotionalWordValue(String value) {
+		if(NotionalWordValueType.getWordValueType(value) == null) {
+			raise("不是合法的基本词：%s", value);
+		}
+	}
+	
+	private static void raiseIfDuplicateNotionalWordValue(String value) {
+		//非注音的基本词重复
+		if(LogicValidate.isValidSyllable(value)==false && NotionalWordsQueryLogic.hasNotionalWordValue(value)) {
+			raise("基本词已存在：%s", value);
+		}
 	}
 	
 }

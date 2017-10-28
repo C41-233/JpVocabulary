@@ -205,8 +205,8 @@ $(function(){
 			})
 			.toArray()
 		
-		Action.post("/words/verb/action/create", {values: values, meanings: meanings, types: types}, function(){
-			
+		Action.post("/words/verb/action/create", {values: values, meanings: meanings, types: types}, function(data){
+			location.href = data.href
 		})
 	}
 

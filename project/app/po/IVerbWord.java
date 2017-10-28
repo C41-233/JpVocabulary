@@ -9,5 +9,7 @@ public interface IVerbWord extends IModel{
 	public Iterable<VerbWordType> getTypes();
 	
 	public Iterable<? extends IVerbWordValue> getValues();
+
+	public Iterable<String> getSyllables();
 	
 }
