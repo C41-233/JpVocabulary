@@ -13,8 +13,8 @@ public class HQL {
 	private IQueryCondition where;
 	private String orderBy;
 	
-	public HQL where(String condition) {
-		this.where = new Condition(condition);
+	public HQL where(String condition, Object...args) {
+		this.where = new Condition(condition, args);
 		return this;
 	}
 	

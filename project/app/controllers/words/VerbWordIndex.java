@@ -53,8 +53,16 @@ public class VerbWordIndex extends HTMLComponentsControllerBase{
 					.orderBy(VerbWordsLogic.ValueComparator)
 					.foreach(t->vo.alias.add(t));
 			}
+			else {
+				Linq.from(word.getSyllables()).foreach(t->vo.alias.add(t));
+			}
 			
 			vo.href = Route.get(VerbWordDetail.class, "index", new RouteArgs().put("id", word.getId()).put("refer", request.url));
+			for(String meaning : word.getMeanings()) {
+				vo.meanings.add(meaning);
+			}
+			
+			Linq.from(word.getTypes()).select(t->t.toSimple()).foreach(t->vo.types.add(t));
 			
 			wordsVO.add(vo);
 		}

@@ -9,8 +9,10 @@ import base.utility.collection.Iterables;
 import base.utility.comparator.Comparators;
 import base.utility.function.Predicates;
 import base.utility.linq.Linq;
+import core.model.ConcatSplit;
 import core.model.hql.HQL;
 import core.model.hql.HQLResult;
+import core.model.hql.Like;
 import logic.LogicBase;
 import logic.LogicValidate;
 import logic.pinyins.WordQueryIndex;
@@ -42,9 +44,10 @@ public final class VerbWordsLogic extends LogicBase{
 	
 	public static List<IVerbWordValue> findVerbWordValuesByIndex(String index) {
 		HQL hql = HQL.begin();
-		
+		hql.where(Like.contains("index", ConcatSplit.getToken(index)));
 		hql.orderBy("value");
 		HQLResult result = hql.end();
+		
 		return VerbWordValue.find(result.select, result.params).fetch();
 	}
 	
