@@ -50,7 +50,29 @@ textarea{
 	width:			380px;
 	margin-bottom:	5px;
 }
-
+#import-notional-word-types{
+	padding-left:	20px;
+	padding-right:	20px;
+	border:			1px solid transparent;
+}
 #import-notional-word-types .checkbox{
+	width:			80px;
+}
+
+/*添加动词*/
+#import-verb-word-input-words,
+#import-verb-word-input-meanings{
+	width:			380px;
+	margin-bottom:	5px;
+}
+#import-verb-word-types>div:nth-child(1)>.checkbox{
+	width:			160px;
+}
+#import-verb-word-types{
+	padding-left:	20px;
+	padding-right:	20px;
+	border:			1px solid transparent;
+}
+#import-verb-word-types .checkbox{
 	width:			80px;
 }

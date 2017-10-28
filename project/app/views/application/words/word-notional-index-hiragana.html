@@ -1,4 +1,5 @@
 <div>
+	#{if words}
 	<table class="table table-bordered table-words">
 		#{list items:words, as:'word'}
 			<tr>
@@ -21,4 +22,8 @@
 			</tr>
 		#{/list}
 	</table>
+	#{/if}
+	#{else}
+		<p>（无）</p>
+	#{/else}
 </div>

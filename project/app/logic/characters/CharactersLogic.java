@@ -10,6 +10,7 @@ import core.model.hql.Like;
 import logic.LogicBase;
 import models.Character;
 import models.NotionalWordValue;
+import models.VerbWordValue;
 import po.CharacterWord;
 import po.ICharacter;
 import po.ICharacterSyllable;
@@ -98,6 +99,13 @@ public final class CharactersLogic extends LogicBase{
 		for(NotionalWordValue notionalWordValue : notionalWordValues) {
 			notionalWordValue.setIndexes(pinyins);
 			notionalWordValue.save();
+		}
+		
+		//更新动词的汉字索引
+		List<VerbWordValue> verbWordValues = VerbWordValue.find("value like ?1", character.getJpValue()+"%").fetch();
+		for(VerbWordValue verbWordValue : verbWordValues) {
+			verbWordValue.setIndexes(pinyins);
+			verbWordValue.save();
 		}
 	}
 

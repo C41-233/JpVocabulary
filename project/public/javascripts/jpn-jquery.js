@@ -88,7 +88,7 @@
 	
 	function bind(obj, func){
 		obj.on("validate.check", function(){
-			var rst = func($(this).val())
+			var rst = func.call(obj[0], ($(this).val()))
 			if(rst === true){
 				$(this).removeClass("validate-error")
 				$(this).data("tooltip-title", "").tooltip("hide")
@@ -104,6 +104,10 @@
 		}).bind("input", function(){
 			$(this).trigger("validate.check")
 		}).trigger("validate.check")
+		
+		obj.find("input[type='checkbox']").on("change", function(){
+			obj.trigger("validate.check")
+		})
 		
 		obj.tooltip({
 			title: function(){

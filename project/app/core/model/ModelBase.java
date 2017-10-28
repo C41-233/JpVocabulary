@@ -67,9 +67,9 @@ public abstract class ModelBase extends Model implements IModel{
 				Object value = field.get(this);
 				sb.append(" ")
 				.append(field.getName())
-				.append("=[")
+				.append("=【")
 				.append(value.toString().replace("\n", "\\n"))
-				.append("]");
+				.append("】");
 			}
 			Logs.Db.debug(sb.toString());
 		}

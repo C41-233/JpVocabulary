@@ -105,7 +105,7 @@ $(function(){
 		})
 	}
 	
-	var dialog = $("#dialog-import-character").jpDialog({
+	$("#dialog-import-character").jpDialog({
 		width:	260,
 		buttons: {
 			"创建": actionCreateCharacter,
@@ -157,7 +157,7 @@ $(function(){
 		})
 	}
 
-	var dialog = $("#dialog-import-notional-word").jpDialog({
+	$("#dialog-import-notional-word").jpDialog({
 		width:	420,
 		buttons: {
 			"创建": actionCreateNotional,
@@ -177,6 +177,62 @@ $(function(){
 			}).isExist(function(s){
 				return Validate.isValidSyllable(s)
 			})
+		},
+		"#import-notional-word-types": function(){
+			return $(this).find(":checked").length > 0
+		}
+	})
+})
+
+//添加动词
+$(function(){
+
+	function actionCreateVerb(){
+		if($("#dialog-import-verb-word").validate("hasError")){
+			return
+		}
+		
+		var values = $("#import-verb-word-input-words").val().toLines()
+		var meanings = $("#import-verb-word-input-meanings").val().toLines()
+		var types = Linq.from($("#import-verb-word-types input[type='checkbox']:checked"))
+			.select(function(q){
+				if($(q).data("value")){
+					return $(q).data("value")
+				}
+				else{
+					return $(q).parent().text().trim()
+				}
+			})
+			.toArray()
+		
+		Action.post("/words/verb/action/create", {values: values, meanings: meanings, types: types}, function(){
+			
+		})
+	}
+
+	$("#dialog-import-verb-word").jpDialog({
+		width:	420,
+		buttons: {
+			"创建": actionCreateVerb,
+			"取消": function(){
+				$(this).dialog("close")
+			}
+		},
+		trigger: "#btn-import-verb-word"
+	})
+	
+	$("#dialog-import-verb-word").validate({
+		"#import-verb-word-input-words": function(val){
+			return Linq.from(val.split("\n")).select(function(s){
+				return s.trim()
+			}).where(function(s){
+				return s != ""
+			}).isExist(function(s){
+				return Validate.isValidSyllable(s)
+			})
+		},
+		"#import-verb-word-types": function(){
+			return $(this).children("div:nth-child(1), div:nth-child(2)").find(":checked").length > 0
 		}
 	})
 })

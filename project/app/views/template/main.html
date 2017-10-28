@@ -58,7 +58,7 @@
 					<li class="dropdown">
 						<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">用言 <span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="/">动词</a></li>
+							<li><a href="/words/verb">动词</a></li>
 							<li><a href="/">形容词</a></li>
 							<li><a href="/">形容动词</a></li>
 							<li><a href="/">助动词</a></li>
@@ -103,6 +103,7 @@
 						<ul class="dropdown-menu">
 							<li><a href="javascript:void(0)" id="btn-import-character">汉字</a></li>
 							<li><a href="javascript:void(0)" id="btn-import-notional-word">基本词</a></li>
+							<li><a href="javascript:void(0)" id="btn-import-verb-word">动词</a></li>
 						</ul>
 					</li>
 					<li><a href="javascript:void(0)" id="btn-mysqldump">导出</a></li>
@@ -210,5 +211,78 @@
 		</div>
 	</div>
 
+	<div id="dialog-import-verb-word" title="创建动词" class="pre-hide">
+		<div class="text-center">
+			<form class="form-inline">
+				<div class="form-group">
+					<textarea id="import-verb-word-input-words" class="form-control" placeholder="每行一个单词，至少包含一个读音" rows="3"></textarea>
+				</div>
+				<div class="form-group">
+					<textarea id="import-verb-word-input-meanings" class="form-control" placeholder="每行一个释义" rows="4"></textarea>
+				</div>
+				<div class="text-left" id="import-verb-word-types">
+					<div>
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" data-value="一类动词"> 一类动词（五段动词）
+							</label>
+						</div>
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" data-value="二类动词"> 二类动词（一段动词）
+							</label>
+						</div>
+					</div>
+					<div>
+						<div class="checkbox">
+							<label>
+								<input type="checkbox"> ラ变动词
+							</label>
+						</div>
+						<div class="checkbox">
+							<label>
+								<input type="checkbox"> カ变动词
+							</label>
+						</div>
+					</div>
+					<div>
+						<div class="checkbox">
+							<label>
+								<input type="checkbox"> 自动词
+							</label>
+						</div>
+						<div class="checkbox">
+							<label>
+								<input type="checkbox"> 他动词
+							</label>
+						</div>
+					</div>
+					<div>
+						<div class="checkbox">
+							<label>
+								<input type="checkbox"> 否定动词
+							</label>
+						</div>
+						<div class="checkbox">
+							<label>
+								<input type="checkbox"> 补助动词
+							</label>
+						</div>
+						<div class="checkbox">
+							<label>
+								<input type="checkbox"> 尊敬动词
+							</label>
+						</div>
+						<div class="checkbox">
+							<label>
+								<input type="checkbox"> 自谦动词
+							</label>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	
 </body>
 </html>

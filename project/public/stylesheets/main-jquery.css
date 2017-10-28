@@ -1,6 +1,7 @@
 .validate-error, .validate-error:focus,
 input.error, input.error:focus{
-	border-color:	red;
+	border:	1px solid red !important;
+	border-radius:	4px !important;
 }
 
 .editable{
