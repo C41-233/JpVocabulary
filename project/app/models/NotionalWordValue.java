@@ -52,7 +52,7 @@ public class NotionalWordValue extends ModelBase implements INotionalWordValue{
 	public void setIndexes(Iterable<String> indexes) {
 		Assert.require(indexes);
 		this.index = ConcatSplit.concatTokens(
-			Linq.from(indexes).sort()
+			Linq.from(indexes).orderBySelf()
 		);
 	}
 	@Override

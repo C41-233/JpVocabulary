@@ -69,7 +69,7 @@ public class Test1 {
 			list.add(i);
 		}
 		
-		List<Integer> out = Linq.from(list).sort().toList();
+		List<Integer> out = Linq.from(list).orderBySelf().toList();
 		for(int i=0; i<=10000; i++) {
 			assertEquals((Integer)i, out.get(i));
 		}

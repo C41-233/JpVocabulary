@@ -228,7 +228,7 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 	}
 
 	@SuppressWarnings("unchecked")
-	public default IReferenceEnumerable<T> sort(){
+	public default IReferenceEnumerable<T> orderBySelf(){
 		return new OrderByEnumerable<T>(this, (t1, t2)->{
 			return Comparators.compare((Comparable)t1, (Comparable)t2);
 		});

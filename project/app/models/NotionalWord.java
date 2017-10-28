@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import base.utility.assertion.Assert;
-import base.utility.comparator.Comparators;
 import base.utility.linq.Linq;
 import core.model.ConcatSplit;
 import core.model.ModelBase;
@@ -44,9 +43,7 @@ public class NotionalWord extends ModelBase implements INotionalWord{
 		Assert.require(types);
 		this.types = ConcatSplit.concatTokens(
 			Linq.from(types)
-				.orderBy(
-					(t1,t2)->Comparators.compare(t1.ordinal(), t2.ordinal())
-				)
+				.orderBy(t->t.ordinal())
 				.select(t->t.toString())
 		);
 	}
