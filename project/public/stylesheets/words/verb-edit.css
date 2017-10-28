@@ -26,3 +26,16 @@
 	padding-top:	1px;
 	padding-bottom:	1px;
 }
+
+#table-fixwords td:nth-child(1){
+	min-width:		180px;
+}
+#table-fixwords td:nth-child(2){
+	min-width:		280px;
+	padding-left:	20px;
+}
+#table-fixwords td:nth-child(3){
+	padding-left:	15px;
+	padding-top:	1px;
+	padding-bottom:	1px;
+}

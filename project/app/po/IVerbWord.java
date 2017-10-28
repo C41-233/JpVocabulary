@@ -12,4 +12,6 @@ public interface IVerbWord extends IModel{
 
 	public Iterable<String> getSyllables();
 	
+	public Iterable<VerbFixword> getFixwords();
+	
 }

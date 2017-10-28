@@ -12,5 +12,5 @@ public interface ICharacter extends IModel{
 	
 	public Iterable<ICharacterSyllable> getSyllables();
 
-	public Iterable<CharacterWord> getFixwords();
+	public Iterable<WordPair> getFixwords();
 }

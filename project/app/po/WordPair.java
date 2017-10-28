@@ -2,17 +2,17 @@ package po;
 
 import com.google.gson.JsonObject;
 
-public class CharacterWord {
+public class WordPair {
 
 	private final String word;
 	private final String syllable;
 	
-	public CharacterWord(String word, String syllable) {
+	public WordPair(String word, String syllable) {
 		this.word = word;
 		this.syllable = syllable;
 	}
 	
-	public CharacterWord(JsonObject json) {
+	public WordPair(JsonObject json) {
 		this.word = json.get("word").getAsString();
 		this.syllable = json.get("syllable").getAsString();
 	}

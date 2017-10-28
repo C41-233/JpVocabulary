@@ -10,9 +10,12 @@ import core.controller.RouteArgs;
 import core.controller.validation.annotation.Required;
 import logic.LogicValidate;
 import logic.indexes.IndexManager;
+import logic.pinyins.Pinyins;
 import logic.words.VerbWordsLogic;
 import po.IVerbWord;
 import po.IVerbWordValue;
+import po.VerbFixword;
+import po.VerbWordType;
 
 public class VerbWordIndex extends HTMLComponentsControllerBase{
 
@@ -58,11 +61,17 @@ public class VerbWordIndex extends HTMLComponentsControllerBase{
 			}
 			
 			vo.href = Route.get(VerbWordDetail.class, "index", new RouteArgs().put("id", word.getId()).put("refer", request.url));
-			for(String meaning : word.getMeanings()) {
-				vo.meanings.add(meaning);
-			}
+			
+			Linq.from(word.getMeanings()).foreach(t->vo.meanings.add(t));
 			
 			Linq.from(word.getTypes()).select(t->t.toSimple()).foreach(t->vo.types.add(t));
+			
+			Linq.from(word.getFixwords()).select(t->{
+				FixwordVO fixwordVO = new FixwordVO();
+				fixwordVO.value = t.getValue();
+				fixwordVO.meaning = t.getMeaning();
+				return fixwordVO;
+			}).foreach(t->vo.fixwords.add(t));
 			
 			wordsVO.add(vo);
 		}
@@ -71,7 +80,72 @@ public class VerbWordIndex extends HTMLComponentsControllerBase{
 	}
 
 	private static void processAsCharacter(String index) {
+		List<PinyinGroupVO> pinyinGroupsVO = new ArrayList<>();
+		for(int i=1; i<=4; i++) {
+			String pinyin = index+i;
+			List<IVerbWordValue> values = VerbWordsLogic.findVerbWordValuesByIndex(pinyin);
+			if(values.size() == 0) {
+				continue;
+			}
+			
+			PinyinGroupVO groupVO = new PinyinGroupVO();
+			groupVO.value = Pinyins.toPinyin(pinyin);
+			Linq.from(values)
+				.groupBy(value->value.getValue().substring(0, 1))
+				.orderBy(group->group.getKey())
+				.foreach(group->{
+					CharacterGroupVO characterGroupVO = new CharacterGroupVO();
+					characterGroupVO.name = group.getKey();
+					groupVO.characters.add(characterGroupVO);
+					
+					for(IVerbWordValue value : group) {
+						IVerbWord word = value.getWord();
+						
+						WordVO wordVO = new WordVO();
+						wordVO.value = value.getValue();
+						
+						for(String syllable : word.getSyllables()) {
+							wordVO.alias.add(syllable);
+						}
+						
+						for(String meaning : word.getMeanings()) {
+							wordVO.meanings.add(meaning);
+						}
+						
+						for(VerbWordType type : word.getTypes()) {
+							wordVO.types.add(type.toSimple());
+						}
+						
+						wordVO.href = Route.get(VerbWordDetail.class, "index", new RouteArgs().put("id", word.getId()).put("refer", request.url));
+						
+						for(VerbFixword fixword : word.getFixwords()) {
+							FixwordVO fixwordVO = new FixwordVO();
+							fixwordVO.value = fixword.getValue();
+							fixwordVO.meaning = fixword.getMeaning();
+							wordVO.fixwords.add(fixwordVO);
+						}
+						
+						characterGroupVO.words.add(wordVO);
+					}
+				});
+			pinyinGroupsVO.add(groupVO);
+		}		
 		
+		renderArgs.put("pinyins", pinyinGroupsVO);
+		renderArgs.put("model", "pinyin");
+	}
+
+	private static class PinyinGroupVO{
+		
+		public String value;
+		public List<CharacterGroupVO> characters = new ArrayList<>();
+		
+	}
+	
+	private static class CharacterGroupVO{
+		
+		public String name;
+		public List<WordVO> words = new ArrayList<>();
 		
 	}
 	
@@ -81,8 +155,13 @@ public class VerbWordIndex extends HTMLComponentsControllerBase{
 		public List<String> alias = new ArrayList<>();
 		public List<String> meanings = new ArrayList<>();
 		public List<String> types = new ArrayList<>();
+		public List<FixwordVO> fixwords = new ArrayList<>();
 		public String href;
-		
+	}
+	
+	private static class FixwordVO{
+		public String value;
+		public String meaning;
 	}
 	
 }

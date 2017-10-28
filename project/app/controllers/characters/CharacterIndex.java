@@ -10,7 +10,7 @@ import core.controller.validation.annotation.Required;
 import logic.characters.CharactersLogic;
 import logic.indexes.IndexManager;
 import logic.pinyins.Pinyins;
-import po.CharacterWord;
+import po.WordPair;
 import po.ICharacter;
 import po.ICharacterSyllable;
 
@@ -62,7 +62,7 @@ public final class CharacterIndex extends HTMLComponentsControllerBase{
 						syllableVO.words.add(wordVO);
 					}
 					
-					for(CharacterWord word : syllable.getWords()) {
+					for(WordPair word : syllable.getWords()) {
 						WordPairVO wordVO = new WordPairVO();
 						wordVO.word = word.getWord();
 						wordVO.syllable = word.getSyllable();
@@ -71,7 +71,7 @@ public final class CharacterIndex extends HTMLComponentsControllerBase{
 				}
 				
 				//固有词组
-				for(CharacterWord word : character.getFixwords()) {
+				for(WordPair word : character.getFixwords()) {
 					WordPairVO wordVO = new WordPairVO();
 					wordVO.word = word.getWord();
 					wordVO.syllable = word.getSyllable();

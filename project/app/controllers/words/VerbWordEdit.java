@@ -12,6 +12,7 @@ import logic.pinyins.Pinyins;
 import logic.words.VerbWordsLogic;
 import po.IVerbWord;
 import po.IVerbWordValue;
+import po.VerbFixword;
 import po.VerbWordType;
 
 public final class VerbWordEdit extends HtmlControllerBase{
@@ -70,6 +71,15 @@ public final class VerbWordEdit extends HtmlControllerBase{
 		}
 		renderArgs.put("types", typesVO);
 		
+		List<FixwordVO> fixwordsVO = new ArrayList<>();
+		for(VerbFixword fixword : word.getFixwords()) {
+			FixwordVO fixwordVO = new FixwordVO();
+			fixwordVO.value = fixword.getValue();
+			fixwordVO.meaning = fixword.getMeaning();
+			fixwordsVO.add(fixwordVO);
+		}
+		renderArgs.put("fixwords", fixwordsVO);
+		
 		renderArgs.put("refer", refer);
 		jsArgs.put("refer", refer);
 		
@@ -93,6 +103,11 @@ public final class VerbWordEdit extends HtmlControllerBase{
 		public String name;
 		public String value;
 		public boolean has;
+	}
+
+	private static class FixwordVO{
+		String value;
+		String meaning;
 	}
 	
 }

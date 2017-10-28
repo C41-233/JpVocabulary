@@ -10,7 +10,7 @@ import core.controller.validation.annotation.Id;
 import core.controller.validation.annotation.StringValue;
 import logic.characters.CharactersLogic;
 import logic.pinyins.Pinyins;
-import po.CharacterWord;
+import po.WordPair;
 import po.ICharacter;
 import po.ICharacterSyllable;
 
@@ -52,7 +52,7 @@ public class CharacterDetail extends HtmlControllerBase{
 				syllableVO.words.add(wordVO);
 			}
 			
-			for(CharacterWord word : syllable.getWords()) {
+			for(WordPair word : syllable.getWords()) {
 				WordVO wordVO = new WordVO();
 				syllableVO.words.add(wordVO);
 				
@@ -61,7 +61,7 @@ public class CharacterDetail extends HtmlControllerBase{
 			}
 		}
 		
-		for(CharacterWord word : character.getFixwords()) {
+		for(WordPair word : character.getFixwords()) {
 			WordVO wordVO = new WordVO();
 			wordVO.syllable = word.getSyllable();
 			wordVO.word = word.getWord();

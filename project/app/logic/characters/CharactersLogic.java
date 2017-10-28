@@ -11,7 +11,7 @@ import logic.LogicBase;
 import models.Character;
 import models.NotionalWordValue;
 import models.VerbWordValue;
-import po.CharacterWord;
+import po.WordPair;
 import po.ICharacter;
 import po.ICharacterSyllable;
 
@@ -135,11 +135,11 @@ public final class CharactersLogic extends LogicBase{
 		character.save();
 	}
 
-	public static void updateSyllableWords(long id, String syllable, List<CharacterWord> words) {
+	public static void updateSyllableWords(long id, String syllable, List<WordPair> words) {
 		Character character = getCharacterOrRaiseIfNotFound(id);
 		raiseIfSyllableNotFound(character, syllable);
 		
-		for(CharacterWord word : words) {
+		for(WordPair word : words) {
 			raiseIfNotValidSyllable(word.getSyllable());
 		}
 		
@@ -152,7 +152,7 @@ public final class CharactersLogic extends LogicBase{
 		
 		Character character = getCharacterOrRaiseIfNotFound(id);
 		raiseIfFixwordFound(character, word, syllable);
-		character.addFixword(new CharacterWord(word, syllable));
+		character.addFixword(new WordPair(word, syllable));
 		character.save();
 	}
 

@@ -18,7 +18,7 @@ import base.utility.linq.Linq;
 import core.model.ConcatSplit;
 import core.model.ModelBase;
 import core.model.ModelConstant;
-import po.CharacterWord;
+import po.WordPair;
 import po.ICharacter;
 import po.ICharacterSyllable;
 
@@ -129,7 +129,7 @@ public class Character extends ModelBase implements ICharacter{
 		this.syllables = syllables.toString();
 	}
 
-	public void setSyllableWords(String syllable, List<CharacterWord> words) {
+	public void setSyllableWords(String syllable, List<WordPair> words) {
 		Assert.require(syllable);
 		Assert.require(words);
 		
@@ -140,12 +140,12 @@ public class Character extends ModelBase implements ICharacter{
 	}
 	
 	@Override
-	public Iterable<CharacterWord> getFixwords() {
+	public Iterable<WordPair> getFixwords() {
 		Fixwords fixwords = new Fixwords(this.fixwords);
 		return fixwords.getFixwords();
 	}
 	
-	public void addFixword(CharacterWord characterWord) {
+	public void addFixword(WordPair characterWord) {
 		Fixwords fixwords = new Fixwords(this.fixwords);
 		fixwords.add(characterWord);
 		this.fixwords = fixwords.toString();
@@ -162,7 +162,7 @@ public class Character extends ModelBase implements ICharacter{
 	private static class CharacterSyllable implements ICharacterSyllable{
 	
 		private String value;
-		private final List<CharacterWord> words;
+		private final List<WordPair> words;
 		private boolean isMain;
 		
 		public CharacterSyllable(String syllable) {
@@ -173,7 +173,7 @@ public class Character extends ModelBase implements ICharacter{
 		
 		public CharacterSyllable(JsonObject json) {
 			this.value = json.get("value").getAsString();
-			this.words = Linq.from(json.get("words").getAsJsonArray()).select(j->new CharacterWord(j.getAsJsonObject())).toList();
+			this.words = Linq.from(json.get("words").getAsJsonArray()).select(j->new WordPair(j.getAsJsonObject())).toList();
 			this.isMain = json.get("isMain").getAsBoolean();
 		}
 	
@@ -187,11 +187,11 @@ public class Character extends ModelBase implements ICharacter{
 		}
 	
 		@Override
-		public Iterable<CharacterWord> getWords() {
+		public Iterable<WordPair> getWords() {
 			return this.words;
 		}
 	
-		public void addWord(CharacterWord word) {
+		public void addWord(WordPair word) {
 			this.words.add(word);
 		}
 	
@@ -262,10 +262,10 @@ public class Character extends ModelBase implements ICharacter{
 			this.syllables.sort((c1,c2)->Comparators.compare(c1.getValue(), c2.getValue()));
 		}
 		
-		public void setSyllable(String syllable, List<CharacterWord> words) {
+		public void setSyllable(String syllable, List<WordPair> words) {
 			removeSyllable(syllable);
 			CharacterSyllable obj = new CharacterSyllable(syllable);
-			for(CharacterWord word : words) {
+			for(WordPair word : words) {
 				obj.addWord(word);
 			}
 			this.syllables.add(obj);
@@ -297,30 +297,30 @@ public class Character extends ModelBase implements ICharacter{
 	
 	private static class Fixwords {
 	
-		private final List<CharacterWord> words;
+		private final List<WordPair> words;
 		
 		public Fixwords(String json) {
 			JsonArray array = new JsonParser().parse(json).getAsJsonArray();
-			this.words = Linq.from(array).select(j->j.getAsJsonObject()).select(word->new CharacterWord(word)).toList();
+			this.words = Linq.from(array).select(j->j.getAsJsonObject()).select(word->new WordPair(word)).toList();
 			onChange();
 		}
 		
 		@Override
 		public String toString() {
 			JsonArray array = new JsonArray();
-			for(CharacterWord word : words) {
+			for(WordPair word : words) {
 				array.add(word.toJsonObject());
 			}
 			return array.toString();
 		}
 	
-		public Iterable<CharacterWord> getFixwords() {
+		public Iterable<WordPair> getFixwords() {
 			return words;
 		}
 	
 		private void onChange() {
 			this.words.sort(
-				Comparators.<CharacterWord>chain(
+				Comparators.<WordPair>chain(
 					(w1, w2)->Comparators.compare(w1.getWord(), w2.getWord())
 				).chain(
 					(w1, w2)->Comparators.compare(w1.getSyllable(), w2.getSyllable())
@@ -328,7 +328,7 @@ public class Character extends ModelBase implements ICharacter{
 			);
 		}
 		
-		public void add(CharacterWord word) {
+		public void add(WordPair word) {
 			this.words.add(word);
 			onChange();
 		}

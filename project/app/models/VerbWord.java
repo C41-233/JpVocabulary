@@ -1,8 +1,13 @@
 package models;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonParser;
 
 import base.utility.assertion.Assert;
 import base.utility.linq.Linq;
@@ -11,6 +16,7 @@ import core.model.ModelBase;
 import core.model.ModelConstant;
 import logic.LogicValidate;
 import po.IVerbWord;
+import po.VerbFixword;
 import po.VerbWordType;
 
 @Entity
@@ -57,6 +63,33 @@ public class VerbWord extends ModelBase implements IVerbWord{
 		return Linq.from(getValues())
 				.select(v->v.getValue())
 				.where(s->LogicValidate.isValidSyllable(s));
+	}
+	
+	@Column(name="fixwords", columnDefinition="TEXT")
+	private String fixwords = ModelConstant.EmptyJsonArray;
+
+	@Override
+	public Iterable<VerbFixword> getFixwords(){
+		Fixwords fixwords = new Fixwords(this.fixwords);
+		return fixwords.getFixwords();
+	}
+	
+	private static class Fixwords{
+		
+		private final List<VerbFixword> fixwords;
+		
+		public Fixwords(String json) {
+			JsonArray jfixwords = new JsonParser().parse(json).getAsJsonArray();
+			this.fixwords = Linq.from(jfixwords)
+								.select(j->j.getAsJsonObject())
+								.select(j->new VerbFixword(j))
+								.toList();
+		}
+		
+		public Iterable<VerbFixword> getFixwords(){
+			return this.fixwords;
+		}
+		
 	}
 	
 }

@@ -4,6 +4,6 @@ public interface ICharacterSyllable {
 
 	public String getValue();
 	public boolean isMain();
-	public Iterable<CharacterWord> getWords();
+	public Iterable<WordPair> getWords();
 	
 }

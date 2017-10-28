@@ -12,7 +12,7 @@ import core.controller.validation.annotation.Id;
 import core.controller.validation.annotation.Required;
 import core.controller.validation.annotation.StringValue;
 import logic.characters.CharactersLogic;
-import po.CharacterWord;
+import po.WordPair;
 import po.ICharacter;
 
 public final class CharacterAPI extends AjaxControllerBase {
@@ -86,12 +86,12 @@ public final class CharacterAPI extends AjaxControllerBase {
 		@Required String syllable,
 		@Required @StringValue(minLength=1) String[] words
 	) {
-		List<CharacterWord> wordList = Linq.from(words).select(s->{
+		List<WordPair> wordList = Linq.from(words).select(s->{
 			String[] split = Strings.splitTokens(s);
 			if(split.length != 2) {
 				badRequest("参数格式错误: "+s);
 			}
-			return new CharacterWord(split[0], split[1]);
+			return new WordPair(split[0], split[1]);
 		}).toList();
 		CharactersLogic.updateSyllableWords(id, syllable, wordList);
 	}
