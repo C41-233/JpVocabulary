@@ -33,6 +33,8 @@
 #table-fixwords td:nth-child(2){
 	min-width:		280px;
 	padding-left:	20px;
+	padding-top:	2px;
+	padding-bottom:	2px;
 }
 #table-fixwords td:nth-child(3){
 	padding-left:	15px;

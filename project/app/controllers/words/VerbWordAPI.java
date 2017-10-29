@@ -59,4 +59,24 @@ public class VerbWordAPI extends AjaxControllerBase{
 		VerbWordsLogic.deleteValue(id);
 	}
 
+	public static void addFixword(
+		@Id long id,
+		@Required @StringValue(minLength=1) String value,
+		@Required @StringValue(minLength=1) String meaning
+	) {
+		VerbWordsLogic.addFixword(id, value, meaning);
+	}
+	
+	public static void deleteFixword(@Id long id, @Required @StringValue String value) {
+		VerbWordsLogic.deleteFixword(id, value);
+	}
+	
+	public static void updateFixword(
+		@Id long id, 
+		@Required @StringValue String value, 
+		@Required @StringValue(minLength=1) String meaning
+	) {
+		VerbWordsLogic.updateFixword(id, value, meaning);
+	}
+	
 }

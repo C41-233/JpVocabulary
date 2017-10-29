@@ -20,6 +20,7 @@ import models.VerbWord;
 import models.VerbWordValue;
 import po.IVerbWord;
 import po.IVerbWordValue;
+import po.VerbFixword;
 import po.VerbWordType;
 
 public final class VerbWordsLogic extends LogicBase{
@@ -148,7 +149,36 @@ public final class VerbWordsLogic extends LogicBase{
 		word.setTypes(types);
 		word.save();
 	}
-	
+
+	public static void addFixword(long id, String value, String meaning) {
+		VerbWord word = getVerbWordOrRaiseIfNotExist(id);
+		if(Linq.from(word.getFixwords()).isExist(w->w.getValue().equals(value))) {
+			raise("词组已存在：%s", value);
+		}
+		
+		word.addFixword(new VerbFixword(value, meaning));
+		word.save();
+	}
+
+	public static void deleteFixword(long id, String value) {
+		VerbWord word = getVerbWordOrRaiseIfNotExist(id);
+		if(Linq.from(word.getFixwords()).notExist(w->w.getValue().equals(value))) {
+			raise("词组不存在：%s", value);
+		}
+		word.deleteFixword(value);
+		word.save();
+	}
+
+	public static void updateFixword(long id, String value, String meaning) {
+		VerbWord word = getVerbWordOrRaiseIfNotExist(id);
+		if(Linq.from(word.getFixwords()).notExist(w->w.getValue().equals(value))) {
+			raise("词组不存在：%s", value);
+		}
+		word.deleteFixword(value);
+		word.addFixword(new VerbFixword(value, meaning));
+		word.save();
+	}
+
 	private static VerbWord getVerbWordOrRaiseIfNotExist(long id) {
 		VerbWord word = VerbWord.findById(id);
 		if(word == null) {
@@ -193,5 +223,5 @@ public final class VerbWordsLogic extends LogicBase{
 		}
 		return Comparators.compare(t1, t2);
 	};
-	
+
 }

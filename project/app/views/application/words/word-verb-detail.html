@@ -34,6 +34,21 @@
 			<span>${type}</span>
 		#{/list}
 	</div>
+	<div class="div-meanings">
+		#{list items:word.meanings, as:'meaning'}
+			<li>${meaning}</li>
+		#{/list}
+	</div>
+	<div class="div-fixwords">
+		<table>
+			#{list items:word.fixwords, as:'fixword'}
+			<tr>
+				<td>【${fixword.value}】</td>
+				<td>${fixword.meaning}</td>
+			</tr>
+			#{/list}
+		</table>
+	</div>
 </div>
 
 #{/body}
@@ -50,5 +65,11 @@
 .div-types>span{
 	font-weight:	bold;
 	padding-right:	10px;
+}
+.div-meanings{
+	margin-top:		20px;
+}
+.div-fixwords{
+	margin-top:		20px;
 }
 #{/stylesheet}

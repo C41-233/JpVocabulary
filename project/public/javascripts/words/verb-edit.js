@@ -65,6 +65,37 @@ $(function(){
 			}
 		})
 	})
+	
+	$("#btn-add-fixword").click(function(){
+		var word = $("#input-fixword-value").val().trim()
+		var meaning = $("#input-fixword-meaning").val().trim()
+		if(!word || !meaning){
+			return
+		}
+		Action.post("/words/verb/action/add-fixword", {id: DataMgr.id, value: word, meaning: meaning}, function(){
+			location.reload()
+		})
+	})
+	
+	$(".btn-delete-fixword").click(function(){
+		var word = $(this).parent().parent().find("td:nth-child(1)").text().trim()
+		Action.post("/words/verb/action/delete-fixword", {id: DataMgr.id, value: word}, function(){
+			location.reload()
+		})
+	})
+	
+	$(".editable-fixword-meaning").editable({
+		active: function(val){
+			val = val.trim()
+			if(!val){
+				return
+			}
+			var word = $(this).parents("tr").eq(0).find("td:nth-child(1)").text().trim()
+			Action.post("/words/verb/action/update-fixword", {id: DataMgr.id, value: word, meaning: val}, function(){
+				location.reload()
+			})
+		}
+	})
 })
 
 })()

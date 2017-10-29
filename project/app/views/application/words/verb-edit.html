@@ -76,14 +76,13 @@
 							#{list items:fixwords, as:'fixword'}
 								<tr>
 									<td>${fixword.value}</td>
-									<td>${fixword.meaning}</td>
+									<td><div class="editable-fixword-meaning">${fixword.meaning}</div></td>
 									<td><button class="btn btn-danger btn-sm btn-delete-fixword">删除</button></td>
 								</tr>
 							#{/list}
 							<tr>	
 								<td><input type="text" class="form-control" id="input-fixword-value"/></td>
 								<td><input type="text" class="form-control" id="input-fixword-meaning"/></td>
-								<td></td>
 								<td><button class="btn btn-default btn-sm" id="btn-add-fixword">添加</button></td>
 							</tr>
 						</table>

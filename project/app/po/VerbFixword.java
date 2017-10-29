@@ -24,5 +24,12 @@ public class VerbFixword {
 	public String getMeaning() {
 		return this.meaning;
 	}
+
+	public JsonObject toJsonObject() {
+		JsonObject jobj = new JsonObject();
+		jobj.addProperty("value", value);
+		jobj.addProperty("meaning", meaning);
+		return jobj;
+	}
 	
 }

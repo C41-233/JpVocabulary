@@ -10,7 +10,6 @@ import core.controller.validation.annotation.Id;
 import logic.LogicValidate;
 import logic.words.VerbWordsLogic;
 import po.IVerbWord;
-import po.VerbWordType;
 
 public class VerbWordDetail extends HtmlControllerBase{
 
@@ -29,21 +28,27 @@ public class VerbWordDetail extends HtmlControllerBase{
 		WordVO wordVO = new WordVO();
 		wordVO.id = id;
 		
-		for(String value : 
-			Linq.from(word.getValues())
-				.select(w->w.getValue())
-				.orderBy(VerbWordsLogic.ValueComparator)) {
-			if(LogicValidate.isValidSyllable(value)) {
-				wordVO.values2.add(value);
-			}
-			else {
-				wordVO.values1.add(value);
-			}
-		}
-		
-		for(VerbWordType type : word.getTypes()) {
-			wordVO.types.add(type.toFull());
-		}
+		Linq.from(word.getValues())
+			.select(w->w.getValue())
+			.orderBy(VerbWordsLogic.ValueComparator)
+			.foreach(value->{
+				if(LogicValidate.isValidSyllable(value)) {
+					wordVO.values2.add(value);
+				}
+				else {
+					wordVO.values1.add(value);
+				}
+			});
+			
+		Linq.from(word.getTypes()).foreach(t->wordVO.types.add(t.toFull()));
+		Linq.from(word.getMeanings()).select(m->m+"。").foreach(m->wordVO.meanings.add(m));
+		Linq.from(word.getFixwords())
+			.select(f->{
+				FixwordVO vo = new FixwordVO();
+				vo.value = f.getValue();
+				vo.meaning = f.getMeaning();
+				return vo;
+			}).foreach(m->wordVO.fixwords.add(m));
 		
 		renderArgs.put("word", wordVO);
 		
@@ -55,6 +60,13 @@ public class VerbWordDetail extends HtmlControllerBase{
 		public List<String> values1 = new ArrayList<>();
 		public List<String> values2 = new ArrayList<>();
 		public List<String> types = new ArrayList<>();
+		public List<String> meanings = new ArrayList<>();
+		public List<FixwordVO> fixwords = new ArrayList<>();
+	}
+	
+	private static class FixwordVO{
+		public String value;
+		public String meaning;
 	}
 	
 }

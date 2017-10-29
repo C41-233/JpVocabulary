@@ -13,6 +13,16 @@
 					#{list items:word.meanings, as:'meaning'}
 						<div>${meaning}</div>
 					#{/list}
+					#{if word.fixwords}
+						<table class="table-fixwords">
+							#{list items:word.fixwords, as:'fixword'}
+								<tr>
+									<td>【${fixword.value}】</td>
+									<td>${fixword.meaning}</td>
+								</tr>
+							#{/list}
+						</table>
+					#{/if}
 				</td>
 				<td>
 					#{list items:word.types, as:'type'}

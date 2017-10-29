@@ -55,5 +55,8 @@ POST	/words/verb/action/update-meanings		words.VerbWordAPI.updateMeanings
 POST	/words/verb/action/add-value			words.VerbWordAPI.addValue
 POST	/words/verb/action/delete-value			words.VerbWordAPI.deleteValue
 POST	/words/verb/action/update-type			words.VerbWordAPI.updateType
+POST	/words/verb/action/add-fixword			words.VerbWordAPI.addFixword
+POST	/words/verb/action/delete-fixword		words.VerbWordAPI.deleteFixword
+POST	/words/verb/action/update-fixword		words.VerbWordAPI.updateFixword
 
 GET		/test									Test.test
