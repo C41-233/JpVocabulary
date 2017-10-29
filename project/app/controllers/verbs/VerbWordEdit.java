@@ -1,4 +1,4 @@
-package controllers.words;
+package controllers.verbs;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,7 @@ import logic.pinyins.Pinyins;
 import logic.words.VerbWordsLogic;
 import po.IVerbWord;
 import po.IVerbWordValue;
-import po.VerbFixword;
+import po.WordFixword;
 import po.VerbWordType;
 
 public final class VerbWordEdit extends HtmlControllerBase{
@@ -72,7 +72,7 @@ public final class VerbWordEdit extends HtmlControllerBase{
 		renderArgs.put("types", typesVO);
 		
 		List<FixwordVO> fixwordsVO = new ArrayList<>();
-		for(VerbFixword fixword : word.getFixwords()) {
+		for(WordFixword fixword : word.getFixwords()) {
 			FixwordVO fixwordVO = new FixwordVO();
 			fixwordVO.value = fixword.getValue();
 			fixwordVO.meaning = fixword.getMeaning();

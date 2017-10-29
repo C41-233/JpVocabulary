@@ -1,4 +1,4 @@
-package controllers.words;
+package controllers.notionals;
 
 import base.core.Objects;
 import core.controller.Route;

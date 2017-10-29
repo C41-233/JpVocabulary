@@ -1,4 +1,4 @@
-package controllers.words;
+package controllers.notionals;
 
 import java.util.ArrayList;
 import java.util.List;

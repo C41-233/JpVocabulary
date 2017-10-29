@@ -15,7 +15,6 @@ public enum NotionalWordType {
 		接续词,
 		疑问词,
 		接头词,
-		数量词,
-		叹词;
+		数量词;
 	
 }

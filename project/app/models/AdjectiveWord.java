@@ -10,17 +10,17 @@ import core.model.ConcatSplit;
 import core.model.ModelBase;
 import core.model.ModelConstant;
 import logic.LogicValidate;
-import po.IVerbWord;
+import po.AdjectiveWordType;
+import po.IAdjectiveWord;
 import po.WordFixword;
-import po.VerbWordType;
 
 @Entity
-@Table(name="verbs")
-public class VerbWord extends ModelBase implements IVerbWord{
+@Table(name="adjectives")
+public class AdjectiveWord extends ModelBase implements IAdjectiveWord{
 
 	@Column(name="meaning", columnDefinition="TEXT")
 	private String meaning;
-	
+
 	@Override
 	public Iterable<String> getMeanings(){
 		return ConcatSplit.splitAsLines(this.meaning);
@@ -33,13 +33,13 @@ public class VerbWord extends ModelBase implements IVerbWord{
 	
 	@Column(name="types")
 	private String types = ModelConstant.EmptyToken;
-	
+
 	@Override
-	public Iterable<VerbWordType> getTypes(){
-		return Linq.from(ConcatSplit.splitAsTokens(this.types)).select(t->VerbWordType.valueOf(t));
+	public Iterable<AdjectiveWordType> getTypes(){
+		return Linq.from(ConcatSplit.splitAsTokens(this.types)).select(t->AdjectiveWordType.valueOf(t));
 	}
 	
-	public void setTypes(Iterable<VerbWordType> types) {
+	public void setTypes(Iterable<AdjectiveWordType> types) {
 		Assert.require(types);
 		this.types = ConcatSplit.concatTokens(
 			Linq.from(types)
@@ -48,18 +48,6 @@ public class VerbWord extends ModelBase implements IVerbWord{
 		);
 	}
 
-	@Override
-	public Iterable<VerbWordValue> getValues() {
-		return VerbWordValue.find("refId=?1 order by value", id).fetch();
-	}
-
-	@Override
-	public Iterable<String> getSyllables() {
-		return Linq.from(getValues())
-				.select(v->v.getValue())
-				.where(s->LogicValidate.isValidSyllable(s));
-	}
-	
 	@Column(name="fixwords", columnDefinition="TEXT")
 	private String fixwords = ModelConstant.EmptyJsonArray;
 
@@ -81,4 +69,16 @@ public class VerbWord extends ModelBase implements IVerbWord{
 		this.fixwords = fixwords.toString();
 	}
 
+	@Override
+	public Iterable<AdjectiveWordValue> getValues() {
+		return AdjectiveWordValue.find("refId=?1 order by value", id).fetch();
+	}
+
+	@Override
+	public Iterable<String> getSyllables() {
+		return Linq.from(getValues())
+				.select(v->v.getValue())
+				.where(s->LogicValidate.isValidSyllable(s));
+	}
+	
 }

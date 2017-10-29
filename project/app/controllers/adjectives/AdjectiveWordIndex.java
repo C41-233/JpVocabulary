@@ -1,4 +1,4 @@
-package controllers.words;
+package controllers.adjectives;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,13 +11,13 @@ import core.controller.validation.annotation.Required;
 import logic.LogicValidate;
 import logic.indexes.IndexManager;
 import logic.pinyins.Pinyins;
-import logic.words.VerbWordsLogic;
-import po.IVerbWord;
-import po.IVerbWordValue;
-import po.VerbFixword;
-import po.VerbWordType;
+import logic.words.AdjectiveWordsLogic;
+import po.AdjectiveWordType;
+import po.IAdjectiveWord;
+import po.IAdjectiveWordValue;
+import po.WordFixword;
 
-public class VerbWordIndex extends HTMLComponentsControllerBase{
+public class AdjectiveWordIndex extends HTMLComponentsControllerBase{
 
 	public static void index() {
 		page(IndexManager.Hiragana.getFirst());
@@ -25,7 +25,7 @@ public class VerbWordIndex extends HTMLComponentsControllerBase{
 	
 	public static void page(@Required String index) {
 		LeftIndexGroup indexes = LeftIndexGroup.compile(index, IndexManager.Hiragana, IndexManager.Character);
-		indexes.url(s->Route.get(VerbWordIndex.class, "page", new RouteArgs().put("index", s)));
+		indexes.url(s->Route.get(AdjectiveWordIndex.class, "page", new RouteArgs().put("index", s)));
 		renderArgs.put("indexes", indexes);
 		renderArgs.put("index", index);
 
@@ -36,14 +36,14 @@ public class VerbWordIndex extends HTMLComponentsControllerBase{
 			processAsHiragana(index);
 		}
 		
-		render("words/word-verb-index");
+		render("words/word-adj-index");
 	}
 
 	private static void processAsHiragana(String index) {
-		List<IVerbWordValue> values = VerbWordsLogic.findVerbWordValuesByIndex(index);
+		List<IAdjectiveWordValue> values = AdjectiveWordsLogic.findAdjectiveWordValuesByIndex(index);
 		List<WordVO> wordsVO = new ArrayList<>();
-		for(IVerbWordValue value : values) {
-			IVerbWord word = value.getWord();
+		for(IAdjectiveWordValue value : values) {
+			IAdjectiveWord word = value.getWord();
 			
 			WordVO vo = new WordVO();
 			vo.value = value.getValue();
@@ -53,18 +53,17 @@ public class VerbWordIndex extends HTMLComponentsControllerBase{
 				Linq.from(word.getValues())
 					.select(t->t.getValue())
 					.where(t->LogicValidate.isValidSyllable(t)==false)
-					.orderBy(VerbWordsLogic.ValueComparator)
 					.foreach(t->vo.alias.add(t));
 			}
 			else {
 				Linq.from(word.getSyllables()).foreach(t->vo.alias.add(t));
 			}
 			
-			vo.href = Route.get(VerbWordDetail.class, "index", new RouteArgs().put("id", word.getId()).put("refer", request.url));
+			//vo.href = Route.get(VerbWordDetail.class, "index", new RouteArgs().put("id", word.getId()).put("refer", request.url));
 			
 			Linq.from(word.getMeanings()).foreach(t->vo.meanings.add(t));
 			
-			Linq.from(word.getTypes()).select(t->t.toSimple()).foreach(t->vo.types.add(t));
+			//Linq.from(word.getTypes()).select(t->t.toSimple()).foreach(t->vo.types.add(t));
 			
 			Linq.from(word.getFixwords()).select(t->{
 				FixwordVO fixwordVO = new FixwordVO();
@@ -83,7 +82,7 @@ public class VerbWordIndex extends HTMLComponentsControllerBase{
 		List<PinyinGroupVO> pinyinGroupsVO = new ArrayList<>();
 		for(int i=1; i<=4; i++) {
 			String pinyin = index+i;
-			List<IVerbWordValue> values = VerbWordsLogic.findVerbWordValuesByIndex(pinyin);
+			List<IAdjectiveWordValue> values = AdjectiveWordsLogic.findAdjectiveWordValuesByIndex(index);
 			if(values.size() == 0) {
 				continue;
 			}
@@ -98,8 +97,8 @@ public class VerbWordIndex extends HTMLComponentsControllerBase{
 					characterGroupVO.name = group.getKey();
 					groupVO.characters.add(characterGroupVO);
 					
-					for(IVerbWordValue value : group) {
-						IVerbWord word = value.getWord();
+					for(IAdjectiveWordValue value : group) {
+						IAdjectiveWord word = value.getWord();
 						
 						WordVO wordVO = new WordVO();
 						wordVO.value = value.getValue();
@@ -112,13 +111,13 @@ public class VerbWordIndex extends HTMLComponentsControllerBase{
 							wordVO.meanings.add(meaning);
 						}
 						
-						for(VerbWordType type : word.getTypes()) {
-							wordVO.types.add(type.toSimple());
+						for(AdjectiveWordType type : word.getTypes()) {
+							//wordVO.types.add(type.toSimple());
 						}
 						
-						wordVO.href = Route.get(VerbWordDetail.class, "index", new RouteArgs().put("id", word.getId()).put("refer", request.url));
+						//wordVO.href = Route.get(VerbWordDetail.class, "index", new RouteArgs().put("id", word.getId()).put("refer", request.url));
 						
-						for(VerbFixword fixword : word.getFixwords()) {
+						for(WordFixword fixword : word.getFixwords()) {
 							FixwordVO fixwordVO = new FixwordVO();
 							fixwordVO.value = fixword.getValue();
 							fixwordVO.meaning = fixword.getMeaning();

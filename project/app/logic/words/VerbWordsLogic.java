@@ -20,7 +20,7 @@ import models.VerbWord;
 import models.VerbWordValue;
 import po.IVerbWord;
 import po.IVerbWordValue;
-import po.VerbFixword;
+import po.WordFixword;
 import po.VerbWordType;
 
 public final class VerbWordsLogic extends LogicBase{
@@ -156,7 +156,7 @@ public final class VerbWordsLogic extends LogicBase{
 			raise("词组已存在：%s", value);
 		}
 		
-		word.addFixword(new VerbFixword(value, meaning));
+		word.addFixword(new WordFixword(value, meaning));
 		word.save();
 	}
 
@@ -175,7 +175,7 @@ public final class VerbWordsLogic extends LogicBase{
 			raise("词组不存在：%s", value);
 		}
 		word.deleteFixword(value);
-		word.addFixword(new VerbFixword(value, meaning));
+		word.addFixword(new WordFixword(value, meaning));
 		word.save();
 	}
 

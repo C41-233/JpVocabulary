@@ -28,37 +28,39 @@ POST	/characters/action/update-syllable-words characters.CharacterAPI.updateSyll
 POST	/characters/action/add-fixword			characters.CharacterAPI.addFixword
 POST	/characters/action/delete-fixword		characters.CharacterAPI.deleteFixword
 
-GET		/words/character						words.CharacterWordIndex.index
-GET		/words/character/{index}				words.CharacterWordIndex.page
+GET		/words/character						notionals.CharacterWordIndex.index
+GET		/words/character/{index}				notionals.CharacterWordIndex.page
+GET		/words/hiragana							notionals.HiraganaWordIndex.index
+GET		/words/hiragana/{index}					notionals.HiraganaWordIndex.page
+GET		/words/function							notionals.FunctionWordIndex.index
+GET		/words/function/{index}					notionals.FunctionWordIndex.page
+GET		/words/adjnoun							notionals.AdjNounWordIndex.index
+GET		/words/adjnoun/{index}					notionals.AdjNounWordIndex.page
+GET		/words/notional/{<[0-9]+>id}/edit		notionals.NotionalWordEdit.index
 
-GET		/words/hiragana							words.HiraganaWordIndex.index
-GET		/words/hiragana/{index}					words.HiraganaWordIndex.page
-GET		/words/function							words.FunctionWordIndex.index
-GET		/words/function/{index}					words.FunctionWordIndex.page
-GET		/words/adjnoun							words.AdjNounWordIndex.index
-GET		/words/adjnoun/{index}					words.AdjNounWordIndex.page
-GET		/words/verb								words.VerbWordIndex.index
-GET		/words/verb/{<[0-9]+>id}				words.VerbWordDetail.index
-GET		/words/verb/{index}						words.VerbWordIndex.page
+POST	/words/notional/action/create			notionals.NotionalWordAPI.create
+POST	/words/notional/action/delete			notionals.NotionalWordAPI.delete
+POST	/words/notional/action/add-value		notionals.NotionalWordAPI.addValue
+POST	/words/notional/action/delete-value		notionals.NotionalWordAPI.deleteValue
+POST	/words/notional/action/update-meanings	notionals.NotionalWordAPI.updateMeanings
+POST	/words/notional/action/update-type		notionals.NotionalWordAPI.updateType
 
-GET		/words/notional/{<[0-9]+>id}/edit		words.NotionalWordEdit.index
-GET		/words/verb/{<[0-9]+>id}/edit			words.VerbWordEdit.index
+GET		/words/verb								verbs.VerbWordIndex.index
+GET		/words/verb/{index}						verbs.VerbWordIndex.page
+GET		/words/verb/{<[0-9]+>id}				verbs.VerbWordDetail.index
+GET		/words/verb/{<[0-9]+>id}/edit			verbs.VerbWordEdit.index
 
-POST	/words/notional/action/create			words.NotionalWordAPI.create
-POST	/words/notional/action/delete			words.NotionalWordAPI.delete
-POST	/words/notional/action/add-value		words.NotionalWordAPI.addValue
-POST	/words/notional/action/delete-value		words.NotionalWordAPI.deleteValue
-POST	/words/notional/action/update-meanings	words.NotionalWordAPI.updateMeanings
-POST	/words/notional/action/update-type		words.NotionalWordAPI.updateType
+POST	/words/verb/action/create				verbs.VerbWordAPI.create
+POST	/words/verb/action/delete				verbs.VerbWordAPI.delete
+POST	/words/verb/action/update-meanings		verbs.VerbWordAPI.updateMeanings
+POST	/words/verb/action/add-value			verbs.VerbWordAPI.addValue
+POST	/words/verb/action/delete-value			verbs.VerbWordAPI.deleteValue
+POST	/words/verb/action/update-type			verbs.VerbWordAPI.updateType
+POST	/words/verb/action/add-fixword			verbs.VerbWordAPI.addFixword
+POST	/words/verb/action/delete-fixword		verbs.VerbWordAPI.deleteFixword
+POST	/words/verb/action/update-fixword		verbs.VerbWordAPI.updateFixword
 
-POST	/words/verb/action/create				words.VerbWordAPI.create
-POST	/words/verb/action/delete				words.VerbWordAPI.delete
-POST	/words/verb/action/update-meanings		words.VerbWordAPI.updateMeanings
-POST	/words/verb/action/add-value			words.VerbWordAPI.addValue
-POST	/words/verb/action/delete-value			words.VerbWordAPI.deleteValue
-POST	/words/verb/action/update-type			words.VerbWordAPI.updateType
-POST	/words/verb/action/add-fixword			words.VerbWordAPI.addFixword
-POST	/words/verb/action/delete-fixword		words.VerbWordAPI.deleteFixword
-POST	/words/verb/action/update-fixword		words.VerbWordAPI.updateFixword
+GET		/words/adj								adjectives.AdjectiveWordIndex.index
+GET		/words/adj/{index}						adjectives.AdjectiveWordIndex.page
 
 GET		/test									Test.test

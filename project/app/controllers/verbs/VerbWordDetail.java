@@ -1,4 +1,4 @@
-package controllers.words;
+package controllers.verbs;
 
 import java.util.ArrayList;
 import java.util.List;
