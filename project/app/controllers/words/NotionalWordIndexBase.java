@@ -16,7 +16,7 @@ import po.INotionalWordValue;
 import po.NotionalWordType;
 import po.NotionalWordValueType;
 
-public abstract class NotionalWordIndex extends HTMLComponentsControllerBase{
+public abstract class NotionalWordIndexBase extends HTMLComponentsControllerBase{
 
 	@FunctionalInterface
 	protected static interface IWordProvider{
@@ -28,7 +28,7 @@ public abstract class NotionalWordIndex extends HTMLComponentsControllerBase{
 		public String route(String index);
 	}
 	
-	protected static void process(String index, IWordProvider wordProvider, IPageProvider pageProvider) {
+	protected static void process(String index, String wordsName, IWordProvider wordProvider, IPageProvider pageProvider) {
 		renderArgs.put("index", index);
 		
 		LeftIndexGroup indexes =LeftIndexGroup.compile(index, IndexManager.Hiragana, IndexManager.Character);
@@ -42,6 +42,7 @@ public abstract class NotionalWordIndex extends HTMLComponentsControllerBase{
 			processAsHiragana(index, wordProvider);
 		}
 		
+		renderArgs.put("group", wordsName);
 		render("words/word-notional-index");
 	}
 

@@ -35,6 +35,8 @@ GET		/words/hiragana							words.HiraganaWordIndex.index
 GET		/words/hiragana/{index}					words.HiraganaWordIndex.page
 GET		/words/function							words.FunctionWordIndex.index
 GET		/words/function/{index}					words.FunctionWordIndex.page
+GET		/words/adjnoun							words.AdjNounWordIndex.index
+GET		/words/adjnoun/{index}					words.AdjNounWordIndex.page
 GET		/words/verb								words.VerbWordIndex.index
 GET		/words/verb/{<[0-9]+>id}				words.VerbWordDetail.index
 GET		/words/verb/{index}						words.VerbWordIndex.page

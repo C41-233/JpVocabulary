@@ -15,7 +15,7 @@ import logic.words.NotionalWordsQueryLogic;
 import po.INotionalWord;
 import po.INotionalWordValue;
 
-public class CharacterWordIndex extends HTMLComponentsControllerBase{
+public final class CharacterWordIndex extends HTMLComponentsControllerBase{
 
 	public static void index() {
 		page(IndexManager.Character.getFirst());

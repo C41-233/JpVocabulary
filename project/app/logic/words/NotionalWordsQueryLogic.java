@@ -16,6 +16,7 @@ import models.NotionalWord;
 import models.NotionalWordValue;
 import po.INotionalWord;
 import po.INotionalWordValue;
+import po.NotionalWordType;
 import po.NotionalWordValueType;
 
 public final class NotionalWordsQueryLogic {
@@ -61,7 +62,7 @@ public final class NotionalWordsQueryLogic {
 		and.and("type=? or type=?", NotionalWordValueType.Mixed.value(), NotionalWordValueType.Syllable.value());
 		and.and(Like.contains("index", ConcatSplit.getToken(index)));
 		
-		Clause clause = new Clause("id", "NotionalWord", Like.contains("types", ConcatSplit.getToken("名词")));
+		Clause clause = new Clause("id", "NotionalWord", Like.contains("types", ConcatSplit.getToken(NotionalWordType.名词.toString())));
 		and.and(new In("refId", clause));
 		
 		hql.where(and);
@@ -78,15 +79,30 @@ public final class NotionalWordsQueryLogic {
 		and.and(Like.contains("index", ConcatSplit.getToken(index)));
 		
 		Or orTypes = new Or();
-		orTypes.or(Like.contains("types", "副词"));
-		orTypes.or(Like.contains("types", "代词"));
-		orTypes.or(Like.contains("types", "连体词"));
-		orTypes.or(Like.contains("types", "接续词"));
-		orTypes.or(Like.contains("types", "疑问词"));
-		orTypes.or(Like.contains("types", "接头词"));
-		orTypes.or(Like.contains("types", "数量词"));
+		orTypes.or(Like.contains("types", ConcatSplit.getToken(NotionalWordType.副词.toString())));
+		orTypes.or(Like.contains("types", ConcatSplit.getToken(NotionalWordType.代词.toString())));
+		orTypes.or(Like.contains("types", ConcatSplit.getToken(NotionalWordType.连体词.toString())));
+		orTypes.or(Like.contains("types", ConcatSplit.getToken(NotionalWordType.接续词.toString())));
+		orTypes.or(Like.contains("types", ConcatSplit.getToken(NotionalWordType.疑问词.toString())));
+		orTypes.or(Like.contains("types", ConcatSplit.getToken(NotionalWordType.接头词.toString())));
+		orTypes.or(Like.contains("types", ConcatSplit.getToken(NotionalWordType.数量词.toString())));
 		
 		Clause clause = new Clause("id", "NotionalWord", orTypes);
+		and.and(new In("refId", clause));
+		
+		hql.where(and);
+		
+		HQLResult rst = hql.end();
+		return NotionalWordValue.find(rst.select, rst.params).fetch();
+	}
+
+	public static List<INotionalWordValue> findAdjNounWordValuesByIndex(String index) {
+		HQL hql = HQL.begin();
+		
+		And and = new And();
+		and.and(Like.contains("index", ConcatSplit.getToken(index)));
+		
+		Clause clause = new Clause("id", "NotionalWord", Like.contains("types", ConcatSplit.getToken(NotionalWordType.形容动词.toString())));
 		and.and(new In("refId", clause));
 		
 		hql.where(and);
