@@ -63,7 +63,7 @@ public class AdjectiveWordIndex extends HTMLComponentsControllerBase{
 			
 			Linq.from(word.getMeanings()).foreach(t->vo.meanings.add(t));
 			
-			//Linq.from(word.getTypes()).select(t->t.toSimple()).foreach(t->vo.types.add(t));
+			Linq.from(word.getTypes()).select(t->t.toSimple()).foreach(t->vo.types.add(t));
 			
 			Linq.from(word.getFixwords()).select(t->{
 				FixwordVO fixwordVO = new FixwordVO();
@@ -82,7 +82,7 @@ public class AdjectiveWordIndex extends HTMLComponentsControllerBase{
 		List<PinyinGroupVO> pinyinGroupsVO = new ArrayList<>();
 		for(int i=1; i<=4; i++) {
 			String pinyin = index+i;
-			List<IAdjectiveWordValue> values = AdjectiveWordsLogic.findAdjectiveWordValuesByIndex(index);
+			List<IAdjectiveWordValue> values = AdjectiveWordsLogic.findAdjectiveWordValuesByIndex(pinyin);
 			if(values.size() == 0) {
 				continue;
 			}
@@ -112,7 +112,7 @@ public class AdjectiveWordIndex extends HTMLComponentsControllerBase{
 						}
 						
 						for(AdjectiveWordType type : word.getTypes()) {
-							//wordVO.types.add(type.toSimple());
+							wordVO.types.add(type.toSimple());
 						}
 						
 						//wordVO.href = Route.get(VerbWordDetail.class, "index", new RouteArgs().put("id", word.getId()).put("refer", request.url));

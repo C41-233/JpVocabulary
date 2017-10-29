@@ -1,6 +1,7 @@
 package logic;
 
 import base.utility.Chars;
+import base.utility.function.Predicates;
 import base.utility.linq.Linq;
 
 public final class LogicValidate {
@@ -22,7 +23,12 @@ public final class LogicValidate {
 	}
 
 	public static boolean isCharacterWord(String word) {
-		return word != null && word.length() >0 && Linq.from(word).isAll(Chars::isCJKUnifiedIdeograph);
+		return word != null && word.length() >0 && Linq.from(word).isAll(Predicates.or(Chars::isCJKUnifiedIdeograph, c->c=='々'));
 	}
 	
+	public static boolean isValidJpBasicWord(String word) {
+		return word != null 
+				&& word.isEmpty() == false 
+				&& Linq.from(word).isAll(Predicates.or(Chars::isCJKUnifiedIdeograph, Chars::isHiragana, c->c=='々'));
+	}
 }

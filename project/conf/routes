@@ -63,4 +63,6 @@ POST	/words/verb/action/update-fixword		verbs.VerbWordAPI.updateFixword
 GET		/words/adj								adjectives.AdjectiveWordIndex.index
 GET		/words/adj/{index}						adjectives.AdjectiveWordIndex.page
 
+POST	/words/adj/action/create				adjectives.AdjectiveWordAPI.create
+
 GET		/test									Test.test

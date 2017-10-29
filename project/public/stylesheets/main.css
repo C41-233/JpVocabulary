@@ -76,3 +76,10 @@ textarea{
 #import-verb-word-types .checkbox{
 	width:			80px;
 }
+
+/*添加形容词*/
+#import-adj-word-input-words,
+#import-adj-word-input-meanings{
+	width:			380px;
+	margin-bottom:	5px;
+}

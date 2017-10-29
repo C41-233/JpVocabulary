@@ -236,3 +236,53 @@ $(function(){
 		}
 	})
 })
+
+//添加形容词
+
+$(function(){
+
+	function actionCreateAdj(){
+		if($("#dialog-import-adj-word").validate("hasError")){
+			return
+		}
+		
+		var values = $("#import-adj-word-input-words").val().toLines()
+		var meanings = $("#import-adj-word-input-meanings").val().toLines()
+		var types = Linq.from($("#import-adj-word-types input[type='checkbox']:checked"))
+			.select(function(q){
+				return $(q).parent().text().trim()
+			})
+			.toArray()
+		
+		Action.post("/words/adj/action/create", {values: values, meanings: meanings, types: types}, function(data){
+			location.href = data.href
+		})
+	}
+
+	$("#dialog-import-adj-word").jpDialog({
+		width:	420,
+		buttons: {
+			"创建": actionCreateAdj,
+			"取消": function(){
+				$(this).dialog("close")
+			}
+		},
+		trigger: "#btn-import-adj-word"
+	})
+	
+	$("#dialog-import-adj-word").validate({
+		"#import-adj-word-input-words": function(val){
+			var list = Linq.from(val.split("\n")).select(function(s){
+				return s.trim()
+			}).where(function(s){
+				return s != ""
+			})
+			
+			return list.isExist(function(s){
+				return Validate.isValidSyllable(s)
+			}) && list.isAll(function(s){
+				return s.match(/い$/)
+			})
+		}
+	})
+})

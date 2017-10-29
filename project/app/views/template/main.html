@@ -104,6 +104,7 @@
 							<li><a href="javascript:void(0)" id="btn-import-character">汉字</a></li>
 							<li><a href="javascript:void(0)" id="btn-import-notional-word">基本词</a></li>
 							<li><a href="javascript:void(0)" id="btn-import-verb-word">动词</a></li>
+							<li><a href="javascript:void(0)" id="btn-import-adj-word">形容词</a></li>
 						</ul>
 					</li>
 					<li><a href="javascript:void(0)" id="btn-mysqldump">导出</a></li>
@@ -279,5 +280,35 @@
 		</div>
 	</div>
 	
+	<div id="dialog-import-adj-word" title="创建形容词" class="pre-hide">
+		<div class="text-center">
+			<form class="form-inline">
+				<div class="form-group">
+					<textarea id="import-adj-word-input-words" class="form-control" placeholder="每行一个单词，至少包含一个读音
+形容词以い结尾" rows="3"></textarea>
+				</div>
+				<div class="form-group">
+					<textarea id="import-adj-word-input-meanings" class="form-control" placeholder="每行一个释义" rows="4"></textarea>
+				</div>
+				<div class="text-left" id="import-adj-word-types">
+					<div class="checkbox">
+						<label>
+							<input type="checkbox"> 否定
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox"> 补助
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox"> 尊敬
+						</label>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
 </body>
 </html>

@@ -46,7 +46,7 @@ public enum NotionalWordValueType {
 		}
 		
 		//汉字与假名混合
-		if(Linq.from(value).isAll(Predicates.or(Chars::isCJKUnifiedIdeograph, Chars::isHiragana, Chars::isKatakana))) {
+		if(Linq.from(value).isAll(Predicates.or(Chars::isCJKUnifiedIdeograph, Chars::isHiragana, Chars::isKatakana, c->c=='々'))) {
 			return Mixed;
 		}
 		

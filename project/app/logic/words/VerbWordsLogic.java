@@ -7,7 +7,6 @@ import java.util.Set;
 import base.utility.Chars;
 import base.utility.collection.Iterables;
 import base.utility.comparator.Comparators;
-import base.utility.function.Predicates;
 import base.utility.linq.Linq;
 import core.model.ConcatSplit;
 import core.model.hql.HQL;
@@ -20,8 +19,8 @@ import models.VerbWord;
 import models.VerbWordValue;
 import po.IVerbWord;
 import po.IVerbWordValue;
-import po.WordFixword;
 import po.VerbWordType;
+import po.WordFixword;
 
 public final class VerbWordsLogic extends LogicBase{
 
@@ -198,8 +197,8 @@ public final class VerbWordsLogic extends LogicBase{
 	private static void raiseIfNotValidVerbWordValue(String value) {
 		if(
 			value == null || value.length() == 0
-			|| Linq.from(value).isAll(Predicates.or(Chars::isCJKUnifiedIdeograph, Chars::isHiragana)) == false
-			|| Linq.from(value).isAll(Chars::isCJKUnifiedIdeograph)
+			|| LogicValidate.isValidJpBasicWord(value) == false
+			|| LogicValidate.isCharacterWord(value)
 		) {
 			raise("不是合法的动词：%s", value);
 		}

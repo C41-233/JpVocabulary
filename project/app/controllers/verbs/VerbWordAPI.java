@@ -28,10 +28,10 @@ public class VerbWordAPI extends AjaxControllerBase{
 			badRequest("不合法的词性：%s", Linq.from(types).findFirst(s->Objects.asEnum(VerbWordType.class, s)==null));
 		}
 		List<String> valuesList = Arrays.asList(values);
-		List<String> meaingsList = Arrays.asList(meanings);
+		List<String> meaningsList = Arrays.asList(meanings);
 		List<VerbWordType> typesList = Linq.from(types).select(t->VerbWordType.valueOf(t)).toList();
 		
-		IVerbWord word = VerbWordsLogic.create(valuesList, meaingsList, typesList);
+		IVerbWord word = VerbWordsLogic.create(valuesList, meaningsList, typesList);
 		jsonResult.put("href", Route.get(VerbWordDetail.class, "index", new RouteArgs().put("id", word.getId())));
 	}
 
