@@ -7,7 +7,6 @@ import java.util.HashSet;
 
 import base.io.LineReader;
 import base.io.RuntimeIOException;
-import base.utility.linq.Linq;
 
 class IndexManagerImplement implements IIndexManager{
 
@@ -22,6 +21,7 @@ class IndexManagerImplement implements IIndexManager{
 	
 	private final ArrayList<IIndexGroup> cache = new ArrayList<>();
 	private final HashSet<String> indexSet = new HashSet<>();
+	private final ArrayList<String> indexList = new ArrayList<>();
 	
 	private long lastTime = 0;
 	
@@ -40,7 +40,7 @@ class IndexManagerImplement implements IIndexManager{
 	@Override
 	public String getFirst() {
 		tryLoad();
-		return Linq.from(cache).selectMany(group->group.getItems()).first();
+		return indexList.get(0);
 	}
 	
 	private void tryLoad(){
@@ -52,6 +52,7 @@ class IndexManagerImplement implements IIndexManager{
 		
 		cache.clear();
 		indexSet.clear();
+		indexList.clear();
 		
 		try(LineReader scanner = new LineReader(file.toPath(), LineReader.Trim | LineReader.SkipEmpty)){
 			IndexGroup last = null;
@@ -64,11 +65,20 @@ class IndexManagerImplement implements IIndexManager{
 					last.name = line.substring(1, line.length()-1);
 				}
 				else{
-					last.items.add(line);
+					if(last != null) {
+						last.items.add(line);
+					}
 					indexSet.add(line);
+					indexList.add(line);
 				}
 			}
 		}
+	}
+
+	@Override
+	public Iterable<String> all() {
+		tryLoad();
+		return indexList;
 	}
 
 }

@@ -6,6 +6,8 @@ import java.util.List;
 import base.core.Objects;
 import base.utility.linq.Linq;
 import core.controller.AjaxControllerBase;
+import core.controller.Route;
+import core.controller.RouteArgs;
 import core.controller.validation.annotation.Array;
 import core.controller.validation.annotation.Required;
 import core.controller.validation.annotation.StringValue;
@@ -29,7 +31,7 @@ public class AdjectiveWordAPI extends AjaxControllerBase{
 		List<AdjectiveWordType> typesList = Linq.from(types).select(t->AdjectiveWordType.valueOf(t)).toList();
 		
 		IAdjectiveWord word = AdjectiveWordsLogic.create(valuesList, meaningsList, typesList);
-		//jsonResult.put("href", Route.get(VerbWordDetail.class, "index", new RouteArgs().put("id", word.getId())));
+		jsonResult.put("href", Route.get(AdjectiveWordDetail.class, "index", new RouteArgs().put("id", word.getId())));
 	}
 
 }

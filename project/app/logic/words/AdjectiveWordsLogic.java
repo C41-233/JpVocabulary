@@ -27,6 +27,15 @@ public final class AdjectiveWordsLogic extends LogicBase{
 		return AdjectiveWordValue.find(result.select, result.params).fetch();
 	}
 
+	public static List<IAdjectiveWordValue> findAdjectiveWordValuesByAlpha(char ch) {
+		HQL hql = HQL.begin();
+		hql.where(Like.contains("index", ConcatSplit.Split+Character.toLowerCase(ch)));
+		hql.orderBy("value");
+		HQLResult result = hql.end();
+		
+		return AdjectiveWordValue.find(result.select, result.params).fetch();
+	}
+
 	public static boolean hasAdjectiveWordValue(String value) {
 		return AdjectiveWordValue.find("value=?1", value).first() != null;
 	}

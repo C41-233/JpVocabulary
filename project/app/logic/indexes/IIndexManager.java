@@ -8,4 +8,6 @@ public interface IIndexManager {
 
 	public String getFirst();
 
+	public Iterable<String> all();
+
 }

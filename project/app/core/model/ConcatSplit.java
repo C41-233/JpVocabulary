@@ -8,6 +8,8 @@ import base.utility.linq.Linq;
 
 public final class ConcatSplit{
 
+	public static final String Split = "|";
+
 	private ConcatSplit() {}
 	
 	public static List<String> splitAsTokens(String s) {
