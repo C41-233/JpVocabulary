@@ -3,12 +3,15 @@ package controllers.adjectives;
 import java.util.Arrays;
 import java.util.List;
 
+import org.jboss.netty.handler.codec.replay.VoidEnum;
+
 import base.core.Objects;
 import base.utility.linq.Linq;
 import core.controller.AjaxControllerBase;
 import core.controller.Route;
 import core.controller.RouteArgs;
 import core.controller.validation.annotation.Array;
+import core.controller.validation.annotation.Id;
 import core.controller.validation.annotation.Required;
 import core.controller.validation.annotation.StringValue;
 import logic.words.AdjectiveWordsLogic;
@@ -34,4 +37,16 @@ public class AdjectiveWordAPI extends AjaxControllerBase{
 		jsonResult.put("href", Route.get(AdjectiveWordDetail.class, "index", new RouteArgs().put("id", word.getId())));
 	}
 
+	public static void delete(@Id long id) {
+		AdjectiveWordsLogic.delete(id);
+	}
+	
+	public static void addValue(@Id long id, @Required @StringValue(minLength=1) String value) {
+		AdjectiveWordsLogic.addValue(id, value);
+	}
+	
+	public static void deleteValue(@Id long id) {
+		AdjectiveWordsLogic.deleteValue(id);
+	}
+	
 }

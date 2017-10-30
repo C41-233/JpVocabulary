@@ -63,7 +63,11 @@ POST	/words/verb/action/update-fixword		verbs.VerbWordAPI.updateFixword
 GET		/words/adj								adjectives.AdjectiveWordIndex.index
 GET		/words/adj/{<[0-9]+>id}					adjectives.AdjectiveWordDetail.index
 GET		/words/adj/{index}						adjectives.AdjectiveWordIndex.page
+GET		/words/adj/{<[0-9]+>id}/edit			adjectives.AdjectiveWordEdit.index
 
 POST	/words/adj/action/create				adjectives.AdjectiveWordAPI.create
+POST	/words/adj/action/delete				adjectives.AdjectiveWordAPI.delete
+POST	/words/adj/action/add-value				adjectives.AdjectiveWordAPI.addValue
+POST	/words/adj/action/delete-value			adjectives.AdjectiveWordAPI.deleteValue
 
 GET		/test									Test.test

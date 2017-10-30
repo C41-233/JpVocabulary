@@ -52,7 +52,7 @@ public final class AdjectiveWordDetail extends HtmlControllerBase{
 		
 		renderArgs.put("word", wordVO);
 		
-		render("words/word-adj-detail");
+		render("adjs/adj-detail");
 	}
 
 	private static class WordVO{

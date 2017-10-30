@@ -88,6 +88,55 @@ public final class AdjectiveWordsLogic extends LogicBase{
 		return word;
 	}
 
+	public static void delete(long id) {
+		AdjectiveWord word = getAdjectiveWordOrRaiseIfNotExist(id);
+		for(AdjectiveWordValue value : word.getValues()) {
+			value.delete();
+		}
+		word.delete();
+	}
+	
+	public static void addValue(long id, String value) {
+		raiseIfNotValidAdjectiveWordValue(value);
+		raiseIfDuplicateAdjectiveWordValue(value);
+		raiseIfNotExistQueryIndex(value);
+		
+		AdjectiveWord word = getAdjectiveWordOrRaiseIfNotExist(id);
+		if(Linq.from(word.getValues()).isExist(v->v.getValue().equals(value))) {
+			raise("重复添加形容词：%s", value);
+		}
+		
+		AdjectiveWordValue wordValue = new AdjectiveWordValue();
+		wordValue.setValue(value);
+		wordValue.setAdjectiveWordId(word.getId());
+		wordValue.setIndexes(WordQueryIndex.getWordQueryIndex(value));
+		wordValue.save();
+	}
+	
+	public static void deleteValue(long id) {
+		AdjectiveWordValue value = getAdjectiveWordValueOrRaiseIfNotExist(id);
+		if(LogicValidate.isValidSyllable(value.getValue()) && Linq.from(value.getWord().getSyllables()).count() == 1) {
+			raise("不能删除全部注音");
+		}
+		value.delete();
+	}
+	
+	private static AdjectiveWord getAdjectiveWordOrRaiseIfNotExist(long id) {
+		AdjectiveWord word = AdjectiveWord.findById(id);
+		if(word == null) {
+			raise("形容词不存在：id=%d", id);
+		}
+		return word;
+	}
+	
+	private static AdjectiveWordValue getAdjectiveWordValueOrRaiseIfNotExist(long id) {
+		AdjectiveWordValue value = AdjectiveWordValue.findById(id);
+		if(value == null) {
+			raise("形容词不存在：id=%d", id);
+		}
+		return value;
+	}
+	
 	private static void raiseIfNotValidAdjectiveWordValue(String value) {
 		if(
 			value == null
