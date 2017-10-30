@@ -2,6 +2,7 @@ package logic.words;
 
 import java.util.List;
 
+import base.utility.collection.Iterables;
 import base.utility.linq.Linq;
 import core.model.ConcatSplit;
 import core.model.hql.HQL;
@@ -17,6 +18,24 @@ import po.IAdjectiveWord;
 import po.IAdjectiveWordValue;
 
 public final class AdjectiveWordsLogic extends LogicBase{
+
+	public static IAdjectiveWord getAdjectiveWordAndUpdate(long id) {
+		AdjectiveWord word = AdjectiveWord.findById(id);
+		if(word == null) {
+			return null;
+		}
+
+		//更新单词索引
+		for(AdjectiveWordValue value : word.getValues()) {
+			List<String> indexes = WordQueryIndex.getWordQueryIndex(value.getValue());
+			if(Iterables.equals(value.getIndexes(), indexes) == false) {
+				value.setIndexes(indexes);
+				value.save();
+			}
+		}
+		
+		return word;
+	}
 
 	public static List<IAdjectiveWordValue> findAdjectiveWordValuesByIndex(String index) {
 		HQL hql = HQL.begin();

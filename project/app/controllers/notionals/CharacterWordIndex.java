@@ -68,7 +68,7 @@ public final class CharacterWordIndex extends HTMLComponentsControllerBase{
 			}
 		}
 		
-		render("words/word-character-index");
+		render("notionals/character-index");
 	}
 
 	private static class CharacterWordPinyinGroupVO{

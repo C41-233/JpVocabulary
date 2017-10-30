@@ -83,7 +83,7 @@ public final class VerbWordEdit extends HtmlControllerBase{
 		renderArgs.put("refer", refer);
 		jsArgs.put("refer", refer);
 		
-		render("words/verb-edit");
+		render("verbs/verb-edit");
 	}
 	
 	private static class WordVO{

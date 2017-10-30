@@ -52,7 +52,7 @@ public class VerbWordDetail extends HtmlControllerBase{
 		
 		renderArgs.put("word", wordVO);
 		
-		render("words/word-verb-detail");
+		render("verbs/verb-detail");
 	}
 	
 	private static class WordVO{

@@ -77,7 +77,7 @@ public final class NotionalWordEdit extends HtmlControllerBase{
 		jsArgs.put("id", id);
 		jsArgs.put("refer", refer);
 		
-		render("words/notional-edit");
+		render("notionals/notional-edit");
 	}
 	
 	private static class WordVO{

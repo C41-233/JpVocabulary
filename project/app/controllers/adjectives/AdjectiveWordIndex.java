@@ -41,7 +41,7 @@ public class AdjectiveWordIndex extends HTMLComponentsControllerBase{
 			processAsHiragana(index);
 		}
 		
-		render("words/word-adj-index");
+		render("adjs/adj-index");
 	}
 
 	private static void processAsHiragana(String index) {

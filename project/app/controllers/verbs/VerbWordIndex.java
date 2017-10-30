@@ -36,7 +36,7 @@ public class VerbWordIndex extends HTMLComponentsControllerBase{
 			processAsHiragana(index);
 		}
 		
-		render("words/word-verb-index");
+		render("verbs/verb-index");
 	}
 
 	private static void processAsHiragana(String index) {

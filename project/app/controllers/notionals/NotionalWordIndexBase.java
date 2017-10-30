@@ -43,7 +43,7 @@ public abstract class NotionalWordIndexBase extends HTMLComponentsControllerBase
 		}
 		
 		renderArgs.put("group", wordsName);
-		render("words/word-notional-index");
+		render("notionals/notional-index");
 	}
 
 	private static void processAsHiragana(String index, IWordProvider provider) {
