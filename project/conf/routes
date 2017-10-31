@@ -69,5 +69,9 @@ POST	/words/adj/action/create				adjectives.AdjectiveWordAPI.create
 POST	/words/adj/action/delete				adjectives.AdjectiveWordAPI.delete
 POST	/words/adj/action/add-value				adjectives.AdjectiveWordAPI.addValue
 POST	/words/adj/action/delete-value			adjectives.AdjectiveWordAPI.deleteValue
+POST	/words/adj/action/update-meanings		adjectives.AdjectiveWordAPI.updateMeanings
+POST	/words/adj/action/update-type			adjectives.AdjectiveWordAPI.updateType
+POST	/words/adj/action/add-fixword			adjectives.AdjectiveWordAPI.addFixword
+POST	/words/adj/action/delete-fixword		adjectives.AdjectiveWordAPI.deleteFixword
 
 GET		/test									Test.test

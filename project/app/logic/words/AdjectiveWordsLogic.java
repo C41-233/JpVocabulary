@@ -1,6 +1,7 @@
 package logic.words;
 
 import java.util.List;
+import java.util.Set;
 
 import base.utility.collection.Iterables;
 import base.utility.linq.Linq;
@@ -13,9 +14,11 @@ import logic.LogicValidate;
 import logic.pinyins.WordQueryIndex;
 import models.AdjectiveWord;
 import models.AdjectiveWordValue;
+import models.VerbWord;
 import po.AdjectiveWordType;
 import po.IAdjectiveWord;
 import po.IAdjectiveWordValue;
+import po.WordFixword;
 
 public final class AdjectiveWordsLogic extends LogicBase{
 
@@ -119,6 +122,45 @@ public final class AdjectiveWordsLogic extends LogicBase{
 			raise("不能删除全部注音");
 		}
 		value.delete();
+	}
+
+	public static void updateMeanings(long id, List<String> meanings) {
+		AdjectiveWord word = getAdjectiveWordOrRaiseIfNotExist(id);
+		word.setMeanings(meanings);
+		word.save();
+	}
+
+	public static void updateType(long id, AdjectiveWordType type, boolean value) {
+		AdjectiveWord word = getAdjectiveWordOrRaiseIfNotExist(id);
+		Set<AdjectiveWordType> types =Linq.from(word.getTypes()).toSet();
+		if(value) {
+			types.add(type);
+		}
+		else {
+			types.remove(type);
+		}
+		
+		word.setTypes(types);
+		word.save();
+	}
+
+	public static void addFixword(long id, String value, String meaning) {
+		AdjectiveWord word = getAdjectiveWordOrRaiseIfNotExist(id);
+		if(Linq.from(word.getFixwords()).isExist(w->w.getValue().equals(value))) {
+			raise("词组已存在：%s", value);
+		}
+		
+		word.addFixword(new WordFixword(value, meaning));
+		word.save();
+	}
+
+	public static void deleteFixword(long id, String value) {
+		AdjectiveWord word = getAdjectiveWordOrRaiseIfNotExist(id);
+		if(Linq.from(word.getFixwords()).notExist(w->w.getValue().equals(value))) {
+			raise("词组不存在：%s", value);
+		}
+		word.deleteFixword(value);
+		word.save();
 	}
 	
 	private static AdjectiveWord getAdjectiveWordOrRaiseIfNotExist(long id) {

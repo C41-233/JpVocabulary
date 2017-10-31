@@ -58,7 +58,7 @@ $(function(){
 	
 	$("#div-word-types input[type='checkbox']").change(function(){
 		var value = $(this).is(":checked")
-		var type = $(this).data("value")
+		var type = $(this).parent().text().trim()
 		Action.post("/words/adj/action/update-type", {id: DataMgr.id, type: type, value: value}, {
 			complete: function(){
 				location.reload()

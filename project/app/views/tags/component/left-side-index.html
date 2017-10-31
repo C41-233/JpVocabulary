@@ -9,6 +9,7 @@
 	#left-list .left-list-content{
 		padding-left:	0;
 		padding-right:	0;
+		background-color: white;
 	}
 	#left-list .left-list-content a{
 		display:	inline-block;
@@ -16,19 +17,30 @@
 		text-decoration:	none;
 		padding-left:	15%;
 	}
-	#left-list .left-list-content{
-		background-color: #f6f6f6;
+	#left-list .left-list-content li.active a{
+		color:			white;
 	}
-	#left-list .left-list-content li.active{
-		background-color:	#faa523;
+	#left-list .left-list-content li.active,
+	#left-list .left-list-content li.active:hover{
+		background-color:	#286090;
 		font-weight:		bold;
+		text-shadow:		0 -1px 0 #286090;
+		background-image: linear-gradient(to bottom,#337ab7 0,#2b669a 100%);
 	}
 	#left-list .left-list-content li:hover{
-		background-color:	#007fff;
+		background-color:	#f5f5f5;
+	}
+	#left-list .left-list-header{
+		background-color:	white;
+		color:				black;
+		border:				1px solid #ddd;
 	}
 	#left-list .left-list-header-active{
 		font-weight:		bold;
-		background-color:	#faa523;
+		/*background-color:	#286090;*/
+		color:				white;
+		text-shadow:		0 -1px 0 #286090;
+		background-image: linear-gradient(to bottom,#337ab7 0,#2b669a 100%);
 	}
 #{/css}
 

@@ -3,8 +3,6 @@ package controllers.adjectives;
 import java.util.Arrays;
 import java.util.List;
 
-import org.jboss.netty.handler.codec.replay.VoidEnum;
-
 import base.core.Objects;
 import base.utility.linq.Linq;
 import core.controller.AjaxControllerBase;
@@ -47,6 +45,30 @@ public class AdjectiveWordAPI extends AjaxControllerBase{
 	
 	public static void deleteValue(@Id long id) {
 		AdjectiveWordsLogic.deleteValue(id);
+	}
+	
+	public static void updateMeanings(@Id long id, @Array @StringValue(minLength=1) String[] meanings) {
+		AdjectiveWordsLogic.updateMeanings(id, Arrays.asList(meanings));
+	}
+	
+	public static void updateType(@Id long id, @Required String type, @Required boolean value) {
+		AdjectiveWordType enumType = Objects.asEnum(AdjectiveWordType.class, type);
+		if(enumType == null) {
+			badRequest("不合法的词性：%s", type);
+		}
+		AdjectiveWordsLogic.updateType(id, enumType, value);
+	}
+
+	public static void addFixword(
+		@Id long id,
+		@Required @StringValue(minLength=1) String value,
+		@Required @StringValue(minLength=1) String meaning
+	) {
+		AdjectiveWordsLogic.addFixword(id, value, meaning);
+	}
+
+	public static void deleteFixword(@Id long id, @Required @StringValue String value) {
+		AdjectiveWordsLogic.deleteFixword(id, value);
 	}
 	
 }
