@@ -14,7 +14,6 @@ import logic.LogicValidate;
 import logic.pinyins.WordQueryIndex;
 import models.AdjectiveWord;
 import models.AdjectiveWordValue;
-import models.VerbWord;
 import po.AdjectiveWordType;
 import po.IAdjectiveWord;
 import po.IAdjectiveWordValue;

@@ -74,4 +74,7 @@ POST	/words/adj/action/update-type			adjectives.AdjectiveWordAPI.updateType
 POST	/words/adj/action/add-fixword			adjectives.AdjectiveWordAPI.addFixword
 POST	/words/adj/action/delete-fixword		adjectives.AdjectiveWordAPI.deleteFixword
 
+GET		/words/katakana							katakanas.KatakanaWordIndex.index
+GET		/words/katakana/{index}					katakanas.KatakanaWordIndex.page
+
 GET		/test									Test.test
