@@ -19,7 +19,11 @@ public class Like implements IQueryCondition{
 	public static Like contains(String name, String arg) {
 		return new Like(name, "%"+arg+"%");
 	}
-	
+
+	public static Like startWith(String name, String arg) {
+		return new Like(name, arg+"%");
+	}
+
 	@Override
 	public void appendSQL(StringBuilder sb) {
 		sb.append(name).append(" like ?");
@@ -30,6 +34,5 @@ public class Like implements IQueryCondition{
 		ar.add(arg);
 	}
 
-	
 	
 }
