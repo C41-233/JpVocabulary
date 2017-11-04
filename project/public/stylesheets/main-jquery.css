@@ -6,6 +6,7 @@ input.error, input.error:focus{
 
 .editable{
 	cursor:			pointer;
+	width:			100%;
 }
 
 .dialog-wait-body{

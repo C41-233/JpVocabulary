@@ -27,7 +27,7 @@
 					<table class="table table-bordered table-words">
 						#{list items:character.words, as:'word'}
 							<tr>
-								<th class="word-value font-jp"><a href="@{words.NotionalWordEdit.index(word.id, request.url)}">${word.value}</a></th>
+								<th class="word-value font-jp"><a href="@{notionals.NotionalWordEdit.index(word.id, request.url)}">${word.value}</a></th>
 								<td>
 									#{list items:word.syllables, as:'syllable'}
 										<div>${syllable}</div>

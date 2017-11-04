@@ -105,6 +105,7 @@
 							<li><a href="javascript:void(0)" id="btn-import-notional-word">基本词</a></li>
 							<li><a href="javascript:void(0)" id="btn-import-verb-word">动词</a></li>
 							<li><a href="javascript:void(0)" id="btn-import-adj-word">形容词</a></li>
+							<li><a href="javascript:void(0)" id="btn-import-katakana-word">片假名词</a></li>
 						</ul>
 					</li>
 					<li><a href="javascript:void(0)" id="btn-mysqldump">导出</a></li>
@@ -140,7 +141,7 @@
 				<div class="form-group">
 					<textarea id="import-notional-word-input-meanings" class="form-control" placeholder="每行一个释义" rows="4"></textarea>
 				</div>
-				<div class="text-left" id="import-notional-word-types">
+				<div class="text-left validate-div" id="import-notional-word-types">
 					<div>
 						<div class="checkbox">
 							<label>
@@ -216,7 +217,7 @@
 				<div class="form-group">
 					<textarea id="import-verb-word-input-meanings" class="form-control" placeholder="每行一个释义" rows="4"></textarea>
 				</div>
-				<div class="text-left" id="import-verb-word-types">
+				<div class="text-left validate-div" id="import-verb-word-types">
 					<div>
 						<div class="checkbox">
 							<label>
@@ -304,6 +305,91 @@
 					<div class="checkbox">
 						<label>
 							<input type="checkbox"> 尊敬
+						</label>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	
+	<div id="dialog-import-katakana-word" title="创建片假名词" class="pre-hide">
+		<div class="text-center">
+			<form class="form-inline">
+				<div class="form-group">
+					<input type="text" id="import-katakana-word-input-value" class="form-control" placeholder="片假名词">
+				</div>
+				<div class="form-group">
+					<textarea id="import-katakana-word-input-meanings" class="form-control" placeholder="每行一个释义" rows="4"></textarea>
+				</div>
+				<div class="text-left validate-div" id="import-katakana-word-types">
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" checked> 名词
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox"> 形容动词
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox"> 自动词
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox"> 他动词
+						</label>
+					</div>
+				</div>
+				<div class="form-group">
+					<input type="text" id="import-katakana-word-input-alias" class="form-control" placeholder="词源">
+				</div>
+				<div class="text-left validate-div" id="import-katakana-word-alias-types">
+					<div class="radio">
+						<label>
+							<input type="radio" checked name="alias-type"> 英
+						</label>
+					</div>
+					<div class="radio">
+						<label>
+							<input type="radio" name="alias-type"> 汉
+						</label>
+					</div>
+					<div class="radio">
+						<label>
+							<input type="radio" name="alias-type"> 日
+						</label>
+					</div>
+					<div class="radio">
+						<label>
+							<input type="radio" name="alias-type"> 德
+						</label>
+					</div>
+					<div class="radio">
+						<label>
+							<input type="radio" name="alias-type"> 法
+						</label>
+					</div>
+					<div class="radio">
+						<label>
+							<input type="radio" name="alias-type"> 葡
+						</label>
+					</div>
+					<div class="radio">
+						<label>
+							<input type="radio" name="alias-type"> 荷
+						</label>
+					</div>
+					<div class="radio">
+						<label>
+							<input type="radio" name="alias-type"> 略
+						</label>
+					</div>
+					<div class="radio">
+						<label>
+							<input type="radio" name="alias-type"> 无
 						</label>
 					</div>
 				</div>

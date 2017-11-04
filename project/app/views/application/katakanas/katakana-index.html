@@ -17,8 +17,39 @@
 				</div>
 			</div>
 			<hr/>
+			<table class="table table-bordered">
+				#{list items:words, as:'word'}
+					<tr>
+						<th><a href="${word.href}">${word.value}</a></th>
+						<td>
+							#{list items:word.meanings, as:'meaning'}
+								<div>${meaning}</div>
+							#{/list}
+						</td>
+						<td>
+							#{if word.alias}
+								【${word.context}】${word.alias}
+							#{/if}
+						</td>
+						<td>
+							#{list items:word.types, as:'type'}
+								<span>${type}</span>
+							#{/list}
+						</td>
+					</tr>
+				#{/list}
+			</table>
 		</div>
 	</div>
 </div>
 
 #{/body}
+
+#{stylesheet}
+
+th a, th a:hover{
+	color:			black;
+	text-decoration:	none;
+}
+
+#{/stylesheet}

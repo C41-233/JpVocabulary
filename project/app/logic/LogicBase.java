@@ -42,7 +42,7 @@ public abstract class LogicBase{
 			values.add(pinyin);
 		}
 	}
-	
+		
 	protected static void raiseIfNotExistQueryIndex(String value) {
 		if(WordQueryIndex.getWordQueryIndex(value).size() == 0) {
 			raise("汉字无法生成索引，需要先添加汉字：%s", value);

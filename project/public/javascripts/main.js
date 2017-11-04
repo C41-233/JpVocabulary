@@ -8,6 +8,10 @@ String.prototype.isHiragana = function(){
 	return Linq.from(this).charCode().isAll(CharCode.isHiragana)
 }
 
+String.prototype.isKatakana = function(){
+	return Linq.from(this).charCode().isAll(CharCode.isKatakana)
+}
+
 String.prototype.toLines = function(){
 	return Linq.from(this.split("\n")).select(function(s){
 		return s.trim()
@@ -238,7 +242,6 @@ $(function(){
 })
 
 //添加形容词
-
 $(function(){
 
 	function actionCreateAdj(){
@@ -283,6 +286,59 @@ $(function(){
 			}) && list.isAll(function(s){
 				return s.match(/い$/)
 			})
+		}
+	})
+})
+
+//添加片假名词
+$(function(){
+
+	function actionCreateKatakana(){
+		if($("#dialog-import-katakana-word").validate("hasError")){
+			return
+		}
+		
+		var value = $("#import-katakana-word-input-value").val().trim()
+		var meanings = $("#import-katakana-word-input-meanings").val().toLines()
+		var types = Linq.from($("#import-katakana-word-types input[type='checkbox']:checked"))
+			.select(function(q){
+				return $(q).parent().text().trim()
+			})
+			.toArray()
+		var alias = $("#import-katakana-word-input-alias").val().trim()
+		var context = $("#import-katakana-word-alias-types :checked").parent().text().trim()
+		
+		Action.post("/words/katakana/action/create", {
+			value: value,
+			meanings: meanings,
+			types: types,
+			alias: alias,
+			context: context
+		}, function(data){
+		
+		})
+	}
+
+	$("#dialog-import-katakana-word").jpDialog({
+		width:	420,
+		buttons: {
+			"创建": actionCreateKatakana,
+			"取消": function(){
+				$(this).dialog("close")
+			}
+		},
+		trigger: "#btn-import-katakana-word"
+	})
+	
+	$("#dialog-import-katakana-word").validate({
+		"#import-katakana-word-input-value": function(val){
+			return val.length>0 && CharCode.isKatakana(val.charCodeAt(0))
+		},
+		"#import-katakana-word-types": function(){
+			return $(this).find(":checked").length > 0
+		},
+		"#import-katakana-word-alias-types": function(){
+			return $(this).find(":checked").length == 1
 		}
 	})
 })
