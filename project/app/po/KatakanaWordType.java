@@ -6,6 +6,7 @@ public enum KatakanaWordType {
 	形容动词,
 	自动词,
 	他动词,
+	拟声词,
 	;
 	
 }
