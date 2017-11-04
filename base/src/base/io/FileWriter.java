@@ -13,16 +13,20 @@ public class FileWriter implements ICloseable{
 
 	private final OutputStreamWriter os;
 	
-	public FileWriter(File file, String charset) {
+	public FileWriter(File file, String charset, boolean append) {
 		try {
-			this.os = new OutputStreamWriter(new FileOutputStream(file), charset);
+			this.os = new OutputStreamWriter(new FileOutputStream(file, append), charset);
 		} catch (FileNotFoundException | UnsupportedEncodingException e) {
 			throw new RuntimeIOException(e);
 		} 
 	}
 	
+	public FileWriter(File file, boolean append) {
+		this(file, "utf-8", append);
+	}
+	
 	public FileWriter(File file) {
-		this(file, "utf-8");
+		this(file, "utf-8", false);
 	}
 	
 	public void print(String s) {
@@ -61,6 +65,14 @@ public class FileWriter implements ICloseable{
 	public void close() {
 		try {
 			os.close();
+		} catch (IOException e) {
+			throw new RuntimeIOException(e);
+		}
+	}
+
+	public void flush() {
+		try {
+			this.os.flush();
 		} catch (IOException e) {
 			throw new RuntimeIOException(e);
 		}

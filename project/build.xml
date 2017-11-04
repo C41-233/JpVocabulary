@@ -1,12 +1,15 @@
 <project default="all">
-	<property name="folder.classes.output" value="tmp/bin"/>
+	<property name="folder.tmp" value="tmp"/>
+	<property name="folder.classes.output" value="${folder.tmp}/bin"/>
 	<property name="folder.lib" value="lib"/>
 	<property name="file.base.jar" value="${folder.lib}/base.jar"/>
+	<property name="file.ext.jar" value="${folder.lib}/ext.jar"/>
 
-	<target name="folder">
-		<mkdir dir="${folder.classes.output}"/>
+	<target name="create-folder">
+		<mkdir dir="../db/log"/>
 	</target>
-    <target name="build-base" depends="folder">
+    <target name="build-base">
+		<mkdir dir="${folder.classes.output}"/>
         <javac 
 			srcdir="../base/src" 
 			destdir="${folder.classes.output}"
@@ -16,14 +19,34 @@
 			<compilerarg value="-Xlint:unchecked"/>
         </javac>
 		<jar jarfile="${file.base.jar}" basedir="${folder.classes.output}" includes="base/**"/>
+		<delete dir="${folder.classes.output}" />
+    </target>
+    <target name="build-ext" depends="build-base">
+		<mkdir dir="${folder.classes.output}"/>
+        <javac 
+			srcdir="ext" 
+			destdir="${folder.classes.output}"
+			encoding="utf-8"
+			includeantruntime="false"
+		>
+			<compilerarg value="-Xlint:unchecked"/>
+			<classpath>
+				<pathelement location="play-1.4.4/framework/lib/log4j-1.2.17.jar"/>
+				<pathelement location="play-1.4.4/framework/lib/joda-time-2.9.7.jar"/>
+				<pathelement location="${folder.lib}/base.jar"/>
+			</classpath>
+        </javac>
+		<jar jarfile="${file.ext.jar}" basedir="${folder.classes.output}" includes="**/*"/>
+		<delete dir="${folder.classes.output}" />
     </target>
 	
 	<target name="clean">
 		<delete includeemptydirs="true">
 			<fileset file="${file.base.jar}"/>
-			<fileset dir="tmp" includes="**/*"/>
+			<fileset file="${file.ext.jar}"/>
+			<fileset dir="${folder.tmp}" includes="**/*"/>
 		</delete>
 	</target>
 	
-	<target name="all" depends="clean,build-base"/>
+	<target name="all" depends="clean,build-base,build-ext,create-folder"/>
 </project>

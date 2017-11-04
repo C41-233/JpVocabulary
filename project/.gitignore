@@ -1,4 +1,5 @@
-/tmp/*
+/app/controllers/Test.java
 /eclipse/classes/*
 /lib/base.jar
-/app/controllers/Test.java
+/lib/ext.jar
+/tmp/*
