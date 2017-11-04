@@ -315,7 +315,7 @@ $(function(){
 			alias: alias,
 			context: context
 		}, function(data){
-		
+			location.href = data.href
 		})
 	}
 

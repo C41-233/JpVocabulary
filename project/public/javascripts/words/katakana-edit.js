@@ -26,6 +26,10 @@ $(function(){
 
 	$("#editable-value").editable({
 		active: function(val){
+			val = val.trim()
+			Action.post("/words/katakana/action/update-value", {id: DataMgr.id, value: val}, function(){
+				location.reload()
+			})
 		}
 	})
 	
@@ -51,7 +55,20 @@ $(function(){
 	
 	$("#editable-alias").editable({
 		active: function(val){
+			val = val.trim()
+			Action.post("/words/katakana/action/update-alias", {id: DataMgr.id, alias: val}, function(){
+				location.reload()
+			})
 		}
+	})
+	
+	$("#div-word-contexts input[type='radio']").change(function(){
+		var context = $(this).parent().text().trim()
+		Action.post("/words/katakana/action/update-context", {id: DataMgr.id, context: context}, {
+			complete: function(){
+				location.reload()
+			}
+		})
 	})
 	
 })

@@ -1,8 +1,10 @@
 package logic.words;
 
 import java.util.List;
+import java.util.Set;
 
 import base.utility.Chars;
+import base.utility.linq.Linq;
 import core.model.hql.HQL;
 import core.model.hql.HQLResult;
 import core.model.hql.Like;
@@ -38,6 +40,7 @@ public final class KatakanaWordsLogic extends LogicBase{
 
 	public static IKatakanaWord create(String value, List<String> meanings, List<KatakanaWordType> types, String alias, KatakanaWordContext context) {
 		raiseIfNotValidKatakanaWord(value);
+		raiseIfDuplicateKatakanaWord(value);
 		
 		KatakanaWord word = new KatakanaWord();
 		word.setValue(value);
@@ -49,9 +52,73 @@ public final class KatakanaWordsLogic extends LogicBase{
 		return word;
 	}
 
+	public static void delete(long id) {
+		KatakanaWord word = getKatakanaWordOrRaiseIfNotExist(id);
+		word.delete();
+	}
+
+	public static void updateValue(long id, String value) {
+		raiseIfNotValidKatakanaWord(value);
+		raiseIfDuplicateKatakanaWord(value);
+		
+		KatakanaWord word = getKatakanaWordOrRaiseIfNotExist(id);
+		word.setValue(value);
+		word.save();
+	}
+
+	public static void updateMeanings(long id, List<String> meanings) {
+		KatakanaWord word = getKatakanaWordOrRaiseIfNotExist(id);
+		word.setMeanings(meanings);
+		word.save();
+	}
+
+	public static void updateType(long id, KatakanaWordType type, boolean value) {
+		KatakanaWord word = getKatakanaWordOrRaiseIfNotExist(id);
+		Set<KatakanaWordType> types = Linq.from(word.getTypes()).toSet();
+		if(value) {
+			types.add(type);
+		}
+		else {
+			types.remove(type);
+		}
+		
+		if(types.size() == 0) {
+			raise("至少存在一个词性");
+		}
+		
+		word.setTypes(types);
+		word.save();
+	}
+
+	public static void updateAlias(long id, String alias) {
+		KatakanaWord word = getKatakanaWordOrRaiseIfNotExist(id);
+		word.setAlias(alias);
+		word.save();
+	}
+
+	public static void updateContext(long id, KatakanaWordContext context) {
+		KatakanaWord word = getKatakanaWordOrRaiseIfNotExist(id);
+		word.setContext(context);
+		word.save();
+	}
+
+	private static KatakanaWord getKatakanaWordOrRaiseIfNotExist(long id) {
+		KatakanaWord word = KatakanaWord.findById(id);
+		if(word == null) {
+			raise("片假名词不存在：id=%d", id);
+		}
+		return word;
+	}
+	
 	private static void raiseIfNotValidKatakanaWord(String value) {
 		if(value == null || value.length() == 0 || Chars.isKatakana(value.codePointAt(0))==false) {
 			raise("不是合法的片假名词：%s", value);
+		}
+	}
+	
+	private static void raiseIfDuplicateKatakanaWord(String value) {
+		if(KatakanaWord.find("value=?1", value).first()!=null) {
+			raise("已存在片假名词：%s", value);
 		}
 	}
 

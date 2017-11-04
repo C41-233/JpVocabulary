@@ -7,7 +7,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-lg-10">
-			<a href="refer"><span class="glyphicon glyphicon-arrow-left"></span>返回</a>
+			<a href="${refer}"><span class="glyphicon glyphicon-arrow-left"></span>返回</a>
 		</div>
 		<div class="col-lg-2 text-right">
 			<button class="btn btn-danger" id="btn-delete-word">删除</button>
@@ -79,7 +79,10 @@
 #{/body}
 
 #{stylesheet}
-	th{
+	#main-table{
+		margin-top:	20px;
+	}
+	#main-table th{
 		width:	20%;
 	}
 #{/stylesheet}

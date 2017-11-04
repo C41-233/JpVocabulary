@@ -25,6 +25,7 @@ public final class KatakanaWordEdit extends HtmlControllerBase{
 		
 		WordVO wordVO = new WordVO();
 		wordVO.value = word.getValue();
+		wordVO.alias = word.getAlias();
 		
 		StringBuilder meaningsSb = new StringBuilder();
 		for(String meaning : word.getMeanings()) {

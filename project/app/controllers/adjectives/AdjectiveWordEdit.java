@@ -104,8 +104,8 @@ public final class AdjectiveWordEdit extends HtmlControllerBase{
 	}
 
 	private static class FixwordVO{
-		String value;
-		String meaning;
+		public String value;
+		public String meaning;
 	}
 	
 	

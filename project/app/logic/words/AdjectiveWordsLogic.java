@@ -131,7 +131,7 @@ public final class AdjectiveWordsLogic extends LogicBase{
 
 	public static void updateType(long id, AdjectiveWordType type, boolean value) {
 		AdjectiveWord word = getAdjectiveWordOrRaiseIfNotExist(id);
-		Set<AdjectiveWordType> types =Linq.from(word.getTypes()).toSet();
+		Set<AdjectiveWordType> types = Linq.from(word.getTypes()).toSet();
 		if(value) {
 			types.add(type);
 		}

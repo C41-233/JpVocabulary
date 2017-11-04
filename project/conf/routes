@@ -79,5 +79,11 @@ GET		/words/katakana/{<[0-9]+>id}			katakanas.KatakanaWordEdit.index
 GET		/words/katakana/{index}					katakanas.KatakanaWordIndex.page
 
 POST	/words/katakana/action/create			katakanas.KatakanaWordAPI.create
+POST	/words/katakana/action/delete			katakanas.KatakanaWordAPI.delete
+POST	/words/katakana/action/update-value		katakanas.KatakanaWordAPI.updateValue
+POST	/words/katakana/action/update-meanings	katakanas.KatakanaWordAPI.updateMeanings
+POST	/words/katakana/action/update-type		katakanas.KatakanaWordAPI.updateType
+POST	/words/katakana/action/update-alias		katakanas.KatakanaWordAPI.updateAlias
+POST	/words/katakana/action/update-context	katakanas.KatakanaWordAPI.updateContext
 
 GET		/test									Test.test
