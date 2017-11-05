@@ -6,7 +6,7 @@
 	<property name="file.ext.jar" value="${folder.lib}/ext.jar"/>
 
 	<target name="create-folder">
-		<mkdir dir="../db/log"/>
+		<mkdir dir="../log"/>
 	</target>
     <target name="build-base">
 		<mkdir dir="${folder.classes.output}"/>
