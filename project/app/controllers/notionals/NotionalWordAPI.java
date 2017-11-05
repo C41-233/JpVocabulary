@@ -6,14 +6,11 @@ import java.util.List;
 import base.core.Objects;
 import base.utility.linq.Linq;
 import core.controller.AjaxControllerBase;
-import core.controller.Route;
-import core.controller.RouteArgs;
 import core.controller.validation.annotation.Array;
 import core.controller.validation.annotation.Id;
 import core.controller.validation.annotation.Required;
 import core.controller.validation.annotation.StringValue;
 import logic.words.NotionalWordsUpdateLogic;
-import po.INotionalWord;
 import po.NotionalWordType;
 
 public final class NotionalWordAPI extends AjaxControllerBase{
@@ -32,8 +29,7 @@ public final class NotionalWordAPI extends AjaxControllerBase{
 		List<String> meaingsList = Arrays.asList(meanings);
 		List<NotionalWordType> typesList = Linq.from(types).select(t->NotionalWordType.valueOf(t)).toList();
 		
-		INotionalWord word = NotionalWordsUpdateLogic.create(valuesList, meaingsList, typesList);
-		jsonResult.put("href", Route.get(NotionalWordEdit.class, "index", new RouteArgs().put("id", word.getId())));
+		NotionalWordsUpdateLogic.create(valuesList, meaingsList, typesList);
 	}
 	
 	public static void delete(@Id long id) {

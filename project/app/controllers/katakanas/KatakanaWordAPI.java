@@ -6,14 +6,11 @@ import java.util.List;
 import base.core.Objects;
 import base.utility.linq.Linq;
 import core.controller.AjaxControllerBase;
-import core.controller.Route;
-import core.controller.RouteArgs;
 import core.controller.validation.annotation.Array;
 import core.controller.validation.annotation.Id;
 import core.controller.validation.annotation.Required;
 import core.controller.validation.annotation.StringValue;
 import logic.words.KatakanaWordsLogic;
-import po.IKatakanaWord;
 import po.KatakanaWordContext;
 import po.KatakanaWordType;
 
@@ -38,8 +35,7 @@ public class KatakanaWordAPI extends AjaxControllerBase{
 		List<String> meaningsList = Arrays.asList(meanings);
 		List<KatakanaWordType> typesList = Linq.from(types).select(s->KatakanaWordType.valueOf(s)).toList();
 		
-		IKatakanaWord word = KatakanaWordsLogic.create(value, meaningsList, typesList, alias, contextEnum);
-		jsonResult.put("href", Route.get(KatakanaWordEdit.class, "index", new RouteArgs().put("id", word.getId())));
+		KatakanaWordsLogic.create(value, meaningsList, typesList, alias, contextEnum);
 	}
 	
 	public static void delete(@Id long id) {

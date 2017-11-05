@@ -6,14 +6,11 @@ import java.util.List;
 import base.core.Objects;
 import base.utility.linq.Linq;
 import core.controller.AjaxControllerBase;
-import core.controller.Route;
-import core.controller.RouteArgs;
 import core.controller.validation.annotation.Array;
 import core.controller.validation.annotation.Id;
 import core.controller.validation.annotation.Required;
 import core.controller.validation.annotation.StringValue;
 import logic.words.VerbWordsLogic;
-import po.IVerbWord;
 import po.VerbWordType;
 
 public class VerbWordAPI extends AjaxControllerBase{
@@ -31,8 +28,7 @@ public class VerbWordAPI extends AjaxControllerBase{
 		List<String> meaningsList = Arrays.asList(meanings);
 		List<VerbWordType> typesList = Linq.from(types).select(t->VerbWordType.valueOf(t)).toList();
 		
-		IVerbWord word = VerbWordsLogic.create(valuesList, meaningsList, typesList);
-		jsonResult.put("href", Route.get(VerbWordDetail.class, "index", new RouteArgs().put("id", word.getId())));
+		VerbWordsLogic.create(valuesList, meaningsList, typesList);
 	}
 
 	public static void delete(@Id long id) {

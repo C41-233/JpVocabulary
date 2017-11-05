@@ -30,8 +30,12 @@ public final class CharacterIndex extends HTMLComponentsControllerBase{
 		
 		//汉字组
 		List<CharacterGroupVO> characterGroupsVO = new ArrayList<>();
+		List<String> groups = new ArrayList<>();
+		groups.add(index);
 		for(int i=1; i<=4; i++) {
-			String groupName = index + i;
+			groups.add(index + i);
+		}
+		for(String groupName : groups) {
 			List<ICharacter> characters = CharactersLogic.findCharactersByPinyin(groupName);
 			if(characters.size() == 0) {
 				continue;

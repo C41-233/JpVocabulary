@@ -31,4 +31,20 @@ public final class Pinyins{
 		return index.substring(0, index.length()-1);
 	}
 	
+	public static String toPinyinIndex(String pinyin) {
+		char[] chs = pinyin.toCharArray();
+		for(int i=0; i<chs.length; i++) {
+			char ch = chs[i];
+			for(char[] s : ss) {
+				for(int j=1; j<s.length; j++) {
+					if(ch == s[j]) {
+						chs[i] = s[0];
+						return new String(chs).replace('ü', 'v') + (j);
+					}
+				}
+			}
+		}
+		return pinyin;
+	}
+	
 }

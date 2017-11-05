@@ -41,6 +41,10 @@ public class FileWriter implements ICloseable{
 		print(String.valueOf(val));
 	}
 
+	public void print(boolean val) {
+		print(String.valueOf(val));
+	}
+	
 	public void print(Object val) {
 		print(val.toString());
 	}
@@ -57,6 +61,10 @@ public class FileWriter implements ICloseable{
 		print(val + "\n");
 	}
 
+	public void println(boolean val) {
+		print(val + "\n");
+	}
+	
 	public void println(Object val) {
 		print(val + "\n");
 	}
