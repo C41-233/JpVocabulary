@@ -25,7 +25,11 @@
 							<div class="div-character">
 								<a class="character-header" href="@{characters.CharacterDetail.index(character.id, request.url)}">
 									<span class="character-jp font-jp">${character.jp}</span>
-									<span class="character-cn">${character.cn}</span>
+									<span class="character-cn">
+										#{list items:character.cns, as:'cn'}
+											${cn}
+										#{/list}
+									</span>
 								</a>
 								<div class="div-character-syllables">
 									#{list items:character.syllables, as:'syllable'}

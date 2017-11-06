@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import base.utility.Strings;
+import base.utility.linq.Linq;
 import core.controller.HtmlControllerBase;
 import core.controller.Route;
 import core.controller.validation.annotation.Id;
@@ -33,7 +34,7 @@ public class CharacterDetail extends HtmlControllerBase{
 		CharacterVO vo = new CharacterVO();
 		vo.id = character.getId();
 		vo.jp = character.getJpValue();
-		vo.cn = character.getCnValue();
+		Linq.from(character.getCnValue()).foreach(c->vo.cns.add(c));
 		
 		for(String pinyin : character.getPinyins()) {
 			vo.pinyins.add(Pinyins.toPinyin(pinyin));
@@ -75,7 +76,7 @@ public class CharacterDetail extends HtmlControllerBase{
 	private static class CharacterVO{
 		long id;
 		String jp;
-		String cn;
+		List<Character> cns = new ArrayList<>();
 		List<String> pinyins = new ArrayList<>();
 		List<SyllableVO> syllables = new ArrayList<>();
 		List<WordVO> fixwords = new ArrayList<>();

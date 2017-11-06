@@ -10,8 +10,12 @@
 	</div>
 	<div class="row">
 		<div class="col-lg-10">
-			<h1 class="font-jp">${character.jp}</h1>
-			<h1>${character.cn}</h1>
+			<h1 class="character-jp font-jp">${character.jp}</h1>
+			<h1 class="character-cn">
+				#{list items:character.cns, as:'cn'}
+					${cn}
+				#{/list}
+			</h1>
 		</div>
 		<div class="col-lg-2 text-right">
 			<a href="@{characters.CharacterEdit.index(character.id, refer)}" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-wrench"></span> 编辑</a>
@@ -78,5 +82,8 @@
 	.span-word{
 		display:	inline-block;
 		min-width:	100px;
+	}
+	.character-jp{
+		font-size:	60px;
 	}
 #{/stylesheet}

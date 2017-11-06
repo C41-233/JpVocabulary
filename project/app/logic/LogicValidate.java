@@ -16,8 +16,8 @@ public final class LogicValidate {
 	}
 
 	public static boolean isValidCnValue(String cn) {
-		return cn!=null && cn.length() == 1 
-				&& (Chars.isCJKUnifiedIdeograph(cn.codePointAt(0)) || cn.charAt(0)=='〇');
+		return cn!=null && cn.length() > 0
+				&& Linq.from(cn).isAll(ch -> Chars.isCJKUnifiedIdeograph(ch) || ch=='〇');
 	}
 	
 	public static boolean isValidSyllable(String syllable) {

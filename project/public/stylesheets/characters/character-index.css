@@ -1,5 +1,5 @@
 /*ºº×Ö×é*/
-.character-header, .character-header:hover{
+.character-header, .character-header:hover, .character-header:focus, .character-header:visited{
 	color:			black;
 	text-decoration:	none;
 }
@@ -14,10 +14,11 @@
 	display:	inline-block;
 }
 .character-jp{
-	font-size:		24px;
+	font-size:		30px;
+	margin-right:	10px;
 }
 .character-cn{
-	font-size:		22px;
+	font-size:		20px;
 }
 
 .div-character-syllables{

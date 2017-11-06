@@ -3,6 +3,7 @@ package controllers.characters;
 import java.util.ArrayList;
 import java.util.List;
 
+import base.utility.linq.Linq;
 import controllers.components.HTMLComponentsControllerBase;
 import core.controller.Route;
 import core.controller.RouteArgs;
@@ -50,7 +51,7 @@ public final class CharacterIndex extends HTMLComponentsControllerBase{
 				CharacterVO characterVO = new CharacterVO();
 				characterVO.id = character.getId();
 				characterVO.jp = character.getJpValue();
-				characterVO.cn = character.getCnValue();
+				Linq.from(character.getCnValue()).foreach(c->characterVO.cns.add(c));
 				groupVO.characters.add(characterVO);
 				
 				//发音组
@@ -108,7 +109,7 @@ public final class CharacterIndex extends HTMLComponentsControllerBase{
 	private static class CharacterVO{
 		long id;
 		String jp;
-		String cn;
+		List<Character> cns = new ArrayList<>();
 		List<CharacterSyllableVO> syllables = new ArrayList<>();
 		List<WordPairVO> fixwords = new ArrayList<>();
 	}

@@ -1,15 +1,21 @@
 (function(){
 
 String.prototype.isCJKCharacter = function(){
-	return Linq.from(this).charCode().isAll(CharCode.isCJKCharacter)
+	return Linq.from(this).charCode().isAll(function(c){
+		return CharCode.isCJKCharacter(c) || c=='〇' || c=='ヶ'
+	})
 }
 
 String.prototype.isHiragana = function(){
-	return Linq.from(this).charCode().isAll(CharCode.isHiragana)
+	return Linq.from(this).charCode().isAll(function(c){
+		return CharCode.isHiragana(c) || c=='ー'
+	})
 }
 
 String.prototype.isKatakana = function(){
-	return Linq.from(this).charCode().isAll(CharCode.isKatakana)
+	return Linq.from(this).charCode().isAll(function(c){
+		return CharCode.isKatakana(c) || c=='ー'
+	})
 }
 
 String.prototype.toLines = function(){
@@ -25,7 +31,7 @@ global.Validate = {
 		return val.length == 1 && val.isCJKCharacter()
 	},
 	isValidCnCharacter: function(val){
-		return val.length == 1 && val.isCJKCharacter()
+		return val.length > 0 && val.isCJKCharacter()
 	},
 	isValidSyllable: function(val){
 		return val.length > 0 && val.isHiragana()

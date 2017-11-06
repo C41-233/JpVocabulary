@@ -19,7 +19,7 @@ public final class CharacterAPI extends AjaxControllerBase {
 
 	public static void create(
 		@Required @StringValue(length=1) String jp, 
-		@Required @StringValue(length=1) String cn, 
+		@Required @StringValue(minLength=1) String cn, 
 		@Required @StringValue(minLength=1) String[] pinyins
 	) {
 		ICharacter character = CharactersLogic.createCharacter(jp, cn, Arrays.asList(pinyins));
@@ -46,7 +46,7 @@ public final class CharacterAPI extends AjaxControllerBase {
 	
 	public static void updateCn(
 		@Id long id,
-		@Required @StringValue(length=1) String value
+		@Required @StringValue(minLength=1) String value
 	) {
 		CharactersLogic.updateCn(id, value);
 	}
