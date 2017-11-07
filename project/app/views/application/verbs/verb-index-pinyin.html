@@ -6,11 +6,12 @@
 
 #{list items:pinyins, as:'pinyin'}
 <div>
-	<div>${pinyin.value}</div>
+	<div class="div-group">${pinyin.value}</div>
 	<div class="div-pinyin-group">
 		#{list items:pinyin.characters, as:'character'}
-			<div>${character.name}</div>
+			<div class="div-character">${character.name}</div>
 			<table class="table table-bordered table-words">
+				<tbody>
 				#{list items:character.words, as:'word'}
 					<tr>
 						<th><a href="${word.href}">${word.value}</a></th>
@@ -41,6 +42,7 @@
 						</td>
 					</tr>
 				#{/list}
+				</tbody>
 			</table>
 		#{/list}
 	</div>

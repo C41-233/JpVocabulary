@@ -59,11 +59,10 @@ public final class VerbWordsLogic extends LogicBase{
 		
 		for(String value : values) {
 			raiseIfNotExistQueryIndex(value);
-			raiseIfDuplicateVerbWordValue(value);
 			raiseIfNotValidVerbWordValue(value);
 		}
 		
-		if(Linq.from(types).notExist(t->t==VerbWordType.一类动词 || t==VerbWordType.二类动词 || t==VerbWordType.カ变动词 || t==VerbWordType.ラ变动词)) {
+		if(Linq.from(types).notExist(t->t==VerbWordType.一类动词 || t==VerbWordType.二类动词 || t==VerbWordType.サ变动词 ||t==VerbWordType.カ变动词 || t==VerbWordType.ラ变动词)) {
 			raise("至少包含一个词性", types);
 		}
 		
@@ -98,7 +97,6 @@ public final class VerbWordsLogic extends LogicBase{
 
 	public static void addValue(long id, String value) {
 		raiseIfNotValidVerbWordValue(value);
-		raiseIfDuplicateVerbWordValue(value);
 		raiseIfNotExistQueryIndex(value);
 		
 		VerbWord word = getVerbWordOrRaiseIfNotExist(id);
@@ -139,6 +137,7 @@ public final class VerbWordsLogic extends LogicBase{
 		
 		if(types.contains(VerbWordType.一类动词) == false
 			&& types.contains(VerbWordType.二类动词) == false
+			&& types.contains(VerbWordType.サ变动词) == false
 			&& types.contains(VerbWordType.カ变动词) == false
 			&& types.contains(VerbWordType.ラ变动词) == false
 		) {
@@ -201,13 +200,6 @@ public final class VerbWordsLogic extends LogicBase{
 			|| LogicValidate.isCharacterWord(value)
 		) {
 			raise("不是合法的动词：%s", value);
-		}
-	}
-
-	private static void raiseIfDuplicateVerbWordValue(String value) {
-		//检查非读音的单词是否重复
-		if(LogicValidate.isValidSyllable(value)==false && hasVerbWordValue(value)) {
-			raise("动词已存在：%s", value);
 		}
 	}
 

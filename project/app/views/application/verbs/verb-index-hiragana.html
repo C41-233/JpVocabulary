@@ -1,6 +1,7 @@
 <div>
 	#{if words}
 	<table class="table table-bordered table-words">
+		<tbody>
 		#{list items:words, as:'word'}
 			<tr>
 				<th><a href="${word.href}">${word.value}</a></th>
@@ -31,6 +32,7 @@
 				</td>
 			</tr>
 		#{/list}
+		</tbody>
 	</table>
 	#{/if}
 	#{else}
