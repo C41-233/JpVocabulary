@@ -64,12 +64,11 @@ public final class AdjectiveWordsLogic extends LogicBase{
 	public static IAdjectiveWord create(List<String> values, List<String> meanings, List<AdjectiveWordType> types) {
 		//必须至少有一个注音
 		if(Linq.from(values).notExist(LogicValidate::isValidSyllable)) {
-			raise("动词必须至少有一个读音");
+			raise("形容词必须至少有一个读音");
 		}
 		
 		for(String value : values) {
 			raiseIfNotExistQueryIndex(value);
-			raiseIfDuplicateAdjectiveWordValue(value);
 			raiseIfNotValidAdjectiveWordValue(value);
 		}
 		
@@ -100,7 +99,6 @@ public final class AdjectiveWordsLogic extends LogicBase{
 	
 	public static void addValue(long id, String value) {
 		raiseIfNotValidAdjectiveWordValue(value);
-		raiseIfDuplicateAdjectiveWordValue(value);
 		raiseIfNotExistQueryIndex(value);
 		
 		AdjectiveWord word = getAdjectiveWordOrRaiseIfNotExist(id);
@@ -185,13 +183,6 @@ public final class AdjectiveWordsLogic extends LogicBase{
 			|| LogicValidate.isValidJpBasicWord(value) == false
 		) {
 			raise("不是合法的形容词：%s", value);
-		}
-	}
-
-	private static void raiseIfDuplicateAdjectiveWordValue(String value) {
-		//检查非读音的单词是否重复
-		if(LogicValidate.isValidSyllable(value)==false && hasAdjectiveWordValue(value)) {
-			raise("形容词已存在：%s", value);
 		}
 	}
 
