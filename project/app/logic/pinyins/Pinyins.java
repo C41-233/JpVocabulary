@@ -14,6 +14,12 @@ public final class Pinyins{
 	};
 	
 	public static String toPinyin(String index) {
+		if(index == null) {
+			return index;
+		}
+		if(index.matches(".+[1-4]$") == false) {
+			return index;
+		}
 		String token = index.substring(0, index.length()-1);
 		int seq = index.charAt(index.length()-1) - '0';
 		
@@ -28,6 +34,12 @@ public final class Pinyins{
 	}
 	
 	public static String toAlphaIndex(String index) {
+		if(index == null) {
+			return null;
+		}
+		if(index.matches(".+[1-4]$")==false) {
+			return index;
+		}
 		return index.substring(0, index.length()-1);
 	}
 	
