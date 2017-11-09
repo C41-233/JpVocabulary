@@ -11,10 +11,12 @@ public enum NotionalWordType {
 		//虚词
 		副词,
 		代词,
+		叹词,
 		连体词,
 		接续词,
 		疑问词,
 		接头词,
+		接尾词,
 		数量词;
 	
 }
