@@ -34,7 +34,7 @@ public class AdjectiveWordIndex extends HTMLComponentsControllerBase{
 		renderArgs.put("index", index);
 		renderArgs.put("indexes", indexes);
 		
-		if(index.length() == 1) {
+		if(index.matches("^[A-Z]$")) {
 			processAsCharacter(index.charAt(0));
 		}
 		else {
@@ -83,6 +83,25 @@ public class AdjectiveWordIndex extends HTMLComponentsControllerBase{
 				}).foreach(t->vo.fixwords.add(t));
 				
 				groupVO.words.add(vo);
+				groupVO.words.sort((v1, v2)->{
+					int c = Comparators.compare(v1.value, v2.value);
+					if(c != 0) {
+						return c;
+					}
+					
+					int s1 = v1.alias.size();
+					int s2 = v2.alias.size();
+					if(s1 == 0 && s2 == 0) {
+						return 0;
+					}
+					if(s1 == 0) {
+						return -1;
+					}
+					if(s2 == 0) {
+						return 1;
+					}
+					return Comparators.compare(v1.alias.get(0), v2.alias.get(0));
+				});
 			}
 			
 			if(groupVO.words.size() > 0) {
