@@ -23,7 +23,10 @@ public final class NotionalWordsQueryLogic {
 
 	public static List<INotionalWordValue> findCharacterWordValuesByPinyin(String pinyin){
 		HQL hql = HQL.begin();
-		hql.where(Like.contains("index", ConcatSplit.getToken(pinyin)));
+		And and = new And();
+		and.and(Like.contains("index", ConcatSplit.getToken(pinyin)));
+		and.and("type=?", NotionalWordValueType.Character.value());
+		hql.where(and);
 		hql.orderBy("value");
 		HQLResult result = hql.end();
 		

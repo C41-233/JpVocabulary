@@ -23,7 +23,6 @@ public final class NotionalWordsUpdateLogic extends LogicBase{
 		
 		for(String value : values) {
 			raiseIfNotExistQueryIndex(value);
-			raiseIfDuplicateNotionalWordValue(value);
 			raiseIfNotValidNotionalWordValue(value);
 		}
 		
@@ -58,7 +57,6 @@ public final class NotionalWordsUpdateLogic extends LogicBase{
 	}
 	
 	public static void addValue(long id, String value) {
-		raiseIfDuplicateNotionalWordValue(value);
 		raiseIfNotValidNotionalWordValue(value);
 		raiseIfNotExistQueryIndex(value);
 		
@@ -126,13 +124,6 @@ public final class NotionalWordsUpdateLogic extends LogicBase{
 	private static void raiseIfNotValidNotionalWordValue(String value) {
 		if(NotionalWordValueType.getWordValueType(value) == null) {
 			raise("不是合法的基本词：%s", value);
-		}
-	}
-	
-	private static void raiseIfDuplicateNotionalWordValue(String value) {
-		//非注音的基本词重复
-		if(LogicValidate.isValidSyllable(value)==false && NotionalWordsQueryLogic.hasNotionalWordValue(value)) {
-			raise("基本词已存在：%s", value);
 		}
 	}
 	

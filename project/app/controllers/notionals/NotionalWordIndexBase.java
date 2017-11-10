@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import base.utility.comparator.Comparators;
 import base.utility.linq.IReferenceEnumerable;
 import base.utility.linq.Linq;
 import controllers.components.HTMLComponentsControllerBase;
@@ -94,6 +95,25 @@ public abstract class NotionalWordIndexBase extends HTMLComponentsControllerBase
 			}
 			
 			wordVO.href = Route.get(NotionalWordEdit.class, "index", new RouteArgs().put("id", word.getId()).put("refer", request.url));
+			
+			wordsVO.sort((w1,w2)->{
+				int s = Comparators.compare(w1.value, w2.value);
+				if(s != 0) {
+					return s;
+				}
+				int s1 = w1.alias.size();
+				int s2 = w2.alias.size();
+				if(s1 !=0 && s2 != 0) {
+					return Comparators.compare(w1.alias.get(0), w2.alias.get(0));
+				}
+				if(s1 == 0 && s2 != 0) {
+					return -1;
+				}
+				if(s1 !=0 && s2 == 0) {
+					return 1;
+				}
+				return 0;
+			});
 			
 			wordsVO.add(wordVO);
 		}
