@@ -70,6 +70,7 @@ $.fn.jpDialog = function(params){
 	if(args.width){
 		options.width = args.width
 	}
+	
 	options.buttons = {
 		"创建": args.create, 
 		"取消": function(){
@@ -99,9 +100,6 @@ $(function(){
 	$("#btn-mysqldump").click(function(){
 		Dialog.wait(function(handle){
 			Action.post("/action/dump", {}, {
-				success: function(){
-					alert("备份完成")
-				},
 				complete: function(){
 					handle.close()
 				}	

@@ -88,12 +88,14 @@ public final class NotionalWordsQueryLogic {
 		orTypes.or(Like.contains("types", ConcatSplit.getToken(NotionalWordType.接续词.toString())));
 		orTypes.or(Like.contains("types", ConcatSplit.getToken(NotionalWordType.疑问词.toString())));
 		orTypes.or(Like.contains("types", ConcatSplit.getToken(NotionalWordType.接头词.toString())));
+		orTypes.or(Like.contains("types", ConcatSplit.getToken(NotionalWordType.接尾词.toString())));
 		orTypes.or(Like.contains("types", ConcatSplit.getToken(NotionalWordType.数量词.toString())));
 		
 		Clause clause = new Clause("id", "NotionalWord", orTypes);
 		and.and(new In("refId", clause));
 		
 		hql.where(and);
+		hql.orderBy("value");
 		
 		HQLResult rst = hql.end();
 		return NotionalWordValue.find(rst.select, rst.params).fetch();
@@ -109,6 +111,7 @@ public final class NotionalWordsQueryLogic {
 		and.and(new In("refId", clause));
 		
 		hql.where(and);
+		hql.orderBy("value");
 		
 		HQLResult rst = hql.end();
 		return NotionalWordValue.find(rst.select, rst.params).fetch();

@@ -22,7 +22,7 @@ public final class LogicValidate {
 	
 	public static boolean isValidSyllable(String syllable) {
 		return syllable!=null && syllable.length() > 0 && Linq.from(syllable).isAll(
-			Predicates.or(Chars::isHiragana, c->c=='ー')
+			Predicates.or(Chars::isHiragana, Chars::isKatakana, c->c=='ー')
 		);
 	}
 
