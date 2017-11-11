@@ -117,4 +117,12 @@ public final class NotionalWordsQueryLogic {
 		return NotionalWordValue.find(rst.select, rst.params).fetch();
 	}
 	
+	public static List<INotionalWord> findInterjectionWords(){
+		HQL hql = HQL.begin();
+		hql.where(Like.contains("types", ConcatSplit.getToken(NotionalWordType.叹词.toString())));
+		
+		HQLResult rst = hql.end();
+		return NotionalWord.find(rst.select, rst.params).fetch();
+	}
+	
 }
