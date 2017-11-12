@@ -6,6 +6,7 @@ GET		/public/images/							staticDir:public/images/
 GET		/public/fonts/							staticDir:public/fonts/
 
 GET     /                                       MainIndex.index
+GET		/search									MainIndex.search
 
 POST	/action/dump							functions.Function.dump
 

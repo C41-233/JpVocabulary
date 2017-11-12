@@ -7,6 +7,7 @@ import core.model.ConcatSplit;
 import core.model.hql.HQL;
 import core.model.hql.HQLResult;
 import core.model.hql.Like;
+import core.model.hql.Or;
 import logic.LogicBase;
 import models.Character;
 import models.NotionalWordValue;
@@ -37,7 +38,19 @@ public final class CharactersLogic extends LogicBase{
 	public static boolean hasCharacter(String jp) {
 		return Character.find("jp=?1", jp).first() != null;
 	}
-	
+
+	public static List<ICharacter> findCharacterBySearch(String q) {
+		HQL hql = HQL.begin();
+		
+		Or or = new Or();
+		or.or("jp=?", q);
+		or.or(Like.contains("cn", q));
+		hql.where(or);
+		
+		HQLResult rst = hql.end();
+		return Character.find(rst.select, rst.params).fetch();
+	}
+
 	public static ICharacter createCharacter(String jp, String cn, List<String> pinyins) {
 		raiseIfNotValidJpValue(jp);
 		raiseIfNotValidCnValue(cn);

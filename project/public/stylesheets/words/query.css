@@ -1,0 +1,42 @@
+#btn-search{
+	margin-top:	5px;
+	margin-bottom:	5px;
+	width:	70px;
+}
+#logo{
+	margin-bottom:	15px;
+}
+
+.div-character{
+	margin-bottom:	10px;
+}
+
+.character-jp{
+	font-size:		30px;
+	font-weight:	bold;
+}
+
+.character-cn{
+	margin-left:	10px;
+	font-weight:	bold;
+	font-size:		20px;
+}
+
+.div-character-syllables,
+.div-character-fixwords
+{
+	padding-left:	20px;
+}
+
+.character-syllable{
+	font-weight:	bold;
+}
+
+.div-character-words{
+	padding-left:	20px;
+}
+
+.character-word{
+	display:		inline-block;
+	margin-right:	20px;
+}

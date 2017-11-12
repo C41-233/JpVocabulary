@@ -29,7 +29,8 @@
 		</div>
 	</div>
 	<hr/>
-	<div class="row">
+	#{if character.syllables}
+	<div class="row" style="margin-bottom:20px">
 		<div class="col-lg-12">
 			#{list items:character.syllables, as:'syllable'}
 			<div>
@@ -46,7 +47,8 @@
 			#{/list}
 		</div>
 	</div>
-	<div class="row" style="margin-top:20px">
+	#{/if}
+	<div class="row">
 		<div class="col-lg-12">
 			<div>
 				#{if character.fixwords}

@@ -1,0 +1,64 @@
+#{meta /}
+
+#{body}
+
+<div class="container">
+	<form class="row" method="GET" action="/search">
+		<div class="col-lg-12">
+			<h1 class="text-center" id="logo">Japanese Vocabulary</h1>
+		</div>
+		<div class="col-lg-12">
+			<input type="text" class="form-control" name="q" value="${request.params.get('q')}" id="input-text">
+		</div>
+		<div class="col-lg-12 text-center">
+			<button class="btn btn-default" id="btn-search" type="submit">搜索</button>
+		</div>
+	</form>
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="div-characters">
+				#{list items:characters, as:'character'}
+					<div class="div-character">
+						<div>
+							<span class="character-jp">${character.jp}</span>
+							<span class="character-cn">
+								#{list items:character.cns, as:'cn'}
+									${cn}
+								#{/list}
+							</span>
+						</div>
+						<div class="div-character-pinyins">
+							#{list items:character.pinyins, as:'pinyin'}
+								<span>${pinyin}</span>
+							#{/list}
+						</div>
+						<div class="div-character-syllables">
+							#{list items:character.syllables, as:'syllable'}
+								<div>
+									<div class="character-syllable">${syllable.value}</div>
+									<div class="div-character-words">
+										#{list items: syllable.words, as:'word'}
+											<div class="character-word">${word.word}(${word.syllable})</div>
+										#{/list}
+									</div>
+								</div>
+							#{/list}
+						</div>
+						<div class="div-character-fixwords">
+							#{list items:character.fixwords, as:'fixword'}
+								<div><span class="font-bold">${fixword.word}</span>(${fixword.syllable})</div>
+							#{/list}
+						</div>
+					</div>
+				#{/list}
+			</div>
+			#{if !characters}
+				<p>（无）</p>
+			#{/if}
+		</div>
+	</div>
+</div>
+
+#{/body}
+
+#{stylesheet "words/query.css"/}
