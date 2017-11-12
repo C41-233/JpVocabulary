@@ -1,0 +1,45 @@
+#{meta /}
+
+#{body}
+
+<div class="container">
+	<div class="row">
+		<div class="col-lg-12 col-sm-3 col-xs-6">
+			<h3>叹词</h3>
+			<hr/>
+			<table class="table table-bordered">
+				#{list items:words, as:'word'}
+					<tr>
+						<th class="div-value">
+							<a href="@{notionals.NotionalWordEdit.index(word.id, request.url)}">
+								#{list items:word.values, as:'value'}
+									<span class="value">${value}</span>
+								#{/list}
+							</a>
+						</th>
+						<td>
+							#{list items:word.meanings, as:'meaning'}
+								<div>${meaning}</div>
+							#{/list}
+						</td>
+					</tr>
+				#{/list}
+			</table>
+		</div>
+	</div>
+</div>
+
+#{/body}
+
+#{stylesheet}
+	.div-value{
+		width:	20%;
+	}
+	.value+.value:before{
+		content: ' / ';
+	}
+	.div-value a{
+		color:	black;
+		text-decoration:	none;
+	}
+#{/stylesheet}

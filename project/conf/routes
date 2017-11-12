@@ -86,4 +86,6 @@ POST	/words/katakana/action/update-type		katakanas.KatakanaWordAPI.updateType
 POST	/words/katakana/action/update-alias		katakanas.KatakanaWordAPI.updateAlias
 POST	/words/katakana/action/update-context	katakanas.KatakanaWordAPI.updateContext
 
+GET		/words/interjections					notionals.InterjectionWordIndex.index
+
 GET		/test									Test.test
