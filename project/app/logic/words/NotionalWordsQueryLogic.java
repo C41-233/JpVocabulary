@@ -124,5 +124,9 @@ public final class NotionalWordsQueryLogic {
 		HQLResult rst = hql.end();
 		return NotionalWord.find(rst.select, rst.params).fetch();
 	}
+
+	public static List<INotionalWordValue> findNotionalWordValuesBySearch(String query) {
+		return NotionalWordValue.find("value=?1", query).fetch();
+	}
 	
 }

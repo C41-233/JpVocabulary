@@ -23,6 +23,8 @@ public final class CharactersLogic extends LogicBase{
 	public static List<ICharacter> findCharactersByPinyin(String pinyin){
 		HQL hql = HQL.begin();
 		hql.where(Like.contains("pinyins", ConcatSplit.getToken(pinyin)));
+		hql.orderBy("jp");
+		
 		HQLResult result = hql.end();
 		return Character.find(result.select, result.params).fetch();
 	}
@@ -34,7 +36,15 @@ public final class CharactersLogic extends LogicBase{
 	public static ICharacter findCharacter(String jp) {
 		return Character.find("jp=?1", jp).first();
 	}
-	
+
+	public static List<ICharacter> findCharactersByCn(String cn) {
+		HQL hql = HQL.begin();
+		hql.where(Like.contains("cn", cn));
+		
+		HQLResult result = hql.end();
+		return Character.find(result.select, result.params).fetch();
+	}
+
 	public static boolean hasCharacter(String jp) {
 		return Character.find("jp=?1", jp).first() != null;
 	}
