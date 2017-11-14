@@ -50,7 +50,11 @@ public final class VerbWordsLogic extends LogicBase{
 		
 		return VerbWordValue.find(result.select, result.params).fetch();
 	}
-	
+
+	public static List<IVerbWordValue> findVerbWordValuesBySearch(String query) {
+		return VerbWordValue.find("value=?1", query).fetch();
+	}
+
 	public static IVerbWord create(List<String> values, List<String> meanings, List<VerbWordType> types) {
 		//必须至少有一个注音
 		if(Linq.from(values).notExist(LogicValidate::isValidSyllable)) {

@@ -3,9 +3,10 @@ package controllers;
 import java.util.ArrayList;
 import java.util.List;
 
-import base.core.Objects;
 import base.utility.linq.Linq;
 import controllers.characters.CharacterDetail;
+import controllers.notionals.NotionalWordEdit;
+import controllers.verbs.VerbWordDetail;
 import core.controller.HtmlControllerBase;
 import core.controller.Route;
 import core.controller.RouteArgs;
@@ -13,10 +14,14 @@ import logic.characters.CharactersConvert;
 import logic.characters.CharactersLogic;
 import logic.pinyins.Pinyins;
 import logic.words.NotionalWordsQueryLogic;
+import logic.words.VerbWordsLogic;
 import po.ICharacter;
 import po.ICharacterSyllable;
 import po.INotionalWord;
 import po.INotionalWordValue;
+import po.IVerbWord;
+import po.IVerbWordValue;
+import po.WordFixword;
 import po.WordPair;
 
 public final class MainIndex extends HtmlControllerBase {
@@ -34,6 +39,7 @@ public final class MainIndex extends HtmlControllerBase {
     	List<String> queries = CharactersConvert.convert(q);
     	
     	processNotional(queries);
+    	processVerb(queries);
     	
     	render("query");
     }
@@ -83,6 +89,7 @@ public final class MainIndex extends HtmlControllerBase {
     			INotionalWord word = value.getWord();
     			WordVO wordVO = new WordVO();
 
+    			wordVO.href = Route.get(NotionalWordEdit.class, "index", new RouteArgs().put("id", word.getId()).put("refer", request.url));
     			wordVO.value = value.getValue();
     			Linq.from(word.getValues()).select(v->v.getValue()).where(s->s.equals(wordVO.value)==false).foreach(v->wordVO.alias.add(v));
     			Linq.from(word.getMeanings()).foreach(m->wordVO.meanings.add(m));
@@ -92,6 +99,31 @@ public final class MainIndex extends HtmlControllerBase {
     		}
     	}
     	renderArgs.put("notionals", wordsVO);
+    }
+    
+    private static void processVerb(List<String> queries) {
+    	List<VerbVO> verbsVO = new ArrayList<>();
+    	for(String query : queries) {
+    		List<IVerbWordValue> values = VerbWordsLogic.findVerbWordValuesBySearch(query);
+    		for(IVerbWordValue value : values) {
+    			IVerbWord word = value.getWord();
+    			VerbVO verbVO = new VerbVO();
+    			verbVO.value = value.getValue();
+    			verbVO.href = Route.get(VerbWordDetail.class, "index", new RouteArgs().put("id", word.getId()).put("refer", request.url));
+    			Linq.from(word.getValues()).select(w->w.getValue()).where(s->s.equals(verbVO.value)==false).foreach(s->verbVO.alias.add(s));
+    			Linq.from(word.getMeanings()).foreach(m->verbVO.meanings.add(m));
+    			Linq.from(word.getTypes()).foreach(t->verbVO.types.add(t.toSimple()));
+    			for(WordFixword fixword : word.getFixwords()) {
+    				WordMeaningVO fixwordVO = new WordMeaningVO();
+    				fixwordVO.word = fixword.getValue();
+    				fixwordVO.meaning = fixword.getMeaning();
+    				verbVO.fixwords.add(fixwordVO);
+    			}
+    			verbsVO.add(verbVO);
+    		}
+    	}
+    	
+    	renderArgs.put("verbs", verbsVO);
     }
     
     private static class CharacterVO{
@@ -113,11 +145,20 @@ public final class MainIndex extends HtmlControllerBase {
     	public String syllable;
     }
     
+    private static class WordMeaningVO{
+    	public String word;
+    	public String meaning;
+    }
+    
     private static class WordVO{
     	public String href;
     	public String value;
     	public List<String> alias = new ArrayList<>();
     	public List<String> meanings = new ArrayList<>();
     	public List<String> types = new ArrayList<>();
+    }
+    
+    private static class VerbVO extends WordVO{
+    	public List<WordMeaningVO> fixwords = new ArrayList<>();
     }
 }

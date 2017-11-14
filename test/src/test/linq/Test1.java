@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -69,5 +70,18 @@ public class Test1 {
 			assertEquals((Integer)i, odd.get(j));
 		}
 	}
+
+	@Test
+	public void join() {
+		List<String> list1 = Arrays.asList("1", "2", "3");
+		List<String> list2 = Arrays.asList("4", "5");
+		List<String> rst = Linq.from(list1).join(list2, (s1, s2)->s1+s2).toList();
+		List<String> expect = Arrays.asList("14", "15", "24", "25", "34", "35");
+		assertEquals(6, rst.size());
+		for(int i=0; i<expect.size(); i++) {
+			assertEquals(expect.get(i), rst.get(i));
+		}
+	}
+
 
 }

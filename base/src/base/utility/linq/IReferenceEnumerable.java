@@ -11,9 +11,12 @@ import java.util.Map;
 import java.util.Objects;
 
 import base.utility.collection.map.DefaultValueHashMap;
+import base.utility.collection.tuple.Tuple;
+import base.utility.collection.tuple.Tuple2;
 import base.utility.comparator.Comparators;
 import base.utility.function.IAction;
 import base.utility.function.IForeachAction;
+import base.utility.function.IJoiner;
 import base.utility.function.IReferencePredicate;
 import base.utility.function.ISelector;
 import base.utility.function.ISelectorEx;
@@ -264,6 +267,14 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 	
 	public default IReferenceEnumerable<T> union(Iterable<? extends T> iterable){
 		return new UnionEnumerable<T>(this, Linq.from(iterable));
+	}
+	
+	public default <U> IReferenceEnumerable<Tuple2<T, U>> join(Iterable<U> other){
+		return new JoinEnumerable<>(this, other, (t, u)->Tuple.make(t, u));
+	}
+	
+	public default <U, V> IReferenceEnumerable<V> join(Iterable<U> other, IJoiner<T, U, V> joiner){
+		return new JoinEnumerable<>(this, other, joiner);
 	}
 	
 }

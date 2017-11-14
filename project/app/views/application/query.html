@@ -58,7 +58,7 @@
 				<table class="table table-bordered">
 					#{list items:notionals, as:'word'}
 						<tr>
-							<th>${word.value}</th>
+							<th><a href="${word.href}">${word.value}</a></th>
 							<td>
 								#{list items:word.alias, as:'alias'}
 									<div>${alias}</div>
@@ -76,9 +76,37 @@
 							</td>
 						</tr>
 					#{/list}
+					#{list items:verbs, as:'word'}
+						<tr>
+							<th><a href="${word.href}">${word.value}</a></th>
+							<td>
+								#{list items:word.alias, as:'alias'}
+									<div>${alias}</div>
+								#{/list}
+							</td>
+							<td>
+								#{list items:word.meanings, as:'meaning'}
+									<div>${meaning}</div>
+								#{/list}
+								<table class="table-fixwords">
+									#{list items:word.fixwords, as:'fixword'}
+										<tr>
+											<td>【${fixword.word}】</td>
+											<td>${fixword.meaning}</td>
+										</tr>
+									#{/list}
+								</table>
+							</td>
+							<td>
+								#{list items:word.types, as:'type'}
+									<span>${type}</span>
+								#{/list}
+							</td>
+						</tr>
+					#{/list}
 				</table>
 			</div>
-			#{if !characters && !notionals}
+			#{if !characters && !notionals && !verbs}
 				<p>（无）</p>
 			#{/if}
 		</div>

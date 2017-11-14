@@ -49,3 +49,7 @@ a, a:hover, a:visited, a:focus{
 	display:		inline-block;
 	margin-right:	20px;
 }
+
+.table-fixwords td:nth-child(1){
+	padding-right:	10px;
+}
