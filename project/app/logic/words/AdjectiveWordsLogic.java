@@ -56,6 +56,10 @@ public final class AdjectiveWordsLogic extends LogicBase{
 		
 		return AdjectiveWordValue.find(result.select, result.params).fetch();
 	}
+	
+	public static List<IAdjectiveWordValue> findAdjectiveWordValuesBySearch(String query){
+		return AdjectiveWordValue.find("value=?1", query).fetch();
+	}
 
 	public static boolean hasAdjectiveWordValue(String value) {
 		return AdjectiveWordValue.find("value=?1", value).first() != null;

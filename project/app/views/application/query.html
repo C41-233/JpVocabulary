@@ -104,9 +104,38 @@
 							</td>
 						</tr>
 					#{/list}
+					#{list items:adjs, as:'word'}
+						<tr>
+							<th><a href="${word.href}">${word.value}</a></th>
+							<td>
+								#{list items:word.alias, as:'alias'}
+									<div>${alias}</div>
+								#{/list}
+							</td>
+							<td>
+								#{list items:word.meanings, as:'meaning'}
+									<div>${meaning}</div>
+								#{/list}
+								<table class="table-fixwords">
+									#{list items:word.fixwords, as:'fixword'}
+										<tr>
+											<td>【${fixword.word}】</td>
+											<td>${fixword.meaning}</td>
+										</tr>
+									#{/list}
+								</table>
+							</td>
+							<td>
+								<span>形容词</span>
+								#{list items:word.types, as:'type'}
+									<span>${type}</span>
+								#{/list}
+							</td>
+						</tr>
+					#{/list}
 				</table>
 			</div>
-			#{if !characters && !notionals && !verbs}
+			#{if !characters && !notionals && !verbs && !adjs}
 				<p>（无）</p>
 			#{/if}
 		</div>
