@@ -1,27 +1,32 @@
 package controllers;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import base.utility.linq.Linq;
 import controllers.adjectives.AdjectiveWordDetail;
-import controllers.adjectives.AdjectiveWordEdit;
 import controllers.characters.CharacterDetail;
+import controllers.katakanas.KatakanaWordEdit;
 import controllers.notionals.NotionalWordEdit;
 import controllers.verbs.VerbWordDetail;
 import core.controller.HtmlControllerBase;
 import core.controller.Route;
 import core.controller.RouteArgs;
-import logic.characters.CharactersConvert;
+import core.controller.validation.annotation.Required;
+import core.controller.validation.annotation.StringValue;
+import logic.JpConvert;
 import logic.characters.CharactersLogic;
 import logic.pinyins.Pinyins;
 import logic.words.AdjectiveWordsLogic;
+import logic.words.KatakanaWordsLogic;
 import logic.words.NotionalWordsQueryLogic;
 import logic.words.VerbWordsLogic;
 import po.IAdjectiveWord;
 import po.IAdjectiveWordValue;
 import po.ICharacter;
 import po.ICharacterSyllable;
+import po.IKatakanaWord;
 import po.INotionalWord;
 import po.INotionalWordValue;
 import po.IVerbWord;
@@ -35,17 +40,19 @@ public final class MainIndex extends HtmlControllerBase {
         render("index");
     }
 
-    public static void search(String q) {
+    public static void search(@Required @StringValue String q) {
     	renderArgs.put("query", q);
     	
     	//汉字
     	processCharacter(q);
     	
-    	List<String> queries = CharactersConvert.convert(q);
+    	List<String> queries = JpConvert.toJpCharacter(q);
     	
     	processNotional(queries);
     	processVerb(queries);
     	processAdj(queries);
+    	
+    	processKatakana(q);
     	
     	render("query");
     }
@@ -158,6 +165,55 @@ public final class MainIndex extends HtmlControllerBase {
     	renderArgs.put("adjs", verbsVO);
     }
     
+    private static void processKatakana(String query) {
+    	List<IKatakanaWord> words = new ArrayList<>();
+    	
+    	//片假名直接查询
+    	{
+    		List<String> jpStrings = JpConvert.toJpCharacter(query);
+    		for(String jpString : jpStrings) {
+        		String katakanaString = JpConvert.toKatakana(jpString);
+        		IKatakanaWord word = KatakanaWordsLogic.findKatakanaWordsBySearch(katakanaString);
+        		if(word != null) {
+        			words.add(word);
+        		}
+    		}
+    	}
+    	
+    	//别名查询
+    	{
+    		HashSet<String> aliases = new HashSet<>();
+    		aliases.add(query);
+    		
+    		for(String s : JpConvert.toJpCharacter(query)) {
+    			aliases.add(s);
+    		}
+    		
+    		for(String alias : aliases) {
+        		IKatakanaWord word = KatakanaWordsLogic.findKatakanaWordsByAlias(alias);
+        		if(word != null) {
+        			words.add(word);
+        		}
+    		}
+    	}
+    	
+    	List<KatakanaWordVO> katakanasVO = new ArrayList<>();
+    	for(IKatakanaWord word : words) {
+			KatakanaWordVO wordVO = new KatakanaWordVO();
+			wordVO.value = word.getValue();
+			wordVO.href = Route.get(KatakanaWordEdit.class, "index", new RouteArgs().put("id", word.getId()).put("refer", request.url));
+			wordVO.context = word.getContext().toString();
+			wordVO.alias = word.getAlias();
+			
+			Linq.from(word.getMeanings()).foreach(m->wordVO.meanings.add(m));
+			Linq.from(word.getTypes()).foreach(t->wordVO.types.add(t.toString()));
+			
+			katakanasVO.add(wordVO);
+    	}
+    	
+    	renderArgs.put("katakanas", katakanasVO);
+    }
+    
     private static class CharacterVO{
     	public String href;
     	public String jp;
@@ -189,6 +245,15 @@ public final class MainIndex extends HtmlControllerBase {
     	public List<String> meanings = new ArrayList<>();
     	public List<String> types = new ArrayList<>();
     	public List<WordMeaningVO> fixwords = new ArrayList<>();
+    }
+    
+    private static class KatakanaWordVO{
+    	public String href;
+    	public String value;
+    	public String alias;
+    	public String context;
+    	public List<String> meanings = new ArrayList<>();
+    	public List<String> types = new ArrayList<>();
     }
     
 }

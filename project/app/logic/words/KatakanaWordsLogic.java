@@ -34,6 +34,14 @@ public final class KatakanaWordsLogic extends LogicBase{
 		return KatakanaWord.find(rst.select, rst.params).fetch();
 	}
 
+	public static IKatakanaWord findKatakanaWordsBySearch(String query) {
+		return KatakanaWord.find("value=?1", query).first();
+	}
+
+	public static IKatakanaWord findKatakanaWordsByAlias(String query) {
+		return KatakanaWord.find("alias=?1", query).first();
+	}
+
 	public static IKatakanaWord getKatakanawordAndUpdate(long id) {
 		return KatakanaWord.findById(id);
 	}
