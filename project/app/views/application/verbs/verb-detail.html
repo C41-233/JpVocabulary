@@ -1,5 +1,12 @@
 #{meta /}
 
+#{if word.values1}
+	#{title word.values1.get(0)/}
+#{/if}
+#{elseif word.values2}
+	#{title word.values2.get(0)/}
+#{/elseif}
+
 #{body}
 
 <div class="container">

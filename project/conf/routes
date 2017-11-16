@@ -89,4 +89,6 @@ POST	/words/katakana/action/update-context	katakanas.KatakanaWordAPI.updateConte
 
 GET		/words/interjections					notionals.InterjectionWordIndex.index
 
+GET		/50										Page.of(file:'50')
+
 GET		/test									Test.test
