@@ -90,5 +90,7 @@ POST	/words/katakana/action/update-context	katakanas.KatakanaWordAPI.updateConte
 GET		/words/interjections					notionals.InterjectionWordIndex.index
 
 GET		/50										Page._50
+GET		/grammar/verb							Page.verb
+GET		/grammar/other							Page.other
 
 GET		/test									Test.test
