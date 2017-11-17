@@ -3,10 +3,11 @@
 #{title '五十音图'/}
 
 #{body}
+<div class="container">
 	<h1>五十音图</h1>
 	<hr/>
 	<h2>清音</h2>
-	<table>
+	<table class="table table-bordered">
 		<tr>
 			<th>あ ア a</th>
 			<th>い イ i</th>
@@ -71,21 +72,21 @@
 			<th>ろ ロ ro</th>
 		</tr>
 		<tr>
-			<th>わ ワ wa</th>
-			<th>い イ i</th>
+			<th>わ ワ wa </th>
+			<th>い イ i<br/>ゐ ヰ wi</th>
 			<th>う ウ u</th>
-			<th>え エ e</th>
+			<th>え エ e<br/>ゑ ヱ we</th>
 			<th>を ヲ wo</th>
 		</tr>
 	</table>
 	<h2>拨音</h2>
-	<table>
+	<table class="table table-bordered">
 		<tr>
 			<th>ん ン n</th>
 		</tr>
 	</table>
 	<h2>浊音</h2>
-	<table>
+	<table class="table table-bordered">
 		<tr>
 			<th>が ガ ga</th>
 			<th>ぎ ギ gi</th>
@@ -115,7 +116,7 @@
 			<th>ぼ ボ bo</th>
 	</table>
 	<h2>半浊音</h2>
-	<table>
+	<table class="table table-bordered">
 		<tr>
 			<th>ぱ パ pa</th>
 			<th>ぴ ピ pi</th>
@@ -125,7 +126,7 @@
 		</tr>
 	</table>
 	<h2>拗音</h2>
-	<table>
+	<table class="table table-bordered">
 		<tr>
 			<th>きゃ キャ kya</th>
 			<th>きゅ キュ kyu</th>
@@ -189,7 +190,7 @@
 	</table>
 	
 	<h2>外来音</h2>
-	<table>
+	<table class="table table-bordered">
 		<thead>
 		<tr>
 			<th></th>
@@ -250,7 +251,7 @@
 			<th></th>
 			<th></th>
 			<th></th>
-			<th>ヴ vu</th>
+			<th>ヴゥ vu</th>
 		</tr>
 		<tr>
 			<th>エ</th>
@@ -299,15 +300,15 @@
 		</tr>
 	</table>
 	
-	<h2>促音规则</h2>
+	<h2>促音</h2>
 	<p>促音只发生在か行、さ行、た行、ぽ行的音之前。</p>
 	
-	<h2>长音规则</h2>
+	<h2>长音</h2>
 	<p>平假名，あ段后跟あ，い段后跟い，う段后跟う，え段后跟い，お段后跟う。</p>
 	<p>片假名后跟长音符号ー。</p>
 	
 	<h2>万叶假名</h2>
-	<table>
+	<table class="table table-bordered">
 		<tr><th>あ a</th><td>阿、安、婀、鞅、英、吾、足</td></tr>
 		<tr><th>い i</th><td>伊、怡、以、一、异、已、移、射、五</td></tr>
 		<tr><th>う u</th><td>宇、有、污、于、羽、鸟、纡、禹、云、菟、鹈、卯、鸬、得</td></tr>
@@ -396,5 +397,11 @@
 		<tr><th>ゑ we</th><td>回、惠、卫、慧、隈、秽、画、咲</td></tr>
 		<tr><th>を wo</th><td>乎、袁、远、怨、呼、乌、呜、坞、椀、越、男、雄、绪</td></tr>
 	</table>
+</div>
 #{/body}
 
+#{stylesheet}
+th{
+	white-space: nowrap;
+}
+#{/stylesheet}
