@@ -5,6 +5,7 @@ import java.util.Set;
 
 import base.utility.Chars;
 import base.utility.linq.Linq;
+import core.model.ConcatSplit;
 import core.model.hql.HQL;
 import core.model.hql.HQLResult;
 import core.model.hql.Like;
@@ -40,6 +41,14 @@ public final class KatakanaWordsLogic extends LogicBase{
 
 	public static IKatakanaWord findKatakanaWordsByAlias(String query) {
 		return KatakanaWord.find("alias=?1", query).first();
+	}
+
+	public static List<IKatakanaWord> findQuantifierKatakanaWords() {
+		HQL hql = HQL.begin();
+		hql.where(Like.contains("types", ConcatSplit.getToken(KatakanaWordType.量词.toString())));
+		hql.orderBy("value");
+		HQLResult rst = hql.end();
+		return KatakanaWord.find(rst.select, rst.params).fetch();
 	}
 
 	public static IKatakanaWord getKatakanawordAndUpdate(long id) {

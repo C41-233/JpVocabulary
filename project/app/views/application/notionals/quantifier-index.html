@@ -6,14 +6,25 @@
 	<h3>量词</h3>
 	<hr/>
 	<table class="table table-bordered table-words">
-		#{list items:words, as:'word'}
+		#{list items:notionals, as:'word'}
 			<tr>
-				<th class="word-value font-jp"><a href="@{notionals.NotionalWordEdit.index(word.id, request.url)}">${word.value}</a></th>
+				<th class="word-value font-jp"><a href="${word.href}">${word.value}</a></th>
 				<td>
 					#{list items:word.syllables, as:'syllable'}
 						<div>${syllable}</div>
 					#{/list}
 				</td>
+				<td>
+					#{list items:word.meanings, as:'meaning'}
+						<div>${meaning}</div>
+					#{/list}
+				</td>
+			</tr>
+		#{/list}
+		#{list items:katakanas, as:'word'}
+			<tr>
+				<th class="word-value font-jp"><a href="${word.href}">${word.value}</a></th>
+				<td>【${word.context}】${word.alias}</td>
 				<td>
 					#{list items:word.meanings, as:'meaning'}
 						<div>${meaning}</div>
