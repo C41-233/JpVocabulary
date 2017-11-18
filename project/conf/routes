@@ -37,6 +37,8 @@ GET		/words/function							notionals.FunctionWordIndex.index
 GET		/words/function/{index}					notionals.FunctionWordIndex.page
 GET		/words/adjnoun							notionals.AdjNounWordIndex.index
 GET		/words/adjnoun/{index}					notionals.AdjNounWordIndex.page
+GET		/words/numeral							Page.numeral
+GET		/words/quantifier						notionals.QuantifierWordIndex.index
 GET		/words/notional/{<[0-9]+>id}/edit		notionals.NotionalWordEdit.index
 
 POST	/words/notional/action/create			notionals.NotionalWordAPI.create

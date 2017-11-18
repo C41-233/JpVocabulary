@@ -15,6 +15,10 @@ public final class Page extends HtmlControllerBase{
 	public static void other() {
 		of("other");
 	}
+
+	public static void numeral() {
+		of("numeral");
+	}
 	
 	private static void of(String file) {
 		render("pages/"+file);

@@ -17,6 +17,8 @@ public enum NotionalWordType {
 		疑问词,
 		接头词,
 		接尾词,
+		数词,
+		量词,
 		数量词;
 	
 }
