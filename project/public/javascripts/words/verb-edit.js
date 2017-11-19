@@ -77,6 +77,12 @@ $(function(){
 		})
 	})
 	
+	$("#input-fixword-value, #input-fixword-meaning").keydown(function(e){
+		if(e.keyCode==VK.ENTER){
+			$("#btn-add-fixword").click()
+		}
+	})
+	
 	$(".btn-delete-fixword").click(function(){
 		var word = $(this).parent().parent().find("td:nth-child(1)").text().trim()
 		Action.post("/words/verb/action/delete-fixword", {id: DataMgr.id, value: word}, function(){

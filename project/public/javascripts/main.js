@@ -63,8 +63,12 @@ $.fn.jpDialog = function(params){
 		resizable: false,
 		draggable: false,
 		closeOnEscape: false,
+		open: function(){
+			$(document).on("keydown", esc)
+		},
 		close: function(){
 			$(this).validate("clear")
+			$(document).off("keydown", esc)
 		}
 	}
 	if(args.width){
@@ -91,6 +95,13 @@ $.fn.jpDialog = function(params){
 			args.create()
 		}
 	})
+	
+	var esc = function(e){
+		if(e.keyCode == VK.ESC){
+			dialog.dialog("close")
+		}
+	}
+	
 }
 
 })();
@@ -105,6 +116,20 @@ $(function(){
 				}	
 			})
 		})
+	})
+})
+
+$(function(){
+	$(document).keyup(function(e){
+		if(e.target==document.body){
+			switch(e.keyCode){
+				case VK._1: $("#btn-import-character").click(); break
+				case VK._2: $("#btn-import-notional-word").click(); break
+				case VK._3: $("#btn-import-verb-word").click(); break
+				case VK._4: $("#btn-import-adj-word").click(); break
+				case VK._5: $("#btn-import-katakana-word").click(); break
+			}
+		}
 	})
 })
 
