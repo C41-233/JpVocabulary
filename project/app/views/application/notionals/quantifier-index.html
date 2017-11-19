@@ -8,7 +8,7 @@
 	<table class="table table-bordered table-words">
 		#{list items:notionals, as:'word'}
 			<tr>
-				<th class="word-value font-jp"><a href="${word.href}">${word.value}</a></th>
+				<th class="word-value font-jp"><a href="${word.href}" class="word-link">${word.value}</a></th>
 				<td>
 					#{list items:word.syllables, as:'syllable'}
 						<div>${syllable}</div>
@@ -36,10 +36,3 @@
 </div>
 
 #{/body}
-
-#{stylesheet}
-	a, a:hover, a:visited, a:focus{
-		color:	black;
-		text-decoration: none;
-	}
-#{/stylesheet}

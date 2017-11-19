@@ -2,12 +2,14 @@
 
 #{stylesheet "words/notional-index.css"/}
 
+#{title "片假名词"/}
+
 #{body}
 
 <div class="container">
 	<div class="row">
 		<div class="col-lg-2 col-sm-3 col-xs-6">
-			<h3>${group}</h3>
+			<h3>片假名词</h3>
 			#{component.left-side-index indexes/}
 		</div>
 		<div class="col-lg-10 col-sm-9 col-xs-6">
@@ -20,7 +22,7 @@
 			<table class="table table-bordered">
 				#{list items:words, as:'word'}
 					<tr>
-						<th><a href="${word.href}">${word.value}</a></th>
+						<th><a class="word-link" href="${word.href}">${word.value}</a></th>
 						<td>
 							#{list items:word.meanings, as:'meaning'}
 								<div>${meaning}</div>
@@ -48,11 +50,3 @@
 
 #{/body}
 
-#{stylesheet}
-
-th a, th a:hover{
-	color:			black;
-	text-decoration:	none;
-}
-
-#{/stylesheet}

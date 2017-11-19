@@ -10,7 +10,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-lg-10">
-			<a href="@{characters.CharacterDetail.index(character.id, refer)}"><span class="glyphicon glyphicon-arrow-left"></span>返回</a>
+			<a href="@{characters.CharacterDetail.index(character.id, refer)}" class=" back-link"><span class="glyphicon glyphicon-arrow-left"></span>返回</a>
 		</div>
 		<div class="col-lg-2 text-right">
 			<button class="btn btn-danger" id="btn-delete-character" #{if !canDelete}disabled#{/if}>删除</button>

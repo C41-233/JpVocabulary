@@ -7,7 +7,3 @@
 .table-words td:nth-child(3){
 	width:		40%;
 }
-.table-words th:nth-child(1) a{
-	color:		black;
-	text-decoration:	none;
-}

@@ -7,10 +7,6 @@
 .table-words>tbody>tr>td:nth-child(3){
 	width:		40%;
 }
-.table-words>tbody>tr>th:nth-child(1) a{
-	color:		black;
-	text-decoration:	none;
-}
 
 .div-group{
 	font-size:		16px;

@@ -11,7 +11,7 @@
 				#{list items:words, as:'word'}
 					<tr>
 						<th class="div-value">
-							<a href="@{notionals.NotionalWordEdit.index(word.id, request.url)}">
+							<a href="@{notionals.NotionalWordEdit.index(word.id, request.url)}" class="word-link">
 								#{list items:word.values, as:'value'}
 									<span class="value">${value}</span>
 								#{/list}
@@ -37,9 +37,5 @@
 	}
 	.value+.value:before{
 		content: ' / ';
-	}
-	.div-value a{
-		color:	black;
-		text-decoration:	none;
 	}
 #{/stylesheet}

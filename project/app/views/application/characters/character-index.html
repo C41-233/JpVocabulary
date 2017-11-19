@@ -25,7 +25,7 @@
 					<div class="div-characters">
 						#{list items:group.characters, as:'character'}
 							<div class="div-character">
-								<a class="character-header" href="@{characters.CharacterDetail.index(character.id, request.url)}">
+								<a class="character-header word-link" href="@{characters.CharacterDetail.index(character.id, request.url)}">
 									<span class="character-jp font-jp">${character.jp}</span>
 									<span class="character-cn">
 										#{list items:character.cns, as:'cn'}
