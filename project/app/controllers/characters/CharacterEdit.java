@@ -7,7 +7,7 @@ import base.utility.Strings;
 import core.controller.HtmlControllerBase;
 import core.controller.validation.annotation.Id;
 import core.controller.validation.annotation.StringValue;
-import logic.characters.CharactersLogic;
+import logic.characters.CharactersQueryLogic;
 import logic.pinyins.Pinyins;
 import po.WordPair;
 import po.ICharacter;
@@ -21,7 +21,7 @@ public class CharacterEdit extends HtmlControllerBase{
 	) {
 		renderArgs.put("refer", refer);
 		
-		ICharacter character = CharactersLogic.getCharacer(id);
+		ICharacter character = CharactersQueryLogic.getCharacer(id);
 		if(character == null) {
 			notFound(Strings.format("%d not found", id));
 		}

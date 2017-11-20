@@ -9,11 +9,13 @@ import core.controller.HtmlControllerBase;
 import core.controller.Route;
 import core.controller.validation.annotation.Id;
 import core.controller.validation.annotation.StringValue;
-import logic.characters.CharactersLogic;
+import logic.characters.CharactersQueryLogic;
 import logic.pinyins.Pinyins;
-import po.WordPair;
 import po.ICharacter;
 import po.ICharacterSyllable;
+import po.INotionalWord;
+import po.INotionalWordValue;
+import po.WordPair;
 
 public class CharacterDetail extends HtmlControllerBase{
 
@@ -26,7 +28,8 @@ public class CharacterDetail extends HtmlControllerBase{
 		}
 		renderArgs.put("refer", refer);
 		
-		ICharacter character = CharactersLogic.getCharacer(id);
+		//汉字属性
+		ICharacter character = CharactersQueryLogic.getCharacer(id);
 		if(character == null) {
 			notFound(Strings.format("汉字不存在: id=%d", id));
 		}
@@ -47,14 +50,14 @@ public class CharacterDetail extends HtmlControllerBase{
 			syllableVO.value = syllable.getValue();
 			
 			if(syllable.isMain()) {
-				WordVO wordVO = new WordVO();
+				FixwordVO wordVO = new FixwordVO();
 				wordVO.word = character.getJpValue();
 				wordVO.syllable = syllable.getValue();
 				syllableVO.words.add(wordVO);
 			}
 			
 			for(WordPair word : syllable.getWords()) {
-				WordVO wordVO = new WordVO();
+				FixwordVO wordVO = new FixwordVO();
 				syllableVO.words.add(wordVO);
 				
 				wordVO.word = word.getWord();
@@ -63,13 +66,29 @@ public class CharacterDetail extends HtmlControllerBase{
 		}
 		
 		for(WordPair word : character.getFixwords()) {
-			WordVO wordVO = new WordVO();
+			FixwordVO wordVO = new FixwordVO();
 			wordVO.syllable = word.getSyllable();
 			wordVO.word = word.getWord();
 			vo.fixwords.add(wordVO);
 		}
 		
 		renderArgs.put("character", vo);
+		
+		//汉字相关单词查询
+		List<WordVO> wordsVO = new ArrayList<>();
+		List<INotionalWordValue> values = CharactersQueryLogic.findNotionalWordsByCharacter(character.getJpValue());
+		for(INotionalWordValue value : values) {
+			WordVO wordVO = new WordVO();
+			INotionalWord word = value.getWord();
+			wordVO.value = value.getValue();
+			Linq.from(word.getSyllables()).foreach(s->wordVO.alias.add(s));
+			Linq.from(word.getMeanings()).foreach(m->wordVO.meanings.add(m));
+			Linq.from(word.getTypes()).select(t->t.toString()).foreach(t->wordVO.types.add(t));
+			wordsVO.add(wordVO);
+		}
+		
+		renderArgs.put("words", wordsVO);
+		
 		render("characters/character-detail");
 	}
 	
@@ -79,17 +98,24 @@ public class CharacterDetail extends HtmlControllerBase{
 		List<Character> cns = new ArrayList<>();
 		List<String> pinyins = new ArrayList<>();
 		List<SyllableVO> syllables = new ArrayList<>();
-		List<WordVO> fixwords = new ArrayList<>();
+		List<FixwordVO> fixwords = new ArrayList<>();
 	}
 	
 	private static class SyllableVO{
 		String value;
-		List<WordVO> words = new ArrayList<>();
+		List<FixwordVO> words = new ArrayList<>();
+	}
+	
+	private static class FixwordVO{
+		String word;
+		String syllable;
 	}
 	
 	private static class WordVO{
-		String word;
-		String syllable;
+		String value;
+		List<String> alias = new ArrayList<>();
+		List<String> meanings = new ArrayList<>();
+		List<String> types = new ArrayList<>();
 	}
 	
 }

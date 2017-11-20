@@ -3,11 +3,6 @@ package logic.characters;
 import java.util.List;
 
 import base.utility.linq.Linq;
-import core.model.ConcatSplit;
-import core.model.hql.HQL;
-import core.model.hql.HQLResult;
-import core.model.hql.Like;
-import core.model.hql.Or;
 import logic.LogicBase;
 import models.Character;
 import models.NotionalWordValue;
@@ -16,51 +11,10 @@ import po.WordPair;
 import po.ICharacter;
 import po.ICharacterSyllable;
 
-public final class CharactersLogic extends LogicBase{
+public final class CharactersUpdateLogic extends LogicBase{
 
-	private CharactersLogic() {}
+	private CharactersUpdateLogic() {}
 	
-	public static List<ICharacter> findCharactersByPinyin(String pinyin){
-		HQL hql = HQL.begin();
-		hql.where(Like.contains("pinyins", ConcatSplit.getToken(pinyin)));
-		hql.orderBy("jp");
-		
-		HQLResult result = hql.end();
-		return Character.find(result.select, result.params).fetch();
-	}
-
-	public static ICharacter getCharacer(long id) {
-		return Character.findById(id);
-	}
-	
-	public static ICharacter findCharacter(String jp) {
-		return Character.find("jp=?1", jp).first();
-	}
-
-	public static List<ICharacter> findCharactersByCn(String cn) {
-		HQL hql = HQL.begin();
-		hql.where(Like.contains("cn", cn));
-		
-		HQLResult result = hql.end();
-		return Character.find(result.select, result.params).fetch();
-	}
-
-	public static boolean hasCharacter(String jp) {
-		return Character.find("jp=?1", jp).first() != null;
-	}
-
-	public static List<ICharacter> findCharacterBySearch(String q) {
-		HQL hql = HQL.begin();
-		
-		Or or = new Or();
-		or.or("jp=?", q);
-		or.or(Like.contains("cn", q));
-		hql.where(or);
-		
-		HQLResult rst = hql.end();
-		return Character.find(rst.select, rst.params).fetch();
-	}
-
 	public static ICharacter createCharacter(String jp, String cn, List<String> pinyins) {
 		raiseIfNotValidJpValue(jp);
 		raiseIfNotValidCnValue(cn);
@@ -196,7 +150,7 @@ public final class CharactersLogic extends LogicBase{
 	}
 
 	private static void raiseIfCharacterAlreadyExist(String ch) {
-		if(hasCharacter(ch)) {
+		if(CharactersQueryLogic.hasCharacter(ch)) {
 			raise("汉字已存在：%s", ch);
 		}
 	}

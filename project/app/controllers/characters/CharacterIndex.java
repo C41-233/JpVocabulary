@@ -8,7 +8,7 @@ import controllers.components.HTMLComponentsControllerBase;
 import core.controller.Route;
 import core.controller.RouteArgs;
 import core.controller.validation.annotation.Required;
-import logic.characters.CharactersLogic;
+import logic.characters.CharactersQueryLogic;
 import logic.indexes.IndexManager;
 import logic.pinyins.Pinyins;
 import po.WordPair;
@@ -37,7 +37,7 @@ public final class CharacterIndex extends HTMLComponentsControllerBase{
 			groups.add(index + i);
 		}
 		for(String groupName : groups) {
-			List<ICharacter> characters = CharactersLogic.findCharactersByPinyin(groupName);
+			List<ICharacter> characters = CharactersQueryLogic.findCharactersByPinyin(groupName);
 			if(characters.size() == 0) {
 				continue;
 			}

@@ -11,7 +11,7 @@ import core.controller.RouteArgs;
 import core.controller.validation.annotation.Id;
 import core.controller.validation.annotation.Required;
 import core.controller.validation.annotation.StringValue;
-import logic.characters.CharactersLogic;
+import logic.characters.CharactersUpdateLogic;
 import po.WordPair;
 import po.ICharacter;
 
@@ -22,47 +22,47 @@ public final class CharacterAPI extends AjaxControllerBase {
 		@Required @StringValue(minLength=1) String cn, 
 		@Required @StringValue(minLength=1) String[] pinyins
 	) {
-		ICharacter character = CharactersLogic.createCharacter(jp, cn, Arrays.asList(pinyins));
+		ICharacter character = CharactersUpdateLogic.createCharacter(jp, cn, Arrays.asList(pinyins));
 		jsonResult.put("href", Route.get(CharacterDetail.class, "index", new RouteArgs().put("id", character.getId())));
 	}
 	
 	public static void delete(@Id long id) {
-		CharactersLogic.deleteCharacter(id);
+		CharactersUpdateLogic.deleteCharacter(id);
 	}
 	
 	public static void addSyllable(
 		@Id long id, 
 		@Required @StringValue(minLength=1) String syllable
 	) {
-		CharactersLogic.addSyllable(id, syllable);
+		CharactersUpdateLogic.addSyllable(id, syllable);
 	}
 
 	public static void updateJp(
 		@Id long id,
 		@Required @StringValue(length=1) String value
 	) {
-		CharactersLogic.updateJp(id, value);
+		CharactersUpdateLogic.updateJp(id, value);
 	}
 	
 	public static void updateCn(
 		@Id long id,
 		@Required @StringValue(minLength=1) String value
 	) {
-		CharactersLogic.updateCn(id, value);
+		CharactersUpdateLogic.updateCn(id, value);
 	}
 
 	public static void updatePinyins(
 		@Id long id,
 		@Required @StringValue(minLength=1) String[] values
 	) {
-		CharactersLogic.updatePinyins(id, Arrays.asList(values));
+		CharactersUpdateLogic.updatePinyins(id, Arrays.asList(values));
 	}
 	
 	public static void deleteSyllable(
 		@Id long id,
 		@Required String syllable
 	) {
-		CharactersLogic.deleteSyllable(id, syllable);
+		CharactersUpdateLogic.deleteSyllable(id, syllable);
 	}
 	
 	public static void updateSyllableValue(
@@ -70,7 +70,7 @@ public final class CharacterAPI extends AjaxControllerBase {
 		@Required @StringValue(minLength=1) String syllable,
 		@Required @StringValue(minLength=1) String value
 	) {
-		CharactersLogic.updateSyllable(id, syllable, value);
+		CharactersUpdateLogic.updateSyllable(id, syllable, value);
 	}
 
 	public static void updateSyllableMain(
@@ -78,7 +78,7 @@ public final class CharacterAPI extends AjaxControllerBase {
 		@Required @StringValue(minLength=1) String syllable,
 		@Required boolean value
 	) {
-		CharactersLogic.updateSyllableMain(id, syllable, value);
+		CharactersUpdateLogic.updateSyllableMain(id, syllable, value);
 	}
 	
 	public static void updateSyllableWords(
@@ -93,7 +93,7 @@ public final class CharacterAPI extends AjaxControllerBase {
 			}
 			return new WordPair(split[0], split[1]);
 		}).toList();
-		CharactersLogic.updateSyllableWords(id, syllable, wordList);
+		CharactersUpdateLogic.updateSyllableWords(id, syllable, wordList);
 	}
 	
 	public static void addFixword(
@@ -101,7 +101,7 @@ public final class CharacterAPI extends AjaxControllerBase {
 		@Required @StringValue(minLength=1) String word,
 		@Required @StringValue(minLength=1) String syllable
 	) {
-		CharactersLogic.addFixword(id, word, syllable);
+		CharactersUpdateLogic.addFixword(id, word, syllable);
 	}
 
 	public static void deleteFixword(
@@ -109,7 +109,7 @@ public final class CharacterAPI extends AjaxControllerBase {
 		@Required String word,
 		@Required String syllable
 	) {
-		CharactersLogic.deleteFixword(id, word, syllable);
+		CharactersUpdateLogic.deleteFixword(id, word, syllable);
 	}
 	
 }

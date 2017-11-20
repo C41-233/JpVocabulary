@@ -6,7 +6,7 @@ import java.util.List;
 
 import base.utility.Chars;
 import base.utility.linq.Linq;
-import logic.characters.CharactersLogic;
+import logic.characters.CharactersQueryLogic;
 import po.ICharacter;
 
 public final class WordQueryIndex {
@@ -17,7 +17,7 @@ public final class WordQueryIndex {
 		if(Chars.isCJKUnifiedIdeograph(ch) == false) {
 			return Arrays.asList(first);
 		}
-		ICharacter character = CharactersLogic.findCharacter(first);
+		ICharacter character = CharactersQueryLogic.findCharacter(first);
 		if(character == null) {
 			return Collections.emptyList();
 		}

@@ -16,7 +16,7 @@ import core.controller.RouteArgs;
 import core.controller.validation.annotation.Required;
 import core.controller.validation.annotation.StringValue;
 import logic.JpConvert;
-import logic.characters.CharactersLogic;
+import logic.characters.CharactersQueryLogic;
 import logic.pinyins.Pinyins;
 import logic.words.AdjectiveWordsLogic;
 import logic.words.KatakanaWordsLogic;
@@ -47,6 +47,10 @@ public final class MainIndex extends HtmlControllerBase {
     	processCharacter(q);
     	
     	List<String> queries = JpConvert.toJpCharacter(q);
+    	for(int i=0; i<queries.size(); i++) {
+    		String query = queries.get(i);
+    		queries.set(i, JpConvert.toHiragana(query));
+    	}
     	
     	processNotional(queries);
     	processVerb(queries);
@@ -58,7 +62,7 @@ public final class MainIndex extends HtmlControllerBase {
     }
 
     private static void processCharacter(String query) {
-		List<ICharacter> characters = CharactersLogic.findCharacterBySearch(query);
+		List<ICharacter> characters = CharactersQueryLogic.findCharacterBySearch(query);
 		List<CharacterVO> charactersVO = new ArrayList<>();
 		for(ICharacter character : characters) {
 			CharacterVO vo = new CharacterVO();

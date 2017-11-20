@@ -67,6 +67,30 @@
 			</div>
 		</div>
 	</div>
+	<div class="row">
+		<table class="table table-bordered">
+			#{list items:words, as:'word'}
+				<tr>
+					<th>${word.value}</th>
+					<td>
+						#{list items:word.alias, as:'s'}
+							<div>${s}</div>
+						#{/list}
+					</td>
+					<td>
+						#{list items:word.meanings, as:'meaning'}
+							<div>${meaning}</div>
+						#{/list}
+					</td>
+					<td>
+						#{list items:word.types, as:'type'}
+							<span>${type}</span>
+						#{/list}
+					</td>
+				</tr>
+			#{/list}
+		</table>
+	</div>
 </div>
 
 #{/body}
