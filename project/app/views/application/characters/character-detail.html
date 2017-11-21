@@ -2,6 +2,8 @@
 
 #{title character.jp/}
 
+#{stylesheet 'characters/character-detail.css'/}
+
 #{body}
 
 <div class="container">
@@ -55,9 +57,9 @@
 			<div>
 				#{if character.fixwords}
 					<div class="font-bold">熟字训</div>
-					<div class="div-syllable-words">
+					<div>
 						#{list items:character.fixwords, as:'word'}
-							<span class="span-word">
+							<span class="span-fixword">
 								<span class="font-jp">${word.word}</span>
 								(<span class="font-jp">${word.syllable}</span>)
 							</span>
@@ -71,7 +73,7 @@
 		<table class="table table-bordered">
 			#{list items:words, as:'word'}
 				<tr>
-					<th>${word.value}</th>
+					<th><a class="word-link" href="${word.href}">${word.value}</a></th>
 					<td>
 						#{list items:word.alias, as:'s'}
 							<div>${s}</div>
@@ -94,24 +96,3 @@
 </div>
 
 #{/body}
-
-#{stylesheet}
-	h1{
-		display:	inline-block;
-		margin-right:	10px;
-	}
-	.pinyin{
-		font-size:	16px;
-	}
-	.div-syllable-words{
-		padding-left:	20px;
-		margin-bottom:	10px;
-	}
-	.span-word{
-		display:	inline-block;
-		min-width:	100px;
-	}
-	.character-jp{
-		font-size:	60px;
-	}
-#{/stylesheet}

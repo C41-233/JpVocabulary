@@ -1,0 +1,25 @@
+h1{
+	display:	inline-block;
+	margin-right:	10px;
+}
+.pinyin{
+	font-size:	16px;
+}
+.div-syllable-words{
+	padding-left:	20px;
+	margin-bottom:	10px;
+}
+.span-word{
+	display:	inline-block;
+	min-width:	100px;
+}
+.span-word+.span-word{
+	margin-left:	20px;
+}
+.span-fixword{
+	display:	inline-block;
+	min-width:	200px;
+}
+.character-jp{
+	font-size:	60px;
+}

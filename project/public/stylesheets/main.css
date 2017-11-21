@@ -1,3 +1,6 @@
+body{
+	margin-bottom:	20px;
+}
 .word-link, .word-link:link, .word-link:focus, .word-link:visited{
 	color:	black;
 	text-decoration:	none;
@@ -20,7 +23,7 @@
 }
 
 .font-jp{
-	font-family: "MS PGothic";
+	font-family: "MS Gothic";
 }
 
 .vertical-middle{

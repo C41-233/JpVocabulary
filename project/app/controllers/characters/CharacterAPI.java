@@ -23,7 +23,7 @@ public final class CharacterAPI extends AjaxControllerBase {
 		@Required @StringValue(minLength=1) String[] pinyins
 	) {
 		ICharacter character = CharactersUpdateLogic.createCharacter(jp, cn, Arrays.asList(pinyins));
-		jsonResult.put("href", Route.get(CharacterDetail.class, "index", new RouteArgs().put("id", character.getId())));
+		jsonResult.put("href", Route.get(CharacterEdit.class, "index", new RouteArgs().put("id", character.getId())));
 	}
 	
 	public static void delete(@Id long id) {

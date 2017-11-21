@@ -7,20 +7,16 @@ import core.model.hql.HQL;
 import core.model.hql.HQLResult;
 import core.model.hql.Like;
 import core.model.hql.Or;
+import models.AdjectiveWordValue;
 import models.Character;
 import models.NotionalWordValue;
+import models.VerbWordValue;
+import po.IAdjectiveWordValue;
 import po.ICharacter;
 import po.INotionalWordValue;
+import po.IVerbWordValue;
 
 public final class CharactersQueryLogic {
-
-	public static List<INotionalWordValue> findNotionalWordsByCharacter(String jpValue) {
-		HQL hql = HQL.begin();
-		hql.where(Like.contains("value", jpValue));
-
-		HQLResult result = hql.end();
-		return NotionalWordValue.find(result.select, result.params).fetch();
-	}
 
 	public static List<ICharacter> findCharactersByPinyin(String pinyin){
 		HQL hql = HQL.begin();
@@ -61,6 +57,36 @@ public final class CharactersQueryLogic {
 		
 		HQLResult rst = hql.end();
 		return Character.find(rst.select, rst.params).fetch();
+	}
+
+	public static List<INotionalWordValue> findNotionalWordsByCharacter(String jpValue) {
+		HQL hql = HQL.begin();
+		hql.where(Like.contains("value", jpValue));
+		hql.orderBy("value");
+		
+		HQLResult result = hql.end();
+		List<INotionalWordValue> list = NotionalWordValue.find(result.select, result.params).fetch();
+		return list;
+	}
+
+	public static List<IVerbWordValue> findVerbWordsByCharacter(String jpValue) {
+		HQL hql = HQL.begin();
+		hql.where(Like.contains("value", jpValue));
+		hql.orderBy("value");
+		
+		HQLResult result = hql.end();
+		List<IVerbWordValue> list = VerbWordValue.find(result.select, result.params).fetch();
+		return list;
+	}
+
+	public static List<IAdjectiveWordValue> findAdjWordsByCharacter(String jpValue) {
+		HQL hql = HQL.begin();
+		hql.where(Like.contains("value", jpValue));
+		hql.orderBy("value");
+		
+		HQLResult result = hql.end();
+		List<IAdjectiveWordValue> list = AdjectiveWordValue.find(result.select, result.params).fetch();
+		return list;
 	}
 
 }
