@@ -8,8 +8,10 @@ import core.controller.HtmlControllerBase;
 import core.controller.Route;
 import core.controller.validation.annotation.Id;
 import logic.LogicValidate;
+import logic.convert.verb.VerbConvert;
 import logic.words.VerbWordsLogic;
 import po.IVerbWord;
+import po.VerbWordType;
 
 public class VerbWordDetail extends HtmlControllerBase{
 
@@ -28,6 +30,8 @@ public class VerbWordDetail extends HtmlControllerBase{
 		WordVO wordVO = new WordVO();
 		wordVO.id = id;
 		
+		List<ConvertVO> convertsVO = new ArrayList<>();
+		
 		Linq.from(word.getValues())
 			.select(w->w.getValue())
 			.orderBy(VerbWordsLogic.ValueComparator)
@@ -38,6 +42,14 @@ public class VerbWordDetail extends HtmlControllerBase{
 				else {
 					wordVO.values1.add(value);
 				}
+				ConvertVO vo = new ConvertVO();
+				VerbWordType mainType = word.getMainType();
+				vo.原型 = VerbConvert.原型.convert(value, mainType);
+				vo.终止型 = VerbConvert.终止型.convert(value, mainType);
+				vo.连体型 = VerbConvert.连体型.convert(value, mainType);
+				vo.连用型1 = VerbConvert.连用型1.convert(value, mainType);
+				vo.连用型M = VerbConvert.连用型M.convert(value, mainType);
+				convertsVO.add(vo);
 			});
 			
 		Linq.from(word.getTypes()).foreach(t->wordVO.types.add(t.toFull()));
@@ -51,6 +63,7 @@ public class VerbWordDetail extends HtmlControllerBase{
 			}).foreach(m->wordVO.fixwords.add(m));
 		
 		renderArgs.put("word", wordVO);
+		renderArgs.put("converts", convertsVO);
 		
 		render("verbs/verb-detail");
 	}
@@ -67,6 +80,14 @@ public class VerbWordDetail extends HtmlControllerBase{
 	private static class FixwordVO{
 		public String value;
 		public String meaning;
+	}
+	
+	private static class ConvertVO{
+		public String 原型;
+		public String 终止型;
+		public String 连体型;
+		public String 连用型1;
+		public String 连用型M;
 	}
 	
 }

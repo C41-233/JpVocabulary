@@ -49,6 +49,17 @@ public class VerbWord extends ModelBase implements IVerbWord{
 	}
 
 	@Override
+	public boolean hasType(VerbWordType type) {
+		String name = type.toString();
+		return Linq.from(ConcatSplit.splitAsTokens(this.types)).isExist(name);
+	}
+
+	@Override
+	public VerbWordType getMainType() {
+		return Linq.from(ConcatSplit.splitAsTokens(this.types)).select(s->VerbWordType.valueOf(s)).first();
+	}
+
+	@Override
 	public Iterable<VerbWordValue> getValues() {
 		return VerbWordValue.find("refId=?1 order by value", id).fetch();
 	}

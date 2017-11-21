@@ -1,5 +1,7 @@
 #{meta /}
 
+#{stylesheet 'words/verb-detail.css'/}
+
 #{if word.values1}
 	#{title word.values1.get(0)/}
 #{/if}
@@ -56,27 +58,43 @@
 			#{/list}
 		</table>
 	</div>
+	<div class="div-converts">
+		<table class="table table-bordered">
+			<tbody>
+				<tr>
+					<th>原型</th>
+					#{list items:converts, as:'word'}
+					<td>${word.原型}</td>
+					#{/list}
+				</tr>
+				<tr>
+					<th>终止型</th>
+					#{list items:converts, as:'word'}
+					<td>${word.终止型}</td>
+					#{/list}
+				</tr>
+				<tr>
+					<th>连体型</th>
+					#{list items:converts, as:'word'}
+					<td>${word.连体型}</td>
+					#{/list}
+				</tr>
+				<tr>
+					<th>连用型I</th>
+					#{list items:converts, as:'word'}
+					<td>${word.连用型1}</td>
+					#{/list}
+				</tr>
+				<tr>
+					<th>连用型（ます）</th>
+					#{list items:converts, as:'word'}
+					<td>${word.连用型M}</td>
+					#{/list}
+				</tr>
+			</tbody>
+		</table>
+	</div>
 </div>
 
 #{/body}
 
-#{stylesheet}
-.div-types{
-	background-color:	#F9F9F9;
-	padding-top:	2px;
-	padding-bottom:	2px;
-	padding-left:	5px;
-	padding-right:	5px;
-	border-radius:	6px;
-}
-.div-types>span{
-	font-weight:	bold;
-	padding-right:	10px;
-}
-.div-meanings{
-	margin-top:		20px;
-}
-.div-fixwords{
-	margin-top:		20px;
-}
-#{/stylesheet}
