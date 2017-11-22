@@ -5,10 +5,13 @@ import po.VerbWordType;
 public enum VerbConvert {
 
 	原型(new VerbYuanXing()),
-	终止型(new VerbZhongZhiXing()),
-	连体型(new VerbLianTiXing()),
+	终止型(new VerbYuanXing()),
+	连体型(new VerbYuanXing()),
 	连用型1(new VerbLianYongXing1()),
+	连用型2(new VerbLianYongXing2()),
 	连用型M(new VerbLianYongXingM()),
+	连用型T(new VerbLianYongXingT()),
+	未然型1(new VerbWeiRanXing1()),
 	;
 	
 	private final IVerbConvertor convertor;

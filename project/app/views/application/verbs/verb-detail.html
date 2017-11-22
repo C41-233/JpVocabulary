@@ -86,9 +86,27 @@
 					#{/list}
 				</tr>
 				<tr>
-					<th>连用型（ます）</th>
+					<th>连用型II</th>
+					#{list items:converts, as:'word'}
+					<td>${word.连用型2}</td>
+					#{/list}
+				</tr>
+				<tr>
+					<th>未然型I</th>
+					#{list items:converts, as:'word'}
+					<td>${word.未然型1}</td>
+					#{/list}
+				</tr>
+				<tr>
+					<th>ます</th>
 					#{list items:converts, as:'word'}
 					<td>${word.连用型M}</td>
+					#{/list}
+				</tr>
+				<tr>
+					<th>て</th>
+					#{list items:converts, as:'word'}
+					<td>${word.连用型T}</td>
 					#{/list}
 				</tr>
 			</tbody>

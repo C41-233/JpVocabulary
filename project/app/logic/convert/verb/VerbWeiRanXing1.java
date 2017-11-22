@@ -2,20 +2,20 @@ package logic.convert.verb;
 
 import logic.convert.SuffixReplace;
 
-class VerbLianYongXing1 implements IVerbConvertor {
+class VerbWeiRanXing1 implements IVerbConvertor {
 
 	@Override
 	public String from1(String word) {
 		SuffixReplace replace = new SuffixReplace();
-		replace.add("う", "い");
-		replace.add("く", "き");
-		replace.add("ぐ", "ぎ");
-		replace.add("す", "し");
-		replace.add("つ", "ち");
-		replace.add("ぬ", "に");
-		replace.add("ぶ", "び");
-		replace.add("む", "み");
-		replace.add("る", "り");
+		replace.add("う", "わ");
+		replace.add("く", "か");
+		replace.add("ぐ", "が");
+		replace.add("す", "さ");
+		replace.add("つ", "た");
+		replace.add("ぬ", "な");
+		replace.add("ぶ", "ば");
+		replace.add("む", "ま");
+		replace.add("る", "ら");
 		return replace.replace(word);
 	}
 
@@ -38,14 +38,14 @@ class VerbLianYongXing1 implements IVerbConvertor {
 	public String fromK(String word) {
 		SuffixReplace replace = new SuffixReplace();
 		replace.add("来る", "来");
-		replace.add("くる", "き");
+		replace.add("くる", "こ");
 		return replace.replace(word);
 	}
 
 	@Override
 	public String fromR(String word) {
 		SuffixReplace replace = new SuffixReplace();
-		replace.add("る", "り");
+		replace.add("る", "ら");
 		return replace.replace(word);
 	}
 

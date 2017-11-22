@@ -48,7 +48,10 @@ public class VerbWordDetail extends HtmlControllerBase{
 				vo.终止型 = VerbConvert.终止型.convert(value, mainType);
 				vo.连体型 = VerbConvert.连体型.convert(value, mainType);
 				vo.连用型1 = VerbConvert.连用型1.convert(value, mainType);
+				vo.连用型2 = VerbConvert.连用型2.convert(value, mainType);
 				vo.连用型M = VerbConvert.连用型M.convert(value, mainType);
+				vo.连用型T = VerbConvert.连用型T.convert(value, mainType);
+				vo.未然型1 = VerbConvert.未然型1.convert(value, mainType);
 				convertsVO.add(vo);
 			});
 			
@@ -87,7 +90,10 @@ public class VerbWordDetail extends HtmlControllerBase{
 		public String 终止型;
 		public String 连体型;
 		public String 连用型1;
+		public String 连用型2;
 		public String 连用型M;
+		public String 连用型T;
+		public String 未然型1;
 	}
 	
 }
