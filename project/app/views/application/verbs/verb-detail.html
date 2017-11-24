@@ -48,6 +48,7 @@
 			<li>${meaning}</li>
 		#{/list}
 	</div>
+	#{if word.fixwords}
 	<div class="div-fixwords">
 		<table>
 			#{list items:word.fixwords, as:'fixword'}
@@ -58,6 +59,7 @@
 			#{/list}
 		</table>
 	</div>
+	#{/if}
 	<div class="div-converts">
 		<table class="table table-bordered">
 			<tbody>
@@ -98,6 +100,99 @@
 					#{/list}
 				</tr>
 				<tr>
+					<th>未然型II</th>
+					#{list items:converts, as:'word'}
+					<td>${word.未然型2}</td>
+					#{/list}
+				</tr>
+				<tr>
+					<th>假定型</th>
+					#{list items:converts, as:'word'}
+					<td>${word.假定型}</td>
+					#{/list}
+				</tr>
+				<tr>
+					<th>命令型</th>
+					#{list items:converts, as:'word'}
+						<td>
+							<div>${word.命令型1}</div>
+							#{if word.命令型2}
+							<div>${word.命令型2}</div>
+							#{/if}
+						</td>
+					#{/list}
+				</tr>
+				<tr>
+					<th>意志型</th>
+					#{list items:converts, as:'word'}
+					<td>${word.意志型}</td>
+					#{/list}
+				</tr>
+				<tr>
+					<th>推量型</th>
+					#{list items:converts, as:'word'}
+					<td>${word.推量型}</td>
+					#{/list}
+				</tr>
+				<tr>
+					<th>可能态</th>
+					#{list items:converts, as:'word'}
+					<td>
+						#{if word.可能态1}
+						<div>${word.可能态1}</div>
+						#{/if}
+						#{if word.可能态2}
+						<div>${word.可能态2}</div>
+						#{/if}
+					</td>
+					#{/list}
+				</tr>
+				<tr>
+					<th>被动态</th>
+					#{list items:converts, as:'word'}
+						<td>
+							<div>${word.被动态1}</div>
+							#{if word.被动态2}
+							<div>${word.被动态2}</div>
+							#{/if}
+						</td>
+					#{/list}
+				</tr>
+				<tr>
+					<th>自发态</th>
+					#{list items:converts, as:'word'}
+						<td>
+							<div>${word.自发态1}</div>
+							#{if word.自发态2}
+							<div>${word.自发态2}</div>
+							#{/if}
+						</td>
+					#{/list}
+				</tr>
+				<tr>
+					<th>使役态</th>
+					#{list items:converts, as:'word'}
+						<td>
+							<div>${word.使役态1}</div>
+							#{if word.使役态2}
+							<div>${word.使役态2}</div>
+							#{/if}
+						</td>
+					#{/list}
+				</tr>
+				<tr>
+					<th>被役态I</th>
+					#{list items:converts, as:'word'}
+					<td>${word.被役态1}</td>
+					#{/list}
+				</tr>
+				<tr>
+					<th>被役态II</th>
+					#{list items:converts, as:'word'}
+					<td>${word.被役态2}</td>
+					#{/list}
+				</tr>
+				<tr>
 					<th>ます</th>
 					#{list items:converts, as:'word'}
 					<td>${word.连用型M}</td>
@@ -107,6 +202,41 @@
 					<th>て</th>
 					#{list items:converts, as:'word'}
 					<td>${word.连用型T}</td>
+					#{/list}
+				</tr>
+				<tr>
+					<th>ちゃ/じゃ</th>
+					#{list items:converts, as:'word'}
+					<td>
+						<div>${word.连用型CJ1}</div>
+						#{if word.连用型CJ2}
+						<div>${word.连用型CJ2}</div>
+						#{/if}
+					</td>
+					#{/list}
+				</tr>
+				<tr>
+					<th>た</th>
+					#{list items:converts, as:'word'}
+					<td>${word.连用型D}</td>
+					#{/list}
+				</tr>
+				<tr>
+					<th>ない</th>
+					#{list items:converts, as:'word'}
+					<td>${word.未然型N}</td>
+					#{/list}
+				</tr>
+				<tr>
+					<th>ず</th>
+					#{list items:converts, as:'word'}
+					<td>${word.未然型Z}</td>
+					#{/list}
+				</tr>
+				<tr>
+					<th>ば</th>
+					#{list items:converts, as:'word'}
+					<td>${word.假定型B}</td>
 					#{/list}
 				</tr>
 			</tbody>

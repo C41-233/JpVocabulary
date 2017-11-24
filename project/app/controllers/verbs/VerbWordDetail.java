@@ -52,6 +52,18 @@ public class VerbWordDetail extends HtmlControllerBase{
 				vo.连用型M = VerbConvert.连用型M.convert(value, mainType);
 				vo.连用型T = VerbConvert.连用型T.convert(value, mainType);
 				vo.未然型1 = VerbConvert.未然型1.convert(value, mainType);
+				vo.未然型2 = VerbConvert.未然型2.convert(value, mainType);
+				vo.假定型 = VerbConvert.假定型.convert(value, mainType);
+				vo.命令型1 = VerbConvert.命令型1.convert(value, mainType);
+				vo.命令型2 = VerbConvert.命令型2.convert(value, mainType);
+				vo.意志型 = VerbConvert.意志型.convert(value, mainType);
+				vo.推量型 = VerbConvert.推量型.convert(value, mainType);
+				vo.可能态1 = VerbConvert.可能态1.convert(value, mainType);
+				vo.可能态2 = VerbConvert.可能态2.convert(value, mainType);
+				vo.被动态1 = VerbConvert.被动态1.convert(value, mainType);
+				vo.被动态2 = VerbConvert.被动态2.convert(value, mainType);
+				vo.自发态1 = VerbConvert.自发态1.convert(value, mainType);
+				vo.自发态2 = VerbConvert.自发态2.convert(value, mainType);
 				convertsVO.add(vo);
 			});
 			
@@ -94,6 +106,28 @@ public class VerbWordDetail extends HtmlControllerBase{
 		public String 连用型M;
 		public String 连用型T;
 		public String 未然型1;
+		public String 未然型2;
+		public String 假定型;
+		public String 命令型1;
+		public String 命令型2;
+		public String 意志型;
+		public String 推量型;
+		public String 可能态1;
+		public String 可能态2;
+		public String 被动态1;
+		public String 被动态2;
+		public String 自发态1;
+		public String 自发态2;
+		public String 使役态1;
+		public String 使役态2;
+		public String 被役态1;
+		public String 被役态2;
+		public String 连用型CJ1;
+		public String 连用型CJ2;
+		public String 连用型D;
+		public String 未然型N;
+		public String 未然型Z;
+		public String 假定型B;
 	}
 	
 }
