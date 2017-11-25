@@ -173,7 +173,9 @@
 					<th>使役态</th>
 					#{list items:converts, as:'word'}
 						<td>
+							#{if word.使役态1}
 							<div>${word.使役态1}</div>
+							#{/if}
 							#{if word.使役态2}
 							<div>${word.使役态2}</div>
 							#{/if}
@@ -181,15 +183,16 @@
 					#{/list}
 				</tr>
 				<tr>
-					<th>被役态I</th>
+					<th>被役态</th>
 					#{list items:converts, as:'word'}
-					<td>${word.被役态1}</td>
-					#{/list}
-				</tr>
-				<tr>
-					<th>被役态II</th>
-					#{list items:converts, as:'word'}
-					<td>${word.被役态2}</td>
+					<td>
+						#{if word.被役态1}
+						<div>${word.被役态1}</div>
+						#{/if}
+						#{if word.被役态2}
+						<div>${word.被役态2}</div>
+						#{/if}
+					</td>
 					#{/list}
 				</tr>
 				<tr>

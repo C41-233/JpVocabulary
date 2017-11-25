@@ -64,6 +64,8 @@ public class VerbWordDetail extends HtmlControllerBase{
 				vo.被动态2 = VerbConvert.被动态2.convert(value, mainType);
 				vo.自发态1 = VerbConvert.自发态1.convert(value, mainType);
 				vo.自发态2 = VerbConvert.自发态2.convert(value, mainType);
+				vo.使役态1 = VerbConvert.使役态1.convert(value, mainType);
+				vo.使役态2 = VerbConvert.使役态2.convert(value, mainType);
 				convertsVO.add(vo);
 			});
 			
