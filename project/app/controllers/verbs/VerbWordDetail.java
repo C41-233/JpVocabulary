@@ -66,6 +66,10 @@ public class VerbWordDetail extends HtmlControllerBase{
 				vo.自发态2 = VerbConvert.自发态2.convert(value, mainType);
 				vo.使役态1 = VerbConvert.使役态1.convert(value, mainType);
 				vo.使役态2 = VerbConvert.使役态2.convert(value, mainType);
+				vo.被役态1 = VerbConvert.被役态1.convert(value, mainType);
+				vo.被役态2 = VerbConvert.被役态2.convert(value, mainType);
+				vo.连用型CJ = VerbConvert.连用型CJ.convert(value, mainType);
+				vo.连用型D = VerbConvert.连用型D.convert(value, mainType);
 				convertsVO.add(vo);
 			});
 			
@@ -124,8 +128,7 @@ public class VerbWordDetail extends HtmlControllerBase{
 		public String 使役态2;
 		public String 被役态1;
 		public String 被役态2;
-		public String 连用型CJ1;
-		public String 连用型CJ2;
+		public String 连用型CJ;
 		public String 连用型D;
 		public String 未然型N;
 		public String 未然型Z;
