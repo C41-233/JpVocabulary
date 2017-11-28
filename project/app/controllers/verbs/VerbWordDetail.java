@@ -70,6 +70,8 @@ public class VerbWordDetail extends HtmlControllerBase{
 				vo.被役态2 = VerbConvert.被役态2.convert(value, mainType);
 				vo.连用型CJ = VerbConvert.连用型CJ.convert(value, mainType);
 				vo.连用型D = VerbConvert.连用型D.convert(value, mainType);
+				vo.未然型N = VerbConvert.未然型N.convert(value, mainType);
+				vo.未然型Z = VerbConvert.未然型Z.convert(value, mainType);
 				convertsVO.add(vo);
 			});
 			

@@ -30,6 +30,8 @@ public enum VerbConvert {
 	被役态2(new VerbBeiYiTai2()),
 	连用型CJ(new VerbLianYongXingCJ()),
 	连用型D(new VerbLianYongXingD()),
+	未然型N(new VerbWeiRanXingN()),
+	未然型Z(new VerbWeiRanXingZ()),
 	;
 	
 	private final IVerbConvertor convertor;
