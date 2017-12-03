@@ -72,6 +72,7 @@ public class VerbWordDetail extends HtmlControllerBase{
 				vo.连用型D = VerbConvert.连用型D.convert(value, mainType);
 				vo.未然型N = VerbConvert.未然型N.convert(value, mainType);
 				vo.未然型Z = VerbConvert.未然型Z.convert(value, mainType);
+				vo.假定型B = VerbConvert.假定型B.convert(value, mainType);
 				convertsVO.add(vo);
 			});
 			
