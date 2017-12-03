@@ -177,8 +177,8 @@ public final class MainIndex extends HtmlControllerBase {
     		List<String> jpStrings = JpConvert.toJpCharacter(query);
     		for(String jpString : jpStrings) {
         		String katakanaString = JpConvert.toKatakana(jpString);
-        		IKatakanaWord word = KatakanaWordsLogic.findKatakanaWordsBySearch(katakanaString);
-        		if(word != null) {
+        		List<IKatakanaWord> rst = KatakanaWordsLogic.findKatakanaWordsBySearch(katakanaString);
+        		for(IKatakanaWord word : rst){
         			words.add(word);
         		}
     		}

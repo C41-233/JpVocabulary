@@ -35,8 +35,8 @@ public final class KatakanaWordsLogic extends LogicBase{
 		return KatakanaWord.find(rst.select, rst.params).fetch();
 	}
 
-	public static IKatakanaWord findKatakanaWordsBySearch(String query) {
-		return KatakanaWord.find("value=?1", query).first();
+	public static List<IKatakanaWord> findKatakanaWordsBySearch(String query) {
+		return KatakanaWord.find("value=?1", query).fetch();
 	}
 
 	public static IKatakanaWord findKatakanaWordsByAlias(String query) {
@@ -57,7 +57,6 @@ public final class KatakanaWordsLogic extends LogicBase{
 
 	public static IKatakanaWord create(String value, List<String> meanings, List<KatakanaWordType> types, String alias, KatakanaWordContext context) {
 		raiseIfNotValidKatakanaWord(value);
-		raiseIfDuplicateKatakanaWord(value);
 		
 		KatakanaWord word = new KatakanaWord();
 		word.setValue(value);
@@ -76,7 +75,6 @@ public final class KatakanaWordsLogic extends LogicBase{
 
 	public static void updateValue(long id, String value) {
 		raiseIfNotValidKatakanaWord(value);
-		raiseIfDuplicateKatakanaWord(value);
 		
 		KatakanaWord word = getKatakanaWordOrRaiseIfNotExist(id);
 		word.setValue(value);
@@ -133,10 +131,4 @@ public final class KatakanaWordsLogic extends LogicBase{
 		}
 	}
 	
-	private static void raiseIfDuplicateKatakanaWord(String value) {
-		if(KatakanaWord.find("value=?1", value).first()!=null) {
-			raise("已存在片假名词：%s", value);
-		}
-	}
-
 }
