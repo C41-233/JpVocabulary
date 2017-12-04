@@ -15,4 +15,12 @@ public final class Strings{
 		return string.split("(\\s|　)+");
 	}
 	
+	public static String of(Object...objects) {
+		StringBuilder sb = new StringBuilder();
+		for(Object object : objects) {
+			sb.append(object);
+		}
+		return sb.toString();
+	}
+	
 }

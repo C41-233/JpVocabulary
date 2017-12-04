@@ -256,6 +256,7 @@ $(function(){
 		},
 		"#import-verb-word-types": function(){
 			return $(this).children("div:nth-child(1), div:nth-child(2)").find(":checked").length > 0
+				&& $(this).children("div:nth-child(3)").find(":checked").length > 0
 		}
 	})
 })

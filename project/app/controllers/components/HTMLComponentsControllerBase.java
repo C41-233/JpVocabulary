@@ -24,7 +24,7 @@ public abstract class HTMLComponentsControllerBase extends HtmlControllerBase{
 		public static LeftIndexGroup compile(String index, IIndexManager... managers) {
 			LeftIndexGroup rst = new LeftIndexGroup();
 			
-			if(Linq.from(managers).notExist(manager->manager.isValidIndex(index))) {
+			if(Linq.from(managers).isNotExist(manager->manager.isValidIndex(index))) {
 				notFound(Strings.format("%s not found.", index));
 			}
 			

@@ -57,7 +57,7 @@ public final class VerbWordsLogic extends LogicBase{
 
 	public static IVerbWord create(List<String> values, List<String> meanings, List<VerbWordType> types) {
 		//必须至少有一个注音
-		if(Linq.from(values).notExist(LogicValidate::isValidSyllable)) {
+		if(Linq.from(values).isNotExist(LogicValidate::isValidSyllable)) {
 			raise("动词必须至少有一个读音");
 		}
 		
@@ -66,8 +66,12 @@ public final class VerbWordsLogic extends LogicBase{
 			raiseIfNotValidVerbWordValue(value);
 		}
 		
-		if(Linq.from(types).notExist(t->t==VerbWordType.一类动词 || t==VerbWordType.二类动词 || t==VerbWordType.サ变动词 ||t==VerbWordType.カ变动词 || t==VerbWordType.ラ变动词)) {
+		if(Linq.from(types).isNotExistAnyOf(VerbWordType.一类动词, VerbWordType.二类动词, VerbWordType.サ变动词, VerbWordType.カ变动词, VerbWordType.ラ变动词)) {
 			raise("至少包含一个词性", types);
+		}
+
+		if(Linq.from(types).isNotExistAnyOf(VerbWordType.自动词, VerbWordType.他动词)) {
+			raise("至少包含自动词/他动词", types);
 		}
 		
 		VerbWord word = new VerbWord();
@@ -148,6 +152,12 @@ public final class VerbWordsLogic extends LogicBase{
 			raise("至少包含一个基本词性");
 		}
 		
+		if(types.contains(VerbWordType.自动词) == false
+			&& types.contains(VerbWordType.他动词) == false
+		) {
+			raise("至少包含一个自动词/他动词");
+		}
+		
 		word.setTypes(types);
 		word.save();
 	}
@@ -164,7 +174,7 @@ public final class VerbWordsLogic extends LogicBase{
 
 	public static void deleteFixword(long id, String value) {
 		VerbWord word = getVerbWordOrRaiseIfNotExist(id);
-		if(Linq.from(word.getFixwords()).notExist(w->w.getValue().equals(value))) {
+		if(Linq.from(word.getFixwords()).isNotExist(w->w.getValue().equals(value))) {
 			raise("词组不存在：%s", value);
 		}
 		word.deleteFixword(value);
@@ -173,7 +183,7 @@ public final class VerbWordsLogic extends LogicBase{
 
 	public static void updateFixword(long id, String value, String meaning) {
 		VerbWord word = getVerbWordOrRaiseIfNotExist(id);
-		if(Linq.from(word.getFixwords()).notExist(w->w.getValue().equals(value))) {
+		if(Linq.from(word.getFixwords()).isNotExist(w->w.getValue().equals(value))) {
 			raise("词组不存在：%s", value);
 		}
 		word.deleteFixword(value);

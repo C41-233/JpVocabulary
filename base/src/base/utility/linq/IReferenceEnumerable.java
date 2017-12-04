@@ -37,7 +37,7 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 		return true;
 	}
 
-	public default boolean notAll(IReferencePredicate<? super T> predicate) {
+	public default boolean isNotAll(IReferencePredicate<? super T> predicate) {
 		IEnumerator<T> enumerator = iterator();
 		while(enumerator.hasNext()) {
 			T obj = enumerator.next();
@@ -63,7 +63,7 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 		return isExist(obj->Objects.equals(obj, value));
 	}
 
-	public default boolean notExist(IReferencePredicate<? super T> predicate) {
+	public default boolean isNotExist(IReferencePredicate<? super T> predicate) {
 		IEnumerator<T> enumerator = iterator();
 		while(enumerator.hasNext()) {
 			T obj = enumerator.next();
@@ -74,10 +74,18 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 		return true;
 	}
 	
-	public default boolean notExist(T value) {
-		return notExist(obj->Objects.equals(obj, value));
+	public default boolean isNotExist(T value) {
+		return isNotExist(obj->Objects.equals(obj, value));
 	}
 
+	public default boolean isNotExistAnyOf(Object... values){
+		HashSet<Object> set = new HashSet<>();
+		for(Object value : values) {
+			set.add(value);
+		}
+		return isNotExist(obj->set.contains(obj));
+	}
+	
 	public default T at(int index) {
 		IEnumerator<T> enumerator = iterator();
 		for(int i=0; i<index && enumerator.hasNext(); i++, enumerator.moveNext());

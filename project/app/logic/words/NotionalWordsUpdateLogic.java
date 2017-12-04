@@ -17,7 +17,7 @@ public final class NotionalWordsUpdateLogic extends LogicBase{
 
 	public static INotionalWord create(List<String> values, List<String> meanings, List<NotionalWordType> types) {
 		//必须至少有一个注音
-		if(Linq.from(values).notExist(LogicValidate::isValidSyllable)) {
+		if(Linq.from(values).isNotExist(LogicValidate::isValidSyllable)) {
 			raise("基本词必须至少有一个读音");
 		}
 		

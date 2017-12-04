@@ -162,7 +162,7 @@ public final class CharactersUpdateLogic extends LogicBase{
 	}
 
 	private static void raiseIfSyllableNotFound(Character character, String syllable) {
-		if(Linq.from(character.getSyllables()).notExist(s->s.getValue().equals(syllable))) {
+		if(Linq.from(character.getSyllables()).isNotExist(s->s.getValue().equals(syllable))) {
 			raise("不存在读音: %s", syllable);
 		}
 	}
@@ -174,7 +174,7 @@ public final class CharactersUpdateLogic extends LogicBase{
 	}
 
 	private static void raiseIfFixwordNotFound(Character character, String word, String syllable) {
-		if(Linq.from(character.getFixwords()).notExist(s->s.getWord().equals(word) && s.getSyllable().equals(syllable))) {
+		if(Linq.from(character.getFixwords()).isNotExist(s->s.getWord().equals(word) && s.getSyllable().equals(syllable))) {
 			raise("单词不存在: %s %s", word, syllable);
 		}
 	}

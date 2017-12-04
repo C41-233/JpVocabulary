@@ -23,3 +23,6 @@ h1{
 .character-jp{
 	font-size:	60px;
 }
+.row+.row{
+	margin-top:	10px;
+}

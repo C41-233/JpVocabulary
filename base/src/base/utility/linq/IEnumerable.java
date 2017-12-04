@@ -54,7 +54,7 @@ public interface IEnumerable<T> extends Iterable<T>{
 		return enumerator.hasNext() == false;
 	}
 	
-	public default boolean notEmpty() {
+	public default boolean isNotEmpty() {
 		return isEmpty() == false;
 	}
 

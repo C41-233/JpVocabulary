@@ -23,7 +23,28 @@ public class JpConvert {
 			}
 		}
 		
-		return rst.toList();
+		List<String> list = rst.toList();
+		{
+			int count = list.size();
+			for(int i=0; i<count; i++) {
+				char[] chars = list.get(i).toCharArray();
+				boolean set = false;
+				for(int j=1; j<chars.length; j++) {
+					if(chars[j-1] == chars[j]) {
+						chars[j] = '々';
+						set = true;
+					}
+					else if(chars[j] == '々') {
+						chars[j] = chars[j-1];
+						set = true;
+					}
+				}
+				if(set) {
+					list.add(new String(chars));
+				}
+			}
+		}
+		return list;
 	}
 	
 	public static String toKatakana(String s) {

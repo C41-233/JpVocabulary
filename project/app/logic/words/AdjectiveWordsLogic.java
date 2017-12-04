@@ -67,7 +67,7 @@ public final class AdjectiveWordsLogic extends LogicBase{
 
 	public static IAdjectiveWord create(List<String> values, List<String> meanings, List<AdjectiveWordType> types) {
 		//必须至少有一个注音
-		if(Linq.from(values).notExist(LogicValidate::isValidSyllable)) {
+		if(Linq.from(values).isNotExist(LogicValidate::isValidSyllable)) {
 			raise("形容词必须至少有一个读音");
 		}
 		
@@ -157,7 +157,7 @@ public final class AdjectiveWordsLogic extends LogicBase{
 
 	public static void deleteFixword(long id, String value) {
 		AdjectiveWord word = getAdjectiveWordOrRaiseIfNotExist(id);
-		if(Linq.from(word.getFixwords()).notExist(w->w.getValue().equals(value))) {
+		if(Linq.from(word.getFixwords()).isNotExist(w->w.getValue().equals(value))) {
 			raise("词组不存在：%s", value);
 		}
 		word.deleteFixword(value);

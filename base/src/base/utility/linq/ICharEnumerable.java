@@ -24,7 +24,7 @@ public interface ICharEnumerable extends IEnumerable<Character>{
 		return true;
 	}
 	
-	public default boolean notAll(ICharPredicate predicate) {
+	public default boolean isNotAll(ICharPredicate predicate) {
 		ICharEnumerator enumerator = iterator();
 		while(enumerator.hasNext()) {
 			char ch = enumerator.nextChar();
