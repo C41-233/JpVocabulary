@@ -27,6 +27,7 @@
 				<div class="font-bold">${group.value}</div>
 				<div class="div-group">
 					<table class="table table-bordered table-words">
+						<tbody>
 						#{list items:group.words, as:'word'}
 							<tr>
 								<th><a href="${word.href}" class="word-link">${word.value}</a></th>
@@ -58,6 +59,7 @@
 								</td>
 							</tr>
 						#{/list}
+						</tbody>
 					</table>
 				</div>
 			</div>

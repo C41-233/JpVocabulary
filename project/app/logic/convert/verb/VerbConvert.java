@@ -4,7 +4,7 @@ import po.VerbWordType;
 
 public enum VerbConvert {
 
-	原型(new VerbYuanXing()),
+	基本型(new VerbYuanXing()),
 	终止型(new VerbYuanXing()),
 	连体型(new VerbYuanXing()),
 	连用型1(new VerbLianYongXing1()),

@@ -29,18 +29,18 @@
 		</div>
 	</div>
 	<hr/>
-	<div class="div-types">
+	<div class="div-types block">
 		<span>形容词</span>
 		#{list items:word.types, as:'type'}
 			<span>${type}</span>
 		#{/list}
 	</div>
-	<div class="div-meanings">
+	<div class="div-meanings block">
 		#{list items:word.meanings, as:'meaning'}
 			<li>${meaning}</li>
 		#{/list}
 	</div>
-	<div class="div-fixwords">
+	<div class="div-fixwords block">
 		<table>
 			#{list items:word.fixwords, as:'fixword'}
 			<tr>
@@ -48,6 +48,108 @@
 				<td>${fixword.meaning}</td>
 			</tr>
 			#{/list}
+		</table>
+	</div>
+	<div class="block">
+		<table class="table table-bordered">
+			<tbody>
+				<tr>
+					<th>基本型</th>
+					#{list items:converts, as:'convert'}
+						<td>${convert.基本型}</td>
+					#{/list}
+				</tr>
+				<tr>
+					<th>终止型</th>
+					#{list items:converts, as:'convert'}
+						<td>${convert.终止型}</td>
+					#{/list}
+				</tr>
+				<tr>
+					<th>连体型</th>
+					#{list items:converts, as:'convert'}
+						<td>${convert.连体型}</td>
+					#{/list}
+				</tr>
+				<tr>
+					<th>未然型I</th>
+					#{list items:converts, as:'convert'}
+						<td>${convert.未然型1}</td>
+					#{/list}
+				</tr>
+				<tr>
+					<th>未然型II</th>
+					#{list items:converts, as:'convert'}
+						<td>${convert.未然型2}</td>
+					#{/list}
+				</tr>
+				<tr>
+					<th>连用型I</th>
+					#{list items:converts, as:'convert'}
+						<td>${convert.连用型1}</td>
+					#{/list}
+				</tr>
+				<tr>
+					<th>连用型II</th>
+					#{list items:converts, as:'convert'}
+						<td>${convert.连用型2}</td>
+					#{/list}
+				</tr>
+				<tr>
+					<th>假定型</th>
+					#{list items:converts, as:'convert'}
+						<td>${convert.假定型}</td>
+					#{/list}
+				</tr>
+				<tr>
+					<th>意志型</th>
+					#{list items:converts, as:'convert'}
+						<td>${convert.意志型}</td>
+					#{/list}
+				</tr>
+				<tr>
+					<th>推量型</th>
+					#{list items:converts, as:'convert'}
+						<td>${convert.推量型}</td>
+					#{/list}
+				</tr>
+				<tr>
+					<th>て</th>
+					#{list items:converts, as:'convert'}
+						<td>${convert.连用型T}</td>
+					#{/list}
+				</tr>
+				<tr>
+					<th>ちゃ/じゃ</th>
+					#{list items:converts, as:'convert'}
+						<td>${convert.连用型CJ}</td>
+					#{/list}
+				</tr>
+				<tr>
+					<th>た</th>
+					#{list items:converts, as:'convert'}
+						<td>${convert.连用型D}</td>
+					#{/list}
+				</tr>
+				<tr>
+					<th>ば</th>
+					#{list items:converts, as:'convert'}
+						<td>${convert.假定型B}</td>
+					#{/list}
+				</tr>
+				<tr>
+					<th>さ</th>
+					#{list items:converts, as:'convert'}
+						<td>${convert.S}</td>
+					#{/list}
+				</tr>
+				<tr>
+					<th>ござる</th>
+					#{list items:converts, as:'convert'}
+						<td>${convert.GZR}</td>
+					#{/list}
+				</tr>
+			</tbody>
 		</table>
 	</div>
 </div>
@@ -67,10 +169,7 @@
 	font-weight:	bold;
 	padding-right:	10px;
 }
-.div-meanings{
-	margin-top:		20px;
-}
-.div-fixwords{
-	margin-top:		20px;
+.block+.block{
+	margin-top:		10px;
 }
 #{/stylesheet}

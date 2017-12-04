@@ -28,6 +28,8 @@ public final class AdjectiveWordDetail extends HtmlControllerBase{
 		WordVO wordVO = new WordVO();
 		wordVO.id = id;
 		
+		List<ConvertVO> convertsVO = new ArrayList<>();
+		
 		Linq.from(word.getValues())
 			.select(w->w.getValue())
 			.orderBy(VerbWordsLogic.ValueComparator)
@@ -38,8 +40,13 @@ public final class AdjectiveWordDetail extends HtmlControllerBase{
 				else {
 					wordVO.values1.add(value);
 				}
+				ConvertVO convert = new ConvertVO();
+				
+				convertsVO.add(convert);
 			});
 			
+		renderArgs.put("converts", convertsVO);
+		
 		Linq.from(word.getTypes()).foreach(t->wordVO.types.add(t.toString()));
 		Linq.from(word.getMeanings()).select(m->m+"。").foreach(m->wordVO.meanings.add(m));
 		Linq.from(word.getFixwords())
@@ -67,6 +74,25 @@ public final class AdjectiveWordDetail extends HtmlControllerBase{
 	private static class FixwordVO{
 		public String value;
 		public String meaning;
+	}
+	
+	private static class ConvertVO{
+		public String 基本型;
+		public String 终止型;
+		public String 连体型;
+		public String 未然型1;
+		public String 未然型2;
+		public String 连用型1;
+		public String 连用型2;
+		public String 假定型;
+		public String 意志型;
+		public String 推量型;
+		public String 连用型T;
+		public String 连用型CJ;
+		public String 连用型D;
+		public String 假定型B;
+		public String S;
+		public String GZR;
 	}
 	
 }
