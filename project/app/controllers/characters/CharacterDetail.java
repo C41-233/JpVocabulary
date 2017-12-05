@@ -119,6 +119,7 @@ public class CharacterDetail extends HtmlControllerBase{
 				wordVO.href = Route.get(AdjectiveWordDetail.class, "index", new RouteArgs().put("id", word.getId()).put("refer", request.url));
 				Linq.from(word.getSyllables()).foreach(s->wordVO.alias.add(s));
 				Linq.from(word.getMeanings()).foreach(m->wordVO.meanings.add(m));
+				wordVO.types.add("形容词");
 				Linq.from(word.getTypes()).select(t->t.toString()).foreach(t->wordVO.types.add(t));
 				wordsVO.add(wordVO);
 			}

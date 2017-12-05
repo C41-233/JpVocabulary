@@ -37,7 +37,7 @@ public enum VerbConvert {
 	
 	private final IVerbConvertor convertor;
 	
-	VerbConvert(IVerbConvertor convertor) {
+	private VerbConvert(IVerbConvertor convertor) {
 		this.convertor = convertor;
 	}
 	
