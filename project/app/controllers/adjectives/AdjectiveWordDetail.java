@@ -31,9 +31,6 @@ public final class AdjectiveWordDetail extends HtmlControllerBase{
 		
 		List<ConvertVO> convertsVO = new ArrayList<>();
 		
-		//这里假定读音就一个
-		String syllable = Linq.from(word.getSyllables()).first();
-		
 		Linq.from(word.getValues())
 			.select(w->w.getValue())
 			.orderBy(VerbWordsLogic.ValueComparator)
@@ -45,11 +42,21 @@ public final class AdjectiveWordDetail extends HtmlControllerBase{
 					wordVO.values1.add(value);
 				}
 				ConvertVO convert = new ConvertVO();
-				convert.基本型 = AdjConvert.基本型.convert(value, syllable);
-				convert.终止型 = AdjConvert.终止型.convert(value, syllable);
-				convert.连体型 = AdjConvert.连体型.convert(value, syllable);
-				convert.未然型1 = AdjConvert.未然型1.convert(value, syllable);
-				convert.未然型2 = AdjConvert.未然型2.convert(value, syllable);
+				convert.基本型 = AdjConvert.基本型(value);
+				convert.终止型 = AdjConvert.终止型(value);
+				convert.连体型 = AdjConvert.连体型(value);
+				convert.未然型1 = AdjConvert.未然型1(value);
+				convert.未然型2 = AdjConvert.未然型2(value);
+				convert.连用型1 = AdjConvert.连用型1(value);
+				convert.连用型2 = AdjConvert.连用型2(value);
+				convert.假定型 = AdjConvert.假定型(value);
+				convert.意志型 = AdjConvert.意志型(value);
+				convert.推量型 = AdjConvert.推量型(value);
+				convert.连用型T = AdjConvert.连用型T(value);
+				convert.连用型CJ = AdjConvert.连用型CJ(value);
+				convert.连用型D = AdjConvert.连用型D(value);
+				convert.假定型B = AdjConvert.假定型B(value);
+				convert.S = AdjConvert.S(value);
 				convertsVO.add(convert);
 			});
 			
