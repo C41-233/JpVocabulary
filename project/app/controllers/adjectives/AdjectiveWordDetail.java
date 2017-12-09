@@ -7,6 +7,7 @@ import base.utility.linq.Linq;
 import core.controller.HtmlControllerBase;
 import core.controller.Route;
 import core.controller.validation.annotation.Id;
+import core.logger.Logs;
 import logic.LogicValidate;
 import logic.convert.adjective.AdjConvert;
 import logic.words.AdjectiveWordsLogic;
@@ -30,6 +31,12 @@ public final class AdjectiveWordDetail extends HtmlControllerBase{
 		wordVO.id = id;
 		
 		List<ConvertVO> convertsVO = new ArrayList<>();
+		
+		List<String> syllables = Linq.from(word.getSyllables()).toList();
+		String syllable = syllables.get(0);
+		if(syllables.size() > 1) {
+			Logs.Logic.warn("%s存在多个发音，可能导致转换错误", syllable);
+		}
 		
 		Linq.from(word.getValues())
 			.select(w->w.getValue())
@@ -57,6 +64,7 @@ public final class AdjectiveWordDetail extends HtmlControllerBase{
 				convert.连用型D = AdjConvert.连用型D(value);
 				convert.假定型B = AdjConvert.假定型B(value);
 				convert.S = AdjConvert.S(value);
+				convert.GZR =  AdjConvert.GZR(value, syllable);
 				convertsVO.add(convert);
 			});
 			
