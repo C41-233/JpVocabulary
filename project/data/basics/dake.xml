@@ -1,0 +1,21 @@
+<basic value="だけ">
+	<value class="副助词">
+		<meaning>限定范围、数量、程度，表示“只，仅仅”，代替助词が和を</meaning>
+		<example>
+			<jp>二人だけで行きます。</jp>
+			<cn>就两个人去。</cn>
+		</example>
+		<example>
+			<jp>大きい部屋は一階にだけあります。</jp>
+			<cn>只有一楼有大房间。</cn>
+		</example>
+		<example>
+			<jp>わたしは聞くだけです。</jp>
+			<cn>我只是听听。</cn>
+		</example>
+		<example>
+			<jp>彼だけ来ていません。</jp>
+			<cn>只有他没到。</cn>
+		</example>
+	</value>
+</basic>
