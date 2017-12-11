@@ -20,6 +20,10 @@ public final class Page extends HtmlControllerBase{
 		of("numeral");
 	}
 	
+	public static void auxiliary() {
+		of("auxiliary");
+	}
+	
 	private static void of(String file) {
 		render("pages/"+file);
 	}

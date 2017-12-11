@@ -1,0 +1,40 @@
+#{meta /}
+
+#{title '谚语'/}
+
+#{body}
+
+<div class="container">
+	<div class="row">
+		<div class="col-lg-12 col-sm-3 col-xs-6">
+			<h3>谚语</h3>
+			<hr/>
+			<table class="table table-bordered">
+				#{list items:words, as:'word'}
+					<tr>
+						<th class="div-value">
+							<a href="@{notionals.NotionalWordEdit.index(word.id, request.url)}" class="word-link">${word.value}</a>
+						</th>
+						<td>${word.syllable}</td>
+						<td>
+							#{list items:word.meanings, as:'meaning'}
+								<div>${meaning}</div>
+							#{/list}
+						</td>
+					</tr>
+				#{/list}
+			</table>
+		</div>
+	</div>
+</div>
+
+#{/body}
+
+#{stylesheet}
+	.div-value{
+		width:	20%;
+	}
+	.value+.value:before{
+		content: ' / ';
+	}
+#{/stylesheet}

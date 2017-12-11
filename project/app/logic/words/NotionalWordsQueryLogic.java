@@ -138,4 +138,12 @@ public final class NotionalWordsQueryLogic {
 		return NotionalWordValue.find("value=?1", query).fetch();
 	}
 
+	public static List<INotionalWord> findProverbs(){
+		HQL hql = HQL.begin();
+		hql.where(Like.contains("types", ConcatSplit.getToken(NotionalWordType.谚语.toString())));
+		
+		HQLResult rst = hql.end();
+		return NotionalWord.find(rst.select, rst.params).fetch();
+	}
+	
 }

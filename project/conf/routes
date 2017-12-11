@@ -90,9 +90,11 @@ POST	/words/katakana/action/update-alias		katakanas.KatakanaWordAPI.updateAlias
 POST	/words/katakana/action/update-context	katakanas.KatakanaWordAPI.updateContext
 
 GET		/words/interjections					notionals.InterjectionWordIndex.index
+GET		/sentences/proverb						sentences.Proverb.index
 
 GET		/50										Page._50
 GET		/grammar/verb							Page.verb
 GET		/grammar/other							Page.other
+GET		/grammar/auxiliary						Page.auxiliary
 
 GET		/test									Test.test

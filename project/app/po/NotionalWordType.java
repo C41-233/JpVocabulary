@@ -19,6 +19,7 @@ public enum NotionalWordType {
 		接尾词,
 		数词,
 		量词,
-		数量词;
+		数量词,
+		谚语;
 	
 }
