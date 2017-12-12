@@ -29,6 +29,7 @@ public class HashArrayListMultiMap<K, V> implements IMultiMap<K, V>{
 	public void put(K key, V value) {
 		ArrayList<V> list = getListOrCreate(key);
 		list.add(value);
+		size++;
 	}
 	
 	private ArrayList<V> getListOrCreate(K key){
@@ -39,10 +40,47 @@ public class HashArrayListMultiMap<K, V> implements IMultiMap<K, V>{
 		}
 		return list;
 	}
+
+	@Override
+	public boolean remove(K key, V value) {
+		ArrayList<V> list = data.get(key);
+		if(list == null) {
+			return false;
+		}
+		
+		boolean del = list.remove(value);
+		if(del) {
+			size--;
+		}
+		return del;
+	}
 	
-	public Iterable<V> values(K key){
+	@Override
+	public boolean removeAll(K key) {
+		ArrayList<V> list = data.get(key);
+		if(list == null) {
+			return false;
+		}
+		
+		size -= list.size();
+		return true;
+	}
+
+	@Override
+	public V getOne(String key) {
+		ArrayList<V> list = data.get(key);
+		return list == null ? null : list.get(0);
+	}
+
+	@Override
+	public Iterable<V> getAll(K key){
 		ArrayList<V> list = data.get(key);
 		return list == null ? Collections.emptyList() : list;
 	}
-	
+
+	@Override
+	public boolean containsKey(K key) {
+		return data.containsKey(key);
+	}
+
 }

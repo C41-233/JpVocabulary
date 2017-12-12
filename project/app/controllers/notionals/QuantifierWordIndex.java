@@ -30,17 +30,17 @@ public class QuantifierWordIndex extends HtmlControllerBase{
 				}
 				
 				if(valuesMap.count(NotionalWordValueType.Character) > 0) {
-					for(String value : valuesMap.values(NotionalWordValueType.Character)) {
-						AddWord(notionalsVO, word, value, valuesMap.values(NotionalWordValueType.Syllable));
+					for(String value : valuesMap.getAll(NotionalWordValueType.Character)) {
+						AddWord(notionalsVO, word, value, valuesMap.getAll(NotionalWordValueType.Syllable));
 					}
 				}
 				else if(valuesMap.count(NotionalWordValueType.Mixed)> 0) {
-					for(String value : valuesMap.values(NotionalWordValueType.Mixed)) {
-						AddWord(notionalsVO, word, value, valuesMap.values(NotionalWordValueType.Syllable));
+					for(String value : valuesMap.getAll(NotionalWordValueType.Mixed)) {
+						AddWord(notionalsVO, word, value, valuesMap.getAll(NotionalWordValueType.Syllable));
 					}
 				}
 				else {
-					for(String value : valuesMap.values(NotionalWordValueType.Syllable)) {
+					for(String value : valuesMap.getAll(NotionalWordValueType.Syllable)) {
 						AddWord(notionalsVO, word, value, Collections.emptyList());
 					}
 				}

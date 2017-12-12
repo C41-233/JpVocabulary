@@ -8,4 +8,14 @@ public interface IMultiMap <K, V>{
 	
 	public void put(K key, V value);
 	
+	public boolean remove(K key, V value);
+	
+	public boolean removeAll(K key);
+	
+	public V getOne(String key);
+	
+	public Iterable<V> getAll(K key);
+	
+	public boolean containsKey(K key);
+	
 }

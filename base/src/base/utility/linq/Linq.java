@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Iterator;
 
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
 public final class Linq {
 
 	private Linq() {}
@@ -38,6 +41,10 @@ public final class Linq {
 			list.add(enumeration.nextElement());
 		}
 		return from(list);
+	}
+
+	public static IReferenceEnumerable<Node> from(NodeList nodes) {
+		return new NodeListEnumerable(nodes);
 	}
 
 }

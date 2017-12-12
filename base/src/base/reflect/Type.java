@@ -1,17 +1,22 @@
 package base.reflect;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
 
 public class Type<T> {
 
-	public static <T> Type<T> load(Class<T> cl){
-		return new Type<>(cl);
-	}
-	
 	private final Class<T> clazz;
+	private final ArrayList<FieldInfo> fields;
 	
-	private Type(Class<T> clazz) {
+	Type(Class<T> clazz) {
 		this.clazz = clazz;
+		
+		Field[] fields = clazz.getDeclaredFields();
+		this.fields = new ArrayList<>(fields.length);
+		for(int i=0; i<fields.length; i++) {
+			this.fields.add(new FieldInfo(fields[i]));
+		}
 	}
 	
 	public T newInstance(){
@@ -23,5 +28,21 @@ public class Type<T> {
 			throw new ReflectException(e);
 		}
 	}
+
+	public FieldInfo[] getFields() {
+		return fields.toArray(new FieldInfo[fields.size()]);
+	}
+
+	public boolean isArray() {
+		return clazz.isArray();
+	}
 	
+	public Class<T> asClass() {
+		return clazz;
+	}
+
+	public Type getArrayComponentType() {
+		return Types.typeOf(clazz.getComponentType());
+	}
+
 }
