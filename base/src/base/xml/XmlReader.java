@@ -5,7 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Array;
-import java.util.HashMap;
+import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -13,8 +13,6 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import base.reflect.FieldInfo;
@@ -45,6 +43,10 @@ public class XmlReader {
 		};
 	}
 	
+	/**
+	 * 设置数组类型映射的XML标签，默认情况下数组字段与标签一致，但字段以s结尾时，取其前面部分
+	 * @param selector 数组字段映射到的标签
+	 */
 	public void setArrayTagSelector(IArrayTagSelector selector) {
 		if(selector == null) {
 			this.arrayTagSelector = field -> field;
@@ -54,33 +56,37 @@ public class XmlReader {
 		}
 	}
 
+	/**
+	 * 设置文本字段
+	 * @param field 文本字段名称，null表示不设置默认的文本字段
+	 */
 	public void setDefaultTextField(String field) {
 		this.defaultTextFieldName = field;
 	}
 	
 	@SuppressWarnings("unchecked")
+	private <T> T readInner(Document document, Class<T> clazz) {
+		Element root = document.getDocumentElement();
+		
+		Type<T> type = Types.typeOf(clazz);
+		return (T) createElement(type, root);
+	}
+	
 	public <T> T read(File file, Class<T> clazz){
 		try {
 			DocumentBuilder builder = factory.newDocumentBuilder();
 			Document document = builder.parse(file);
-			Element root = document.getDocumentElement();
-			
-			Type<T> type = Types.typeOf(clazz);
-			return (T) createElement(type, root);
+			return readInner(document, clazz);
 		} catch (ParserConfigurationException | SAXException | IOException e) {
 			throw new XmlException(e);
 		}
 	}
 	
-	@SuppressWarnings("unchecked")
 	public <T> T read(InputStream is, Class<T> clazz) {
 		try {
 			DocumentBuilder builder = factory.newDocumentBuilder();
 			Document document = builder.parse(is);
-			Element root = document.getDocumentElement();
-			
-			Type<T> type = Types.typeOf(clazz);
-			return (T) createElement(type, root);
+			return readInner(document, clazz);
 		} catch (ParserConfigurationException | SAXException | IOException e) {
 			throw new XmlException(e);
 		}
@@ -91,19 +97,46 @@ public class XmlReader {
 		return read(is, clazz);
 	}
 	
-	@FunctionalInterface
-	private static interface ITypeProvider<T>{
-		public T create(String value);
+	@SuppressWarnings("unchecked")
+	private <T> T[] readObjectsInner(Document document, Class<T> clazz, String tag) {
+		Element root = document.getDocumentElement();
+
+		List<Element> tags = Linq.from(root.getChildNodes()).instanceOf(Element.class).where(e->e.getTagName().equals(tag)).toList();
+		
+		T[] arr = (T[]) Array.newInstance(clazz, tags.size());
+		
+		Type<T> type = Types.typeOf(clazz);
+		for(int i=0; i<tags.size(); i++) {
+			arr[i] = (T) createElement(type, tags.get(i));
+		}
+		return arr;
 	}
 	
-	private static HashMap<Class, ITypeProvider> providers = new HashMap<>();
-	
-	static {
-		providers.put(String.class, value->value);
-		providers.put(int.class, value->Integer.parseInt(value));
-		providers.put(long.class, value->Long.parseLong(value));
+	public <T> T[] readObjects(InputStream is, Class<T> clazz, String tag) {
+		try {
+			DocumentBuilder builder = factory.newDocumentBuilder();
+			Document document = builder.parse(is);
+			return readObjectsInner(document, clazz, tag);
+		} catch (ParserConfigurationException | SAXException | IOException e) {
+			throw new XmlException(e);
+		}
 	}
 	
+	public <T> T[] readObjects(String xml, Class<T> clazz, String tag) {
+		ByteArrayInputStream is = new ByteArrayInputStream(xml.getBytes());
+		return readObjects(is, clazz, tag);
+	}
+
+	public <T> T[] readObjects(File file, Class<T> clazz, String tag) {
+		try {
+			DocumentBuilder builder = factory.newDocumentBuilder();
+			Document document = builder.parse(file);
+			return readObjectsInner(document, clazz, tag);
+		} catch (ParserConfigurationException | SAXException | IOException e) {
+			throw new XmlException(e);
+		}
+	}
+
 	private Object createElement(Type type, Element element) {
 		Object obj = type.newInstance();
 		
@@ -116,7 +149,7 @@ public class XmlReader {
 				field.setValue(obj, array);
 			}
 			//普通类型
-			else if(providers.containsKey(fieldType.asClass()))
+			else if(TypeProviers.contains(fieldType.asClass()))
 			{
 				Object value = createBasicElement(field, element);
 				if(value != null) {
@@ -137,7 +170,7 @@ public class XmlReader {
 	private Object createObjectElement(FieldInfo field, Element element) {
 		String fieldName = field.getName();
 		Type fieldType = field.getType();
-		HashArrayListMultiMap<String, Element> childs = getChildElements(element);
+		HashArrayListMultiMap<String, Element> childs = XmlHelper.getChildElements(element);
 		
 		Element fieldElement = childs.getOne(fieldName);
 		if(fieldElement != null) {
@@ -149,7 +182,7 @@ public class XmlReader {
 	private Object createArrayObjectElement(FieldInfo field, Element element) {
 		String fieldName = field.getName();
 		Type fieldType = field.getType();
-		HashArrayListMultiMap<String, Element> childs = getChildElements(element);
+		HashArrayListMultiMap<String, Element> childs = XmlHelper.getChildElements(element);
 		
 		Type arrayComponentType = fieldType.getArrayComponentType();
 		String arrayTagName = arrayTagSelector.getTagName(fieldName);
@@ -165,38 +198,24 @@ public class XmlReader {
 	private Object createBasicElement(FieldInfo field, Element element) {
 		String fieldName = field.getName();
 		Type fieldType = field.getType();
-		ITypeProvider provider = providers.get(fieldType.asClass());
 
 		if(fieldName.equals(defaultTextFieldName)) {
-			return provider.create(element.getTextContent());
+			return TypeProviers.create(fieldType.asClass(), element.getTextContent());
 		}
 		
-		HashArrayListMultiMap<String, Element> childs = getChildElements(element);
+		HashArrayListMultiMap<String, Element> childs = XmlHelper.getChildElements(element);
 		
 		if(element.hasAttribute(fieldName)) {
 			String value = element.getAttribute(fieldName);
-			return provider.create(value);
+			return TypeProviers.create(fieldType.asClass(), value);
 		}
 		else {
 			Element fieldElement = childs.getOne(fieldName);
 			if(fieldElement != null) {
-				return provider.create(fieldElement.getTextContent());
+				return TypeProviers.create(fieldType.asClass(), fieldElement.getTextContent());
 			}
 		}
 		return null;
 	}
 	
-	private static HashArrayListMultiMap<String, Element> getChildElements(Element element){
-		HashArrayListMultiMap<String, Element> map = new HashArrayListMultiMap<>();
-		NodeList nodes = element.getChildNodes();
-		for(int i=0; i<nodes.getLength(); i++) {
-			Node node = nodes.item(i);
-			if(node.getNodeType() == Node.ELEMENT_NODE) {
-				Element child = (Element) node;
-				map.put(child.getTagName(), child);
-			}
-		}
-		return map;
-	}
-
 }

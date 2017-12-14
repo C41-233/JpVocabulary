@@ -65,6 +65,19 @@ public class XmlTest {
 		}
 		
 	}
-	
+
+	@Test
+	public void test4() {
+		String xml = "<root><book><name>A</name></book><book><name>B</name></book></root>";
+		XmlReader reader = new XmlReader();
+		Doc3[] books = reader.readObjects(xml, Doc3.class, "book");
+		assertEquals(2, books.length);
+		assertEquals("A", books[0].name);
+		assertEquals("B", books[1].name);
+	}
+
+	private static class Doc3{
+		public String name;
+	}
 	
 }

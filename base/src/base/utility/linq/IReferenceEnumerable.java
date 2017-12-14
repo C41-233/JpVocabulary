@@ -230,6 +230,10 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 		return new WhereEnumerable<T>(this, predicate);
 	}
 	
+	public default <V> IReferenceEnumerable<V> instanceOf(Class<V> cl){
+		return where(c->cl.isInstance(c)).cast();
+	}
+	
 	public default IReferenceSortedEnumerable<T> orderBy(Comparator<? super T> comparator){
 		return new OrderByEnumerable<T>(this, comparator);
 	}

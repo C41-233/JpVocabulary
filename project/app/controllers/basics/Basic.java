@@ -26,21 +26,8 @@ public class Basic extends HtmlControllerBase{
 	}
 
 	private static void processContent() {
-		/*try {
-			SAXReader reader = new SAXReader();
-			Document document = reader.read(new File("data/basics/contents.xml"));
-			Element root = document.getRootElement();
-			List<Element> groups = root.elements("group");
-			List<ContentGroup> groupsVO = new ArrayList<>();
-			for(Element element : groups) {
-				ContentGroup groupVO = new ContentGroup();
-			}
-		} 
-		catch (DocumentException e) {
-			throw new RuntimeException(e);
-		}*/
 		XmlReader reader = new XmlReader();
-		reader.read(new File("data/basics/contents.xml"), ContentGroup.class);
+		ContentGroup[] groups = reader.readObjects(new File("data/basics/contents.xml"), ContentGroup.class, "group");
 		renderText("123");
 	}
 	
