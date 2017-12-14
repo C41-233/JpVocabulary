@@ -8,6 +8,7 @@ import base.utility.linq.Linq;
 import core.controller.AjaxControllerBase;
 import core.controller.Route;
 import core.controller.RouteArgs;
+import core.controller.validation.annotation.Array;
 import core.controller.validation.annotation.Id;
 import core.controller.validation.annotation.Required;
 import core.controller.validation.annotation.StringValue;
@@ -84,7 +85,7 @@ public final class CharacterAPI extends AjaxControllerBase {
 	public static void updateSyllableWords(
 		@Id long id,
 		@Required String syllable,
-		@Required @StringValue(minLength=1) String[] words
+		@Array @StringValue(minLength=1) String[] words
 	) {
 		List<WordPair> wordList = Linq.from(words).select(s->{
 			String[] split = Strings.splitTokens(s);
