@@ -5,11 +5,11 @@ import java.util.Set;
 
 import base.utility.Chars;
 import base.utility.linq.Linq;
-import core.model.ConcatSplit;
 import core.model.hql.HQL;
 import core.model.hql.HQLResult;
 import core.model.hql.Like;
 import logic.LogicBase;
+import models.ConcatSplit;
 import models.KatakanaWord;
 import po.IKatakanaWord;
 import po.KatakanaWordContext;

@@ -5,7 +5,6 @@ import java.util.Set;
 
 import base.utility.collection.Iterables;
 import base.utility.linq.Linq;
-import core.model.ConcatSplit;
 import core.model.hql.HQL;
 import core.model.hql.HQLResult;
 import core.model.hql.Like;
@@ -14,6 +13,7 @@ import logic.LogicValidate;
 import logic.pinyins.WordQueryIndex;
 import models.AdjectiveWord;
 import models.AdjectiveWordValue;
+import models.ConcatSplit;
 import po.AdjectiveWordType;
 import po.IAdjectiveWord;
 import po.IAdjectiveWordValue;

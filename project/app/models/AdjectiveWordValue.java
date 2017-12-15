@@ -6,9 +6,7 @@ import javax.persistence.Table;
 
 import base.utility.assertion.Assert;
 import base.utility.linq.Linq;
-import core.model.ConcatSplit;
 import core.model.ModelBase;
-import core.model.ModelConstant;
 import po.IAdjectiveWordValue;
 
 @Entity

@@ -3,7 +3,6 @@ package logic.words;
 import java.util.List;
 
 import base.utility.collection.Iterables;
-import core.model.ConcatSplit;
 import core.model.hql.And;
 import core.model.hql.Clause;
 import core.model.hql.HQL;
@@ -12,6 +11,7 @@ import core.model.hql.In;
 import core.model.hql.Like;
 import core.model.hql.Or;
 import logic.pinyins.WordQueryIndex;
+import models.ConcatSplit;
 import models.NotionalWord;
 import models.NotionalWordValue;
 import po.INotionalWord;

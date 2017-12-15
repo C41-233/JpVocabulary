@@ -2,13 +2,13 @@ package logic.characters;
 
 import java.util.List;
 
-import core.model.ConcatSplit;
 import core.model.hql.HQL;
 import core.model.hql.HQLResult;
 import core.model.hql.Like;
 import core.model.hql.Or;
 import models.AdjectiveWordValue;
 import models.Character;
+import models.ConcatSplit;
 import models.NotionalWordValue;
 import models.VerbWordValue;
 import po.IAdjectiveWordValue;

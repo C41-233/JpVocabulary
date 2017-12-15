@@ -1,4 +1,4 @@
-package core.model;
+package models;
 
 public interface ModelConstant{
 
