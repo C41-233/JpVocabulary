@@ -45,4 +45,9 @@ public class Type<T> {
 		return Types.typeOf(clazz.getComponentType());
 	}
 
+	@Override
+	public String toString() {
+		return clazz.getName();
+	}
+	
 }

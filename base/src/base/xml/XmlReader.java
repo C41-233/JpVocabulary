@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -98,7 +99,46 @@ public class XmlReader {
 	}
 	
 	@SuppressWarnings("unchecked")
-	private <T> T[] readObjectsInner(Document document, Class<T> clazz, String tag) {
+	private <T> List<T> readListInner(Document document, Class<T> clazz, String tag) {
+		Element root = document.getDocumentElement();
+
+		List<Element> tags = Linq.from(root.getChildNodes()).instanceOf(Element.class).where(e->e.getTagName().equals(tag)).toList();
+		List<T> list = new ArrayList<>(tags.size());
+		
+		Type<T> type = Types.typeOf(clazz);
+		for(Element e : tags) {
+			list.add((T) createElement(type, e));
+		}
+		return list;
+	}
+	
+	public <T> List<T> readList(File file, Class<T> clazz, String tag){
+		try {
+			DocumentBuilder builder = factory.newDocumentBuilder();
+			Document document = builder.parse(file);
+			return readListInner(document, clazz, tag);
+		} catch (ParserConfigurationException | SAXException | IOException e) {
+			throw new XmlException(e);
+		}
+	}
+	
+	public <T> List<T> readList(InputStream is, Class<T> clazz, String tag){
+		try {
+			DocumentBuilder builder = factory.newDocumentBuilder();
+			Document document = builder.parse(is);
+			return readListInner(document, clazz, tag);
+		} catch (ParserConfigurationException | SAXException | IOException e) {
+			throw new XmlException(e);
+		}
+	}
+	
+	public <T> List<T> readList(String xml, Class<T> clazz, String tag){
+		ByteArrayInputStream is = new ByteArrayInputStream(xml.getBytes());
+		return readList(is, clazz, tag);
+	}
+	
+	@SuppressWarnings("unchecked")
+	private <T> T[] readArrayInner(Document document, Class<T> clazz, String tag) {
 		Element root = document.getDocumentElement();
 
 		List<Element> tags = Linq.from(root.getChildNodes()).instanceOf(Element.class).where(e->e.getTagName().equals(tag)).toList();
@@ -112,26 +152,26 @@ public class XmlReader {
 		return arr;
 	}
 	
-	public <T> T[] readObjects(InputStream is, Class<T> clazz, String tag) {
+	public <T> T[] readArray(InputStream is, Class<T> clazz, String tag) {
 		try {
 			DocumentBuilder builder = factory.newDocumentBuilder();
 			Document document = builder.parse(is);
-			return readObjectsInner(document, clazz, tag);
+			return readArrayInner(document, clazz, tag);
 		} catch (ParserConfigurationException | SAXException | IOException e) {
 			throw new XmlException(e);
 		}
 	}
 	
-	public <T> T[] readObjects(String xml, Class<T> clazz, String tag) {
+	public <T> T[] readArray(String xml, Class<T> clazz, String tag) {
 		ByteArrayInputStream is = new ByteArrayInputStream(xml.getBytes());
-		return readObjects(is, clazz, tag);
+		return readArray(is, clazz, tag);
 	}
 
-	public <T> T[] readObjects(File file, Class<T> clazz, String tag) {
+	public <T> T[] readArray(File file, Class<T> clazz, String tag) {
 		try {
 			DocumentBuilder builder = factory.newDocumentBuilder();
 			Document document = builder.parse(file);
-			return readObjectsInner(document, clazz, tag);
+			return readArrayInner(document, clazz, tag);
 		} catch (ParserConfigurationException | SAXException | IOException e) {
 			throw new XmlException(e);
 		}
@@ -147,6 +187,11 @@ public class XmlReader {
 			if(fieldType.isArray()) {
 				Object array = createArrayObjectElement(field, element);
 				field.setValue(obj, array);
+			}
+			//列表
+			else if(fieldType.asClass() == List.class) {
+				Object list = createListObjectElement(field, element);
+				field.setValue(obj, list);
 			}
 			//普通类型
 			else if(TypeProviers.contains(fieldType.asClass()))
@@ -194,7 +239,28 @@ public class XmlReader {
 		}
 		return array;
 	}
-	
+
+	@SuppressWarnings("unchecked")
+	private Object createListObjectElement(FieldInfo field, Element element) {
+		String fieldName = field.getName();
+		XmlListClass listClass = field.getAnnotation(XmlListClass.class);
+		if(listClass == null) {
+			return null;
+		}
+
+		Type componentType = Types.typeOf(listClass.value());
+		HashArrayListMultiMap<String, Element> childs = XmlHelper.getChildElements(element);
+		
+		String arrayTagName = arrayTagSelector.getTagName(fieldName);
+		Element[] childElements = Linq.from(childs.getAll(arrayTagName)).toArray(Element.class);
+		List<Object> list = new ArrayList<>();
+		for(int i=0; i<childElements.length; i++) {
+			Object childValue = createElement(componentType, childElements[i]);
+			list.add(childValue);
+		}
+		return list;
+	}
+
 	private Object createBasicElement(FieldInfo field, Element element) {
 		String fieldName = field.getName();
 		Type fieldType = field.getType();

@@ -1,0 +1,43 @@
+#{meta /}
+
+#{title index.name/}
+
+#{body}
+
+<div class="container">
+	<div class="row">
+		<div class="col-lg-3">
+			#{list items:groups, as:'group'}
+				<div>
+					<div class="list-group">
+					<div class="list-group-item font-bold">${group.name}</div>
+					#{list items:group.contents, as:'content'}
+						#{if content.value == index.value}
+							<li class="list-group-item active">${content.name}</li>
+						#{/if}
+						#{else}
+							<a href="/words/basic/${content.value}" class="list-group-item">${content.name}</a>
+						#{/else}
+					#{/list}
+					</div>
+				</div>
+			#{/list}
+		</div>
+		<div class="col-lg-9">
+			#{if data}
+				#{list items:data.values, as:'value'}
+					<div>【${value.type}】</div>
+					<div>${value.meaning}</div>
+					#{list items:value.examples, as:'example'}
+						<div>
+							<span>${example.jp}</span>
+							<span>（${example.cn}）</span>
+						</div>
+					#{/list}
+				#{/list}
+			#{/if}
+		</div>
+	</div>
+</div>
+
+#{/body}

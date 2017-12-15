@@ -1,6 +1,9 @@
 package base.reflect;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+
+import base.xml.XmlListClass;
 
 public class FieldInfo {
 
@@ -28,6 +31,10 @@ public class FieldInfo {
 		} catch (IllegalArgumentException | IllegalAccessException e) {
 			throw new ReflectException(e);
 		}
+	}
+
+	public <T extends Annotation> T getAnnotation(Class<T> clazz) {
+		return field.getAnnotation(clazz);
 	}
 
 }

@@ -1,6 +1,6 @@
-<basic value="だけ">
-	<value class="副助词">
-		<meaning>限定范围、数量、程度，表示“只，仅仅”，代替助词が和を</meaning>
+<basic name="だけ">
+	<value type="副助词">
+		<meaning>限定范围、数量、程度，表示“只，仅仅”，代替助词が和を。</meaning>
 		<example>
 			<jp>二人だけで行きます。</jp>
 			<cn>就两个人去。</cn>

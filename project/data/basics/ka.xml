@@ -1,0 +1,32 @@
+<basic name="か">
+	<value type="并列助词">
+		<meaning>列出可能性，表示或者。</meaning>
+		<example>
+			<jp>授業が終わってから、わたしはたいてい教室か閲覧室で勉強します。</jp>
+			<cn>上完课我一般在教室或阅览室学习。</cn>
+		</example>
+		<example>
+			<jp>あなたが来るかわたしが行くかです。</jp>
+			<cn>是你来或是我去。</cn>
+		</example>
+	</value>
+	<value type="副助词">
+		<meaning>构成不定式，接疑问词。</meaning>
+		<example>
+			<jp>木村さんは昨日どこかへ出掛けましたか。</jp>
+			<cn>木村昨天出门去了什么地方吗？</cn>
+		</example>
+		<example>
+			<jp>その部屋にだれかいますか。</jp>
+			<cn>那间屋子里有什么人吗？</cn>
+		</example>
+		<example>
+			<jp>なにか食べ物がありますか。</jp>
+			<cn>有什么吃的吗？</cn>
+		</example>
+		<example>
+			<jp>その本は読んでいませんから、おもしろいかどうか分かりません。</jp>
+			<cn>那本书我没有看过，不知道是否有趣。</cn>
+		</example>
+	</value>
+</basic>
