@@ -3,8 +3,6 @@ package base.reflect;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 
-import base.xml.XmlListClass;
-
 public class FieldInfo {
 
 	private final Field field;
@@ -35,6 +33,10 @@ public class FieldInfo {
 
 	public <T extends Annotation> T getAnnotation(Class<T> clazz) {
 		return field.getAnnotation(clazz);
+	}
+
+	public <T extends Annotation> boolean hasAnnotation(Class<T> clazz) {
+		return field.getAnnotation(clazz) != null;
 	}
 
 }
