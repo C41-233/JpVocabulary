@@ -2,6 +2,14 @@
 
 #{title index.name/}
 
+#{javascript "words/basic.js"/}
+
+#{stylesheet}
+	.target{
+		color:	red;
+	}
+#{/stylesheet}
+
 #{body}
 
 <div class="container">
@@ -23,14 +31,14 @@
 				</div>
 			#{/list}
 		</div>
-		<div class="col-lg-9">
+		<div class="col-lg-9 pre-hide" id="data-body">
 			#{if data}
 				#{list items:data.values, as:'value'}
 					<div>【${value.type}】</div>
 					<div>${value.meaning}</div>
 					#{list items:value.examples, as:'example'}
 						<div>
-							<span>${example.jp}</span>
+							<span class="example-sentence">${example.jp}</span>
 							<span>（${example.cn}）</span>
 						</div>
 					#{/list}
@@ -41,3 +49,4 @@
 </div>
 
 #{/body}
+

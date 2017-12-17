@@ -1,0 +1,118 @@
+<basic name="が/は/も">
+	<value type="主格助词">
+		<meaning>表示客观描述的主语。</meaning>
+		<example>
+			<jp>部屋にラジオ{が}あります。</jp>
+			<cn>房间里有收音机。</cn>
+		</example>
+		<example>
+			<jp>教室に学生{が}います。</jp>
+			<cn>教室里有学生。</cn>
+		</example>
+		<example>
+			<jp>山{が}高いですね。</jp>
+			<cn>山真高啊。</cn>
+		</example>
+		<example>
+			<jp>いつも大勢の人{が}旅行をします。</jp>
+			<cn>一直有很多人去旅行。</cn>
+		</example>
+		<example>
+			<jp>李さん、友達{が}来ましたよ。</jp>
+			<cn>小李，你朋友来了。</cn>
+		</example>
+		<example>
+			<jp>部屋{が}きれいにありました。</jp>
+			<cn>房间变干净了。</cn>
+		</example>
+		<example>
+			<jp>子供たち{が}楽しく遊んでいます。</jp>
+			<cn>孩子们正在高兴地玩耍。</cn>
+		</example>
+		<example>
+			<jp>その日は雨{が}降っていたのです。</jp>
+			<cn>那天下着雨。</cn>
+		</example>
+		<example>
+			<jp>部屋にはテレビ{は}ありません。</jp>
+			<cn>房间里没有电视机。</cn>
+		</example>
+		<example>
+			<jp>テーブルの上に酒{が}あります。マッチ{も}あります。</jp>
+			<cn>饭桌上有酒，还有火柴。</cn>
+		</example>
+	</value>
+	
+	<value type="主格助词">
+		<meaning>构成疑问词的主语</meaning>
+		<example>
+			<jp>何月{が}一番暑いですか。</jp>
+			<cn>几月份最热？</cn>
+		</example>
+		<example>
+			<jp>どれ{が}田中さんの本ですか。</jp>
+			<cn>哪本是田中的书？</cn>
+		</example>
+		<example>
+			<jp>どちら{が}いいか分かりません。</jp>
+			<cn>我不知道哪个好。</cn>
+		</example>
+	</value>
+		
+	<value type="主格助词">
+		<meaning>对疑问词作主语的回答</meaning>
+		<example>
+			<jp>どこがあなたたちの教室ですか。 ——ここ{が}わたしたちの教室です。</jp>
+			<cn>哪儿是你们的教室？ ——这儿是我们的教室。</cn>
+		</example>
+	</value>
+		
+	<value type="主格助词">
+		<meaning>表示从句的主语</meaning>
+		<example>
+			<jp>あなた{が}歌っている歌は日本の歌ですか。</jp>
+			<cn>你正在唱的歌是日本歌吗？</cn>
+		</example>
+		<example>
+			<jp>部屋の掃除はわたし{が}やりましょう。</jp>
+			<cn>房间的打扫由我来做吧。</cn>
+		</example>
+	</value>
+	
+	<value type="宾格助词">
+		<meaning>构成对象语，表示用言描述对象</meaning>
+		<example>
+			<jp>彼は納豆や梅干{が}嫌いです。</jp>
+			<cn>他讨厌纳豆和梅子。</cn>
+		</example>
+		<example>
+			<jp>青木さんは中華料理{が}大好きです。</jp>
+			<cn>青木先生非常喜欢中国菜。</cn>
+		</example>
+		<example>
+			<jp>王さんは料理を作るの{が}下手です。</jp>
+			<cn>小王做菜不行。</cn>
+		</example>
+		<example>
+			<jp>わたしは目{が}よくまりません。</jp>
+			<cn>我眼睛不好。</cn>
+		</example>
+		<example>
+			<jp>上海は冬{が}寒いです。</jp>
+			<cn>上海冬天寒冷。</cn>
+		</example>
+		<example>
+			<jp>李さん、何{が}飲みたいですか。</jp>
+			<cn>小李，想喝点什么？</cn>
+		</example>
+		<example>
+			<jp>今日、お風呂に入ること{は}できません。</jp>
+			<cn>今天不能洗澡。</cn>
+		</example>
+		<example>
+			<jp>日本料理{も}中華料理{も}みな好きです。</jp>
+			<cn>日本料理和中华料理都喜欢。</cn>
+		</example>
+	</value>
+
+</basic>

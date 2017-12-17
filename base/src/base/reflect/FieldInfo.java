@@ -12,7 +12,11 @@ public class FieldInfo {
 		this.field = field;
 		this.type = Types.typeOf(field.getType());
 		
-		this.field.setAccessible(true);
+		try {
+			this.field.setAccessible(true);
+		}
+		catch (SecurityException e) {
+		}
 	}
 	
 	public String getName() {
@@ -21,6 +25,10 @@ public class FieldInfo {
 
 	public Type getType() {
 		return type;
+	}
+
+	public boolean isPublic() {
+		return Modifiers.isPublic(field);
 	}
 
 	public void setValue(Object obj, Object value) {
@@ -37,6 +45,10 @@ public class FieldInfo {
 
 	public <T extends Annotation> boolean hasAnnotation(Class<T> clazz) {
 		return field.getAnnotation(clazz) != null;
+	}
+
+	public Type getDeclaringType() {
+		return Types.typeOf(field.getDeclaringClass());
 	}
 
 }

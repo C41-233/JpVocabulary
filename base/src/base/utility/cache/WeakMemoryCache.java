@@ -5,13 +5,18 @@ import java.util.HashMap;
 
 public class WeakMemoryCache<K, V>{
 
+	@FunctionalInterface
+	public static interface IFactory<V>{
+		public V create();
+	}
+	
 	private final HashMap<K, WeakReference<V>> data = new HashMap<>();
 
-	public void put(K key, V value) {
+	public synchronized void put(K key, V value) {
 		data.put(key, new WeakReference<V>(value));
 	}
 	
-	public V get(K key) {
+	public synchronized V get(K key) {
 		WeakReference<V> ref = data.get(key);
 		if(ref == null) {
 			return null;
@@ -24,7 +29,22 @@ public class WeakMemoryCache<K, V>{
 		return value;
 	}
 	
-	public boolean contains(K key) {
+	public synchronized V getOrCreate(K key, IFactory<V> factory) {
+		WeakReference<V> ref = data.get(key);
+		if(ref == null) {
+			V value = factory.create();
+			data.put(key, new WeakReference<V>(value));
+			return value;
+		}
+		V value = ref.get();
+		if(value == null) {
+			value = factory.create();
+			data.put(key, new WeakReference<V>(value));
+		}
+		return value;
+	}
+	
+	public synchronized boolean contains(K key) {
 		WeakReference<V> ref = data.get(key);
 		if(ref == null) {
 			return false;
