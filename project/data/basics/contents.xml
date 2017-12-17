@@ -10,7 +10,7 @@
 		<content value="dakeni" name="だけに"/>
 		<content value="de" name="で"/>
 		<content value="demo" name="でも"/>
-		<content value="to" name="と/とは/とも"/>
+		<content value="to" name="と"/>
 		<content value="toha" name="とは"/>
 		<content value="toka" name="とか"/>
 		<content value="ha" name="は"/>

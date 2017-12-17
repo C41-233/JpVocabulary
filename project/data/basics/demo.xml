@@ -1,0 +1,34 @@
+<basic name="でも">
+	<value type="提示助词">
+		<meaning>表示全面肯定，接疑问词。</meaning>
+		<example>
+			<jp>料理は何{でも}好きです。</jp>
+			<cn>什么料理都好吃。</cn>
+		</example>
+		<example>
+			<jp>誰{でも}知っています。</jp>
+			<cn>谁都知道。</cn>
+		</example>
+		<example>
+			<jp>わたしはいつ{でも}いいです。</jp>
+			<cn>我无论什么时候都行。</cn>
+		</example>
+	</value>
+
+	<value type="提示助词">
+		<meaning>表示概指事物。</meaning>
+		<example>
+			<jp>顔色があまりよくないですね。気分{でも}悪いんですか。</jp>
+			<cn>你脸色不好，是不是不舒服。</cn>
+		</example>
+		<example>
+			<jp>まだ時間がありますから、コーヒー{でも}読みましょうか。</jp>
+			<cn>还有时间，喝杯咖啡怎么样？</cn>
+		</example>
+		<example>
+			<jp>お母さんに{でも}相談してみたらどうですか。</jp>
+			<cn>或者和你母亲商量一下怎么样？</cn>
+		</example>
+	</value>
+
+</basic>

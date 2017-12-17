@@ -1,0 +1,112 @@
+<basic name="と">
+	<name-hence>とは</name-hence>
+	<name-hint>とも</name-hint>
+	<value type="补格助词">
+		<meaning>表示动作行为的共同者。</meaning>
+		<example>
+			<jp>昨日友達{と}一緒に映画を見ましたか。</jp>
+			<cn>昨天和朋友一起看电影了吗？</cn>
+		</example>
+		<example>
+			<jp>李さん{と}会話の練習をしました。</jp>
+			<cn>和小李练了会话。</cn>
+		</example>
+	</value>
+	
+	<value type="补格助词">
+		<meaning>表示比较对象。</meaning>
+		<example>
+			<jp>これと前のもの{と}違います。</jp>
+			<cn>这和前面那个不一样。</cn>
+		</example>
+		<example>
+			<jp>わたし{と}同じ考えの人はいますか。</jp>
+			<cn>有没有与我持相同想法的人？</cn>
+		</example>
+	</value>
+	
+	<value type="宾格助词">
+		<meaning>表示思考、决定内容。</meaning>
+		<example>
+			<jp>前からあなたに説明したい{と}思っていました。</jp>
+			<cn>我早就想对你说明了。</cn>
+		</example>
+		<example>
+			<jp>彼女は十時ごろ電話をする{と}言いました。</jp>
+			<cn>她说十点左右打电话。</cn>
+		</example>
+		<example>
+			<jp>田中さんは今日はいい天気だ{と}思いました。</jp>
+			<cn>田中以为今天是个好天气。</cn>
+		</example>
+		<example>
+			<jp>明日、朝が早いから今日は早く寝よう{と}思います。</jp>
+			<cn>明天早晨起得早，所以我想今天早点睡。</cn>
+		</example>
+		<example>
+			<jp>将来、教師になろう{と}考えています。</jp>
+			<cn>我想将来当个教师。</cn>
+		</example>
+	</value>
+	
+	<value type="宾格助词">
+		<meaning>表示描述的内容。</meaning>
+		<example>
+			<jp>この町の名前は「ホンチャオ」{と}言います。</jp>
+			<cn>这座镇名叫“虹桥”。</cn>
+		</example>
+		<example>
+			<jp>「午睡」は日本語で「昼寝」{と}書きます。</jp>
+			<cn>“午睡”日语写作“昼寝”。</cn>
+		</example>
+		<example>
+			<jp>これはなん{と}いう花ですか。</jp>
+			<cn>这花叫什么？</cn>
+		</example>
+		<example>
+			<jp>「一月」は「いちがつ」{と}読みますが、「いちげつ」{とは}読みません。</jp>
+			<cn>“一月”可读作“いちがつ”，但不可读作“いちげつ”。</cn>
+		</example>
+		<example>
+			<jp>「月」は「げつ」{と}読みますが、「つき」{とも}読みます。</jp>
+			<cn>“月”读作“げつ”，也读作“つき”。</cn>
+		</example>
+	</value>
+	
+	<value type="宾格助词">
+		<meaning>表示引用的内容。</meaning>
+		<example>
+			<jp>先生は「お名前は何と言いますか」{と}わたしに聞きました。</jp>
+			<cn>老师问我：“你的名字叫什么？”</cn>
+		</example>
+		<example>
+			<jp>木村さんは「明日早く学校に来てください」{と}田中さんに言いました。</jp>
+			<cn>木村对田中说：“明天请早点来学校。”</cn>
+		</example>
+	</value>
+
+	<value type="宾格助词">
+		<meaning>表示结果。</meaning>
+		<example>
+			<jp>焼け野原{と}なります。</jp>
+			<cn>变为一片被火烧光之地。</cn>
+		</example>
+	</value>
+	
+	<value type="并列助词">
+		<meaning>表示并列，相当于“和”。</meaning>
+		<example>
+			<jp>それはお兄さん{と}お姉さんの写真ですか。</jp>
+			<cn>这是你哥哥和姐姐的照片吗？</cn>
+		</example>
+		<example>
+			<jp>李さん{と}魯さんは日本語課の学生です。</jp>
+			<cn>小李和小鲁是日语专业的学生。</cn>
+		</example>
+		<example>
+			<jp>中国{と}日本{と}、どちらが広いですか。</jp>
+			<cn>中国和日本哪个辽阔？</cn>
+		</example>
+	</value>
+
+</basic>
