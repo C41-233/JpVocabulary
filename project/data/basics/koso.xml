@@ -1,0 +1,13 @@
+<basic name="こそ">
+	<value type="提示助词">
+		<meaning>表示强调。</meaning>
+		<example>
+			<jp>これ{こそ}ほんとうの日本料理です。</jp>
+			<cn>这才是真正的日本料理。</cn>
+		</example>
+		<example>
+			<jp>かれと{こそ}仲良くすべきです。</jp>
+			<cn>我该和他搞好关系的。</cn>
+		</example>
+	</value>
+</basic>

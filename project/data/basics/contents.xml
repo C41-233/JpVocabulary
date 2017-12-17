@@ -1,14 +1,14 @@
 <contents>
 	<group name="助词">
 		<content value="ka" name="か"/>
-		<content value="ga" name="が/は/も"/>
-		<content value="kara" name="から/からは/からも"/>
+		<content value="ga" name="が"/>
+		<content value="kara" name="から"/>
 		<content value="kurai" name="くらい/ぐらい"/>
 		<content value="koso" name="こそ"/>
 		<content value="dake" name="だけ"/>
 		<content value="dakedeha" name="だけでは"/>
 		<content value="dakeni" name="だけに"/>
-		<content value="de" name="で/では/でも"/>
+		<content value="de" name="で"/>
 		<content value="demo" name="でも"/>
 		<content value="to" name="と/とは/とも"/>
 		<content value="toha" name="とは"/>

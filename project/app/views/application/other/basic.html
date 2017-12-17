@@ -3,12 +3,7 @@
 #{title index.name/}
 
 #{javascript "words/basic.js"/}
-
-#{stylesheet}
-	.target{
-		color:	red;
-	}
-#{/stylesheet}
+#{stylesheet "words/basic.css"/}
 
 #{body}
 
@@ -32,16 +27,24 @@
 			#{/list}
 		</div>
 		<div class="col-lg-9 pre-hide" id="data-body">
+			<h3>${index.name}</h3>
+			<h3>${data?.hence}</h3>
+			<h3>${data?.hint}</h3>
+			<hr/>
 			#{if data}
 				#{list items:data.values, as:'value'}
-					<div>【${value.type}】</div>
-					<div>${value.meaning}</div>
-					#{list items:value.examples, as:'example'}
-						<div>
-							<span class="example-sentence">${example.jp}</span>
-							<span>（${example.cn}）</span>
+					<div class="div-block">
+						<div class="div-type">【${value.type}】</div>
+						<div>${value.meaning}</div>
+						<div class="div-examples">
+						#{list items:value.examples, as:'example'}
+							<div>
+								<span class="example-sentence font-jp">${example.jp}</span>
+								<span>（${example.cn}）</span>
+							</div>
+						#{/list}
 						</div>
-					#{/list}
+					</div>
 				#{/list}
 			#{/if}
 		</div>

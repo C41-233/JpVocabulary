@@ -1,0 +1,18 @@
+<basic name="だけに">
+	<value type="副助词">
+		<meaning>表示前提条件下的相应结果，相当于“正因为”。</meaning>
+		<example>
+			<jp>有名な大学{だけに}、入るのも難しいです。</jp>
+			<cn>正因为是名牌大学，才难考上。</cn>
+		</example>
+		<example>
+			<jp>日本人の先生に日本語を習った{だけに}、李さんの発音はとてもきれいです。</jp>
+			<cn>正因为是向日本老师学的日语，小李的发音很好。</cn>
+		</example>
+		<example>
+			<jp>値段が高い{だけに}物もいいです。</jp>
+			<cn>正因为价钱贵，所以东西也好。</cn>
+		</example>
+	</value>
+
+</basic>

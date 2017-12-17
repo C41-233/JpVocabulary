@@ -1,0 +1,112 @@
+<basic name="で">
+	<name-hence>では</name-hence>
+	<name-hint>でも</name-hint>
+	<value type="补格助词">
+		<meaning>表示手段、材料、方式。</meaning>
+		<example>
+			<jp>ラジオ{で}日本語を勉強します。</jp>
+			<cn>跟着广播学日语。</cn>
+		</example>
+		<example>
+			<jp>大きな声{で}読んでもかまいませんか。</jp>
+			<cn>大声念没关系吗？</cn>
+		</example>
+		<example>
+			<jp>予め電話{で}教えてください。</jp>
+			<cn>请预先打个电话告诉我。</cn>
+		</example>
+		<example>
+			<jp>二人{で}食事をしました。</jp>
+			<cn>两个人一起吃了饭。</cn>
+		</example>
+	</value>
+	
+	<value type="补格助词">
+		<meaning>表示交通手段。</meaning>
+		<example>
+			<jp>昨日バス{で}家へ帰りました。</jp>
+			<cn>昨天坐公交车回家。</cn>
+		</example>
+	</value>
+	
+	<value type="补格助词">
+		<meaning>表示价值限度。</meaning>
+		<example>
+			<jp>これは千円{で}買ったのです。</jp>
+			<cn>这是用一千元买的。</cn>
+		</example>
+	</value>
+	
+	<value type="补格助词">
+		<meaning>表示时间限度。</meaning>
+		<example>
+			<jp>夏休みは明日{で}終わります。</jp>
+			<cn>暑假明天就结束了。</cn>
+		</example>
+	</value>
+	
+	<value type="补格助词">
+		<meaning>表示程度。</meaning>
+		<example>
+			<jp>牛丼はこれ{で}できあがりました。</jp>
+			<cn>牛肉盖浇饭这就烧好了。</cn>
+		</example>
+	</value>
+	
+	<value type="补格助词">
+		<meaning>表示比例基准，在两组数量词之间。</meaning>
+		<example>
+			<jp>この鉛筆は三本{で}百円でう。</jp>
+			<cn>这种铅笔三支一百元。</cn>
+		</example>
+	</value>
+	
+	<value type="补格助词">
+		<meaning>表示事件、动作发生的场所。</meaning>
+		<example>
+			<jp>わたしはよく閲覧室{で}雑誌や新聞を読みます。</jp>
+			<cn>我常在阅览室看杂志、报纸等。</cn>
+		</example>
+	</value>
+	
+	<value type="补格助词">
+		<meaning>表示比较范围。</meaning>
+		<example>
+			<jp>これは学校{で}一番きれいな建物です。</jp>
+			<cn>这是学校最漂亮的大楼。</cn>
+		</example>
+		<example>
+			<jp>学生の寮{で}この部屋は一番大きいです。</jp>
+			<cn>学生宿舍中这间屋子是最大的。</cn>
+		</example>
+		<example>
+			<jp>上海{では}この建物が一番高いです。</jp>
+			<cn>在上海这幢楼是最高的了。</cn>
+		</example>
+		<example>
+			<jp>スポーツと楽器と{では}、どちらが苦手ですか。</jp>
+			<cn>运动和乐器，你更不擅长哪个？</cn>
+		</example>
+	</value>
+	
+	<value type="补格助词">
+		<meaning>表示原因、理由。</meaning>
+		<example>
+			<jp>彼は大学を受験するつもり{で}北京へ出ました。</jp>
+			<cn>他上北京打算报考大学。</cn>
+		</example>
+		<example>
+			<jp>最近試験{で}忙しかったんです。</jp>
+			<cn>最近因为考试很忙。</cn>
+		</example>
+		<example>
+			<jp>出張{で}北京へ行きました。</jp>
+			<cn>因为出差去了北京。</cn>
+		</example>
+		<example>
+			<jp>あの人は病気{で}三十五歳で死んでしまいました。</jp>
+			<cn>他三十五岁就病逝了。</cn>
+		</example>
+	</value>
+
+</basic>

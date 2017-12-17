@@ -8,6 +8,7 @@ import java.util.Objects;
 import base.utility.linq.Linq;
 import base.xml.XmlListClass;
 import base.xml.XmlReader;
+import base.xml.XmlTag;
 import core.controller.HtmlControllerBase;
 import core.logger.Logs;
 
@@ -62,6 +63,10 @@ public class Basic extends HtmlControllerBase{
 	
 	private static class BasicType{
 		public String name;
+		@XmlTag("name-hence")
+		public String hence;
+		@XmlTag("name-hint")
+		public String hint;
 		
 		@XmlListClass(ValueType.class)
 		public List<ValueType> values = new ArrayList<>();

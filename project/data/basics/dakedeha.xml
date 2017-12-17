@@ -1,0 +1,13 @@
+<basic name="だけでは">
+	<value type="副助词">
+		<meaning>表示在某种限定情况下出现否定的结果，后接否定。</meaning>
+		<example>
+			<jp>あなたひとり{だけでは}無理でしょう。</jp>
+			<cn>就你一个人不行吧。</cn>
+		</example>
+		<example>
+			<jp>口で言う{だけでは}何にもなりせん。実際にやってみなければだめです。</jp>
+			<cn>光嘴上说是无济于事的，必须要实际的做一做。</cn>
+		</example>
+	</value>
+</basic>

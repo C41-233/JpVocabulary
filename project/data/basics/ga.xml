@@ -1,4 +1,6 @@
-<basic name="が/は/も">
+<basic name="が">
+	<name-hence>は</name-hence>
+	<name-hint>も</name-hint>
 	<value type="主格助词">
 		<meaning>表示客观描述的主语。</meaning>
 		<example>
@@ -44,7 +46,7 @@
 	</value>
 	
 	<value type="主格助词">
-		<meaning>构成疑问词的主语</meaning>
+		<meaning>构成疑问词的主语。</meaning>
 		<example>
 			<jp>何月{が}一番暑いですか。</jp>
 			<cn>几月份最热？</cn>
@@ -60,7 +62,7 @@
 	</value>
 		
 	<value type="主格助词">
-		<meaning>对疑问词作主语的回答</meaning>
+		<meaning>对疑问词作主语的回答。</meaning>
 		<example>
 			<jp>どこがあなたたちの教室ですか。 ——ここ{が}わたしたちの教室です。</jp>
 			<cn>哪儿是你们的教室？ ——这儿是我们的教室。</cn>
@@ -68,7 +70,7 @@
 	</value>
 		
 	<value type="主格助词">
-		<meaning>表示从句的主语</meaning>
+		<meaning>表示从句的主语。</meaning>
 		<example>
 			<jp>あなた{が}歌っている歌は日本の歌ですか。</jp>
 			<cn>你正在唱的歌是日本歌吗？</cn>
@@ -80,7 +82,7 @@
 	</value>
 	
 	<value type="宾格助词">
-		<meaning>构成对象语，表示用言描述对象</meaning>
+		<meaning>构成对象语，表示用言描述对象。</meaning>
 		<example>
 			<jp>彼は納豆や梅干{が}嫌いです。</jp>
 			<cn>他讨厌纳豆和梅子。</cn>

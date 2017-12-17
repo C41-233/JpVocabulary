@@ -1,0 +1,48 @@
+<basic name="から">
+	<name-hence>からは</name-hence>
+	<name-hint>からも</name-hint>
+	<value type="补格助词">
+		<meaning>表示时间起点。</meaning>
+		<example>
+			<jp>毎晩七時{から}九時半まで勉強します。</jp>
+			<cn>每天晚上七点到九点半学习。</cn>
+		</example>
+		<example>
+			<jp>魯さんの学校は何時{から}ですか。</jp>
+			<cn>小鲁的学校是几点开始上课？</cn>
+		</example>
+	</value>
+	
+	<value type="补格助词">
+		<meaning>表示空间起点。</meaning>
+		<example>
+			<jp>大学{から}寮まで十分かかります。</jp>
+			<cn>从大学到宿舍要十分钟。</cn>
+		</example>
+		<example>
+			<jp>わたしが乗るバスは上海駅{から}来ます。</jp>
+			<cn>我要坐的公交车是从上海站开来的。</cn>
+		</example>
+	</value>
+	
+	<value type="补格助词">
+		<meaning>表示授予者、来源。</meaning>
+		<example>
+			<jp>牧野という人{から}あなたに電話がありました。</jp>
+			<cn>有位叫牧野的给你打过电话。</cn>
+		</example>
+		<example>
+			<jp>今お父さん{から}電話をもらいました。</jp>
+			<cn>刚才接到了父亲的来电。</cn>
+		</example>
+		<example>
+			<jp>昨日山田先生{から}手紙をいただきました。</jp>
+			<cn>昨天我收到了山田老师的来信。</cn>
+		</example>
+		<example>
+			<jp>わたしは彼{から}多くのことを教えられました。</jp>
+			<cn>我从他那儿学到了很多东西。</cn>
+		</example>
+	</value>
+
+</basic>

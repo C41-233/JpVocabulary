@@ -1,0 +1,38 @@
+<basic name="くらい/ぐらい">
+	<value type="副助词">
+		<meaning>表示概数，大约的基准，接数(量)词。</meaning>
+		<example>
+			<jp>この建物は二十階{くらい}ありますね。</jp>
+			<cn>这幢楼有二十层左右吧。</cn>
+		</example>
+		<example>
+			<jp>あの人は日本に三年{ぐらい}居ます。</jp>
+			<cn>他要在日本呆三年左右。</cn>
+		</example>
+	</value>
+	
+	<value type="副助词">
+		<meaning>表示程度。</meaning>
+		<example>
+			<jp>ちょっと{くらい}休んでもかまわないでしょう。</jp>
+			<cn>可以稍微休息一下吧。</cn>
+		</example>
+		<example>
+			<jp>少し{ぐらい}難しくても大丈夫です。</jp>
+			<cn>稍微有点难也没问题。</cn>
+		</example>
+		<example>
+			<jp>ちょっと風邪を引いた{くらい}で、心配することはありません。</jp>
+			<cn>只是有点感冒，没什么可担心的。</cn>
+		</example>
+		<example>
+			<jp>駅までは歩いて行ける{くらい}近いです。</jp>
+			<cn>到车站近得可以走着去。</cn>
+		</example>
+		<example>
+			<jp>誰でもできる{くらい}簡単です。</jp>
+			<cn>简单得谁都会做。</cn>
+		</example>
+	</value>
+
+</basic>
