@@ -1,6 +1,6 @@
 package base.core;
 
-public final class Objects {
+public final class Core {
 
 	@SuppressWarnings("unchecked")
 	public static <V, T> V cast(T obj) {
@@ -22,6 +22,11 @@ public final class Objects {
 		} catch (ClassCastException e) {
 			return null;
 		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static <E extends Throwable> E throwException(Throwable e) throws E{
+		throw (E) e;
 	}
 	
 }

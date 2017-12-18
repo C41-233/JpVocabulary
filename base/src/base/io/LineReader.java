@@ -5,6 +5,7 @@ import java.nio.file.Path;
 import java.util.Scanner;
 
 import base.core.ICloseable;
+import base.core.Core;
 
 public class LineReader implements ICloseable{
 
@@ -25,7 +26,7 @@ public class LineReader implements ICloseable{
 			this.skip = (mask & SkipEmpty) != 0;
 			this.trim = (mask & Trim) != 0;
 		} catch (IOException e) {
-			throw new RuntimeIOException(e);
+			throw Core.throwException(e);
 		}
 	}
 	

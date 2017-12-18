@@ -1,13 +1,14 @@
 package core.logger;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.apache.log4j.AppenderSkeleton;
 import org.apache.log4j.spi.LoggingEvent;
 import org.joda.time.DateTime;
 
+import base.core.Core;
 import base.io.FileWriter;
-import base.io.RuntimeIOException;
 import base.utility.Strings;
 
 public class JpFileAppender extends AppenderSkeleton {
@@ -53,7 +54,7 @@ public class JpFileAppender extends AppenderSkeleton {
 		}
 		
 		if(folder.isDirectory() == false) {
-			throw new RuntimeIOException("无法创建目录："+path);
+			Core.throwException(new IOException("无法创建目录："+path));
 		}
 		
 		DateTime now = DateTime.now();

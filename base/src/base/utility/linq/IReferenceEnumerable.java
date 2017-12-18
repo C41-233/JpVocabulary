@@ -194,7 +194,7 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 			list.add(obj);
 		}
 		
-		return base.core.Objects.cast(map);
+		return base.core.Core.cast(map);
 	}
 	
 	public default void foreach(IAction<? super T> action) {

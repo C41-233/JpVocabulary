@@ -8,6 +8,7 @@ import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 
 import base.core.ICloseable;
+import base.core.Core;
 
 public class FileWriter implements ICloseable{
 
@@ -17,7 +18,7 @@ public class FileWriter implements ICloseable{
 		try {
 			this.os = new OutputStreamWriter(new FileOutputStream(file, append), charset);
 		} catch (FileNotFoundException | UnsupportedEncodingException e) {
-			throw new RuntimeIOException(e);
+			throw Core.throwException(e);
 		} 
 	}
 	
@@ -33,7 +34,7 @@ public class FileWriter implements ICloseable{
 		try {
 			os.write(s);
 		} catch (IOException e) {
-			throw new RuntimeIOException(e);
+			Core.throwException(e);
 		}
 	}
 	
@@ -74,7 +75,7 @@ public class FileWriter implements ICloseable{
 		try {
 			os.close();
 		} catch (IOException e) {
-			throw new RuntimeIOException(e);
+			Core.throwException(e);
 		}
 	}
 
@@ -82,7 +83,7 @@ public class FileWriter implements ICloseable{
 		try {
 			this.os.flush();
 		} catch (IOException e) {
-			throw new RuntimeIOException(e);
+			Core.throwException(e);
 		}
 	}
 

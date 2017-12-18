@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import base.core.Objects;
+import base.core.Core;
 
 public class TestObjects {
 
@@ -12,13 +12,13 @@ public class TestObjects {
 	public void testAs() {
 		{
 			Object src = "123";
-			String dst = Objects.as(String.class, src);
+			String dst = Core.as(String.class, src);
 			assertEquals(src, dst);
 		}
 		
 		{
 			Object src = 123;
-			String dst = Objects.as(String.class, src);
+			String dst = Core.as(String.class, src);
 			assertEquals(null, dst);
 		}
 	}

@@ -5,15 +5,15 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashSet;
 
+import base.core.Core;
 import base.io.LineReader;
-import base.io.RuntimeIOException;
 
 class IndexManagerImplement implements IIndexManager{
 
 	public IndexManagerImplement(String filename) {
 		this.file = new File(filename);
 		if(file.exists() == false || file.isFile() == false) {
-			throw new RuntimeIOException(new FileNotFoundException());
+			Core.throwException(new FileNotFoundException());
 		}
 	}
 	

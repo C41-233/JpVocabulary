@@ -3,7 +3,7 @@ package controllers.adjectives;
 import java.util.Arrays;
 import java.util.List;
 
-import base.core.Objects;
+import base.core.Core;
 import base.utility.linq.Linq;
 import core.controller.AjaxControllerBase;
 import core.controller.validation.annotation.Array;
@@ -21,8 +21,8 @@ public class AdjectiveWordAPI extends AjaxControllerBase{
 		@Array(duplicate=false) String[] types
 	) {
 		//词性必须全部合法
-		if(Linq.from(types).isExist(s->Objects.asEnum(AdjectiveWordType.class, s)==null)) {
-			badRequest("不合法的词性：%s", Linq.from(types).findFirst(s->Objects.asEnum(AdjectiveWordType.class, s)==null));
+		if(Linq.from(types).isExist(s->Core.asEnum(AdjectiveWordType.class, s)==null)) {
+			badRequest("不合法的词性：%s", Linq.from(types).findFirst(s->Core.asEnum(AdjectiveWordType.class, s)==null));
 		}
 		List<String> valuesList = Arrays.asList(values);
 		List<String> meaningsList = Arrays.asList(meanings);
@@ -48,7 +48,7 @@ public class AdjectiveWordAPI extends AjaxControllerBase{
 	}
 	
 	public static void updateType(@Id long id, @Required String type, @Required boolean value) {
-		AdjectiveWordType enumType = Objects.asEnum(AdjectiveWordType.class, type);
+		AdjectiveWordType enumType = Core.asEnum(AdjectiveWordType.class, type);
 		if(enumType == null) {
 			badRequest("不合法的词性：%s", type);
 		}

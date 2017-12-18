@@ -1,6 +1,6 @@
 package controllers.notionals;
 
-import base.core.Objects;
+import base.core.Core;
 import core.controller.Route;
 import core.controller.RouteArgs;
 import core.controller.validation.annotation.Required;
@@ -18,7 +18,7 @@ public final class HiraganaWordIndex extends NotionalWordIndexBase{
 			index, 
 			"平假名词",
 			s -> NotionalWordsQueryLogic.findHiraganaWordValuesByIndex(s),
-			s -> Route.get(Objects.cast(request.controllerClass), "page", new RouteArgs().put("index", s))
+			s -> Route.get(Core.cast(request.controllerClass), "page", new RouteArgs().put("index", s))
 		);
 	}
 

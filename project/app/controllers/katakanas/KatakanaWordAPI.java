@@ -3,7 +3,7 @@ package controllers.katakanas;
 import java.util.Arrays;
 import java.util.List;
 
-import base.core.Objects;
+import base.core.Core;
 import base.utility.linq.Linq;
 import core.controller.AjaxControllerBase;
 import core.controller.validation.annotation.Array;
@@ -23,11 +23,11 @@ public class KatakanaWordAPI extends AjaxControllerBase{
 		@Required @StringValue String alias,
 		@Required String context
 	) {
-		if(Linq.from(types).isExist(s->Objects.asEnum(KatakanaWordType.class, s)==null)) {
-			badRequest("不合法的词性：%s", Linq.from(types).findFirst(s->Objects.asEnum(KatakanaWordType.class, s)==null));
+		if(Linq.from(types).isExist(s->Core.asEnum(KatakanaWordType.class, s)==null)) {
+			badRequest("不合法的词性：%s", Linq.from(types).findFirst(s->Core.asEnum(KatakanaWordType.class, s)==null));
 		}
 		
-		KatakanaWordContext contextEnum = Objects.asEnum(KatakanaWordContext.class, context);
+		KatakanaWordContext contextEnum = Core.asEnum(KatakanaWordContext.class, context);
 		if(contextEnum == null) {
 			badRequest("不合法的词源：%s", context);
 		}
@@ -61,7 +61,7 @@ public class KatakanaWordAPI extends AjaxControllerBase{
 		@Required String type,
 		@Required boolean value
 	) {
-		KatakanaWordType typeEnum = Objects.asEnum(KatakanaWordType.class, type);
+		KatakanaWordType typeEnum = Core.asEnum(KatakanaWordType.class, type);
 		if(typeEnum == null) {
 			badRequest("不合法的词性：%s", type);
 		}
@@ -80,7 +80,7 @@ public class KatakanaWordAPI extends AjaxControllerBase{
 		@Id long id,
 		@Required String context
 	) {
-		KatakanaWordContext contextEnum = Objects.asEnum(KatakanaWordContext.class, context);
+		KatakanaWordContext contextEnum = Core.asEnum(KatakanaWordContext.class, context);
 		if(contextEnum == null) {
 			badRequest("不合法的词源：%s", context);
 		}

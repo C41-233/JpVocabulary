@@ -3,7 +3,7 @@ package controllers.verbs;
 import java.util.Arrays;
 import java.util.List;
 
-import base.core.Objects;
+import base.core.Core;
 import base.utility.linq.Linq;
 import core.controller.AjaxControllerBase;
 import core.controller.validation.annotation.Array;
@@ -21,8 +21,8 @@ public class VerbWordAPI extends AjaxControllerBase{
 			@Array(duplicate=false, minLength=1) String[] types
 	) {
 		//词性必须全部合法
-		if(Linq.from(types).isExist(s->Objects.asEnum(VerbWordType.class, s)==null)) {
-			badRequest("不合法的词性：%s", Linq.from(types).findFirst(s->Objects.asEnum(VerbWordType.class, s)==null));
+		if(Linq.from(types).isExist(s->Core.asEnum(VerbWordType.class, s)==null)) {
+			badRequest("不合法的词性：%s", Linq.from(types).findFirst(s->Core.asEnum(VerbWordType.class, s)==null));
 		}
 		List<String> valuesList = Arrays.asList(values);
 		List<String> meaningsList = Arrays.asList(meanings);
@@ -40,7 +40,7 @@ public class VerbWordAPI extends AjaxControllerBase{
 	}
 
 	public static void updateType(@Id long id, @Required String type, @Required boolean value) {
-		VerbWordType enumType = Objects.asEnum(VerbWordType.class, type);
+		VerbWordType enumType = Core.asEnum(VerbWordType.class, type);
 		if(enumType == null) {
 			badRequest("不合法的词性：%s", type);
 		}

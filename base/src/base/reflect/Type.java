@@ -99,7 +99,7 @@ public class Type<T> {
 	
 	@Override
 	public boolean equals(Object other) {
-		return this.clazz.equals(other);
+		return this == other;
 	}
 	
 	@Override

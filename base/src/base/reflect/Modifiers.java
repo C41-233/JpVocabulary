@@ -107,6 +107,38 @@ public final class Modifiers {
 		return Modifier.isStatic(modifier);
 	}
 	
+	public static boolean isFinal(Class<?> clazz) {
+		return isFinal(clazz.getModifiers());
+	}
+	
+	public static boolean isFinal(Field field) {
+		return isFinal(field.getModifiers());
+	}
+	
+	public static boolean isFinal(Method method) {
+		return isFinal(method.getModifiers());
+	}
+	
+	public static boolean isFinal(int modifier) {
+		return Modifier.isFinal(modifier);
+	}
+	
+	public static boolean isSynchronized(Method method) {
+		return isSynchronized(method.getModifiers());
+	}
+	
+	public static boolean isSynchronized(int modifier) {
+		return Modifier.isSynchronized(modifier);
+	}
+	
+	public static boolean isVolatile(Field field) {
+		return isVolatile(field.getModifiers());
+	}
+	
+	public static boolean isVolatile(int modifier) {
+		return Modifier.isVolatile(modifier);
+	}
+	
 	public static boolean isAbstract(Class<?> clazz) {
 		return isAbstract(clazz.getModifiers());
 	}

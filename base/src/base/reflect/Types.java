@@ -59,12 +59,12 @@ public final class Types {
 		register_box(void.class, Void.class);
 	}
 	
-	public static Class toBoxClass(Class type) {
+	public static Class<?> toBoxClass(Class<?> type) {
 		Class cl = primitiveToBox.get(type);
 		return cl != null ? cl : type;
 	}
 	
-	public static Class toPrimitiveClass(Class type) {
+	public static Class<?> toPrimitiveClass(Class<?> type) {
 		Class cl = boxToPrimitive.get(type);
 		return cl != null ? cl : type;
 	}

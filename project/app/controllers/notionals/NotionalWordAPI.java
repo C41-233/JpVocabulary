@@ -3,7 +3,7 @@ package controllers.notionals;
 import java.util.Arrays;
 import java.util.List;
 
-import base.core.Objects;
+import base.core.Core;
 import base.utility.linq.Linq;
 import core.controller.AjaxControllerBase;
 import core.controller.validation.annotation.Array;
@@ -22,8 +22,8 @@ public final class NotionalWordAPI extends AjaxControllerBase{
 	) {
 		
 		//词性必须全部合法
-		if(Linq.from(types).isExist(s->Objects.asEnum(NotionalWordType.class, s)==null)) {
-			badRequest("不合法的词性：%s", Linq.from(types).findFirst(s->Objects.asEnum(NotionalWordType.class, s)==null));
+		if(Linq.from(types).isExist(s->Core.asEnum(NotionalWordType.class, s)==null)) {
+			badRequest("不合法的词性：%s", Linq.from(types).findFirst(s->Core.asEnum(NotionalWordType.class, s)==null));
 		}
 		List<String> valuesList = Arrays.asList(values);
 		List<String> meaingsList = Arrays.asList(meanings);
@@ -49,7 +49,7 @@ public final class NotionalWordAPI extends AjaxControllerBase{
 	}
 	
 	public static void updateType(@Id long id, @Required String type, @Required boolean value) {
-		NotionalWordType enumType = Objects.asEnum(NotionalWordType.class, type);
+		NotionalWordType enumType = Core.asEnum(NotionalWordType.class, type);
 		if(enumType == null) {
 			badRequest("不合法的词性：%s", type);
 		}
