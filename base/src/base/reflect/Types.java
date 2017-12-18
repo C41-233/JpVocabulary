@@ -3,6 +3,7 @@ package base.reflect;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 
+import base.core.Core;
 import base.utility.cache.WeakMemoryCache;
 
 public final class Types {
@@ -26,7 +27,7 @@ public final class Types {
 		try {
 			return typeOf(Class.forName(clazz));
 		} catch (ClassNotFoundException e) {
-			throw new ReflectException(e);
+			throw Core.throwException(e);
 		}
 	}
 

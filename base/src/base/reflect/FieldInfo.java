@@ -3,6 +3,8 @@ package base.reflect;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 
+import base.core.Core;
+
 public class FieldInfo {
 
 	private final Field field;
@@ -35,7 +37,7 @@ public class FieldInfo {
 		try {
 			field.set(obj, value);
 		} catch (IllegalArgumentException | IllegalAccessException e) {
-			throw new ReflectException(e);
+			Core.throwException(e);
 		}
 	}
 

@@ -3,6 +3,7 @@ package base.reflect;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 
+import base.core.Core;
 import base.core.EnumOutOfRangeException;
 import base.utility.collection.list.TypeArrayList;
 
@@ -36,7 +37,7 @@ public class Type<T> {
 			constructor.setAccessible(true);
 			return constructor.newInstance();
 		} catch (ReflectiveOperationException e) {
-			throw new ReflectException(e);
+			throw Core.throwException(e);
 		}
 	}
 
