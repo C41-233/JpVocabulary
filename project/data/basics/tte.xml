@@ -1,0 +1,34 @@
+<basic name="って">
+	<value type="补格助词">
+		<meaning>表示传闻，转述。</meaning>
+		<example>
+			<jp>大田、今度中国へ転勤だ{って}。</jp>
+			<cn>听说大田要调到中国去工作。</cn>
+		</example>
+		<example>
+			<jp>もう帰ってもいい{って}。</jp>
+			<cn>说是可以回去了。）</cn>
+		</example>
+	</value>
+	
+	<value type="宾格助词">
+		<meaning>表示所说，所谓。</meaning>
+		<example>
+			<jp>田中先生{って}何の先生ですか。</jp>
+			<cn>所说的田中老师是什么科目的老师呢？</cn>
+		</example>
+		<example>
+			<jp>人間{って}分からないものです。</jp>
+			<cn>人类说起来真是看不透啊。</cn>
+		</example>
+	</value>
+	
+	<value type="宾格助词">
+		<meaning>表示引用、思考、决定、描述的内容，用于口语。</meaning>
+		<example>
+			<jp>もう来ないだろう{って}思ったのですけど。</jp>
+			<cn>我想不会来了吧，可是…</cn>
+		</example>
+	</value>
+
+</basic>

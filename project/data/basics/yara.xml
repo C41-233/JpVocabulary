@@ -1,0 +1,26 @@
+<basic name="やら">
+	<value type="并列助词">
+		<meaning>表示并存。</meaning>
+		<example>
+			<jp>お花{やら}お茶やらを習う。</jp>
+			<cn>学习花道啦，茶道啦。</cn>
+		</example>
+		<example>
+			<jp>嬉しい{やら}悲しいやらで複雑な気持ち。</jp>
+			<cn>悲喜交集心情复杂。</cn>
+		</example>
+	</value>
+
+	<value type="副助词">
+		<meaning>表示不确定的疑问。</meaning>
+		<example>
+			<jp>だれ{やら}笑っているぞ。</jp>
+			<cn>有人在笑呢。</cn>
+		</example>
+		<example>
+			<jp>山田と{やら}いう人が訪ねてきた。</jp>
+			<cn>有个叫什么山田的来找你。</cn>
+		</example>
+	</value>
+
+</basic>

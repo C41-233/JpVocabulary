@@ -1,0 +1,21 @@
+<basic name="しか">
+	<value type="提示助词">
+		<meaning>表示只有，仅有。后续否定，代替助词が和を。</meaning>
+		<example>
+			<jp>彼には一度{しか}会いませんでした。</jp>
+			<cn>我只见过他一次。</cn>
+		</example>
+		<example>
+			<jp>この花は寒いところに{しか}咲きません。</jp>
+			<cn>这种花只在寒冷的地方开。</cn>
+		</example>
+		<example>
+			<jp>こんな話ができる友達はあなた{しか}いません。</jp>
+			<cn>可以谈这些话的朋友只有你一个人。</cn>
+		</example>
+		<example>
+			<jp>李さんはお茶{しか}飲みません。</jp>
+			<cn>小李只喝茶。</cn>
+		</example>
+	</value>
+</basic>

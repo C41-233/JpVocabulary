@@ -1,0 +1,21 @@
+<basic name="より">
+	<value type="补格助词">
+		<meaning>表示比较的对象。</meaning>
+		<example>
+			<jp>スリラー映画{より}人間の暖かい心を伝える映画のほうが好きです。</jp>
+			<cn>与惊悚片相比，我更喜欢描述人间温暖的电影。</cn>
+		</example>
+	</value>
+	
+	<value type="补格助词">
+		<meaning>表示除此之外。</meaning>
+		<example>
+			<jp>父が病気でなくなったので、長男の私は学校をやめて働く{より}しかたがありません。</jp>
+			<cn>父亲病故了，作为长子的我只好休学工作。</cn>
+		</example>
+		<example>
+			<jp>こうする{より}しかたがありません。</jp>
+			<cn>除此以外没有别的办法了。</cn>
+		</example>
+	</value>
+</basic>

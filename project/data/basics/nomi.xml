@@ -1,0 +1,13 @@
+<basic name="のみ">
+	<value type="副助词">
+		<meaning>只，仅。</meaning>
+		<example>
+			<jp>学歴{のみ}を問題にすべきでない。</jp>
+			<cn>不应该光考虑学历问题。</cn>
+		</example>
+		<example>
+			<jp>静かでただ波の音{のみ}聞こえる。</jp>
+			<cn>寂静得只能听到涛声。</cn>
+		</example>
+	</value>
+</basic>

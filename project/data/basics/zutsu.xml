@@ -1,0 +1,22 @@
+<basic name="ずつ">
+	<value type="副助词">
+		<meaning>表示等量的反复。</meaning>
+		<example>
+			<jp>病気もすこし{ずつ}よくなりました。</jp>
+			<cn>病也一点点好起来了。</cn>
+		</example>
+		<example>
+			<jp>毎日一時間{ずつ}運動をします。</jp>
+			<cn>每天运动一小时。</cn>
+		</example>
+	</value>
+
+	<value type="副助词">
+		<meaning>表示均摊，每，各。</meaning>
+		<example>
+			<jp>一人に三つ{ずつ}渡します。</jp>
+			<cn>每人给三个。</cn>
+		</example>
+	</value>
+
+</basic>

@@ -1,0 +1,13 @@
+<basic name="さえ">
+	<value type="提示助词">
+		<meaning>表示只要条件具备。。</meaning>
+		<example>
+			<jp>雨{さえ}降らなければ行くつもりです。</jp>
+			<cn>只要不下雨就去。</cn>
+		</example>
+		<example>
+			<jp>あなた{さえ}いれば寂しくありません。</jp>
+			<cn>只要有你在就不寂寞。</cn>
+		</example>
+	</value>
+</basic>

@@ -33,7 +33,7 @@
 		<content value="ya" name="や"/>
 		<content value="yara" name="やら"/>
 		<content value="yori" name="より"/>
-		<content value="wo" name="を/は/も"/>
+		<content value="wo" name="を"/>
 		<content value="tte" name="って"/>
 	</group>
 	<group name="接续助词">

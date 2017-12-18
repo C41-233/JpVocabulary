@@ -1,0 +1,71 @@
+<basic name="を">
+	<name-hence>は</name-hence>
+	<name-hint>も</name-hint>
+	<value type="宾格助词">
+		<meaning>表示他动词宾语。</meaning>
+		<example>
+			<jp>李さんは毎朝七時半ごろ学生の食堂で朝ご飯{を}食べます。</jp>
+			<cn>小李每天早上七点半左右在学生食堂吃早饭。</cn>
+		</example>
+		<example>
+			<jp>李さんは毎日日本語{を}朗読します。</jp>
+			<cn>小李每天朗读日语。</cn>
+		</example>
+		<example>
+			<jp>三月三日にする女の子の行事{を}ひな祭りと言います。</jp>
+			<cn>我们把三月三日举行的女孩子的活动叫做偶人节。</cn>
+		</example>
+		<example>
+			<jp>肉まんじゅう{は}よく食べます。うどん{は}あまり食べません。</jp>
+			<cn>肉包子倒是常吃，面条可不常吃。</cn>
+		</example>
+		<example>
+			<jp>日本語の雑誌{も}時々読みます。</jp>
+			<cn>日语杂志也常常看。</cn>
+		</example>
+	</value>
+	
+	<value type="补格助词">
+		<meaning>表示出发、离开、经过的场所。</meaning>
+		<example>
+			<jp>わたしは毎朝七時に家{を}出ます。</jp>
+			<cn>我每天七点离开家。</cn>
+		</example>
+		<example>
+			<jp>飛行機が空{を}飛んでいます。</jp>
+			<cn>飞机在天上飞。</cn>
+		</example>
+		<example>
+			<jp>ある人は公園の中{を}散歩しながら、お花見をしています。</jp>
+			<cn>有人在公园里一边散步一边赏花。</cn>
+		</example>
+		<example>
+			<jp>このバスは駅前{を}通ります。</jp>
+			<cn>这辆公交车经过车站一带。</cn>
+		</example>
+		<example>
+			<jp>この道{を}まっすぐ行って、橋{を}渡ってください。</jp>
+			<cn>顺这条路一直走，再过那座桥。</cn>
+		</example>
+	</value>
+	
+	<value type="补格助词">
+		<meaning>表示离开的状态。</meaning>
+		<example>
+			<jp>わたしは来年大学{を}卒業します。</jp>
+			<cn>我明年大学毕业。</cn>
+		</example>
+	</value>
+	
+	<value type="补格助词">
+		<meaning>表示动作进行时的情况。</meaning>
+		<example>
+			<jp>雪の中{を}歩いて帰ります。</jp>
+			<cn>冒着雪走回家。</cn>
+		</example>
+		<example>
+			<jp>お忙しい中{を}来ていただいておそれいります。</jp>
+			<cn>请您从百忙中来真不好意思。</cn>
+		</example>
+	</value>
+</basic>

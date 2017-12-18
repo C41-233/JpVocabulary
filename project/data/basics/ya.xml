@@ -1,0 +1,9 @@
+<basic name="や">
+	<value type="并列助词">
+		<meaning>表示罗列，有诸如此类的含义。</meaning>
+		<example>
+			<jp>そこには本{や}ノートなどがあります。</jp>
+			<cn>那儿有书和本子等。</cn>
+		</example>
+	</value>
+</basic>
