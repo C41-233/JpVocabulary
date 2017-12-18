@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
-import base.reflect.TypeBox;
+import base.reflect.Types;
 import base.utility.Strings;
 import base.utility.generator.SequenceLongGenerator;
 import core.controller.validation.NoSuchValidationException;
@@ -72,7 +72,7 @@ public abstract class ControllerBase extends Controller{
 		
 		for(int i=0; i<parameters.length; i++) {
 			Parameter parameter = parameters[i];
-			Class parameterType = TypeBox.toBoxType(parameter.getType());
+			Class parameterType = Types.toBoxClass(parameter.getType());
 			String name = names[i];
 			String[] raw; 
 			if(parameterType.isArray()) {

@@ -5,8 +5,12 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
-public class Modifiers {
+public final class Modifiers {
 
+	private Modifiers() {
+		throw new StaticClassException();
+	}
+	
 	public static boolean isPublic(Class<?> clazz) {
 		return isPublic(clazz.getModifiers());
 	}
@@ -85,6 +89,22 @@ public class Modifiers {
 	
 	public static boolean isPrivate(int modifier) {
 		return Modifier.isPrivate(modifier);
+	}
+	
+	public static boolean isStatic(Class<?> clazz) {
+		return isStatic(clazz.getModifiers());
+	}
+	
+	public static boolean isStatic(Field field) {
+		return isStatic(field.getModifiers());
+	}
+	
+	public static boolean isStatic(Method method) {
+		return isStatic(method.getModifiers());
+	}
+	
+	public static boolean isStatic(int modifier) {
+		return Modifier.isStatic(modifier);
 	}
 	
 	public static boolean isAbstract(Class<?> clazz) {
