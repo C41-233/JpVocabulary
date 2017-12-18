@@ -1,0 +1,16 @@
+<basic name="までに">
+	<name-hence>までには</name-hence>
+	<name-hint>までにも</name-hint>
+	<value type="补格助词">
+		<meaning>表示最后期限。</meaning>
+		<example>
+			<jp>急げば、十二時{までには}着くでしょう。</jp>
+			<cn>抓紧点时间，十二点以前也许能到达。</cn>
+		</example>
+		<example>
+			<jp>この辞書は来週の水曜日{までに}返してください。</jp>
+			<cn>这本辞典请在下周三以前还给我。</cn>
+		</example>
+	</value>
+
+</basic>

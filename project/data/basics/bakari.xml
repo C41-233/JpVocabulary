@@ -1,0 +1,42 @@
+<basic name="ばかり">
+	<value type="副助词">
+		<meaning>表示大概的数量，接数量词。</meaning>
+		<example>
+			<jp>五千円{ばかり}貸してくれませんか。</jp>
+			<cn>能借我五千元吗？</cn>
+		</example>
+	</value>
+	
+	<value type="副助词">
+		<meaning>表示限定范围，只是，一直，一味地。</meaning>
+		<example>
+			<jp>小説{ばかり}読んでいます。</jp>
+			<cn>净是在看小说。</cn>
+		</example>
+		<example>
+			<jp>病気は悪くなる{ばかり}です。</jp>
+			<cn>病一味地恶化起来。</cn>
+		</example>
+		<example>
+			<jp>遊んで{ばかり}いないで、勉強しなさい。</jp>
+			<cn>不要老是贪玩，快去学习。</cn>
+		</example>
+	</value>
+	
+	<value type="副助词">
+		<meaning>表示刚刚完了，接过去式。</meaning>
+		<example>
+			<jp>昨日習った{ばかり}の単語を忘れました。</jp>
+			<cn>昨天刚学的单词忘了。</cn>
+		</example>
+		<example>
+			<jp>さっき食べた{ばかり}で、おなかがすいていません。</jp>
+			<cn>刚吃过，肚子不饿。</cn>
+		</example>
+		<example>
+			<jp>半年前に中国に来た{ばかり}なので、中国語はまだ話せません。</jp>
+			<cn>半年前刚来中国，所以还不会说中文。</cn>
+		</example>
+	</value>
+
+</basic>

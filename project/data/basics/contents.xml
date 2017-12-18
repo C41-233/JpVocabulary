@@ -15,10 +15,10 @@
 		<content value="toka" name="とか"/>
 		<content value="ha" name="は"/>
 		<content value="bakari" name="ばかり"/>
-		<content value="he" name="へ/へは/へも"/>
+		<content value="he" name="へ"/>
 		<content value="hodo" name="ほど"/>
-		<content value="made" name="まで/までは/までも"/>
-		<content value="madeni" name="までに/までには/までにも"/>
+		<content value="made" name="まで"/>
+		<content value="madeni" name="までに"/>
 		<content value="mo" name="も"/>
 		<content value="nara" name="なら"/>
 		<content value="nado" name="など/なんか"/>

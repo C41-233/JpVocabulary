@@ -1,0 +1,42 @@
+<basic name="は">
+	<value type="提示助词">
+		<meaning>提示主题，读作わ。</meaning>
+		<example>
+			<jp>これ{は}地図です。</jp>
+			<cn>这是地图。</cn>
+		</example>
+		<example>
+			<jp>ノート{は}机の上にあります。</jp>
+			<cn>练习本在桌上。</cn>
+		</example>
+		<example>
+			<jp>五年前ここ{は}図書館でした。</jp>
+			<cn>五年前这儿是图书馆。</cn>
+		</example>
+		<example>
+			<jp>今日{は}昨日より暑いです。</jp>
+			<cn>今天比昨天热。</cn>
+		</example>
+		<example>
+			<jp>わたしが昨日訪ねた友達{は}今日北京へ帰りました。</jp>
+			<cn>我昨天访问的那位朋友今天回北京去了。</cn>
+		</example>
+	</value>
+	
+	<value type="提示助词">
+		<meaning>表示对比，读作わ。</meaning>
+		<example>
+			<jp>昨日は寒く{は}ありませんでした。</jp>
+			<cn>昨天不冷。</cn>
+		</example>
+		<example>
+			<jp>よく散歩しますが、雨の日{は}しません。</jp>
+			<cn>经常散步，但是下雨天不去。</cn>
+		</example>
+		<example>
+			<jp>小野さんは今日{は}休みます。</jp>
+			<cn>小野女士今天休息。</cn>
+		</example>
+	</value>
+
+</basic>

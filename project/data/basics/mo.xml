@@ -1,0 +1,89 @@
+<basic name="も">
+	<value type="提示助词">
+		<meaning>主题兼提。</meaning>
+		<example>
+			<jp>これはレモンです。それ{も}レモンです。</jp>
+			<cn>这个是柠檬，那个也是柠檬。</cn>
+		</example>
+		<example>
+			<jp>父{も}いません。母{も}いません。</jp>
+			<cn>父亲不在，母亲也不在。</cn>
+		</example>
+	</value>
+	
+	<value type="提示助词">
+		<meaning>对比兼提。</meaning>
+		<example>
+			<jp>彼の家は駅からあまり遠く{も}近く{も}ありません。</jp>
+			<cn>他的家离火车站不远也不近。</cn>
+		</example>
+		<usage>
+			<value>…も…ば、…も…</value>
+			<meaning>表示既…又…。</meaning>
+			<example>
+				<jp>老人{も}いれば、若者{も}います。</jp>
+				<cn>既有老人，也有年轻人。</cn>
+			</example>
+			<example>
+				<jp>彼女は行くと{も}言わなければ、行かないと{も}言いませんでした。</jp>
+				<cn>她既不说去，也不说不去。</cn>
+			</example>
+		</usage>
+	</value>
+	
+	<value type="提示助词">
+		<meaning>表示全面肯定。</meaning>
+		<example>
+			<jp>どちら{も}好きです。</jp>
+			<cn>哪个都喜欢。</cn>
+		</example>
+		<example>
+			<jp>どの店{も}込んでいます。</jp>
+			<cn>每家店都挤满了人。</cn>
+		</example>
+	</value>
+	
+	<value type="提示助词">
+		<meaning>表示全面否定。</meaning>
+		<example>
+			<jp>部屋の中にはだれ{も}いません。</jp>
+			<cn>屋里没人。</cn>
+		</example>
+		<example>
+			<jp>今日は一銭{も}使いませんでした。</jp>
+			<cn>今天一分钱也没花。</cn>
+		</example>
+	</value>
+	
+	<value type="提示助词">
+		<meaning>表示强调。</meaning>
+		<example>
+			<jp>松本さんは英語はもちろん、中国{も}よく話せます。</jp>
+			<cn>松本不用说英语，就是汉语也说得很好。</cn>
+		</example>
+		<usage>
+			<value>数量词+も</value>
+			<example>
+				<jp>三十分{も}待ちましたが、来ませんでした。</jp>
+				<cn>等了三十分钟了，但却没来。</cn>
+			</example>
+			<example>
+				<jp>とても人気があると聞きましたが、わたしは一度{も}行ったことがありません。</jp>
+				<cn>听说很受欢迎，我却一次也没去过。</cn>
+			</example>
+			<example>
+				<jp>北京は何回{も}行ったことがあります。</jp>
+				<cn>北京我去过好几次。</cn>
+			</example>
+			<example>
+				<jp>東京には大学が七十{も}あるそうです。</jp>
+				<cn>听说东京有七十多所大学。</cn>
+			</example>
+			<example>
+				<jp>父は病気で五年間{も}寝たままです。</jp>
+				<cn>父亲生病卧床已有五年了。</cn>
+			</example>
+		</usage>
+	</value>
+
+</basic>

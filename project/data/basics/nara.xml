@@ -1,0 +1,38 @@
+<basic name="なら">
+	<value type="提示助词">
+		<meaning>提示主题，并用自信、有把握的语气进行叙述。表示“就…方面来说”，“…的话”。</meaning>
+		<example>
+			<jp>時間{なら}心配はいりません。</jp>
+			<cn>时间的话，不需要担心。</cn>
+		</example>
+		<example>
+			<jp>花{なら}桜です。</jp>
+			<cn>就花来说，最好的是樱花。</cn>
+		</example>
+	</value>
+	
+	<value type="提示助词">
+		<meaning>以假设的形式提出话题。</meaning>
+		<example>
+			<jp>彼が出席する{なら}、私は行きません。</jp>
+			<cn>要是他出席的话，我就不去。</cn>
+		</example>
+		<example>
+			<jp>海が静か{なら}いいですが。</jp>
+			<cn>要是大海平静点就好了。</cn>
+		</example>
+		<example>
+			<jp>私{なら}そんなことを言いませんよ。</jp>
+			<cn>若是我的话，就不说那种事了。</cn>
+		</example>
+		<example>
+			<jp>その部屋、学校に近くて安いん{なら}ぜひ借りたいですね。</jp>
+			<cn>那房子若是离学校近，又便宜的话，我很想借。</cn>
+		</example>
+		<example>
+			<jp>日本語を習うの{なら}、平仮名から始めたほうがいいでしょう。</jp>
+			<cn>学日语的话，还是从平假名学起吧。</cn>
+		</example>
+	</value>
+
+</basic>

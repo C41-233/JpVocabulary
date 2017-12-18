@@ -1,0 +1,24 @@
+<basic name="へ">
+	<name-hence>へは</name-hence>
+	<name-hint>へも</name-hint>
+	<value type="补格助词">
+		<meaning>表示移动方向，读作え。</meaning>
+		<example>
+			<jp>これからホテル{へ}案内します。</jp>
+			<cn>现在我陪您去饭店。</cn>
+		</example>
+		<example>
+			<jp>わたしは来年中国{へ}行きます。</jp>
+			<cn>我明年去中国。</cn>
+		</example>
+		<example>
+			<jp>昨日バスで家{へ}帰りました。</jp>
+			<cn>昨天坐公交车回家。</cn>
+		</example>
+		<example>
+			<jp>韓国{へは}行きました。中国{へは}行きませんでした。</jp>
+			<cn>我去了韩国，没有去中国。</cn>
+		</example>
+	</value>
+
+</basic>

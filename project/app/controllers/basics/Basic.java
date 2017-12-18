@@ -77,11 +77,21 @@ public class Basic extends HtmlControllerBase{
 			
 			@XmlListClass(ExampleType.class)
 			public List<ExampleType> examples = new ArrayList<>();
+			
+			@XmlListClass(UsageType.class)
+			public List<UsageType> usages = new ArrayList<>();
 		}
 		
 		private static class ExampleType{
 			public String jp;
 			public String cn;
+		}
+		
+		private static class UsageType{
+			public String value;
+			public String meaning;
+			@XmlListClass(ExampleType.class)
+			public List<ExampleType> examples = new ArrayList<>();
 		}
 	}
 	

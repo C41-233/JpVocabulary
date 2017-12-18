@@ -1,0 +1,64 @@
+<basic name="まで">
+	<name-hence>までは</name-hence>
+	<name-hint>までも</name-hint>
+	<value type="补格助词">
+		<meaning>表示时间终点。</meaning>
+		<example>
+			<jp>午後五時{まで}学校にいます。</jp>
+			<cn>下午五点之前在学校。</cn>
+		</example>
+		<example>
+			<jp>学校から駅{までは}バスで行きました。</jp>
+			<cn>从学校到火车站，我们是坐公交车去的。</cn>
+		</example>
+	</value>
+	
+	<value type="补格助词">
+		<meaning>表示空间终点。</meaning>
+		<example>
+			<jp>李さんの家から会社{まで}三十分ぐらいかかります。</jp>
+			<cn>从小李家到公司要三十分钟左右。</cn>
+		</example>
+	</value>
+	
+	<value type="副助词">
+		<meaning>表示程度，限定的范围。</meaning>
+		<example>
+			<jp>本は読めますが、まだラジオを聞ける{まで}にはなりません。</jp>
+			<cn>书是能看了，但还没有达到听懂广播的程度。</cn>
+		</example>
+		<example>
+			<jp>いやならやめる{まで}です。</jp>
+			<cn>若是不愿意，不干就算了。</cn>
+		</example>
+		<example>
+			<jp>雨がやむ{まで}待ちましょう。</jp>
+			<cn>等到雨停吧。</cn>
+		</example>
+		<example>
+			<jp>それ{まで}頑張ったのに、やはり失敗してしまいました。</jp>
+			<cn>那样努力，却还是失败了。</cn>
+		</example>
+		<example>
+			<jp>この車は五十人{まで}乗れます。</jp>
+			<cn>这辆车能坐五十人。</cn>
+		</example>
+	</value>
+
+	<value type="副助词">
+		<meaning>表示极端例子。</meaning>
+		<example>
+			<jp>年寄り{まで}一生懸命勉強してます。</jp>
+			<cn>连老人也在拼命学习。</cn>
+		</example>
+		<example>
+			<jp>そんなことをすると、子供に{まで}笑われますよ。</jp>
+			<cn>做那种事，连小孩子都会取笑的。</cn>
+		</example>
+		<example>
+			<jp>心のない鳥{まで}彼の死んで泣いています。</jp>
+			<cn>甚至连没有心的小鸟都为他的死而哭泣。</cn>
+		</example>
+	</value>
+
+</basic>

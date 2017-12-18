@@ -9,17 +9,16 @@ import org.w3c.dom.Element;
 import base.reflect.FieldInfo;
 import base.reflect.Type;
 import base.reflect.Types;
-import base.utility.collection.map.HashArrayListMultiMap;
-import base.utility.linq.Linq;
 
-class XmlReaderDeserializer {
+class SimpleXmlReaderDeserializer implements IXmlReaderDeserializer{
 
 	private final XmlReaderSettings settings;
 	
-	public XmlReaderDeserializer(XmlReaderSettings settings) {
+	public SimpleXmlReaderDeserializer(XmlReaderSettings settings) {
 		this.settings = settings;
 	}
 
+	@Override
 	public Object createElement(Type type, Element element) {
 		Object obj = type.newInstance();
 		
@@ -55,7 +54,7 @@ class XmlReaderDeserializer {
 		return obj;
 	}
 	
-	public Object createObjectElement(FieldInfo field, Element element) {
+	private Object createObjectElement(FieldInfo field, Element element) {
 		String tagName = field.getName();
 		{
 			//指定子标签
@@ -66,16 +65,14 @@ class XmlReaderDeserializer {
 		}
 		
 		Type fieldType = field.getType();
-		HashArrayListMultiMap<String, Element> childs = XmlHelper.getChildElements(element);
-		
-		Element fieldElement = childs.getOne(tagName);
+		Element fieldElement = XmlHelper.getChildElement(element, tagName);
 		if(fieldElement != null) {
 			return createElement(fieldType, fieldElement);
 		}
 		return null;
 	}
 	
-	public Object createArrayObjectElement(FieldInfo field, Element element) {
+	private Object createArrayObjectElement(FieldInfo field, Element element) {
 		String tagName = field.getName();
 		{
 			//指定子标签
@@ -88,11 +85,10 @@ class XmlReaderDeserializer {
 			}
 		}
 		
+		Element[] childElements = XmlHelper.getChildElements(element, tagName);
+
 		Type fieldType = field.getType();
-		HashArrayListMultiMap<String, Element> childs = XmlHelper.getChildElements(element);
-		
 		Type arrayComponentType = fieldType.getArrayComponentType();
-		Element[] childElements = Linq.from(childs.getAll(tagName)).toArray(Element.class);
 		Object array = Array.newInstance(arrayComponentType.asClass(), childElements.length);
 		for(int i=0; i<childElements.length; i++) {
 			Object childValue = createElement(arrayComponentType, childElements[i]);
@@ -102,7 +98,7 @@ class XmlReaderDeserializer {
 	}
 
 	@SuppressWarnings("unchecked")
-	public Object createListObjectElement(FieldInfo field, Element element) {
+	private Object createListObjectElement(FieldInfo field, Element element) {
 		XmlListClass listClass = field.getAnnotation(XmlListClass.class);
 		if(listClass == null) {
 			return null;
@@ -120,10 +116,9 @@ class XmlReaderDeserializer {
 			}
 		}
 
+		Element[] childElements = XmlHelper.getChildElements(element, tagName);
+
 		Type componentType = Types.typeOf(listClass.value());
-		HashArrayListMultiMap<String, Element> childs = XmlHelper.getChildElements(element);
-		
-		Element[] childElements = Linq.from(childs.getAll(tagName)).toArray(Element.class);
 		List<Object> list = new ArrayList<>();
 		for(int i=0; i<childElements.length; i++) {
 			Object childValue = createElement(componentType, childElements[i]);
@@ -132,16 +127,15 @@ class XmlReaderDeserializer {
 		return list;
 	}
 
-	public Object createBasicElement(FieldInfo field, Element element) {
+	private Object createBasicElement(FieldInfo field, Element element) {
 		String tagName = field.getName();
 		Type fieldType = field.getType();
-		HashArrayListMultiMap<String, Element> childs = XmlHelper.getChildElements(element);
 		
 		//只读取子类型
 		XmlTag xmlTag = field.getAnnotation(XmlTag.class);
 		if(xmlTag != null) {
 			tagName = xmlTag.value().equals("") ? tagName : xmlTag.value();
-			Element fieldElement = childs.getOne(tagName);
+			Element fieldElement = XmlHelper.getChildElement(element, tagName);
 			if(fieldElement != null) {
 				return TypeProviers.create(fieldType.asClass(), fieldElement.getTextContent());
 			}
@@ -175,7 +169,7 @@ class XmlReaderDeserializer {
 			return TypeProviers.create(fieldType.asClass(), value);
 		}
 		else {
-			Element fieldElement = childs.getOne(tagName);
+			Element fieldElement = XmlHelper.getChildElement(element, tagName);
 			if(fieldElement != null) {
 				return TypeProviers.create(fieldType.asClass(), fieldElement.getTextContent());
 			}

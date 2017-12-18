@@ -38,12 +38,26 @@
 						<div>${value.meaning}</div>
 						<div class="div-examples">
 						#{list items:value.examples, as:'example'}
-							<div>
-								<span class="example-sentence font-jp">${example.jp}</span>
-								<span>（${example.cn}）</span>
+							<div class="div-example">
+								<div class="example-sentence font-jp">${example.jp}</div>
+								<div>${example.cn}</div>
 							</div>
 						#{/list}
 						</div>
+						#{list items:value.usages, as:'usage'}
+							<div>
+								<div class="usage">${usage.value}</div>
+								<div>${usage.meaning}</div>
+								<div class="div-examples">
+								#{list items:usage.examples, as:'example'}
+									<div class="div-example">
+										<div class="example-sentence font-jp">${example.jp}</div>
+										<div>${example.cn}</div>
+									</div>
+								#{/list}
+								</div>
+							</div>
+						#{/list}
 					</div>
 				#{/list}
 			#{/if}

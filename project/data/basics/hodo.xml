@@ -1,0 +1,42 @@
+<basic name="ほど">
+	<value type="副助词">
+		<meaning>表示概数，大约的幅度，接数(量)词。</meaning>
+		<example>
+			<jp>先生は十日{ほど}前に日本へ行きました。</jp>
+			<cn>老师在十来天之前去日本了。</cn>
+		</example>
+		<example>
+			<jp>教室にはまだ二十人{ほど}います。</jp>
+			<cn>教室里还有二十号人。</cn>
+		</example>
+	</value>
+
+	<value type="副助词">
+		<meaning>表示程度。</meaning>
+		<example>
+			<jp>この本は読めば読む{ほど}おもしろいです。</jp>
+			<cn>这本书越读越有趣。</cn>
+		</example>
+	</value>
+		
+	<value type="副助词">
+		<meaning>表示比较的基准。</meaning>
+		<example>
+			<jp>バスは地下鉄{ほど}込んでいません。</jp>
+			<cn>公交车不如地铁拥挤。</cn>
+		</example>
+		<example>
+			<jp>東京の冬は北京の冬{ほど}寒くないです。</jp>
+			<cn>东京的冬天没有北京的冬天冷。</cn>
+		</example>
+		<example>
+			<jp>今日は昨日{ほど}寒くはありません。</jp>
+			<cn>今天不像昨天那么冷。</cn>
+		</example>
+		<example>
+			<jp>神戸は大阪{ほど}にぎやかではありません。</jp>
+			<cn>神户没有大阪繁华。</cn>
+		</example>
+	</value>
+
+</basic>

@@ -21,3 +21,17 @@ h3+h3{
 	padding-top:	3px;
 	padding-bottom:	3px;
 }
+
+.div-example+.div-example{
+	margin-top:	10px;
+}
+
+.usage{
+	background-color: whiteSmoke;
+	border: 1px black solid;
+	margin-top:	10px;
+	margin-bottom:	4px;
+	padding-left:	5px;
+	padding-top:	3px;
+	padding-right:	3px;
+}

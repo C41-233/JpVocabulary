@@ -67,7 +67,7 @@ public class XmlReader {
 		Element root = document.getDocumentElement();
 		
 		Type<T> type = Types.typeOf(clazz);
-		XmlReaderDeserializer deserializer = new XmlReaderDeserializer(settings);
+		IXmlReaderDeserializer deserializer = getDeserializer();
 		return (T) deserializer.createElement(type, root);
 	}
 	
@@ -104,8 +104,8 @@ public class XmlReader {
 		List<T> list = new ArrayList<>(tags.size());
 		
 		Type<T> type = Types.typeOf(clazz);
-		
-		XmlReaderDeserializer deserializer = new XmlReaderDeserializer(settings);
+
+		IXmlReaderDeserializer deserializer = getDeserializer();
 		for(Element e : tags) {
 			list.add((T) deserializer.createElement(type, e));
 		}
@@ -146,7 +146,7 @@ public class XmlReader {
 		T[] arr = (T[]) Array.newInstance(clazz, tags.size());
 		
 		Type<T> type = Types.typeOf(clazz);
-		XmlReaderDeserializer deserializer = new XmlReaderDeserializer(settings);
+		IXmlReaderDeserializer deserializer = getDeserializer();
 		for(int i=0; i<tags.size(); i++) {
 			arr[i] = (T) deserializer.createElement(type, tags.get(i));
 		}
@@ -178,4 +178,9 @@ public class XmlReader {
 		}
 	}
 
+	private IXmlReaderDeserializer getDeserializer() {
+		SimpleXmlReaderDeserializer deserializer = new SimpleXmlReaderDeserializer(settings);
+		return deserializer;
+	}
+	
 }
