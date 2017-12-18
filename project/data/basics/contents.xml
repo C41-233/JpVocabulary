@@ -23,7 +23,7 @@
 		<content value="nara" name="なら"/>
 		<content value="nado" name="など/なんか"/>
 		<content value="nante" name="なんて"/>
-		<content value="ni" name="に/には/にも"/>
+		<content value="ni" name="に"/>
 		<content value="no" name="の"/>
 		<content value="nomi" name="のみ"/>
 		<content value="sae" name="さえ"/>

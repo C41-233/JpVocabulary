@@ -1,0 +1,35 @@
+<basic name="なんて">
+	<value type="副助词">
+		<meaning>表示出乎意料。</meaning>
+		<example>
+			<jp>日本へ留学する{なんて}夢にも思いませんでした。</jp>
+			<cn>去日本留学连做梦都没想过。</cn>
+		</example>
+		<example>
+			<jp>あの人が一番だ{なんて}、驚いてしまいました。</jp>
+			<cn>他竟然得了第一，我表示很吃惊。</cn>
+		</example>
+	</value>
+	
+	<value type="副助词">
+		<meaning>表示轻视。</meaning>
+		<example>
+			<jp>論文を書く{なんて}つまらないよ。</jp>
+			<cn>什么写论文，没意思。</cn>
+		</example>
+		<example>
+			<jp>私は映画{なんて}見たくありません。</jp>
+			<cn>我不想看什么电影。</cn>
+		</example>
+	</value>
+	
+	<value type="副助词">
+		<meaning>表示之类，等等。</meaning>
+		<example>
+			<jp>よくない{なんて}言えないよ。</jp>
+			<cn>不好之类的话可没法说啊。</cn>
+		</example>
+	</value>
+
+
+</basic>

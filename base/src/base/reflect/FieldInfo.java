@@ -37,7 +37,16 @@ public class FieldInfo {
 		try {
 			field.set(obj, value);
 		} catch (IllegalArgumentException | IllegalAccessException e) {
-			Core.throwException(e);
+			throw Core.throwException(e);
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public <T> T getValue(Object obj){
+		try {
+			return (T) field.get(obj);
+		} catch (IllegalArgumentException | IllegalAccessException e) {
+			throw Core.throwException(e);
 		}
 	}
 

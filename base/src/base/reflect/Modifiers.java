@@ -4,6 +4,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.lang.reflect.Parameter;
 
 public final class Modifiers {
 
@@ -119,6 +120,10 @@ public final class Modifiers {
 		return isFinal(method.getModifiers());
 	}
 	
+	public static boolean isFinal(Parameter parameter) {
+		return isFinal(parameter.getModifiers());
+	}
+	
 	public static boolean isFinal(int modifier) {
 		return Modifier.isFinal(modifier);
 	}
@@ -139,6 +144,22 @@ public final class Modifiers {
 		return Modifier.isVolatile(modifier);
 	}
 	
+	public static boolean isTransient(Field field) {
+		return isTransient(field.getModifiers());
+	}
+	
+	public static boolean isTransient(int modifier) {
+		return Modifier.isTransient(modifier);
+	}
+	
+	public static boolean isNative(Method method) {
+		return isNative(method.getModifiers());
+	}
+	
+	public static boolean isNative(int modifier) {
+		return Modifier.isNative(modifier);
+	}
+	
 	public static boolean isAbstract(Class<?> clazz) {
 		return isAbstract(clazz.getModifiers());
 	}
@@ -149,6 +170,18 @@ public final class Modifiers {
 	
 	public static boolean isAbstract(int modifier) {
 		return Modifier.isAbstract(modifier);
+	}
+	
+	public static boolean isStrictfp(Class<?> clazz) {
+		return isStrictfp(clazz.getModifiers());
+	}
+	
+	public static boolean isStrictfp(Method method) {
+		return isStrictfp(method.getModifiers());
+	}
+	
+	public static boolean isStrictfp(int modifier) {
+		return Modifier.isStatic(modifier);
 	}
 	
 }

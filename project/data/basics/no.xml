@@ -1,0 +1,67 @@
+<basic name="の">
+	<value type="主格助词">
+		<meaning>表示从句的主语。</meaning>
+		<example>
+			<jp>試験{の}始めるベルが鳴りました。</jp>
+			<cn>考试开始的铃响了。</cn>
+		</example>
+	</value>
+	
+	<value type="领格助词">
+		<meaning>构成定语，表示所属、性质、状态。</meaning>
+		<example>
+			<jp>これはわたし{の}荷物です。</jp>
+			<cn>这是我的行李。</cn>
+		</example>
+		<example>
+			<jp>金さんは大学{の}先生です。</jp>
+			<cn>金先生是大学老师。</cn>
+		</example>
+		<example>
+			<jp>歴史{の}本はどこにありますか。</jp>
+			<cn>历史书在哪里？</cn>
+		</example>
+		<example>
+			<jp>一週間ぐらい{の}休みが欲しいですね。</jp>
+			<cn>真想要一周左右的休假。</cn>
+		</example>
+		<example>
+			<jp>野{の}花は咲いています。</jp>
+			<cn>野花绽放。</cn>
+		</example>
+		<example>
+			<jp>本は椅子{の}上にあいません。</jp>
+			<cn>书不在椅子上。</cn>
+		</example>
+		<example>
+			<jp>今日{の}新聞をもう読みましたか。</jp>
+			<cn>今天的报纸看过了吗？</cn>
+		</example>
+		<example>
+			<jp>顧さんは住所{の}地図をくれました。</jp>
+			<cn>小顾给了我他住处的地图。</cn>
+		</example>
+		<example>
+			<jp>これは友達から{の}手紙です。</jp>
+			<cn>这是朋友的来信。</cn>
+		</example>
+		<example>
+			<jp>これはここだけで{の}話です。</jp>
+			<cn>这话只是在这儿讲讲。</cn>
+		</example>
+	</value>
+	
+	<value type="领格助词">
+		<meaning>替代省略修饰成分。</meaning>
+		<example>
+			<jp>この雑誌はわたし{の}です。</jp>
+			<cn>这本杂志是我的。</cn>
+		</example>
+		<example>
+			<jp>林檎は大連{の}がおいしいです。</jp>
+			<cn>苹果是大连的好吃。</cn>
+		</example>
+	</value>
+
+
+</basic>

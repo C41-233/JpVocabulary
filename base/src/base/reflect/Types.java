@@ -1,5 +1,6 @@
 package base.reflect;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 
@@ -38,6 +39,16 @@ public final class Types {
 			return null;
 		}
 		return fields.getOrCreate(field, ()->new FieldInfo(field));
+	}
+	
+	private static final WeakMemoryCache<Constructor, ConstructorInfo> constructors = new WeakMemoryCache<>();
+	
+	@SuppressWarnings("unchecked")
+	public static <T> ConstructorInfo<T> asConstructorInfo(Constructor<T> constructor){
+		if(constructor == null) {
+			return null;
+		}
+		return constructors.getOrCreate(constructor, ()->new ConstructorInfo<>(constructor));
 	}
 	
 	private static final HashMap<Class, Class> primitiveToBox = new HashMap<>();
