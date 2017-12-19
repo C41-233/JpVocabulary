@@ -25,8 +25,12 @@ public final class Core {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static <E extends Throwable> E throwException(Throwable e) throws E{
+	private static <E extends Throwable> E throwRuntime(Throwable e) throws E{
 		throw (E) e;
+	}
+	
+	public static <E extends Throwable> RuntimeException throwException(Throwable e) {
+		return Core.<RuntimeException>throwRuntime(e);
 	}
 	
 }
