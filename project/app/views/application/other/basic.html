@@ -32,21 +32,34 @@
 			<h3>${data?.hint}</h3>
 			<hr/>
 			#{if data}
+				#{if data.usages}
+				<div class="usage">
+					#{list items:data.usages, as:'val'}
+						<div>${val}</div>
+					#{/list}
+				</div>
+				#{/if}
 				#{list items:data.values, as:'value'}
 					<div class="div-block">
 						<div class="div-type">【${value.type}】</div>
 						<div>${value.meaning}</div>
+						#{if value.examples}
 						<div class="div-examples">
-						#{list items:value.examples, as:'example'}
-							<div class="div-example">
-								<div class="example-sentence font-jp">${example.jp}</div>
-								<div>${example.cn}</div>
-							</div>
-						#{/list}
+							#{list items:value.examples, as:'example'}
+								<div class="div-example">
+									<div class="example-sentence font-jp">${example.jp}</div>
+									<div>${example.cn}</div>
+								</div>
+							#{/list}
 						</div>
+						#{/if}
 						#{list items:value.usages, as:'usage'}
 							<div>
-								<div class="usage">${usage.value}</div>
+								<div class="usage">
+									#{list items:usage.values, as:'val'}
+										<div>${val}</div>
+									#{/list}
+								</div>
 								<div>${usage.meaning}</div>
 								<div class="div-examples">
 								#{list items:usage.examples, as:'example'}

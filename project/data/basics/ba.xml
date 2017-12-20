@@ -1,0 +1,22 @@
+<basic name="ば">
+	<value type="接续助词">
+		<meaning>表示假定顺接，接假定形。</meaning>
+		<example>
+			<jp>今日手紙を出せ{ば}、あさって着きます。</jp>
+			<cn>如果今天寄信的话，后天就可以到了。</cn>
+		</example>
+		<example>
+			<jp>これはどうする{ば}いいですか。</jp>
+			<cn>这怎么做好呢？</cn>
+		</example>
+	
+		<example>
+			<jp>おもしろけれ{ば}、わたしも読んでみましょう。</jp>
+			<cn>有趣的话，我也来读读。</cn>
+		</example>
+		<example>
+			<jp>もう時間はあまり多くありませんから、しっかり勉強しなけれ{ば}いけません。</jp>
+			<cn>时间不多了，你应该努力学习才是。</cn>
+		</example>
+	</value>
+</basic>

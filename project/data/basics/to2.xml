@@ -1,0 +1,21 @@
+<basic name="と">
+	<value type="接续助词">
+		<meaning>表示假定、确定、恒常、并列、因果等条件。</meaning>
+		<example>
+			<jp>早く行かない{と}、間に合いません。</jp>
+			<cn>不早点走来不及。</cn>
+		</example>
+		<example>
+			<jp>郵便局は商店のところを右に曲がる{と}すぐです。</jp>
+			<cn>在商店处往右拐就是邮局。</cn>
+		</example>
+		<example>
+			<jp>窓を開ける{と}寒い風が入りました。</jp>
+			<cn>打开窗，冷风吹进来。</cn>
+		</example>
+		<example>
+			<jp>一人でいる{と}寂しくてたまりません。</jp>
+			<cn>一个人呆着寂寞得不得了。</cn>
+		</example>
+	</value>
+</basic>

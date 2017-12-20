@@ -1,0 +1,23 @@
+<basic name="ながら">
+	<usage>动词连用形+ながら</usage>
+	<value type="接续助词">
+		<meaning>表示同时做两个动作，强调后一个动作。</meaning>
+		<example>
+			<jp>鈴木さんはテレビを見{ながら}宿題をしています。</jp>
+			<cn>铃木一边看电视，一边做作业。</cn>
+		</example>
+		<example>
+			<jp>田中さんは歌を歌い{ながら}歩いています。</jp>
+			<cn>田中边唱着歌，边走着。</cn>
+		</example>
+	</value>
+		
+	<value type="接续助词">
+		<meaning>表示转折。</meaning>
+		<example>
+			<jp>知ってい{ながら}知らないふりをしている。</jp>
+			<cn>虽然知道，但装作不知道。</cn>
+		</example>
+	</value>
+
+</basic>

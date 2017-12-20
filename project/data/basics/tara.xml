@@ -1,0 +1,38 @@
+<basic name="たら/だらど">
+	<usage>动词连用形+たら/だら</usage>
+	<usage>形容词连用形（かっ）+たら</usage>
+	<usage>形容动词连用形（だっ）+たら</usage>
+	<usage>体言连用形（だっ）+たら</usage>
+	<value type="接续助词">
+		<meaning>表示假定完了的条件。</meaning>
+		<example>
+			<jp>仕事が終わっ{たら}、お茶でも飲みに行きましょう。</jp>
+			<cn>工作结束一起去喝茶好吗？</cn>
+		</example>
+		<example>
+			<jp>気分が悪かっ{たら}、帰ったほうがいいのです。</jp>
+			<cn>不舒服的话，还是回去的好。</cn>
+		</example>
+		<example>
+			<jp>日曜日の午前だっ{たら}家にいるかもしれません。</jp>
+			<cn>星期天上午的话，我可能在家。</cn>
+		</example>
+	</value>
+	
+	<value type="接续助词">
+		<meaning>表示共起。后项往往是过去式，前后项之间纯属偶然，因此后项是与讲话人意志无关的事实。</meaning>
+		<example>
+			<jp>お湯で洗っ{たら}きれいになりました。</jp>
+			<cn>用热水一洗就干净了。</cn>
+		</example>
+		<example>
+			<jp>食べてみ{たら}、思ったよりおいしかったです。</jp>
+			<cn>一尝比预想的要好吃。</cn>
+		</example>
+		<example>
+			<jp>友達の家を訪ね{たら}、留守でした。</jp>
+			<cn>走访了朋友家，可他不在。</cn>
+		</example>
+	</value>
+
+</basic>

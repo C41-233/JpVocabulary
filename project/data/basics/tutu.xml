@@ -1,0 +1,13 @@
+<basic name="つつ">
+	<value type="接续助词">
+		<meaning>表示一边……一边……。</meaning>
+		<usage>
+			<value>动词连用形+つつ。</value>
+			<example>
+				<jp>酒を飲み{つつ}談じる。</jp>
+				<cn>且饮且谈。</cn>
+			</example>
+		</usage>
+	</value>
+
+</basic>

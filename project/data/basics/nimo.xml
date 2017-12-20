@@ -1,0 +1,13 @@
+<basic name="にも">
+	<value type="接续助词">
+		<meaning>表示即使，不管。</meaning>
+		<example>
+			<jp>どんな本を読む{にも}注意して読まなければだめだ。</jp>
+			<cn>不管读什么书都要仔细读。</cn>
+		</example>
+		<example>
+			<jp>電話をかけよう{にも}、電話番号がわかりません。</jp>
+			<cn>即使想打电话也不知道号码。</cn>
+		</example>
+	</value>
+</basic>

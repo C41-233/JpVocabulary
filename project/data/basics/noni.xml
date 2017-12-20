@@ -1,0 +1,22 @@
+<basic name="のに">
+	<value type="接续助词">
+		<meaning>表示逆接，有意外、不满、埋怨等语气，接连体形。</meaning>
+		<example>
+			<jp>雨が降っている{のに}、傘を持たないで出かけました。</jp>
+			<cn>下着雨，他却不带伞就出去了。</cn>
+		</example>
+		<example>
+			<jp>もう夜中な{のに}まだ帰っていません。</jp>
+			<cn>已经半夜了还不回来。</cn>
+		</example>
+	</value>
+	
+	<value type="接续助词">
+		<meaning>表示目的，接连体形。</meaning>
+		<example>
+			<jp>この部屋は静かで勉強する{のに}いいです。</jp>
+			<cn>这屋子安静，用来学习不错。</cn>
+		</example>
+	</value>
+
+</basic>

@@ -1,0 +1,22 @@
+<basic name="が">
+	<value type="接续助词">
+		<meaning>表示逆接条件，转折关系。</meaning>
+		<example>
+			<jp>この林檎は安いです{が}、あまり美味しくありません。</jp>
+			<cn>这苹果便宜，但不怎么好吃。</cn>
+		</example>
+	</value>
+
+	<value type="接续助词">
+		<meaning>表示顺接条件，铺垫关系。</meaning>
+		<example>
+			<jp>すみません{が}、これはいくらですか。</jp>
+			<cn>不好意思，这要多少钱？</cn>
+		</example>
+		<example>
+			<jp>昨日、李さんに会いました{が}、とても元気でした。</jp>
+			<cn>昨天我遇见了小李，他很健康。</cn>
+		</example>
+	</value>
+
+</basic>

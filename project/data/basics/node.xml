@@ -1,0 +1,25 @@
+<basic name="ので">
+	<value type="接续助词">
+		<meaning>表示原因、理由，接连体形。</meaning>
+		<example>
+			<jp>宿題がたくさんある{ので}今日は遊ぶことができません。</jp>
+			<cn>因为作业很多，今天不能玩了。</cn>
+		</example>
+		<example>
+			<jp>母はマフラーがほしいと言っていた{ので}、マフラーをあげました。</jp>
+			<cn>母亲说想要条围巾，我就送了母亲一条围巾。</cn>
+		</example>
+		<example>
+			<jp>天気がいい{ので}、お花見に出かけました。</jp>
+			<cn>天气不错，所以出门赏花去了。</cn>
+		</example>
+		<example>
+			<jp>日曜日な{ので}、授業がありません。</jp>
+			<cn>因为是周日，所以没课。</cn>
+		</example>
+		<example>
+			<jp>静かな{ので}よく勉強できます。</jp>
+			<cn>这儿安静，因此能好好学习。</cn>
+		</example>
+	</value>
+</basic>

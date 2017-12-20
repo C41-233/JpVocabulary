@@ -1,0 +1,29 @@
+<basic name="な">
+	<value type="接续助词">
+		<meaning>构成连体形。</meaning>
+		<usage>
+			<value>形容动词+な</value>
+			<value>体言+な</value>
+			<example>
+				<jp>今日は会社に行きませんか。 ——ええ、休み{な}のです。</jp>
+				<cn>今天不去公司吗？ ——是的，今天是休息天。</cn>
+			</example>
+			<example>
+				<jp>日曜日{な}ので、授業がありません。</jp>
+				<cn>因为是周日，所以没课。</cn>
+			</example>
+			<example>
+				<jp>この綺麗{な}花は何の花ですか。</jp>
+				<cn>这种美丽的花是什么花？</cn>
+			</example>
+			<example>
+				<jp>わたしは肉が嫌い{な}のです。</jp>
+				<cn>我是不爱吃肉的。</cn>
+			</example>
+			<example>
+				<jp>今にも降りそう{な}天気です。</jp>
+				<cn>眼看就要下雨的天气。</cn>
+			</example>
+		</usage>
+	</value>
+</basic>

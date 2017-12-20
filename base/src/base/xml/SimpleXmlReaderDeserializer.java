@@ -121,7 +121,15 @@ class SimpleXmlReaderDeserializer implements IXmlReaderDeserializer{
 		Type componentType = Types.typeOf(listClass.value());
 		List<Object> list = new ArrayList<>();
 		for(int i=0; i<childElements.length; i++) {
-			Object childValue = createElement(componentType, childElements[i]);
+			//基本类型
+			Object childValue;
+			if(TypeProviers.contains(componentType.asClass())) {
+				childValue = TypeProviers.create(componentType.asClass(), childElements[i].getTextContent());
+			}
+			//级联类型
+			else {
+				childValue = createElement(componentType, childElements[i]);
+			}
 			list.add(childValue);
 		}
 		return list;

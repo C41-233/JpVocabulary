@@ -1,0 +1,26 @@
+<basic name="けれども/けれど/けど">
+	<value type="接续助词">
+		<meaning>表示逆接条件，转折关系。</meaning>
+		<example>
+			<jp>昨日の試験はちょっと難しかった{けど}、まあまあできたよ。</jp>
+			<cn>昨天的考试有点难，不过都做出来了。</cn>
+		</example>
+		<example>
+			<jp>部屋の番号を聞いたのです{けど}、忘れてしまいました。</jp>
+			<cn>我问了房间号码，可是记不起来了。</cn>
+		</example>
+	</value>
+
+	<value type="接续助词">
+		<meaning>表示顺接条件，铺垫关系。</meaning>
+		<example>
+			<jp>来週、送別会をする{けど}、都合はどうかな？</jp>
+			<cn>下星期要开一个欢送会，你时间方便吗？</cn>
+		</example>
+		<example>
+			<jp>わたし、山田です{けど}、鈴木さん、いらっしゃいますか。</jp>
+			<cn>我是山田，请问铃木在吗？</cn>
+		</example>
+	</value>
+
+</basic>

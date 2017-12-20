@@ -1,0 +1,17 @@
+<basic name="から">
+	<value type="接续助词">
+		<meaning>表示原因、理由。</meaning>
+		<example>
+			<jp>星が出ています{から}、明日もいい天気です。</jp>
+			<cn>星星出来了，所以明天也是个好天气。</cn>
+		</example>
+		<example>
+			<jp>すぐ終わります{から}、ちょっと待ってください。</jp>
+			<cn>马上就好，请稍等片刻。</cn>
+		</example>
+		<example>
+			<jp>弟はレコードが好きだ{から}、レコードをあげようと思います。</jp>
+			<cn>弟弟喜欢唱片，所以我想送唱片给他。</cn>
+		</example>
+	</value>
+</basic>

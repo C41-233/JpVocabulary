@@ -67,6 +67,8 @@ public class Basic extends HtmlControllerBase{
 		public String hence;
 		@XmlTag("name-hint")
 		public String hint;
+		@XmlListClass(String.class)
+		public List<String> usages = new ArrayList<>();
 		
 		@XmlListClass(ValueType.class)
 		public List<ValueType> values = new ArrayList<>();
@@ -88,7 +90,8 @@ public class Basic extends HtmlControllerBase{
 		}
 		
 		private static class UsageType{
-			public String value;
+			@XmlListClass(String.class)
+			public List<String> values = new ArrayList<>();
 			public String meaning;
 			@XmlListClass(ExampleType.class)
 			public List<ExampleType> examples = new ArrayList<>();

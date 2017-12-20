@@ -1,0 +1,17 @@
+<basic name="てから/でから">
+	<value type="接续助词">
+		<meaning>表示动作时间上的先后关系。</meaning>
+		<usage>
+			<value>动词连用形+てから/でから</value>
+			<example>
+				<jp>毎日家に帰っ{てから}何をしますか。</jp>
+				<cn>每天回家后干什么？</cn>
+			</example>
+			<example>
+				<jp>よく聞い{てから}答えてください。</jp>
+				<cn>请仔细听后再回答。</cn>
+			</example>
+		</usage>
+	</value>
+
+</basic>

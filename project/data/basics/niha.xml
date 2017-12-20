@@ -1,0 +1,13 @@
+<basic name="には">
+	<value type="接续助词">
+		<meaning>表示目的，用于规范性、习惯性的事项。</meaning>
+		<example>
+			<jp>八時のバスに間に合う{には}、七時に家を出なければなりません。</jp>
+			<cn>要赶上八点的火车，七点就得出门。</cn>
+		</example>
+		<example>
+			<jp>通訳になる{には}、会話に力を入れなければなりません。</jp>
+			<cn>要成为翻译就要在会话上下功夫。</cn>
+		</example>
+	</value>
+</basic>
