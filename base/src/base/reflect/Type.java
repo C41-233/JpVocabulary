@@ -1,6 +1,5 @@
 package base.reflect;
 
-import base.core.Core;
 import base.utility.collection.list.TypeArraySet;
 
 public class Type<T> {
@@ -18,13 +17,18 @@ public class Type<T> {
 	}
 	
 	public T newInstance(){
-		ConstructorInfo<T> constructor = constructors.findConstructorByParameterCount(0);
-		if(constructor == null) {
-			throw Core.throwException(new NoSuchMethodException());
-		}
-		return constructor.newInstance();
+		return constructors.newInstance();
 	}
 
+	public T cast(Object object) {
+		try {
+			return clazz.cast(object);
+		}
+		catch (ClassCastException e) {
+			return null;
+		}
+	}
+	
 	public FieldInfo[] getFields() {
 		return getFields(MemberDomain.Public);
 	}

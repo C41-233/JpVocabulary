@@ -40,8 +40,13 @@ public class TypeTest {
 		assertEquals(3, type.getFields(MemberDomain.Declared).length);
 		assertEquals(6, type.getFields(MemberDomain.PublicOrDeclared).length);
 		assertEquals(7, type.getFields(MemberDomain.AllInherited).length);
-		
-		
+	}
+
+	@Test
+	public void test3() {
+		Type<TestChild> type = Types.typeOf(TestChild.class);
+		TestChild obj = type.newInstance();
+		assertEquals("1", obj.field3);
 	}
 	
 	public static interface TestInterface1 extends TestInterface3{
@@ -58,7 +63,7 @@ public class TypeTest {
 	
 	@SuppressWarnings("unused")
 	public static class TestSuper implements TestInterface2{
-
+		public TestSuper() {}
 		private String field1;
 		public String field2;
 		
@@ -66,6 +71,12 @@ public class TypeTest {
 	
 	@SuppressWarnings("unused")
 	private static class TestChild extends TestSuper implements TestInterface1{
+		private TestChild() {
+			field3 = "1";
+		}
+		public TestChild(String field) {
+			field3 = "2";
+		}
 		public String field3;
 		private String field4;
 		private String field5;

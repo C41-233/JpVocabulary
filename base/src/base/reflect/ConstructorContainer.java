@@ -2,6 +2,8 @@ package base.reflect;
 
 import java.lang.reflect.Constructor;
 
+import base.core.Core;
+
 class ConstructorContainer<T> {
 
 	private final ConstructorInfo<T>[] constructors;
@@ -24,5 +26,14 @@ class ConstructorContainer<T> {
 		}
 		return null;
 	}
-	
+
+	public T newInstance(){
+		for(ConstructorInfo<T> constructor : constructors) {
+			if(constructor.getParameterCount() == 0) {
+				return constructor.newInstance();
+			}
+		}
+		throw Core.throwException(new NoSuchMethodException());
+	}
+
 }
