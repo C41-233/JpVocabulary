@@ -1,17 +1,19 @@
 package base.reflect;
 
-import base.utility.collection.list.TypeArraySet;
+import java.lang.annotation.Annotation;
 
-public class Type<T> {
+public final class Type<T> {
 
-	private final Class<T> clazz;
+	final Class<T> clazz;
 	
 	private final ConstructorContainer<T> constructors;
 	private final FieldContainer fields;
+	private final ExportTypeContainer<T> export;
 	
 	Type(Class<T> clazz) {
 		this.clazz = clazz;
 
+		this.export = new ExportTypeContainer<>(this);
 		this.fields = new FieldContainer(this);
 		this.constructors = new ConstructorContainer<>(this);
 	}
@@ -20,6 +22,24 @@ public class Type<T> {
 		return constructors.newInstance();
 	}
 
+	public <U> Type<? extends U> asSubTypeOf(Type<U> type){
+		try {
+			return Types.typeOf(clazz.asSubclass(type.clazz));
+		}
+		catch (ClassCastException e) {
+			return null;
+		}
+	}
+	
+	public <U> Type<? extends U> asSubTypeOf(Class<U> cl){
+		try {
+			return Types.typeOf(clazz.asSubclass(cl));
+		}
+		catch (ClassCastException e) {
+			return null;
+		}
+	}
+	
 	public T cast(Object object) {
 		try {
 			return clazz.cast(object);
@@ -27,6 +47,30 @@ public class Type<T> {
 		catch (ClassCastException e) {
 			return null;
 		}
+	}
+	
+	public <A extends Annotation> A getAnnotation(Type<A> type) {
+		return clazz.getAnnotation(type.clazz);
+	}
+	
+	public <A extends Annotation> A getAnnotation(Class<A> cl) {
+		return clazz.getAnnotation(cl);
+	}
+	
+	public <A extends Annotation> boolean hasAnnotation(Type<A> type) {
+		return clazz.isAnnotationPresent(type.clazz);
+	}
+	
+	public <A extends Annotation> boolean hasAnnotation(Class<A> cl) {
+		return clazz.isAnnotationPresent(cl);
+	}
+	
+	public ConstructorInfo<T> getConstructor(Class<?>...parameterTypes){
+		return constructors.getConstructor(parameterTypes);
+	}
+	
+	public ConstructorInfo<T>[] getConstructors(){
+		return constructors.getConstructors();
 	}
 	
 	public FieldInfo[] getFields() {
@@ -37,36 +81,12 @@ public class Type<T> {
 		return fields.getFields(domain);
 	}
 
-	@SuppressWarnings("unchecked")
 	public Type<? super T>[] getDeclaredInterfaces() {
-		Class<?>[] interfaces = clazz.getInterfaces();
-		Type<? super T>[] types = new Type[interfaces.length];
-		for(int i=0; i<interfaces.length; i++) {
-			types[i] = (Type<? super T>) Types.typeOf(interfaces[i]);
-		}
-		return types;
+		return export.getDeclaredInterfaces();
 	}
 	
-	@SuppressWarnings("unchecked")
 	public Type<? super T>[] getInterfaces(){
-		TypeArraySet<Type> interfaces = new TypeArraySet<>(Type.class);
-		Class cl = clazz;
-		while(cl != null) {
-			for (Class interfaze : cl.getInterfaces()) {
-				addInterfacesOfInterface(interfaces, interfaze);
-			}
-			cl = cl.getSuperclass();
-		}
-		return interfaces.toArray();
-	}
-	
-	@SuppressWarnings("unchecked")
-	private static void addInterfacesOfInterface(TypeArraySet<Type> interfaces, Class clazz) {
-		Type type = Types.typeOf(clazz);
-		interfaces.add(type);
-		for(Class interfaze : clazz.getInterfaces()) {
-			addInterfacesOfInterface(interfaces, interfaze);
-		}
+		return export.getInterfaces();
 	}
 
 	public boolean isArray() {
@@ -117,6 +137,14 @@ public class Type<T> {
 		return clazz;
 	}
 
+	public String getCanonicalName() {
+		return clazz.getCanonicalName();
+	}
+	
+	public ClassLoader getClassLoader() {
+		return clazz.getClassLoader();
+	}
+	
 	public Type<?> getArrayComponentType() {
 		return Types.typeOf(clazz.getComponentType());
 	}
@@ -125,6 +153,10 @@ public class Type<T> {
 		return Types.typeOf(clazz.getSuperclass());
 	}
 
+	public Type<? super T>[] getExportTypes(){
+		return export.getExportTypes();
+	}
+	
 	@Override
 	public String toString() {
 		return clazz.getName();

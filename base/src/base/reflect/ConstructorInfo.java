@@ -5,9 +5,11 @@ import java.lang.reflect.InvocationTargetException;
 
 import base.core.Core;
 
-public class ConstructorInfo<T>{
+public final class ConstructorInfo<T>{
 
 	private final Constructor<T> constructor;
+	
+	private Type<?>[] cachedParameterTypes;
 	
 	ConstructorInfo(Constructor<T> constructor) {
 		this.constructor = constructor;
@@ -33,5 +35,32 @@ public class ConstructorInfo<T>{
 		}
 	}
 
-	
+	public Type<?>[] getParameterTypes(){
+		return getParameterTypesInner().clone();
+	}
+
+	public boolean isParameterTypesOf(Class<?>... parameterTypes) {
+		Type<?>[] types = getParameterTypesInner();
+		if(types.length != parameterTypes.length) {
+			return false;
+		}
+		for(int i=0; i<types.length; i++) {
+			if(types[i].clazz != parameterTypes[i]) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	private Type<?>[] getParameterTypesInner(){
+		if(cachedParameterTypes == null) {
+			Class<?>[] parameters = constructor.getParameterTypes();
+			cachedParameterTypes = new Type<?>[parameters.length];
+			for(int i=0; i<parameters.length; i++) {
+				cachedParameterTypes[i] = Types.typeOf(parameters[i]);
+			}
+		}
+		return cachedParameterTypes;
+	}
+
 }

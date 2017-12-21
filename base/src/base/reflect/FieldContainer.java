@@ -5,42 +5,41 @@ import java.lang.reflect.Field;
 import base.core.EnumOutOfRangeException;
 import base.utility.collection.list.TypeArrayList;
 
-class FieldContainer {
+final class FieldContainer {
 
 	private final Type<?> type;
 	
-	private final FieldInfo[] public_fields;
-	private final FieldInfo[] declared_fields;
+	private final FieldInfo[] cachedPublicFields;
+	private final FieldInfo[] cachedDeclaredFields;
 	
 	public FieldContainer(Type<?> type) {
 		this.type = type;
 		
-		Class<?> clazz = type.asClass();
-		Field[] public_fields = clazz.getFields();
-		this.public_fields = new FieldInfo[public_fields.length];
+		Field[] public_fields = type.clazz.getFields();
+		this.cachedPublicFields = new FieldInfo[public_fields.length];
 		
 		for(int i=0; i<public_fields.length; i++) {
-			this.public_fields[i] = Types.asFieldInfo(public_fields[i]);
+			this.cachedPublicFields[i] = Types.asFieldInfo(public_fields[i]);
 		}
 		
-		Field[] declared_fields = clazz.getDeclaredFields();
-		this.declared_fields = new FieldInfo[declared_fields.length];
+		Field[] declared_fields = type.clazz.getDeclaredFields();
+		this.cachedDeclaredFields = new FieldInfo[declared_fields.length];
 		for(int i=0; i<declared_fields.length; i++) {
-			this.declared_fields[i] = Types.asFieldInfo(declared_fields[i]);
+			this.cachedDeclaredFields[i] = Types.asFieldInfo(declared_fields[i]);
 		}
 	}
 
 	public FieldInfo[] getFields(MemberDomain domain) {
 		switch (domain) {
 		case Public:
-			return public_fields.clone();
+			return cachedPublicFields.clone();
 		case Declared:
-			return declared_fields.clone();
+			return cachedDeclaredFields.clone();
 		case PublicOrDeclared:
 			{
 				TypeArrayList<FieldInfo> fields = new TypeArrayList<>(FieldInfo.class);
-				fields.addAll(declared_fields);
-				for(FieldInfo field : public_fields) {
+				fields.addAll(cachedDeclaredFields);
+				for(FieldInfo field : cachedPublicFields) {
 					if(field.getDeclaringType() != type) {
 						fields.add(field);
 					}

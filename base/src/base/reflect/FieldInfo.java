@@ -5,7 +5,7 @@ import java.lang.reflect.Field;
 
 import base.core.Core;
 
-public class FieldInfo {
+public final class FieldInfo {
 
 	private final Field field;
 	private final Type type;

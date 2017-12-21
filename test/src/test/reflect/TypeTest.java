@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import base.reflect.ConstructorInfo;
 import base.reflect.MemberDomain;
 import base.reflect.Type;
 import base.reflect.Types;
@@ -45,8 +46,17 @@ public class TypeTest {
 	@Test
 	public void test3() {
 		Type<TestChild> type = Types.typeOf(TestChild.class);
-		TestChild obj = type.newInstance();
-		assertEquals("1", obj.field3);
+		TestChild obj1 = type.newInstance();
+		assertEquals("1", obj1.field3);
+		
+		ConstructorInfo<TestChild> constructor1 = type.getConstructor();
+		TestChild obj2 = constructor1.newInstance();
+		assertEquals("1", obj2.field3);
+		
+		ConstructorInfo<TestChild> constructor2 = type.getConstructor(String.class);
+		TestChild obj3 = constructor2.newInstance("b");
+		assertEquals("2", obj3.field3);
+		assertEquals("b", obj3.field4);
 	}
 	
 	public static interface TestInterface1 extends TestInterface3{
@@ -76,6 +86,7 @@ public class TypeTest {
 		}
 		public TestChild(String field) {
 			field3 = "2";
+			field4 = field;
 		}
 		public String field3;
 		private String field4;
