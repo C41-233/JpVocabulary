@@ -33,6 +33,26 @@ public final class FieldInfo {
 		return Modifiers.isPublic(field);
 	}
 
+	public boolean isProtected() {
+		return Modifiers.isProtected(field);
+	}
+
+	public boolean isInternal() {
+		return Modifiers.isInternal(field);
+	}
+
+	public boolean isStatic() {
+		return Modifiers.isStatic(field);
+	}
+
+	public boolean isInstance() {
+		return Modifiers.isInstance(field);
+	}
+
+	public boolean isPrivate() {
+		return Modifiers.isPrivate(field);
+	}
+
 	public void setValue(Object obj, Object value) {
 		try {
 			field.set(obj, value);
@@ -60,6 +80,11 @@ public final class FieldInfo {
 
 	public Type getDeclaringType() {
 		return Types.typeOf(field.getDeclaringClass());
+	}
+	
+	@Override
+	public String toString() {
+		return field.toString();
 	}
 
 }

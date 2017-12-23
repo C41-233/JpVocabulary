@@ -107,6 +107,10 @@ public final class Modifiers {
 	public static boolean isStatic(int modifier) {
 		return Modifier.isStatic(modifier);
 	}
+
+	public static boolean isInstance(Field field) {
+		return isStatic(field) == false;
+	}
 	
 	public static boolean isFinal(Class<?> clazz) {
 		return isFinal(clazz.getModifiers());
@@ -183,5 +187,5 @@ public final class Modifiers {
 	public static boolean isStrictfp(int modifier) {
 		return Modifier.isStatic(modifier);
 	}
-	
+
 }

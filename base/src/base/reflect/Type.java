@@ -2,13 +2,13 @@ package base.reflect;
 
 import java.lang.annotation.Annotation;
 
-public final class Type<T> {
+public final class Type<T> implements IAnnotatedReflectElement{
 
 	final Class<T> clazz;
 	
-	private final ConstructorContainer<T> constructors;
-	private final FieldContainer fields;
-	private final ExportTypeContainer<T> export;
+	final ConstructorContainer<T> constructors;
+	final FieldContainer fields;
+	final ExportTypeContainer<T> export;
 	
 	Type(Class<T> clazz) {
 		this.clazz = clazz;
@@ -49,19 +49,28 @@ public final class Type<T> {
 		}
 	}
 	
-	public <A extends Annotation> A getAnnotation(Type<A> type) {
-		return clazz.getAnnotation(type.clazz);
-	}
-	
-	public <A extends Annotation> A getAnnotation(Class<A> cl) {
+	@Override
+	public <TAnnotation extends Annotation> TAnnotation getAnnotation(Class<TAnnotation> cl) {
 		return clazz.getAnnotation(cl);
 	}
-	
-	public <A extends Annotation> boolean hasAnnotation(Type<A> type) {
-		return clazz.isAnnotationPresent(type.clazz);
+
+	@Override
+	public Annotation[] getAnnotations() {
+		return clazz.getAnnotations();
 	}
 	
-	public <A extends Annotation> boolean hasAnnotation(Class<A> cl) {
+	@Override
+	public <TAnnotation extends Annotation> TAnnotation[] getAnnotations(Class<TAnnotation> cl) {
+		return clazz.getAnnotationsByType(cl);
+	}
+	
+	@Override
+	public Annotation[] getDeclaredAnnotations() {
+		return clazz.getDeclaredAnnotations();
+	}
+	
+	@Override
+	public <TAnnotation extends Annotation> boolean hasAnnotation(Class<TAnnotation> cl) {
 		return clazz.isAnnotationPresent(cl);
 	}
 	
@@ -74,11 +83,11 @@ public final class Type<T> {
 	}
 	
 	public FieldInfo[] getFields() {
-		return getFields(MemberDomain.Public);
+		return getFields(MemberDomains.Default);
 	}
 	
-	public FieldInfo[] getFields(MemberDomain domain) {
-		return fields.getFields(domain);
+	public FieldInfo[] getFields(int domain) {
+		return fields.getFields(new MemberDomainFlags(domain));
 	}
 
 	public Type<? super T>[] getDeclaredInterfaces() {
@@ -156,7 +165,11 @@ public final class Type<T> {
 	public Type<? super T>[] getExportTypes(){
 		return export.getExportTypes();
 	}
-	
+
+	public Type<? super T>[] getExportSuperTypes() {
+		return export.getExportSuperTypes();
+	}
+
 	@Override
 	public String toString() {
 		return clazz.getName();

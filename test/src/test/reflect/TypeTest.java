@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import base.reflect.ConstructorInfo;
-import base.reflect.MemberDomain;
+import base.reflect.MemberDomains;
 import base.reflect.Type;
 import base.reflect.Types;
 
@@ -29,18 +29,20 @@ public class TypeTest {
 		
 		assertTrue(typeSuper == type.getSuperType());
 		
-		assertEquals(1, type.getDeclaredInterfaces().length);
-		assertEquals(1, typeSuper.getDeclaredInterfaces().length);
-		assertEquals(3, type.getInterfaces().length);
 		
 		assertTrue(type.isPrivate());
 		assertTrue(type.isStatic());
 		assertTrue(type.isClass());
 		
+		assertEquals(1, type.getDeclaredInterfaces().length);
+		assertEquals(1, typeSuper.getDeclaredInterfaces().length);
+		assertEquals(3, type.getInterfaces().length);
+		assertEquals(6, type.getExportTypes().length);
 		assertEquals(4, type.getFields().length);
-		assertEquals(3, type.getFields(MemberDomain.Declared).length);
-		assertEquals(6, type.getFields(MemberDomain.PublicOrDeclared).length);
-		assertEquals(7, type.getFields(MemberDomain.AllInherited).length);
+		
+		assertEquals(3, type.getFields(MemberDomains.Public | MemberDomains.NonPublic | MemberDomains.Instance | MemberDomains.Static).length);
+		assertEquals(2, type.getFields(MemberDomains.Public | MemberDomains.NonPublic | MemberDomains.Static | MemberDomains.Inherited).length);
+		assertEquals(7, type.getFields(MemberDomains.All).length);
 	}
 
 	@Test

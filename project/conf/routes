@@ -94,6 +94,8 @@ GET		/sentences/proverb						sentences.Proverb.index
 
 GET		/words/basic							basics.Basic.index
 GET		/words/basic/{index}					basics.Basic.detail
+GET		/words/formnoun							basics.FormNoun.index
+GET		/words/formnoun/{index}					basics.FormNoun.detail
 
 GET		/50										Page._50
 GET		/grammar/verb							Page.verb

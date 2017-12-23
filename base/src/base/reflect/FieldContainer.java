@@ -2,25 +2,16 @@ package base.reflect;
 
 import java.lang.reflect.Field;
 
-import base.core.EnumOutOfRangeException;
 import base.utility.collection.list.TypeArrayList;
 
 final class FieldContainer {
 
 	private final Type<?> type;
 	
-	private final FieldInfo[] cachedPublicFields;
 	private final FieldInfo[] cachedDeclaredFields;
 	
 	public FieldContainer(Type<?> type) {
 		this.type = type;
-		
-		Field[] public_fields = type.clazz.getFields();
-		this.cachedPublicFields = new FieldInfo[public_fields.length];
-		
-		for(int i=0; i<public_fields.length; i++) {
-			this.cachedPublicFields[i] = Types.asFieldInfo(public_fields[i]);
-		}
 		
 		Field[] declared_fields = type.clazz.getDeclaredFields();
 		this.cachedDeclaredFields = new FieldInfo[declared_fields.length];
@@ -29,39 +20,40 @@ final class FieldContainer {
 		}
 	}
 
-	public FieldInfo[] getFields(MemberDomain domain) {
-		switch (domain) {
-		case Public:
-			return cachedPublicFields.clone();
-		case Declared:
-			return cachedDeclaredFields.clone();
-		case PublicOrDeclared:
-			{
-				TypeArrayList<FieldInfo> fields = new TypeArrayList<>(FieldInfo.class);
-				fields.addAll(cachedDeclaredFields);
-				for(FieldInfo field : cachedPublicFields) {
-					if(field.getDeclaringType() != type) {
-						fields.add(field);
-					}
-				}
-				return fields.toArray();
+	public FieldInfo[] getFields(MemberDomainFlags flags){
+		TypeArrayList<FieldInfo> list = new TypeArrayList<>(FieldInfo.class);
+		
+		addFieldsInner(list, flags);
+		if(flags.isInterited()) {
+			for(Type base : type.getExportSuperTypes()) {
+				base.fields.addFieldsInner(list, flags);
 			}
-		case AllInherited:
-			{
-				TypeArrayList<FieldInfo> fields = new TypeArrayList<>(FieldInfo.class);
-				Type type = this.type;
-				while(type != null) {
-					fields.addAll(type.getFields(MemberDomain.Declared));
-					for(Type interfaze : type.getDeclaredInterfaces()) {
-						fields.addAll(interfaze.getFields(MemberDomain.Declared));
-					}
-					type = type.getSuperType();
-				}
-				return fields.toArray();
+		}
+		
+		return list.toArray();
+	}
+
+	private void addFieldsInner(TypeArrayList<FieldInfo> list, MemberDomainFlags flags) {
+		for(FieldInfo field : cachedDeclaredFields) {
+			if(field.isPublic() && !flags.isPublic()) {
+				continue;
 			}
-		default:
-			throw new EnumOutOfRangeException();
+			if(field.isProtected() && !flags.isProtected()) {
+				continue;
+			}
+			if(field.isInternal() && !flags.isInternal()) {
+				continue;
+			}
+			if(field.isPrivate() && !flags.isPrivate()) {
+				continue;
+			}
+			if(field.isStatic() && !flags.isStatic()) {
+				continue;
+			}
+			if(field.isInstance() && !flags.isInstance()) {
+				continue;
+			}
+			list.add(field);
 		}
 	}
-	
 }

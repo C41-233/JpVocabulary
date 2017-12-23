@@ -54,8 +54,20 @@ final class ExportTypeContainer<T> {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public Type<? super T>[] getExportTypes(){
+		return getExportTypesInner().clone();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public Type<? super T>[] getExportSuperTypes(){
+		Type<? super T>[] types = getExportTypesInner();
+		Type<? super T>[] rst = new Type[types.length - 1];
+		System.arraycopy(types, 1, rst, 0, rst.length);
+		return rst;
+	}
+
+	@SuppressWarnings("unchecked")
+	private Type<? super T>[] getExportTypesInner(){
 		if(cachedExportTypes == null) {
 			TypeArrayList<Type> types = new TypeArrayList<>(Type.class);
 			Type<? super T> type = this.type;
@@ -68,7 +80,8 @@ final class ExportTypeContainer<T> {
 			}
 			cachedExportTypes = types.toArray();
 		}
-		return cachedExportTypes.clone();
+		return cachedExportTypes;
 	}
 	
 }
+
