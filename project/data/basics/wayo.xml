@@ -1,0 +1,9 @@
+<basic name="わよ">
+	<value type="终助词">
+		<meaning>呀，吧。</meaning>
+		<example>
+			<jp>眼鏡は洗面所にある{わよ}。</jp>
+			<cn>眼镜在盥洗室哟。</cn>
+		</example>
+	</value>
+</basic>

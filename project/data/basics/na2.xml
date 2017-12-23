@@ -1,0 +1,21 @@
+<basic name="な">
+	<value type="终助词">
+		<meaning>表示不要，不准。</meaning>
+		<example>
+			<jp>行く{な}。</jp>
+			<cn>不准去。</cn>
+		</example>
+		<example>
+			<jp>そこを動く{な}。</jp>
+			<cn>在那里别动。</cn>
+		</example>
+	</value>
+	
+	<value type="终助词">
+		<meaning>对关系亲密者的命令，接连用形。</meaning>
+		<example>
+			<jp>早くし{な}。</jp>
+			<cn>快干吧。</cn>
+		</example>
+	</value>
+</basic>

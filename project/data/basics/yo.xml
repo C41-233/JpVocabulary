@@ -1,0 +1,14 @@
+<basic name="よ">
+	<value type="终助词">
+		<meaning>加强语气，表示主张、叮嘱、提醒。</meaning>
+		<example>
+			<jp>わたしは行きません{よ}。</jp>
+			<cn>我不去哦。</cn>
+		</example>
+		<example>
+			<jp>もう時間だから、はやく行け{よ}。</jp>
+			<cn>已经到时间了，快走吧。</cn>
+		</example>
+	</value>
+
+</basic>

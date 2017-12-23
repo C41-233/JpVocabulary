@@ -1,0 +1,33 @@
+<basic name="かな">
+	<value type="终助词">
+		<meaning>用于自言自语，提供一种不太确实的信息。</meaning>
+		<example>
+			<jp>今日李さんは来る{かな}。</jp>
+			<cn>小李今天会来吗？</cn>
+		</example>
+		<example>
+			<jp>期間は四年か五年{かな}。</jp>
+			<cn>时间好像是4年或者5年。</cn>
+		</example>
+	</value>
+	
+	<value type="终助词">
+		<meaning>表示质疑。</meaning>
+		<example>
+			<jp>李さんの住所を君は知っている{かな}。</jp>
+			<cn>你知道老李的住址吗？</cn>
+		</example>
+	</value>
+	
+	<value type="终助词">
+		<meaning>表示盼望的心情，接否定。</meaning>
+		<example>
+			<jp>早く返事がこない{かな}。</jp>
+			<cn>回信早点来就好了。</cn>
+		</example>
+		<example>
+			<jp>あした休ませてもらえる{かな}。</jp>
+			<cn>希望明天能让我休息。</cn>
+		</example>
+	</value>
+</basic>

@@ -1,0 +1,9 @@
+<basic name="かい">
+	<value type="终助词">
+		<meaning>用于表示亲昵的问话。</meaning>
+		<example>
+			<jp>もういい{かい}。</jp>
+			<cn>好了吗？</cn>
+		</example>
+	</value>
+</basic>

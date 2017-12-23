@@ -1,0 +1,45 @@
+<basic name="か">
+	<value type="终助词">
+		<meaning>表示疑问。</meaning>
+		<example>
+			<jp>それはタオルです{か}。</jp>
+			<cn>那是毛巾吗？</cn>
+		</example>
+		<example>
+			<jp>あれは何です{か}。</jp>
+			<cn>那是什么？</cn>
+		</example>
+		<example>
+			<jp>あなたは野球ができます{か}。</jp>
+			<cn>你会打棒球吗？</cn>
+		</example>
+		<example>
+			<jp>わたしが来たことを伝えてくださいません{か}。</jp>
+			<cn>能否请您转告他我来过了。</cn>
+		</example>
+		<example>
+			<jp>李さんもラジオを持っているでしょう{か}。</jp>
+			<cn>小李也有收音机吗？</cn>
+		</example>
+	</value>
+	
+	<value type="终助词">
+		<meaning>构成疑问短句，省略助词。</meaning>
+		<example>
+			<jp>どの大学に入る{か}は未だ決めていません。</jp>
+			<cn>还没决定进哪所大学。</cn>
+		</example>
+		<example>
+			<jp>あの人は誰だ{か}知っています{か}。</jp>
+			<cn>你知道那人是谁吗？</cn>
+		</example>
+		<example>
+			<jp>どちらがいい{か}分かりません。</jp>
+			<cn>我不知道哪个好。</cn>
+		</example>
+		<example>
+			<jp>模擬店は成功する{か}どうかやってみなければわからないでしょう。</jp>
+			<cn>模拟店是否成功，不干怎么知道呢？</cn>
+		</example>
+	</value>
+</basic>

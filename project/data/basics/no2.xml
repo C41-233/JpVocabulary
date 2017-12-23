@@ -1,0 +1,9 @@
+<basic name="の">
+	<value type="终助词">
+		<meaning>用于要求说明或确认。</meaning>
+		<example>
+			<jp>ああ、清水君、どうした{の}？</jp>
+			<cn>清水，你好。有什么事吗？</cn>
+		</example>
+	</value>
+</basic>

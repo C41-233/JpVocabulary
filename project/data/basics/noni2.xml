@@ -1,0 +1,13 @@
+<basic name="のに">
+	<value type="终助词">
+		<meaning>表示事与愿违时的遗憾、惋惜、后悔等心情，接连体形。</meaning>
+		<example>
+			<jp>この部屋がもう少し広ければいい{のに}。</jp>
+			<cn>这间屋子再大点就好了。</cn>
+		</example>
+		<example>
+			<jp>注意しておいた{のに}。</jp>
+			<cn>提醒过他了，可是…</cn>
+		</example>
+	</value>
+</basic>

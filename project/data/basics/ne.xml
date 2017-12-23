@@ -1,0 +1,20 @@
+<basic name="ね/ねえ">
+	<value type="终助词">
+		<meaning>表示对事物已有相当程度的了解，只是要求对方给予确认。</meaning>
+		<example>
+			<jp>これはあなたの辞書です{ね}。</jp>
+			<cn>这是你的辞典吧。）</cn>
+		</example>
+	</value>
+	<value type="终助词">
+		<meaning>表示感叹。</meaning>
+		<example>
+			<jp>ここはにぎやかです{ね}。</jp>
+			<cn>这儿真热闹啊。</cn>
+		</example>
+		<example>
+			<jp>学校の庭は綺麗です{ねえ}。</jp>
+			<cn>校园真美啊。</cn>
+		</example>
+	</value>
+</basic>

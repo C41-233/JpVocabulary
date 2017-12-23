@@ -1,0 +1,13 @@
+<basic name="けど">
+	<value type="终助词">
+		<meaning>表示委婉的语气，用于口语。</meaning>
+		<example>
+			<jp>ちょっとお願いしたいことがあります{けど}。</jp>
+			<cn>我想求你点事。</cn>
+		</example>
+		<example>
+			<jp>これはよくわかっている{けど}。</jp>
+			<cn>那我也很清楚，不过…</cn>
+		</example>
+	</value>
+</basic>
