@@ -84,8 +84,24 @@ public final class Type<T> implements IAnnotatedReflectElement{
 		return constructors.getConstructors();
 	}
 	
+	public FieldInfo getDeclaredField(String name) {
+		return getField(name, MemberDomains.AllDeclared);
+	}
+	
+	public FieldInfo getPublicField(String name) {
+		return getField(name, MemberDomains.AllPublic);
+	}
+	
 	public FieldInfo getField(String name, int domain) {
 		return fields.getField(name, new MemberDomainFlags(domain));
+	}
+	
+	public FieldInfo[] getDeclaredFields() {
+		return getFields(MemberDomains.AllDeclared);
+	}
+	
+	public FieldInfo[] getPublicFields() {
+		return getFields(MemberDomains.AllPublic);
 	}
 	
 	public FieldInfo[] getFields(int domain) {
