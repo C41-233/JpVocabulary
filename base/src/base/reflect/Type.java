@@ -9,11 +9,13 @@ public final class Type<T> implements IAnnotatedReflectElement{
 	final ConstructorContainer<T> constructors;
 	final FieldContainer fields;
 	final ExportTypeContainer<T> export;
+	final MemberTypeContainer memberTypes;
 	
 	Type(Class<T> clazz) {
 		this.clazz = clazz;
 
 		this.export = new ExportTypeContainer<>(this);
+		this.memberTypes = new MemberTypeContainer(this);
 		this.fields = new FieldContainer(this);
 		this.constructors = new ConstructorContainer<>(this);
 	}
@@ -82,8 +84,8 @@ public final class Type<T> implements IAnnotatedReflectElement{
 		return constructors.getConstructors();
 	}
 	
-	public FieldInfo[] getFields() {
-		return getFields(MemberDomains.Default);
+	public FieldInfo getField(String name, int domain) {
+		return fields.getField(name, new MemberDomainFlags(domain));
 	}
 	
 	public FieldInfo[] getFields(int domain) {
@@ -98,6 +100,10 @@ public final class Type<T> implements IAnnotatedReflectElement{
 		return export.getInterfaces();
 	}
 
+	public Type<?>[] getMemberTypes(int domain){
+		return memberTypes.getMemberTypes(new MemberDomainFlags(domain));
+	}
+	
 	public boolean isArray() {
 		return clazz.isArray();
 	}
@@ -170,6 +176,14 @@ public final class Type<T> implements IAnnotatedReflectElement{
 		return export.getExportSuperTypes();
 	}
 
+	public Type<?> getEnclosingType(){
+		return Types.typeOf(clazz.getEnclosingClass());
+	}
+	
+	public ConstructorInfo<?> getEnclosingConstructor(){
+		return Types.asConstructorInfo(clazz.getEnclosingConstructor());
+	}
+	
 	@Override
 	public String toString() {
 		return clazz.getName();

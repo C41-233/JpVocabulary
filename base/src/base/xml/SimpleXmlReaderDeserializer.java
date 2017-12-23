@@ -7,6 +7,7 @@ import java.util.List;
 import org.w3c.dom.Element;
 
 import base.reflect.FieldInfo;
+import base.reflect.MemberDomains;
 import base.reflect.Type;
 import base.reflect.Types;
 
@@ -22,7 +23,7 @@ class SimpleXmlReaderDeserializer implements IXmlReaderDeserializer{
 	public Object createElement(Type type, Element element) {
 		Object obj = type.newInstance();
 		
-		for(FieldInfo field : type.getFields()) {
+		for(FieldInfo field : type.getFields(MemberDomains.AllDeclared)) {
 			Type fieldType = field.getType();
 			
 			//数组

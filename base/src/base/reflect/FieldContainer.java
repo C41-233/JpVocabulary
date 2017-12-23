@@ -35,25 +35,49 @@ final class FieldContainer {
 
 	private void addFieldsInner(TypeArrayList<FieldInfo> list, MemberDomainFlags flags) {
 		for(FieldInfo field : cachedDeclaredFields) {
-			if(field.isPublic() && !flags.isPublic()) {
-				continue;
+			if(isMatchFlag(field, flags)) {
+				list.add(field);
 			}
-			if(field.isProtected() && !flags.isProtected()) {
-				continue;
-			}
-			if(field.isInternal() && !flags.isInternal()) {
-				continue;
-			}
-			if(field.isPrivate() && !flags.isPrivate()) {
-				continue;
-			}
-			if(field.isStatic() && !flags.isStatic()) {
-				continue;
-			}
-			if(field.isInstance() && !flags.isInstance()) {
-				continue;
-			}
-			list.add(field);
 		}
+	}
+
+	private static boolean isMatchFlag(FieldInfo field, MemberDomainFlags flags) {
+		if(field.isPublic() && !flags.isPublic()) {
+			return false;
+		}
+		if(field.isProtected() && !flags.isProtected()) {
+			return false;
+		}
+		if(field.isInternal() && !flags.isInternal()) {
+			return false;
+		}
+		if(field.isPrivate() && !flags.isPrivate()) {
+			return false;
+		}
+		if(field.isStatic() && !flags.isStatic()) {
+			return false;
+		}
+		if(field.isInstance() && !flags.isInstance()) {
+			return false;
+		}
+		return true;
+	}
+	
+	public FieldInfo getField(String name, MemberDomainFlags flags) {
+		for (FieldInfo field : cachedDeclaredFields) {
+			if(isMatchFlag(field, flags)) {
+				return field;
+			}
+		}
+		if(flags.isInterited()) {
+			for(Type base : type.getExportSuperTypes()) {
+				FieldInfo field = base.fields.getField(name, flags);
+				if(field != null) {
+					return field;
+				}
+			}
+		}
+		
+		return null;
 	}
 }
