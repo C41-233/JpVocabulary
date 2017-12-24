@@ -71,10 +71,6 @@ public final class Types {
 		register_box(void.class, Void.class);
 	}
 	
-	public static boolean isPrimitiveClass(Class<?> type) {
-		return primitiveToBox.containsKey(type);
-	}
-	
 	public static Class<?> toBoxClass(Class<?> type) {
 		Class cl = primitiveToBox.get(type);
 		return cl != null ? cl : type;

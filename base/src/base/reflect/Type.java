@@ -55,6 +55,18 @@ public final class Type<T> implements IAnnotatedReflectElement, IGenericReflectE
 		}
 	}
 	
+	public boolean isAssignableFrom(Class<?> cls) {
+		return clazz.isAssignableFrom(cls);
+	}
+	
+	public boolean isAssignableFrom(Type<?> type) {
+		return clazz.isAssignableFrom(type.clazz);
+	}
+	
+	public boolean isInstance(Object object) {
+		return clazz.isInstance(object);
+	}
+	
 	@Override
 	public <TAnnotation extends Annotation> TAnnotation getAnnotation(Class<TAnnotation> cl) {
 		return clazz.getAnnotation(cl);
@@ -139,9 +151,29 @@ public final class Type<T> implements IAnnotatedReflectElement, IGenericReflectE
 	public boolean isAnnotation() {
 		return clazz.isAnnotation();
 	}
+
+	public boolean isEnum() {
+		return clazz.isEnum();
+	}
+
+	public boolean isPrimitive() {
+		return clazz.isPrimitive();
+	}
 	
-	public boolean isAnonymous() {
+	public boolean isSynthetic() {
+		return clazz.isSynthetic();
+	}
+	
+	public boolean isAnonymousType() {
 		return clazz.isAnonymousClass();
+	}
+	
+	public boolean isMemberType() {
+		return clazz.isMemberClass();
+	}
+	
+	public boolean isLocalType() {
+		return clazz.isLocalClass();
 	}
 	
 	public boolean isPublic() {
