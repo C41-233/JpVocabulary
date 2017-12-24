@@ -3,7 +3,7 @@ package base.reflect;
 import base.utility.collection.list.TypeArrayList;
 import base.utility.collection.list.TypeArraySet;
 
-final class ExportTypeContainer<T> {
+final class AssginableTypeContainer<T> {
 
 	private final Type<T> type;
 
@@ -13,7 +13,7 @@ final class ExportTypeContainer<T> {
 	
 	private Type<? super T>[] cachedExportTypes;
 	
-	public ExportTypeContainer(Type<T> type) {
+	public AssginableTypeContainer(Type<T> type) {
 		this.type = type;
 	}
 

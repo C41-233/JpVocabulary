@@ -37,7 +37,7 @@ public class TypeTest {
 		assertEquals(1, type.getDeclaredInterfaces().length);
 		assertEquals(1, typeSuper.getDeclaredInterfaces().length);
 		assertEquals(3, type.getInterfaces().length);
-		assertEquals(6, type.getExportTypes().length);
+		assertEquals(6, type.getAssignableTypes().length);
 		assertEquals(4, type.getFields(MemberDomains.AllPublic).length);
 		
 		assertEquals(3, type.getFields(MemberDomains.Public | MemberDomains.NonPublic | MemberDomains.Instance | MemberDomains.Static).length);

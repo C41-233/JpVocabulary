@@ -1,20 +1,24 @@
 package base.reflect;
 
+import java.io.InputStream;
 import java.lang.annotation.Annotation;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.TypeVariable;
+import java.util.HashMap;
 
-public final class Type<T> implements IAnnotatedReflectElement{
+public final class Type<T> implements IAnnotatedReflectElement, IGenericReflectElement<Class<T>>{
 
 	final Class<T> clazz;
 	
 	final ConstructorContainer<T> constructors;
 	final FieldContainer fields;
-	final ExportTypeContainer<T> export;
+	final AssginableTypeContainer<T> assignables;
 	final MemberTypeContainer memberTypes;
 	
 	Type(Class<T> clazz) {
 		this.clazz = clazz;
 
-		this.export = new ExportTypeContainer<>(this);
+		this.assignables = new AssginableTypeContainer<>(this);
 		this.memberTypes = new MemberTypeContainer(this);
 		this.fields = new FieldContainer(this);
 		this.constructors = new ConstructorContainer<>(this);
@@ -109,11 +113,11 @@ public final class Type<T> implements IAnnotatedReflectElement{
 	}
 
 	public Type<? super T>[] getDeclaredInterfaces() {
-		return export.getDeclaredInterfaces();
+		return assignables.getDeclaredInterfaces();
 	}
 	
 	public Type<? super T>[] getInterfaces(){
-		return export.getInterfaces();
+		return assignables.getInterfaces();
 	}
 
 	public Type<?>[] getMemberTypes(int domain){
@@ -130,6 +134,14 @@ public final class Type<T> implements IAnnotatedReflectElement{
 	
 	public boolean isInterface() {
 		return clazz.isInterface();
+	}
+	
+	public boolean isAnnotation() {
+		return clazz.isAnnotation();
+	}
+	
+	public boolean isAnonymous() {
+		return clazz.isAnonymousClass();
 	}
 	
 	public boolean isPublic() {
@@ -168,8 +180,41 @@ public final class Type<T> implements IAnnotatedReflectElement{
 		return clazz;
 	}
 
-	public String getCanonicalName() {
+	public String getName() {
 		return clazz.getCanonicalName();
+	}
+	
+	private static final HashMap<Class, String> primitiveToSpecific = new HashMap<>();
+	static {
+		primitiveToSpecific.put(byte.class, "B");
+		primitiveToSpecific.put(char.class, "C");
+		primitiveToSpecific.put(short.class, "S");
+		primitiveToSpecific.put(int.class, "I");
+		primitiveToSpecific.put(long.class, "J");
+		primitiveToSpecific.put(double.class, "D");
+		primitiveToSpecific.put(float.class, "F");
+		primitiveToSpecific.put(boolean.class, "Z");
+		primitiveToSpecific.put(void.class, "V");
+	}
+	
+	public String getVMSignatureName() {
+		String name = primitiveToSpecific.get(clazz);
+		if(name != null) {
+			return name;
+		}
+		if(clazz.isArray()) {
+			Type compoment = getArrayComponentType();
+			return "["+compoment.getVMSignatureName();
+		}
+		return "L"+getName().replace('.', '/')+";";
+	}
+
+	public String getSimpleName() {
+		return clazz.getSimpleName();
+	}
+
+	public String getSpecificName() {
+		return clazz.getName();
 	}
 	
 	public ClassLoader getClassLoader() {
@@ -184,12 +229,38 @@ public final class Type<T> implements IAnnotatedReflectElement{
 		return Types.typeOf(clazz.getSuperclass());
 	}
 
-	public Type<? super T>[] getExportTypes(){
-		return export.getExportTypes();
+	public ParameterizedType getSuperGenericType(){
+		java.lang.reflect.Type genericType = clazz.getGenericSuperclass();
+		if(genericType instanceof ParameterizedType) {
+			return (ParameterizedType) genericType;
+		}
+		return null;
+	}
+	
+	public ParameterizedType getDeclaredGenericInterface(Class<? super T> interfaze) {
+		java.lang.reflect.Type[] genericTypes = clazz.getGenericInterfaces();
+		for(java.lang.reflect.Type genericType : genericTypes) {
+			if(genericType instanceof ParameterizedType) {
+				ParameterizedType parameterizedType = (ParameterizedType) genericType;
+				if(parameterizedType.getRawType() == interfaze) {
+					return parameterizedType;
+				}
+			}
+		}
+		return null;
+	}
+	
+	@Override
+	public TypeVariable<Class<T>>[] getGenericTypeParameters(){
+		return clazz.getTypeParameters();
+	}
+	
+	public Type<? super T>[] getAssignableTypes(){
+		return assignables.getExportTypes();
 	}
 
-	public Type<? super T>[] getExportSuperTypes() {
-		return export.getExportSuperTypes();
+	public Type<? super T>[] getAssignableSuperTypes() {
+		return assignables.getExportSuperTypes();
 	}
 
 	public Type<?> getEnclosingType(){
@@ -200,9 +271,21 @@ public final class Type<T> implements IAnnotatedReflectElement{
 		return Types.asConstructorInfo(clazz.getEnclosingConstructor());
 	}
 	
+	public T[] getEnumConstants() {
+		return clazz.getEnumConstants();
+	}
+	
+	public Package getPackage() {
+		return clazz.getPackage();
+	}
+	
+	public int getModifiers() {
+		return clazz.getModifiers();
+	}
+	
 	@Override
 	public String toString() {
-		return clazz.getName();
+		return clazz.getCanonicalName();
 	}
 	
 	@Override
@@ -215,4 +298,8 @@ public final class Type<T> implements IAnnotatedReflectElement{
 		return this.clazz.hashCode();
 	}
 
+	public InputStream readResource(String name) {
+		return clazz.getResourceAsStream(name);
+	}
+	
 }

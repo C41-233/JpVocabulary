@@ -19,7 +19,7 @@ final class MemberTypeContainer {
 		
 		addMemberTypesInner(list, flags);
 		if(flags.isInterited()) {
-			for(Type base : type.getExportSuperTypes()) {
+			for(Type base : type.getAssignableSuperTypes()) {
 				base.memberTypes.addMemberTypesInner(list, flags);
 			}
 		}

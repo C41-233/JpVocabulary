@@ -25,7 +25,7 @@ final class FieldContainer {
 		
 		addFieldsInner(list, flags);
 		if(flags.isInterited()) {
-			for(Type base : type.getExportSuperTypes()) {
+			for(Type base : type.getAssignableSuperTypes()) {
 				base.fields.addFieldsInner(list, flags);
 			}
 		}
@@ -70,7 +70,7 @@ final class FieldContainer {
 			}
 		}
 		if(flags.isInterited()) {
-			for(Type base : type.getExportSuperTypes()) {
+			for(Type base : type.getAssignableSuperTypes()) {
 				FieldInfo field = base.fields.getField(name, flags);
 				if(field != null) {
 					return field;
