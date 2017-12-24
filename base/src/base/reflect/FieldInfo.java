@@ -72,22 +72,22 @@ public final class FieldInfo implements IAnnotatedReflectElement{
 
 	@Override
 	public <T extends Annotation> T getAnnotation(Class<T> clazz) {
-		return field.getDeclaredAnnotation(clazz);
+		return field.getAnnotation(clazz);
 	}
 
 	@Override
 	public <T extends Annotation> boolean hasAnnotation(Class<T> clazz) {
-		return field.getDeclaredAnnotation(clazz) != null;
+		return field.getAnnotation(clazz) != null;
 	}
 
 	@Override
 	public Annotation[] getAnnotations() {
-		return field.getDeclaredAnnotations();
+		return field.getAnnotations();
 	}
 
 	@Override
 	public <TAnnotation extends Annotation> TAnnotation[] getAnnotations(Class<TAnnotation> cl) {
-		return field.getDeclaredAnnotationsByType(cl);
+		return field.getAnnotationsByType(cl);
 	}
 
 	public Type getDeclaringType() {
