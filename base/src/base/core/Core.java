@@ -29,7 +29,7 @@ public final class Core {
 		throw (E) e;
 	}
 	
-	public static <E extends Throwable> RuntimeException throwException(Throwable e) {
+	public static RuntimeException throwException(Throwable e) {
 		return Core.<RuntimeException>throwRuntime(e);
 	}
 	
