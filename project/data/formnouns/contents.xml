@@ -1,0 +1,19 @@
+<contents>
+	<content value="ue" name="うえ" align="上"/>
+	<content value="uchi" name="うち" align="内"/>
+	<content value="koto" name="こと" align="事"/>
+	<content value="tabi" name="たび" align="度"/>
+	<content value="tame" name="ため" align="為"/>
+	<content value="tumori" name="つもり" align="積もり/心算"/>
+	<content value="toori" name="とおり" align="通"/>
+	<content value="tokoro" name="ところ" align="所"/>
+	<content value="hazu" name="はず" align="筈"/>
+	<content value="fuu" name="ふう" align="風"/>
+	<content value="hou" name="ほう" align="方"/>
+	<content value="mama" name="まま" align="儘"/>
+	<content value="moto" name="もと" align="本/元/素"/>
+	<content value="mono" name="もの" align="物"/>
+	<content value="no" name="の"/>
+	<content value="sei" name="せい" align="所為"/>
+	<content value="nn" name="ん"/>
+</contents>

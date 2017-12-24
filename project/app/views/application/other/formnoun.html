@@ -1,27 +1,40 @@
 #{meta /}
 
+#{stylesheet "words/basic.css"/}
+
 #{body}
 
 <div class="container">
 	<div class="row">
 		<div class="col-lg-3">
-			#{list items:groups, as:'group'}
-				<div>
-					<div class="list-group">
-					<div class="list-group-item font-bold">${group.name}</div>
-					#{list items:group.contents, as:'content'}
-						#{if content.value == index.value}
-							<li class="list-group-item active">${content.name}</li>
-						#{/if}
-						#{else}
-							<a href="/words/basic/${content.value}" class="list-group-item">${content.name}</a>
-						#{/else}
-					#{/list}
-					</div>
-				</div>
+			#{list items:contents, as:'content'}
+				#{if content.value == index.value}
+					<a class="list-group-item active">
+				#{/if}
+				#{else}
+					<a href="/words/formnoun/${content.value}" class="list-group-item">
+				#{/else}
+					${content.name}#{if content.align}【${content.align}】#{/if}</a>
 			#{/list}
 		</div>
 		<div class="col-lg-9">
+			<h3>${index.name}#{if index.align}【${index.align}】#{/if}</h3>
+			<hr/>
+			#{if data}
+				#{list items:data.values, as:'value'}
+					<div class="div-block">
+						<div>${value.meaning}</div>
+						<div class="div-examples">
+						#{list items:value.examples, as:'example'}
+							<div class="div-example">
+								<div class="example-sentence font-jp">${example.jp}</div>
+								<div>${example.cn}</div>
+							</div>
+						#{/list}
+						</div>
+					</div>
+				#{/list}
+			#{/if}
 		</div>
 	</div>
 </div>

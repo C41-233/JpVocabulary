@@ -1,0 +1,24 @@
+<formnoun name="ため">
+	<value>
+		<meaning>表示目的。</meaning>
+		<example>
+			<jp>日本語を身に着けるために一生懸命勉強しています。</jp>
+			<cn>为了掌握日语而拼命学习。</cn>
+		</example>
+		<example>
+			<jp>何のために日本語を勉強していますか。</jp>
+			<cn>你学习日语是为了什么？</cn>
+		</example>
+	</value>
+	<value>
+		<meaning>表示原因。</meaning>
+		<example>
+			<jp>昨日、学校に来なかったのは病気のためです。</jp>
+			<cn>昨天没来学校是因为病了。</cn>
+		</example>
+		<example>
+			<jp>車が急に増えたために、交通事故が多くなりました。</jp>
+			<cn>因为车辆的急剧增多，交通事故也变多了。</cn>
+		</example>
+	</value>
+</formnoun>

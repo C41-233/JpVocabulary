@@ -1,0 +1,27 @@
+<formnoun name="うち">
+	<value>
+		<meaning>表示某种状态发生之前做某事，相当于“趁着”。</meaning>
+		<example>
+			<jp>若いうちによく勉強しなければなりません。</jp>
+			<cn>应该趁着年轻的时候努力学习。</cn>
+		</example>
+	</value>
+	<value>
+		<meaning>表示范围内。</meaning>
+		<example>
+			<jp>二、三日のうちに行きます。</jp>
+			<cn>两三天之内去。</cn>
+		</example>
+		<example>
+			<jp>三人のうちで林さんが一番若いです。</jp>
+			<cn>三人中小林最年轻的。</cn>
+		</example>
+	</value>
+	<value>
+		<meaning>表示某件事或某种状态持续过程中，发生与意志无关的另一件事。</meaning>
+		<example>
+			<jp>話あっているうちにいいアイディアが浮かびました。</jp>
+			<cn>交谈中想出了一个好主意。</cn>
+		</example>
+	</value>
+</formnoun>
