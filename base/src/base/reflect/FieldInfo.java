@@ -5,7 +5,7 @@ import java.lang.reflect.Field;
 
 import base.core.Core;
 
-public final class FieldInfo {
+public final class FieldInfo implements IAnnotatedReflectElement{
 
 	private final Field field;
 	private final Type type;
@@ -70,12 +70,24 @@ public final class FieldInfo {
 		}
 	}
 
+	@Override
 	public <T extends Annotation> T getAnnotation(Class<T> clazz) {
-		return field.getAnnotation(clazz);
+		return field.getDeclaredAnnotation(clazz);
 	}
 
+	@Override
 	public <T extends Annotation> boolean hasAnnotation(Class<T> clazz) {
-		return field.getAnnotation(clazz) != null;
+		return field.getDeclaredAnnotation(clazz) != null;
+	}
+
+	@Override
+	public Annotation[] getAnnotations() {
+		return field.getDeclaredAnnotations();
+	}
+
+	@Override
+	public <TAnnotation extends Annotation> TAnnotation[] getAnnotations(Class<TAnnotation> cl) {
+		return field.getDeclaredAnnotationsByType(cl);
 	}
 
 	public Type getDeclaringType() {

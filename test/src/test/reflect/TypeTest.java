@@ -25,7 +25,7 @@ public class TypeTest {
 		Type<TestChild> type = Types.typeOf(TestChild.class);
 		Type<TestSuper> typeSuper = Types.typeOf(TestSuper.class);
 
-		assertEquals("test.reflect.TypeTest$TestChild", type.toString());
+		assertEquals("test.reflect.TypeTest.TestChild", type.toString());
 		
 		assertTrue(typeSuper == type.getSuperType());
 		

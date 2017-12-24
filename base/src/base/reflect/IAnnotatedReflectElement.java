@@ -18,8 +18,6 @@ public interface IAnnotatedReflectElement {
 		return getAnnotations(type.clazz);
 	}
 	
-	public Annotation[] getDeclaredAnnotations();
-	
 	public <TAnnotation extends Annotation> boolean hasAnnotation(Class<TAnnotation> cl);
 
 	public default <TAnnotation extends Annotation> boolean hasAnnotation(Type<TAnnotation> type) {

@@ -71,25 +71,48 @@ public final class Type<T> implements IAnnotatedReflectElement, IGenericReflectE
 	public <TAnnotation extends Annotation> TAnnotation getAnnotation(Class<TAnnotation> cl) {
 		return clazz.getAnnotation(cl);
 	}
+	
+	public <TAnnotation extends Annotation> TAnnotation getDeclaredAnnotation(Class<TAnnotation> cl) {
+		return clazz.getDeclaredAnnotation(cl);
+	}
+
+	public <TAnnotation extends Annotation> TAnnotation getDeclaredAnnotation(Type<TAnnotation> type) {
+		return clazz.getDeclaredAnnotation(type.clazz);
+	}
 
 	@Override
 	public Annotation[] getAnnotations() {
 		return clazz.getAnnotations();
+	}
+
+	public Annotation[] getDeclaredAnnotations() {
+		return clazz.getDeclaredAnnotations();
 	}
 	
 	@Override
 	public <TAnnotation extends Annotation> TAnnotation[] getAnnotations(Class<TAnnotation> cl) {
 		return clazz.getAnnotationsByType(cl);
 	}
-	
-	@Override
-	public Annotation[] getDeclaredAnnotations() {
-		return clazz.getDeclaredAnnotations();
+
+	public <TAnnotation extends Annotation> TAnnotation[] getDeclaredAnnotations(Class<TAnnotation> cl) {
+		return clazz.getDeclaredAnnotationsByType(cl);
+	}
+
+	public <TAnnotation extends Annotation> TAnnotation[] getDeclaredAnnotations(Type<TAnnotation> type) {
+		return clazz.getDeclaredAnnotationsByType(type.clazz);
 	}
 	
 	@Override
 	public <TAnnotation extends Annotation> boolean hasAnnotation(Class<TAnnotation> cl) {
-		return clazz.isAnnotationPresent(cl);
+		return clazz.getAnnotation(cl) != null;
+	}
+
+	public <TAnnotation extends Annotation> boolean hasDeclaredAnnotation(Class<TAnnotation> cl) {
+		return clazz.getDeclaredAnnotation(cl) != null;
+	}
+
+	public <TAnnotation extends Annotation> boolean hasDeclaredAnnotation(Type<TAnnotation> type) {
+		return clazz.getDeclaredAnnotation(type.clazz) != null;
 	}
 	
 	public ConstructorInfo<T> getConstructor(Class<?>...parameterTypes){

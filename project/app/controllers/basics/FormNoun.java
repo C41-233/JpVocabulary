@@ -4,8 +4,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlList;
-
 import base.utility.linq.Linq;
 import base.xml.XmlListClass;
 import base.xml.XmlReader;
