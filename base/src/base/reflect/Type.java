@@ -6,7 +6,7 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.TypeVariable;
 import java.util.HashMap;
 
-public final class Type<T> implements IAnnotatedReflectElement, IGenericReflectElement<Class<T>>{
+public final class Type<T> implements IAnnotatedReflectElement, IGenericReflectElement<Class<T>>, IAccessableReflectElement{
 
 	final Class<T> clazz;
 	
@@ -199,18 +199,22 @@ public final class Type<T> implements IAnnotatedReflectElement, IGenericReflectE
 		return clazz.isLocalClass();
 	}
 	
+	@Override
 	public boolean isPublic() {
 		return Modifiers.isPublic(clazz);
 	}
 	
+	@Override
 	public boolean isProtected() {
 		return Modifiers.isProtected(clazz);
 	}
 	
+	@Override
 	public boolean isPrivate() {
 		return Modifiers.isPrivate(clazz);
 	}
 	
+	@Override
 	public boolean isInternal() {
 		return Modifiers.isInternal(clazz);
 	}

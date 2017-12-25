@@ -2,10 +2,12 @@ package base.reflect;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.TypeVariable;
 
 import base.core.Core;
 
-public final class FieldInfo implements IAnnotatedReflectElement{
+public final class FieldInfo implements IAnnotatedReflectElement, IAccessableReflectElement{
 
 	private final Field field;
 	private final Type type;
@@ -28,15 +30,34 @@ public final class FieldInfo implements IAnnotatedReflectElement{
 	public Type getType() {
 		return type;
 	}
-
+	
+	public TypeVariable<?> getGenericTypeVariable(){
+		java.lang.reflect.Type type = field.getGenericType();
+		if(type instanceof TypeVariable) {
+			return (TypeVariable<?>) type;
+		}
+		return null;
+	}
+	
+	public ParameterizedType getGenericParameterizedType() {
+		java.lang.reflect.Type type = field.getGenericType();
+		if(type instanceof ParameterizedType) {
+			return (ParameterizedType) type;
+		}
+		return null;
+	}
+	
+	@Override
 	public boolean isPublic() {
 		return Modifiers.isPublic(field);
 	}
 
+	@Override
 	public boolean isProtected() {
 		return Modifiers.isProtected(field);
 	}
 
+	@Override
 	public boolean isInternal() {
 		return Modifiers.isInternal(field);
 	}
@@ -49,10 +70,19 @@ public final class FieldInfo implements IAnnotatedReflectElement{
 		return Modifiers.isInstance(field);
 	}
 
+	@Override
 	public boolean isPrivate() {
 		return Modifiers.isPrivate(field);
 	}
+	
+	public boolean isEnumConstant() {
+		return field.isEnumConstant();
+	}
 
+	public boolean isSynthetic() {
+		return field.isSynthetic();
+	}
+	
 	public void setValue(Object obj, Object value) {
 		try {
 			field.set(obj, value);
@@ -206,9 +236,26 @@ public final class FieldInfo implements IAnnotatedReflectElement{
 		}
 	}
 
+	@SuppressWarnings("unchecked")
+	public <T> T getStaticValue(){
+		try {
+			return (T) field.get(null);
+		} catch (IllegalArgumentException | IllegalAccessException e) {
+			throw Core.throwException(e);
+		}
+	}
+
 	public boolean getBooleanValue(Object obj) {
 		try {
 			return field.getBoolean(obj);
+		} catch (IllegalArgumentException | IllegalAccessException e) {
+			throw Core.throwException(e);
+		}
+	}
+
+	public boolean getBooleanStaticValue() {
+		try {
+			return field.getBoolean(null);
 		} catch (IllegalArgumentException | IllegalAccessException e) {
 			throw Core.throwException(e);
 		}
@@ -221,10 +268,26 @@ public final class FieldInfo implements IAnnotatedReflectElement{
 			throw Core.throwException(e);
 		}
 	}
+
+	public byte getByteStaticValue() {
+		try {
+			return field.getByte(null);
+		} catch (IllegalArgumentException | IllegalAccessException e) {
+			throw Core.throwException(e);
+		}
+	}
 	
 	public char getCharValue(Object obj) {
 		try {
 			return field.getChar(obj);
+		} catch (IllegalArgumentException | IllegalAccessException e) {
+			throw Core.throwException(e);
+		}
+	}
+
+	public char getCharStaticValue() {
+		try {
+			return field.getChar(null);
 		} catch (IllegalArgumentException | IllegalAccessException e) {
 			throw Core.throwException(e);
 		}
@@ -237,10 +300,26 @@ public final class FieldInfo implements IAnnotatedReflectElement{
 			throw Core.throwException(e);
 		}
 	}
+
+	public short getShortStaticValue() {
+		try {
+			return field.getShort(null);
+		} catch (IllegalArgumentException | IllegalAccessException e) {
+			throw Core.throwException(e);
+		}
+	}
 	
 	public int getIntValue(Object obj) {
 		try {
 			return field.getInt(obj);
+		} catch (IllegalArgumentException | IllegalAccessException e) {
+			throw Core.throwException(e);
+		}
+	}
+
+	public int getIntStaticValue() {
+		try {
+			return field.getInt(null);
 		} catch (IllegalArgumentException | IllegalAccessException e) {
 			throw Core.throwException(e);
 		}
@@ -253,6 +332,14 @@ public final class FieldInfo implements IAnnotatedReflectElement{
 			throw Core.throwException(e);
 		}
 	}
+
+	public long getLongStaticValue() {
+		try {
+			return field.getLong(null);
+		} catch (IllegalArgumentException | IllegalAccessException e) {
+			throw Core.throwException(e);
+		}
+	}
 	
 	public float getFloatValue(Object obj) {
 		try {
@@ -261,10 +348,26 @@ public final class FieldInfo implements IAnnotatedReflectElement{
 			throw Core.throwException(e);
 		}
 	}
+
+	public float getFloatStaticValue() {
+		try {
+			return field.getFloat(null);
+		} catch (IllegalArgumentException | IllegalAccessException e) {
+			throw Core.throwException(e);
+		}
+	}
 	
 	public double getDoubleValue(Object obj) {
 		try {
 			return field.getDouble(obj);
+		} catch (IllegalArgumentException | IllegalAccessException e) {
+			throw Core.throwException(e);
+		}
+	}
+	
+	public double getDoubleStaticValue() {
+		try {
+			return field.getDouble(null);
 		} catch (IllegalArgumentException | IllegalAccessException e) {
 			throw Core.throwException(e);
 		}
