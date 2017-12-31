@@ -4,6 +4,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.TypeVariable;
+import java.util.Objects;
 
 import base.core.Core;
 
@@ -84,6 +85,7 @@ public final class FieldInfo implements IAnnotatedReflectElement, IAccessableRef
 	}
 	
 	public void setValue(Object obj, Object value) {
+		Objects.requireNonNull(obj);
 		try {
 			field.set(obj, value);
 		} catch (IllegalArgumentException | IllegalAccessException e) {
@@ -99,136 +101,10 @@ public final class FieldInfo implements IAnnotatedReflectElement, IAccessableRef
 		}
 	}
 
-	public void setValue(Object obj, byte value) {
-		try {
-			field.set(obj, value);
-		} catch (IllegalArgumentException | IllegalAccessException e) {
-			throw Core.throwException(e);
-		}
-	}
-
-	public void setStaticValue(byte value) {
-		try {
-			field.set(null, value);
-		} catch (IllegalArgumentException | IllegalAccessException e) {
-			throw Core.throwException(e);
-		}
-	}
-
-	public void setValue(Object obj, boolean value) {
-		try {
-			field.set(obj, value);
-		} catch (IllegalArgumentException | IllegalAccessException e) {
-			throw Core.throwException(e);
-		}
-	}
-
-	public void setStaticValue(boolean value) {
-		try {
-			field.set(null, value);
-		} catch (IllegalArgumentException | IllegalAccessException e) {
-			throw Core.throwException(e);
-		}
-	}
-
-	public void setValue(Object obj, short value) {
-		try {
-			field.set(obj, value);
-		} catch (IllegalArgumentException | IllegalAccessException e) {
-			throw Core.throwException(e);
-		}
-	}
-
-	public void setStaticValue(short value) {
-		try {
-			field.set(null, value);
-		} catch (IllegalArgumentException | IllegalAccessException e) {
-			throw Core.throwException(e);
-		}
-	}
-
-	public void setValue(Object obj, char value) {
-		try {
-			field.set(obj, value);
-		} catch (IllegalArgumentException | IllegalAccessException e) {
-			throw Core.throwException(e);
-		}
-	}
-
-	public void setStaticValue(char value) {
-		try {
-			field.set(null, value);
-		} catch (IllegalArgumentException | IllegalAccessException e) {
-			throw Core.throwException(e);
-		}
-	}
-
-	public void setValue(Object obj, int value) {
-		try {
-			field.set(obj, value);
-		} catch (IllegalArgumentException | IllegalAccessException e) {
-			throw Core.throwException(e);
-		}
-	}
-
-	public void setStaticValue(int value) {
-		try {
-			field.set(null, value);
-		} catch (IllegalArgumentException | IllegalAccessException e) {
-			throw Core.throwException(e);
-		}
-	}
-
-	public void setValue(Object obj, long value) {
-		try {
-			field.set(obj, value);
-		} catch (IllegalArgumentException | IllegalAccessException e) {
-			throw Core.throwException(e);
-		}
-	}
-
-	public void setStaticValue(long value) {
-		try {
-			field.set(null, value);
-		} catch (IllegalArgumentException | IllegalAccessException e) {
-			throw Core.throwException(e);
-		}
-	}
-
-	public void setValue(Object obj, float value) {
-		try {
-			field.set(obj, value);
-		} catch (IllegalArgumentException | IllegalAccessException e) {
-			throw Core.throwException(e);
-		}
-	}
-
-	public void setStaticValue(float value) {
-		try {
-			field.set(null, value);
-		} catch (IllegalArgumentException | IllegalAccessException e) {
-			throw Core.throwException(e);
-		}
-	}
-
-	public void setValue(Object obj, double value) {
-		try {
-			field.set(obj, value);
-		} catch (IllegalArgumentException | IllegalAccessException e) {
-			throw Core.throwException(e);
-		}
-	}
-
-	public void setStaticValue(double value) {
-		try {
-			field.set(null, value);
-		} catch (IllegalArgumentException | IllegalAccessException e) {
-			throw Core.throwException(e);
-		}
-	}
 
 	@SuppressWarnings("unchecked")
 	public <T> T getValue(Object obj){
+		Objects.requireNonNull(obj);
 		try {
 			return (T) field.get(obj);
 		} catch (IllegalArgumentException | IllegalAccessException e) {
@@ -245,134 +121,6 @@ public final class FieldInfo implements IAnnotatedReflectElement, IAccessableRef
 		}
 	}
 
-	public boolean getBooleanValue(Object obj) {
-		try {
-			return field.getBoolean(obj);
-		} catch (IllegalArgumentException | IllegalAccessException e) {
-			throw Core.throwException(e);
-		}
-	}
-
-	public boolean getBooleanStaticValue() {
-		try {
-			return field.getBoolean(null);
-		} catch (IllegalArgumentException | IllegalAccessException e) {
-			throw Core.throwException(e);
-		}
-	}
-	
-	public byte getByteValue(Object obj) {
-		try {
-			return field.getByte(obj);
-		} catch (IllegalArgumentException | IllegalAccessException e) {
-			throw Core.throwException(e);
-		}
-	}
-
-	public byte getByteStaticValue() {
-		try {
-			return field.getByte(null);
-		} catch (IllegalArgumentException | IllegalAccessException e) {
-			throw Core.throwException(e);
-		}
-	}
-	
-	public char getCharValue(Object obj) {
-		try {
-			return field.getChar(obj);
-		} catch (IllegalArgumentException | IllegalAccessException e) {
-			throw Core.throwException(e);
-		}
-	}
-
-	public char getCharStaticValue() {
-		try {
-			return field.getChar(null);
-		} catch (IllegalArgumentException | IllegalAccessException e) {
-			throw Core.throwException(e);
-		}
-	}
-	
-	public short getShortValue(Object obj) {
-		try {
-			return field.getShort(obj);
-		} catch (IllegalArgumentException | IllegalAccessException e) {
-			throw Core.throwException(e);
-		}
-	}
-
-	public short getShortStaticValue() {
-		try {
-			return field.getShort(null);
-		} catch (IllegalArgumentException | IllegalAccessException e) {
-			throw Core.throwException(e);
-		}
-	}
-	
-	public int getIntValue(Object obj) {
-		try {
-			return field.getInt(obj);
-		} catch (IllegalArgumentException | IllegalAccessException e) {
-			throw Core.throwException(e);
-		}
-	}
-
-	public int getIntStaticValue() {
-		try {
-			return field.getInt(null);
-		} catch (IllegalArgumentException | IllegalAccessException e) {
-			throw Core.throwException(e);
-		}
-	}
-	
-	public long getLongValue(Object obj) {
-		try {
-			return field.getLong(obj);
-		} catch (IllegalArgumentException | IllegalAccessException e) {
-			throw Core.throwException(e);
-		}
-	}
-
-	public long getLongStaticValue() {
-		try {
-			return field.getLong(null);
-		} catch (IllegalArgumentException | IllegalAccessException e) {
-			throw Core.throwException(e);
-		}
-	}
-	
-	public float getFloatValue(Object obj) {
-		try {
-			return field.getFloat(obj);
-		} catch (IllegalArgumentException | IllegalAccessException e) {
-			throw Core.throwException(e);
-		}
-	}
-
-	public float getFloatStaticValue() {
-		try {
-			return field.getFloat(null);
-		} catch (IllegalArgumentException | IllegalAccessException e) {
-			throw Core.throwException(e);
-		}
-	}
-	
-	public double getDoubleValue(Object obj) {
-		try {
-			return field.getDouble(obj);
-		} catch (IllegalArgumentException | IllegalAccessException e) {
-			throw Core.throwException(e);
-		}
-	}
-	
-	public double getDoubleStaticValue() {
-		try {
-			return field.getDouble(null);
-		} catch (IllegalArgumentException | IllegalAccessException e) {
-			throw Core.throwException(e);
-		}
-	}
-	
 	@Override
 	public <T extends Annotation> T getAnnotation(Class<T> clazz) {
 		return field.getAnnotation(clazz);

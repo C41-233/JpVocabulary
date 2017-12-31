@@ -5,60 +5,47 @@ import base.utility.collection.list.TypeArrayList;
 final class MemberTypeContainer {
 
 	private final Type type;
-	private final Class<?>[] memberClasses;
 	
-	private Type<?>[] cachedMemberTypes;
+	private Type<?>[] cachedDeclaredMemberTypes;
+	private Type<?>[] cachedExportMemberTypes;
 	
 	public MemberTypeContainer(Type type) {
 		this.type = type;
-		this.memberClasses = type.clazz.getDeclaredClasses();
 	}
 	
-	public Type<?>[] getMemberTypes(MemberDomainFlags flags){
-		TypeArrayList<Type> list = new TypeArrayList<>(Type.class);
-		
-		addMemberTypesInner(list, flags);
-		if(flags.isInterited()) {
-			for(Type base : type.getAssignableSuperTypes()) {
-				base.memberTypes.addMemberTypesInner(list, flags);
-			}
-		}
-		
-		return list.toArray();
+	public Type<?>[] getMemberTypes(){
+		return getCachedExportMemberTypesInner().clone();
 	}
 	
-	private void addMemberTypesInner(TypeArrayList<Type> list, MemberDomainFlags flags) {
-		Type[] types = getCachedMemberTypes();
-		for (Type type : types) {
-			if(type.isPublic() && !flags.isPublic()) {
-				continue;
-			}
-			if(type.isProtected() && !flags.isProtected()) {
-				continue;
-			}
-			if(type.isInternal() && !flags.isInternal()) {
-				continue;
-			}
-			if(type.isPrivate() && !flags.isPrivate()) {
-				continue;
-			}
-			if(type.isStatic() && !flags.isStatic()) {
-				continue;
-			}
-			if(!type.isStatic() && !flags.isInstance()) {
-				continue;
-			}
-			list.add(type);
-		}
+	public Type<?>[] getDeclaredMemberTypes(){
+		return getCachedDeclaredMemberTypesInner().clone();
 	}
 	
-	private Type<?>[] getCachedMemberTypes(){
-		if(cachedMemberTypes == null) {
-			cachedMemberTypes = new Type[memberClasses.length];
+	private Type<?>[] getCachedDeclaredMemberTypesInner(){
+		if(cachedDeclaredMemberTypes == null) {
+			Class<?>[] memberClasses = type.clazz.getDeclaredClasses();
+			cachedDeclaredMemberTypes = new Type[memberClasses.length];
 			for(int i=0; i<memberClasses.length; i++) {
-				cachedMemberTypes[i] = Types.typeOf(memberClasses[i]);
+				cachedDeclaredMemberTypes[i] = Types.typeOf(memberClasses[i]);
 			}
 		}
-		return cachedMemberTypes;
+		return cachedDeclaredMemberTypes;
 	}
+	
+	private Type<?>[] getCachedExportMemberTypesInner(){
+		if(cachedExportMemberTypes == null) {
+			TypeArrayList<Type> list = new TypeArrayList<>(Type.class);
+			list.addAll(getCachedDeclaredMemberTypesInner());
+			for (Type<?> base : type.getAssignableSuperTypes()) {
+				for (Type<?> type : base.memberTypes.getCachedDeclaredMemberTypesInner()) {
+					if(type.isPublic() || type.isProtected()) {
+						list.add(type);
+					}
+				}
+			}
+			cachedExportMemberTypes = list.toArray();
+		}
+		return cachedExportMemberTypes;
+	}
+	
 }

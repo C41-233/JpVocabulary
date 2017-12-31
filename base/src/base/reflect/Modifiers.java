@@ -188,4 +188,24 @@ public final class Modifiers {
 		return Modifier.isStatic(modifier);
 	}
 
+	public static String toString(Class<?> cl) {
+		return toString(cl.getModifiers());
+	}
+	
+	public static String toString(Field field) {
+		return toString(field.getModifiers());
+	}
+	
+	public static String toString(Method method) {
+		return toString(method.getModifiers());
+	}
+	
+	public static String toString(Constructor<?> constructor) {
+		return toString(constructor.getModifiers());
+	}
+	
+	public static String toString(int modifier) {
+		return Modifier.toString(modifier);
+	}
+	
 }

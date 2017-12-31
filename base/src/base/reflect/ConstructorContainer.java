@@ -18,15 +18,6 @@ final class ConstructorContainer<T> {
 		}
 	}
 
-	public T newInstance(){
-		for(ConstructorInfo<T> constructor : constructors) {
-			if(constructor.getParameterCount() == 0) {
-				return constructor.newInstance();
-			}
-		}
-		throw Core.throwException(new NoSuchMethodException());
-	}
-
 	public ConstructorInfo<T>[] getConstructors() {
 		return constructors.clone();
 	}
@@ -38,6 +29,15 @@ final class ConstructorContainer<T> {
 			}
 		}
 		return null;
+	}
+
+	public T newInstance(){
+		for(ConstructorInfo<T> constructor : constructors) {
+			if(constructor.getParameterCount() == 0) {
+				return constructor.newInstance();
+			}
+		}
+		throw Core.throwException(new NoSuchMethodException());
 	}
 
 }

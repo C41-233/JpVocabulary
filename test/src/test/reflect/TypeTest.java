@@ -6,7 +6,6 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import base.reflect.ConstructorInfo;
-import base.reflect.MemberDomains;
 import base.reflect.Type;
 import base.reflect.Types;
 
@@ -25,7 +24,7 @@ public class TypeTest {
 		Type<TestChild> type = Types.typeOf(TestChild.class);
 		Type<TestSuper> typeSuper = Types.typeOf(TestSuper.class);
 
-		assertEquals("test.reflect.TypeTest.TestChild", type.toString());
+		assertEquals("test.reflect.TypeTest$TestChild", type.toString());
 		
 		assertTrue(typeSuper == type.getSuperType());
 		
@@ -38,11 +37,8 @@ public class TypeTest {
 		assertEquals(1, typeSuper.getDeclaredInterfaces().length);
 		assertEquals(3, type.getInterfaces().length);
 		assertEquals(6, type.getAssignableTypes().length);
-		assertEquals(4, type.getFields(MemberDomains.AllPublic).length);
-		
-		assertEquals(3, type.getFields(MemberDomains.Public | MemberDomains.NonPublic | MemberDomains.Instance | MemberDomains.Static).length);
-		assertEquals(2, type.getFields(MemberDomains.Public | MemberDomains.NonPublic | MemberDomains.Static | MemberDomains.Inherited).length);
-		assertEquals(7, type.getFields(MemberDomains.All).length);
+		assertEquals(3, type.getDeclaredFields().length);
+		assertEquals(6, type.getFields().length);
 	}
 
 	@Test
