@@ -2,6 +2,7 @@ package base.reflect;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.lang.reflect.Parameter;
 import java.util.HashMap;
 
 import base.core.Core;
@@ -50,7 +51,15 @@ public final class Types {
 		}
 		return constructors.getOrCreate(constructor, ()->new ConstructorInfo<>(constructor));
 	}
+
+	private static final WeakMemoryCache<Parameter, ParameterInfo> parameters = new WeakMemoryCache<>();
 	
+	public static ParameterInfo asParameterInfo(Parameter parameter) {
+		if(parameter == null) {
+			return null;
+		}
+		return parameters.getOrCreate(parameter, ()->new ParameterInfo(parameter));
+	}
 	private static final HashMap<Class, Class> primitiveToBox = new HashMap<>();
 	private static final HashMap<Class, Class> boxToPrimitive = new HashMap<>();
 	
@@ -80,5 +89,6 @@ public final class Types {
 		Class cl = boxToPrimitive.get(type);
 		return cl != null ? cl : type;
 	}
+
 	
 }

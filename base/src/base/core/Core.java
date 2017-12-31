@@ -32,5 +32,5 @@ public final class Core {
 	public static RuntimeException throwException(Throwable e) {
 		return Core.<RuntimeException>throwRuntime(e);
 	}
-	
+
 }

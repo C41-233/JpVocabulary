@@ -8,9 +8,11 @@ public interface IFunctionReflectElement {
 	public TypeInfo<?>[] getParameterTypes();
 	public Type[] getParameterGenericTypes();
 	public boolean isParameterTypesOf(Class<?>... parameterTypes);
+	public ParameterInfo[] getParameters();
 
 	public TypeInfo<?>[] getExceptionTypes();
 	public int getExceptionCount();
 	public Type[] getExceptionGenericTypes();
 	
+	public boolean hasVarArgs();
 }

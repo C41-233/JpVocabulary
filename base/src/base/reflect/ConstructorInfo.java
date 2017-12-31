@@ -3,6 +3,7 @@ package base.reflect;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Parameter;
 import java.lang.reflect.Type;
 
 import base.core.Core;
@@ -11,8 +12,6 @@ public final class ConstructorInfo<T>
 implements IAnnotatedReflectElement, IAccessableReflectElement, IFunctionReflectElement{
 
 	final Constructor<T> constructor;
-	
-	private TypeInfo<?>[] cachedParameterTypes;
 	
 	ConstructorInfo(Constructor<T> constructor) {
 		this.constructor = constructor;
@@ -71,7 +70,8 @@ implements IAnnotatedReflectElement, IAccessableReflectElement, IFunctionReflect
 		return constructor.isSynthetic();
 	}
 	
-	public boolean isVarArgs() {
+	@Override
+	public boolean hasVarArgs() {
 		return constructor.isVarArgs();
 	}
 	
@@ -88,6 +88,9 @@ implements IAnnotatedReflectElement, IAccessableReflectElement, IFunctionReflect
 	////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Parameter
 	////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	private TypeInfo<?>[] cachedParameterTypes;
+	private ParameterInfo[] cachedParameters;
 	
 	@Override
 	public int getParameterCount() {
@@ -96,7 +99,7 @@ implements IAnnotatedReflectElement, IAccessableReflectElement, IFunctionReflect
 	
 	@Override
 	public TypeInfo<?>[] getParameterTypes(){
-		return getParameterTypesInner().clone();
+		return getCachedParameterTypesInner().clone();
 	}
 
 	@Override
@@ -106,7 +109,7 @@ implements IAnnotatedReflectElement, IAccessableReflectElement, IFunctionReflect
 	
 	@Override
 	public boolean isParameterTypesOf(Class<?>... parameterTypes) {
-		TypeInfo<?>[] types = getParameterTypesInner();
+		TypeInfo<?>[] types = getCachedParameterTypesInner();
 		if(types.length != parameterTypes.length) {
 			return false;
 		}
@@ -117,8 +120,13 @@ implements IAnnotatedReflectElement, IAccessableReflectElement, IFunctionReflect
 		}
 		return true;
 	}
-
-	private TypeInfo<?>[] getParameterTypesInner(){
+	
+	@Override
+	public ParameterInfo[] getParameters() {
+		return getCachedParameterInfosInner().clone();
+	}
+	
+	private TypeInfo<?>[] getCachedParameterTypesInner(){
 		if(cachedParameterTypes == null) {
 			Class<?>[] parameters = constructor.getParameterTypes();
 			cachedParameterTypes = new TypeInfo<?>[parameters.length];
@@ -129,6 +137,17 @@ implements IAnnotatedReflectElement, IAccessableReflectElement, IFunctionReflect
 		return cachedParameterTypes;
 	}
 
+	private ParameterInfo[] getCachedParameterInfosInner() {
+		if(cachedParameters == null)
+		{
+			Parameter[] parameters = constructor.getParameters();
+			this.cachedParameters = new ParameterInfo[parameters.length];
+			for(int i=0; i<parameters.length; i++) {
+				cachedParameters[i] = Types.asParameterInfo(parameters[i]);
+			}
+		}
+		return cachedParameters;
+	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Annotation
@@ -136,22 +155,22 @@ implements IAnnotatedReflectElement, IAccessableReflectElement, IFunctionReflect
 	
 	@Override
 	public <TAnnotation extends Annotation> TAnnotation getAnnotation(Class<TAnnotation> cl) {
-		return constructor.getDeclaredAnnotation(cl);
+		return constructor.getAnnotation(cl);
 	}
 
 	@Override
 	public Annotation[] getAnnotations() {
-		return constructor.getDeclaredAnnotations();
+		return constructor.getAnnotations();
 	}
 
 	@Override
 	public <TAnnotation extends Annotation> TAnnotation[] getAnnotations(Class<TAnnotation> cl) {
-		return constructor.getDeclaredAnnotationsByType(cl);
+		return constructor.getAnnotationsByType(cl);
 	}
 
 	@Override
 	public <TAnnotation extends Annotation> boolean hasAnnotation(Class<TAnnotation> cl) {
-		return constructor.getDeclaredAnnotation(cl) != null;
+		return constructor.isAnnotationPresent(cl);
 	}
 
 

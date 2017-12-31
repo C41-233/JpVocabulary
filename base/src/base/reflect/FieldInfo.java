@@ -115,7 +115,7 @@ public final class FieldInfo implements IAnnotatedReflectElement, IAccessableRef
 
 	@Override
 	public <T extends Annotation> boolean hasAnnotation(Class<T> clazz) {
-		return field.getAnnotation(clazz) != null;
+		return field.isAnnotationPresent(clazz);
 	}
 
 	@Override
