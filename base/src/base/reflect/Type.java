@@ -397,8 +397,8 @@ public final class Type<T> implements IAnnotatedReflectElement, IGenericReflectE
 		return constructors.getConstructors();
 	}
 	
-	public T newInstance(){
-		return constructors.newInstance();
+	public T newInstance(Object...args){
+		return constructors.newInstance(args);
 	}
 	
 }

@@ -31,11 +31,26 @@ final class ConstructorContainer<T> {
 		return null;
 	}
 
-	public T newInstance(){
+	public T newInstance(Object...args){
+		ConstructorInfo<T> best = null;
+		int min = Integer.MAX_VALUE;
+		
 		for(ConstructorInfo<T> constructor : constructors) {
-			if(constructor.getParameterCount() == 0) {
-				return constructor.newInstance();
+			int distance = ReflectHelper.getDistance(constructor.constructor.getParameterTypes(), args);
+			if(distance == 0) {
+				best = constructor;
+				break;
 			}
+			if(distance < 0) {
+				continue;
+			}
+			if(distance < min) {
+				best = constructor;
+				min = distance;
+			}
+		}
+		if(best != null) {
+			return best.newInstance(args);
 		}
 		throw Core.throwException(new NoSuchMethodException());
 	}

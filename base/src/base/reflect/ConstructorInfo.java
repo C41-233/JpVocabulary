@@ -7,7 +7,7 @@ import base.core.Core;
 
 public final class ConstructorInfo<T>{
 
-	private final Constructor<T> constructor;
+	final Constructor<T> constructor;
 	
 	private Type<?>[] cachedParameterTypes;
 	
