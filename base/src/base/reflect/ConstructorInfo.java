@@ -7,7 +7,8 @@ import java.lang.reflect.Type;
 
 import base.core.Core;
 
-public final class ConstructorInfo<T> implements IAnnotatedReflectElement, IAccessableReflectElement{
+public final class ConstructorInfo<T> 
+implements IAnnotatedReflectElement, IAccessableReflectElement, IFunctionReflectElement{
 
 	final Constructor<T> constructor;
 	
@@ -46,6 +47,34 @@ public final class ConstructorInfo<T> implements IAnnotatedReflectElement, IAcce
 		return constructor.getModifiers();
 	}
 
+	@Override
+	public boolean isPublic() {
+		return Modifiers.isPublic(constructor);
+	}
+
+	@Override
+	public boolean isProtected() {
+		return Modifiers.isProtected(constructor);
+	}
+
+	@Override
+	public boolean isInternal() {
+		return Modifiers.isInternal(constructor);
+	}
+
+	@Override
+	public boolean isPrivate() {
+		return Modifiers.isPrivate(constructor);
+	}
+	
+	public boolean isSynthetic() {
+		return constructor.isSynthetic();
+	}
+	
+	public boolean isVarArgs() {
+		return constructor.isVarArgs();
+	}
+	
 	public T newInstance(Object...args) {
 		try {
 			return constructor.newInstance(args);
@@ -60,18 +89,22 @@ public final class ConstructorInfo<T> implements IAnnotatedReflectElement, IAcce
 	// Parameter
 	////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
+	@Override
 	public int getParameterCount() {
 		return constructor.getParameterCount();
 	}
 	
+	@Override
 	public TypeInfo<?>[] getParameterTypes(){
 		return getParameterTypesInner().clone();
 	}
 
+	@Override
 	public Type[] getParameterGenericTypes(){
 		return constructor.getGenericParameterTypes();
 	}
 	
+	@Override
 	public boolean isParameterTypesOf(Class<?>... parameterTypes) {
 		TypeInfo<?>[] types = getParameterTypesInner();
 		if(types.length != parameterTypes.length) {
@@ -128,14 +161,17 @@ public final class ConstructorInfo<T> implements IAnnotatedReflectElement, IAcce
 	
 	private TypeInfo<?>[] cachedExceptions;
 
+	@Override
 	public TypeInfo<?>[] getExceptionTypes(){
 		return getCachedExceptionsInner().clone();
 	}
 	
+	@Override
 	public int getExceptionCount() {
 		return getCachedExceptionsInner().length;
 	}
 	
+	@Override
 	public Type[] getExceptionGenericTypes() {
 		return constructor.getGenericExceptionTypes();
 	}
@@ -151,32 +187,4 @@ public final class ConstructorInfo<T> implements IAnnotatedReflectElement, IAcce
 		return cachedExceptions;
 	}
 
-	@Override
-	public boolean isPublic() {
-		return Modifiers.isPublic(constructor);
-	}
-
-	@Override
-	public boolean isProtected() {
-		return Modifiers.isProtected(constructor);
-	}
-
-	@Override
-	public boolean isInternal() {
-		return Modifiers.isInternal(constructor);
-	}
-
-	@Override
-	public boolean isPrivate() {
-		return Modifiers.isPrivate(constructor);
-	}
-	
-	public boolean isSynthetic() {
-		return constructor.isSynthetic();
-	}
-	
-	public boolean isVarArgs() {
-		return constructor.isVarArgs();
-	}
-	
 }
