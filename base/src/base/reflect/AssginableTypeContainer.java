@@ -5,34 +5,34 @@ import base.utility.collection.list.TypeArraySet;
 
 final class AssginableTypeContainer<T> {
 
-	private final ClassType<T> type;
+	private final TypeInfo<T> type;
 
-	private ClassType<? super T>[] cachedDeclaredInterfaces;
+	private TypeInfo<? super T>[] cachedDeclaredInterfaces;
 	
-	private ClassType<? super T>[] cachedInterfaces;
+	private TypeInfo<? super T>[] cachedInterfaces;
 	
-	private ClassType<? super T>[] cachedExportTypes;
+	private TypeInfo<? super T>[] cachedExportTypes;
 	
-	public AssginableTypeContainer(ClassType<T> type) {
+	public AssginableTypeContainer(TypeInfo<T> type) {
 		this.type = type;
 	}
 
 	@SuppressWarnings("unchecked")
-	public ClassType<? super T>[] getDeclaredInterfaces() {
+	public TypeInfo<? super T>[] getDeclaredInterfaces() {
 		if(cachedDeclaredInterfaces == null) {
 			Class<?>[] interfaces = type.clazz.getInterfaces();
-			cachedDeclaredInterfaces = new ClassType[interfaces.length];
+			cachedDeclaredInterfaces = new TypeInfo[interfaces.length];
 			for(int i=0; i<interfaces.length; i++) {
-				cachedDeclaredInterfaces[i] = (ClassType<? super T>) Types.typeOf(interfaces[i]);
+				cachedDeclaredInterfaces[i] = (TypeInfo<? super T>) Types.typeOf(interfaces[i]);
 			}
 		}
 		return cachedDeclaredInterfaces.clone();
 	}
 	
 	@SuppressWarnings("unchecked")
-	public ClassType<? super T>[] getInterfaces(){
+	public TypeInfo<? super T>[] getInterfaces(){
 		if(cachedInterfaces == null) {
-			TypeArraySet<ClassType> interfaces = new TypeArraySet<>(ClassType.class);
+			TypeArraySet<TypeInfo> interfaces = new TypeArraySet<>(TypeInfo.class);
 			Class cl = type.clazz;
 			while(cl != null) {
 				for (Class interfaze : cl.getInterfaces()) {
@@ -46,36 +46,36 @@ final class AssginableTypeContainer<T> {
 	}
 	
 	@SuppressWarnings("unchecked")
-	private static void addInterfacesOfInterface(TypeArraySet<ClassType> interfaces, Class clazz) {
-		ClassType type = Types.typeOf(clazz);
+	private static void addInterfacesOfInterface(TypeArraySet<TypeInfo> interfaces, Class clazz) {
+		TypeInfo type = Types.typeOf(clazz);
 		interfaces.add(type);
 		for(Class interfaze : clazz.getInterfaces()) {
 			addInterfacesOfInterface(interfaces, interfaze);
 		}
 	}
 
-	public ClassType<? super T>[] getExportTypes(){
+	public TypeInfo<? super T>[] getExportTypes(){
 		return getExportTypesInner().clone();
 	}
 	
 	@SuppressWarnings("unchecked")
-	public ClassType<? super T>[] getExportSuperTypes(){
-		ClassType<? super T>[] types = getExportTypesInner();
-		ClassType<? super T>[] rst = new ClassType[types.length - 1];
+	public TypeInfo<? super T>[] getExportSuperTypes(){
+		TypeInfo<? super T>[] types = getExportTypesInner();
+		TypeInfo<? super T>[] rst = new TypeInfo[types.length - 1];
 		System.arraycopy(types, 1, rst, 0, rst.length);
 		return rst;
 	}
 
 	@SuppressWarnings("unchecked")
-	private ClassType<? super T>[] getExportTypesInner(){
+	private TypeInfo<? super T>[] getExportTypesInner(){
 		if(cachedExportTypes == null) {
-			TypeArrayList<ClassType> types = new TypeArrayList<>(ClassType.class);
-			ClassType<? super T> type = this.type;
+			TypeArrayList<TypeInfo> types = new TypeArrayList<>(TypeInfo.class);
+			TypeInfo<? super T> type = this.type;
 			while(type != null) {
 				types.add(type);
 				type = type.getSuperType();
 			}
-			for(ClassType<? super T> interfaze : getInterfaces()) {
+			for(TypeInfo<? super T> interfaze : getInterfaces()) {
 				types.add(interfaze);
 			}
 			cachedExportTypes = types.toArray();

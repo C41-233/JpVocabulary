@@ -13,18 +13,18 @@ public final class Types {
 		throw new StaticClassException();
 	}
 
-	private static final WeakMemoryCache<Class, ClassType> classes = new WeakMemoryCache<>();
+	private static final WeakMemoryCache<Class, TypeInfo> classes = new WeakMemoryCache<>();
 	
 	@SuppressWarnings("unchecked")
-	public static <T> ClassType<T> typeOf(Class<T> clazz){
+	public static <T> TypeInfo<T> typeOf(Class<T> clazz){
 		if(clazz == null) {
 			return null;
 		}
 		
-		return classes.getOrCreate(clazz, ()->new ClassType<T>(clazz));
+		return classes.getOrCreate(clazz, ()->new TypeInfo<T>(clazz));
 	}
 	
-	public static ClassType<?> typeOf(String clazz){
+	public static TypeInfo<?> typeOf(String clazz){
 		try {
 			return typeOf(Class.forName(clazz));
 		} catch (ClassNotFoundException e) {

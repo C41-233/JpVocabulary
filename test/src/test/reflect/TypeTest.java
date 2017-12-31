@@ -6,23 +6,23 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import base.reflect.ConstructorInfo;
-import base.reflect.ClassType;
+import base.reflect.TypeInfo;
 import base.reflect.Types;
 
 public class TypeTest {
 
 	@Test
 	public void test1() {
-		ClassType<String> type1 = Types.typeOf(String.class);
-		ClassType<?> type2 = Types.typeOf("java.lang.String");
+		TypeInfo<String> type1 = Types.typeOf(String.class);
+		TypeInfo<?> type2 = Types.typeOf("java.lang.String");
 		assertTrue(type1 == type2);
 		assertTrue(type1.equals(type2));
 	}
 
 	@Test
 	public void test2() {
-		ClassType<TestChild> type = Types.typeOf(TestChild.class);
-		ClassType<TestSuper> typeSuper = Types.typeOf(TestSuper.class);
+		TypeInfo<TestChild> type = Types.typeOf(TestChild.class);
+		TypeInfo<TestSuper> typeSuper = Types.typeOf(TestSuper.class);
 
 		assertEquals("test.reflect.TypeTest$TestChild", type.toString());
 		
@@ -43,7 +43,7 @@ public class TypeTest {
 
 	@Test
 	public void test3() {
-		ClassType<TestChild> type = Types.typeOf(TestChild.class);
+		TypeInfo<TestChild> type = Types.typeOf(TestChild.class);
 		TestChild obj1 = type.newInstance();
 		assertEquals("1", obj1.field3);
 		

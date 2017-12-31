@@ -6,14 +6,14 @@ import java.util.StringJoiner;
 
 final class NameContainer {
 
-	private final ClassType<?> type;
+	private final TypeInfo<?> type;
 	
-	public NameContainer(ClassType<?> type) {
+	public NameContainer(TypeInfo<?> type) {
 		this.type = type;
 	}
 
 	public String getName() {
-		ClassType<?> enclosing = type.getEnclosingType();
+		TypeInfo<?> enclosing = type.getEnclosingType();
 		if(enclosing == null) {
 			return type.clazz.getCanonicalName();
 		}
@@ -46,7 +46,7 @@ final class NameContainer {
 		{
 			//数组类型
 			if(type.clazz.isArray()) {
-				ClassType compoment = type.getArrayComponentType();
+				TypeInfo compoment = type.getArrayComponentType();
 				return "["+compoment.getVMSignatureName();
 			}
 		}

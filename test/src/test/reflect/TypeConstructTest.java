@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import base.reflect.ConstructorInfo;
-import base.reflect.ClassType;
+import base.reflect.TypeInfo;
 import base.reflect.Types;
 
 public class TypeConstructTest {
@@ -43,7 +43,7 @@ public class TypeConstructTest {
 	
 	@Test
 	public void test1() {
-		ClassType<TestType> type = Types.typeOf(TestType.class);
+		TypeInfo<TestType> type = Types.typeOf(TestType.class);
 		assertEquals(new TestType(), type.newInstance());
 		assertEquals(new TestType(1), type.newInstance(1));
 		assertEquals(new TestType(""), type.newInstance(""));
@@ -52,7 +52,7 @@ public class TypeConstructTest {
 
 	@Test
 	public void test2() {
-		ClassType<TestType> type = Types.typeOf(TestType.class);
+		TypeInfo<TestType> type = Types.typeOf(TestType.class);
 		ConstructorInfo<TestType> constructor = type.getConstructor(Object.class);
 		assertEquals(0, constructor.getExceptionCount());
 	}

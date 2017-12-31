@@ -10,7 +10,7 @@ import base.core.Core;
 public final class FieldInfo implements IAnnotatedReflectElement, IAccessableReflectElement{
 
 	private final Field field;
-	private final ClassType type;
+	private final TypeInfo type;
 	
 	FieldInfo(Field field) {
 		this.field = field;
@@ -27,7 +27,7 @@ public final class FieldInfo implements IAnnotatedReflectElement, IAccessableRef
 		return field.getName();
 	}
 
-	public ClassType getType() {
+	public TypeInfo getType() {
 		return type;
 	}
 	
@@ -128,8 +128,13 @@ public final class FieldInfo implements IAnnotatedReflectElement, IAccessableRef
 		return field.getAnnotationsByType(cl);
 	}
 
-	public ClassType getDeclaringType() {
+	public TypeInfo getDeclaringType() {
 		return Types.typeOf(field.getDeclaringClass());
+	}
+	
+	@Override
+	public int hashCode() {
+		return field.hashCode();
 	}
 	
 	@Override

@@ -6,7 +6,7 @@ import java.lang.reflect.TypeVariable;
 
 import base.core.Core;
 
-public final class ClassType<T> implements IAnnotatedReflectElement, IGenericReflectElement<Class<T>>, IAccessableReflectElement{
+public final class TypeInfo<T> implements IAnnotatedReflectElement, IGenericReflectElement<Class<T>>, IAccessableReflectElement{
 
 	final Class<T> clazz;
 	
@@ -16,7 +16,7 @@ public final class ClassType<T> implements IAnnotatedReflectElement, IGenericRef
 	final MemberTypeContainer memberTypes;
 	final NameContainer names;
 	
-	ClassType(Class<T> clazz) {
+	TypeInfo(Class<T> clazz) {
 		this.clazz = clazz;
 
 		this.assignables = new AssginableTypeContainer<>(this);
@@ -34,7 +34,7 @@ public final class ClassType<T> implements IAnnotatedReflectElement, IGenericRef
 		return clazz.getClassLoader();
 	}
 	
-	public ClassType<?> getArrayComponentType() {
+	public TypeInfo<?> getArrayComponentType() {
 		return Types.typeOf(clazz.getComponentType());
 	}
 
@@ -163,7 +163,7 @@ public final class ClassType<T> implements IAnnotatedReflectElement, IGenericRef
 		return clazz.getDeclaredAnnotation(cl);
 	}
 
-	public <TAnnotation extends Annotation> TAnnotation getDeclaredAnnotation(ClassType<TAnnotation> type) {
+	public <TAnnotation extends Annotation> TAnnotation getDeclaredAnnotation(TypeInfo<TAnnotation> type) {
 		return clazz.getDeclaredAnnotation(type.clazz);
 	}
 
@@ -185,7 +185,7 @@ public final class ClassType<T> implements IAnnotatedReflectElement, IGenericRef
 		return clazz.getDeclaredAnnotationsByType(cl);
 	}
 
-	public <TAnnotation extends Annotation> TAnnotation[] getDeclaredAnnotations(ClassType<TAnnotation> type) {
+	public <TAnnotation extends Annotation> TAnnotation[] getDeclaredAnnotations(TypeInfo<TAnnotation> type) {
 		return clazz.getDeclaredAnnotationsByType(type.clazz);
 	}
 	
@@ -198,7 +198,7 @@ public final class ClassType<T> implements IAnnotatedReflectElement, IGenericRef
 		return clazz.getDeclaredAnnotation(cl) != null;
 	}
 
-	public <TAnnotation extends Annotation> boolean hasDeclaredAnnotation(ClassType<TAnnotation> type) {
+	public <TAnnotation extends Annotation> boolean hasDeclaredAnnotation(TypeInfo<TAnnotation> type) {
 		return clazz.getDeclaredAnnotation(type.clazz) != null;
 	}
 	
@@ -206,7 +206,7 @@ public final class ClassType<T> implements IAnnotatedReflectElement, IGenericRef
 	// Super & Interface
 	////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	public <U> ClassType<? extends U> asSubTypeOf(ClassType<U> type){
+	public <U> TypeInfo<? extends U> asSubTypeOf(TypeInfo<U> type){
 		try {
 			return Types.typeOf(clazz.asSubclass(type.clazz));
 		}
@@ -215,7 +215,7 @@ public final class ClassType<T> implements IAnnotatedReflectElement, IGenericRef
 		}
 	}
 	
-	public <U> ClassType<? extends U> asSubTypeOf(Class<U> cl){
+	public <U> TypeInfo<? extends U> asSubTypeOf(Class<U> cl){
 		try {
 			return Types.typeOf(clazz.asSubclass(cl));
 		}
@@ -237,7 +237,7 @@ public final class ClassType<T> implements IAnnotatedReflectElement, IGenericRef
 		return clazz.isAssignableFrom(cls);
 	}
 	
-	public boolean isAssignableFrom(ClassType<?> type) {
+	public boolean isAssignableFrom(TypeInfo<?> type) {
 		return clazz.isAssignableFrom(type.clazz);
 	}
 	
@@ -245,15 +245,15 @@ public final class ClassType<T> implements IAnnotatedReflectElement, IGenericRef
 		return clazz.isInstance(object);
 	}
 
-	public ClassType<? super T>[] getDeclaredInterfaces() {
+	public TypeInfo<? super T>[] getDeclaredInterfaces() {
 		return assignables.getDeclaredInterfaces();
 	}
 	
-	public ClassType<? super T>[] getInterfaces(){
+	public TypeInfo<? super T>[] getInterfaces(){
 		return assignables.getInterfaces();
 	}
 
-	public ClassType<? super T> getSuperType() {
+	public TypeInfo<? super T> getSuperType() {
 		return Types.typeOf(clazz.getSuperclass());
 	}
 
@@ -265,11 +265,11 @@ public final class ClassType<T> implements IAnnotatedReflectElement, IGenericRef
 		return clazz.getGenericInterfaces();
 	}
 
-	public ClassType<? super T>[] getAssignableTypes(){
+	public TypeInfo<? super T>[] getAssignableTypes(){
 		return assignables.getExportTypes();
 	}
 
-	public ClassType<? super T>[] getAssignableSuperTypes() {
+	public TypeInfo<? super T>[] getAssignableSuperTypes() {
 		return assignables.getExportSuperTypes();
 	}
 
@@ -277,15 +277,15 @@ public final class ClassType<T> implements IAnnotatedReflectElement, IGenericRef
 	// Member Type
 	////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public ClassType<?>[] getDeclaredMemberTypes(){
+	public TypeInfo<?>[] getDeclaredMemberTypes(){
 		return memberTypes.getDeclaredMemberTypes();
 	}
 	
-	public ClassType<?>[] getMemberTypes(){
+	public TypeInfo<?>[] getMemberTypes(){
 		return memberTypes.getMemberTypes();
 	}
 
-	public ClassType<?> getEnclosingType(){
+	public TypeInfo<?> getEnclosingType(){
 		return Types.typeOf(clazz.getEnclosingClass());
 	}
 	

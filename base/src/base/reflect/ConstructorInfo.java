@@ -7,11 +7,11 @@ import java.lang.reflect.Type;
 
 import base.core.Core;
 
-public final class ConstructorInfo<T> implements IAnnotatedReflectElement{
+public final class ConstructorInfo<T> implements IAnnotatedReflectElement, IAccessableReflectElement{
 
 	final Constructor<T> constructor;
 	
-	private ClassType<?>[] cachedParameterTypes;
+	private TypeInfo<?>[] cachedParameterTypes;
 	
 	ConstructorInfo(Constructor<T> constructor) {
 		this.constructor = constructor;
@@ -33,18 +33,19 @@ public final class ConstructorInfo<T> implements IAnnotatedReflectElement{
 		return constructor.toString();
 	}
 	
-	public ClassType<?> getDeclaringType(){
+	@Override
+	public int hashCode() {
+		return constructor.hashCode();
+	}
+	
+	public TypeInfo<?> getDeclaringType(){
 		return Types.typeOf(constructor.getDeclaringClass());
 	}
 	
 	public int getModifiers() {
 		return constructor.getModifiers();
 	}
-	
-	public int getParameterCount() {
-		return constructor.getParameterCount();
-	}
-	
+
 	public T newInstance(Object...args) {
 		try {
 			return constructor.newInstance(args);
@@ -55,12 +56,24 @@ public final class ConstructorInfo<T> implements IAnnotatedReflectElement{
 		}
 	}
 
-	public ClassType<?>[] getParameterTypes(){
+	////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Parameter
+	////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public int getParameterCount() {
+		return constructor.getParameterCount();
+	}
+	
+	public TypeInfo<?>[] getParameterTypes(){
 		return getParameterTypesInner().clone();
 	}
 
+	public Type[] getParameterGenericTypes(){
+		return constructor.getGenericParameterTypes();
+	}
+	
 	public boolean isParameterTypesOf(Class<?>... parameterTypes) {
-		ClassType<?>[] types = getParameterTypesInner();
+		TypeInfo<?>[] types = getParameterTypesInner();
 		if(types.length != parameterTypes.length) {
 			return false;
 		}
@@ -72,10 +85,10 @@ public final class ConstructorInfo<T> implements IAnnotatedReflectElement{
 		return true;
 	}
 
-	private ClassType<?>[] getParameterTypesInner(){
+	private TypeInfo<?>[] getParameterTypesInner(){
 		if(cachedParameterTypes == null) {
 			Class<?>[] parameters = constructor.getParameterTypes();
-			cachedParameterTypes = new ClassType<?>[parameters.length];
+			cachedParameterTypes = new TypeInfo<?>[parameters.length];
 			for(int i=0; i<parameters.length; i++) {
 				cachedParameterTypes[i] = Types.typeOf(parameters[i]);
 			}
@@ -83,6 +96,11 @@ public final class ConstructorInfo<T> implements IAnnotatedReflectElement{
 		return cachedParameterTypes;
 	}
 
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Annotation
+	////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
 	@Override
 	public <TAnnotation extends Annotation> TAnnotation getAnnotation(Class<TAnnotation> cl) {
 		return constructor.getDeclaredAnnotation(cl);
@@ -102,10 +120,15 @@ public final class ConstructorInfo<T> implements IAnnotatedReflectElement{
 	public <TAnnotation extends Annotation> boolean hasAnnotation(Class<TAnnotation> cl) {
 		return constructor.getDeclaredAnnotation(cl) != null;
 	}
-	
-	private ClassType<?>[] cachedExceptions;
 
-	public ClassType<?>[] getExceptionTypes(){
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Exception
+	////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	private TypeInfo<?>[] cachedExceptions;
+
+	public TypeInfo<?>[] getExceptionTypes(){
 		return getCachedExceptionsInner().clone();
 	}
 	
@@ -117,15 +140,43 @@ public final class ConstructorInfo<T> implements IAnnotatedReflectElement{
 		return constructor.getGenericExceptionTypes();
 	}
 	
-	private ClassType<?>[] getCachedExceptionsInner(){
+	private TypeInfo<?>[] getCachedExceptionsInner(){
 		if(cachedExceptions == null) {
 			Class<?>[] exceptions = constructor.getExceptionTypes();
-			this.cachedExceptions = new ClassType[exceptions.length];
+			this.cachedExceptions = new TypeInfo[exceptions.length];
 			for(int i = 0; i<exceptions.length; i++) {
 				this.cachedExceptions[i] = Types.typeOf(exceptions[i]);
 			}
 		}
 		return cachedExceptions;
+	}
+
+	@Override
+	public boolean isPublic() {
+		return Modifiers.isPublic(constructor);
+	}
+
+	@Override
+	public boolean isProtected() {
+		return Modifiers.isProtected(constructor);
+	}
+
+	@Override
+	public boolean isInternal() {
+		return Modifiers.isInternal(constructor);
+	}
+
+	@Override
+	public boolean isPrivate() {
+		return Modifiers.isPrivate(constructor);
+	}
+	
+	public boolean isSynthetic() {
+		return constructor.isSynthetic();
+	}
+	
+	public boolean isVarArgs() {
+		return constructor.isVarArgs();
 	}
 	
 }

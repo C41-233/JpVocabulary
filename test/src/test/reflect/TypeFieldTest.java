@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import base.reflect.ClassType;
+import base.reflect.TypeInfo;
 import base.reflect.Types;
 
 public class TypeFieldTest {
@@ -17,7 +17,7 @@ public class TypeFieldTest {
 	@Test
 	public void test() {
 		TestType object = new TestType();
-		ClassType<TestType> type = Types.typeOf(TestType.class);
+		TypeInfo<TestType> type = Types.typeOf(TestType.class);
 		type.setFieldValue(object, "value1", "123");
 		assertEquals("123", object.value1); 
 		type.setFieldValue(object, "value2", 321);

@@ -4,27 +4,27 @@ import base.utility.collection.list.TypeArrayList;
 
 final class MemberTypeContainer {
 
-	private final ClassType type;
+	private final TypeInfo type;
 	
-	private ClassType<?>[] cachedDeclaredMemberTypes;
-	private ClassType<?>[] cachedExportMemberTypes;
+	private TypeInfo<?>[] cachedDeclaredMemberTypes;
+	private TypeInfo<?>[] cachedExportMemberTypes;
 	
-	public MemberTypeContainer(ClassType type) {
+	public MemberTypeContainer(TypeInfo type) {
 		this.type = type;
 	}
 	
-	public ClassType<?>[] getMemberTypes(){
+	public TypeInfo<?>[] getMemberTypes(){
 		return getCachedExportMemberTypesInner().clone();
 	}
 	
-	public ClassType<?>[] getDeclaredMemberTypes(){
+	public TypeInfo<?>[] getDeclaredMemberTypes(){
 		return getCachedDeclaredMemberTypesInner().clone();
 	}
 	
-	private ClassType<?>[] getCachedDeclaredMemberTypesInner(){
+	private TypeInfo<?>[] getCachedDeclaredMemberTypesInner(){
 		if(cachedDeclaredMemberTypes == null) {
 			Class<?>[] memberClasses = type.clazz.getDeclaredClasses();
-			cachedDeclaredMemberTypes = new ClassType[memberClasses.length];
+			cachedDeclaredMemberTypes = new TypeInfo[memberClasses.length];
 			for(int i=0; i<memberClasses.length; i++) {
 				cachedDeclaredMemberTypes[i] = Types.typeOf(memberClasses[i]);
 			}
@@ -32,12 +32,12 @@ final class MemberTypeContainer {
 		return cachedDeclaredMemberTypes;
 	}
 	
-	private ClassType<?>[] getCachedExportMemberTypesInner(){
+	private TypeInfo<?>[] getCachedExportMemberTypesInner(){
 		if(cachedExportMemberTypes == null) {
-			TypeArrayList<ClassType> list = new TypeArrayList<>(ClassType.class);
+			TypeArrayList<TypeInfo> list = new TypeArrayList<>(TypeInfo.class);
 			list.addAll(getCachedDeclaredMemberTypesInner());
-			for (ClassType<?> base : type.getAssignableSuperTypes()) {
-				for (ClassType<?> type : base.memberTypes.getCachedDeclaredMemberTypesInner()) {
+			for (TypeInfo<?> base : type.getAssignableSuperTypes()) {
+				for (TypeInfo<?> type : base.memberTypes.getCachedDeclaredMemberTypesInner()) {
 					if(type.isPublic() || type.isProtected()) {
 						list.add(type);
 					}
