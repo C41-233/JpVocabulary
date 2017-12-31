@@ -4,27 +4,27 @@ import base.utility.collection.list.TypeArrayList;
 
 final class MemberTypeContainer {
 
-	private final Type type;
+	private final ClassType type;
 	
-	private Type<?>[] cachedDeclaredMemberTypes;
-	private Type<?>[] cachedExportMemberTypes;
+	private ClassType<?>[] cachedDeclaredMemberTypes;
+	private ClassType<?>[] cachedExportMemberTypes;
 	
-	public MemberTypeContainer(Type type) {
+	public MemberTypeContainer(ClassType type) {
 		this.type = type;
 	}
 	
-	public Type<?>[] getMemberTypes(){
+	public ClassType<?>[] getMemberTypes(){
 		return getCachedExportMemberTypesInner().clone();
 	}
 	
-	public Type<?>[] getDeclaredMemberTypes(){
+	public ClassType<?>[] getDeclaredMemberTypes(){
 		return getCachedDeclaredMemberTypesInner().clone();
 	}
 	
-	private Type<?>[] getCachedDeclaredMemberTypesInner(){
+	private ClassType<?>[] getCachedDeclaredMemberTypesInner(){
 		if(cachedDeclaredMemberTypes == null) {
 			Class<?>[] memberClasses = type.clazz.getDeclaredClasses();
-			cachedDeclaredMemberTypes = new Type[memberClasses.length];
+			cachedDeclaredMemberTypes = new ClassType[memberClasses.length];
 			for(int i=0; i<memberClasses.length; i++) {
 				cachedDeclaredMemberTypes[i] = Types.typeOf(memberClasses[i]);
 			}
@@ -32,12 +32,12 @@ final class MemberTypeContainer {
 		return cachedDeclaredMemberTypes;
 	}
 	
-	private Type<?>[] getCachedExportMemberTypesInner(){
+	private ClassType<?>[] getCachedExportMemberTypesInner(){
 		if(cachedExportMemberTypes == null) {
-			TypeArrayList<Type> list = new TypeArrayList<>(Type.class);
+			TypeArrayList<ClassType> list = new TypeArrayList<>(ClassType.class);
 			list.addAll(getCachedDeclaredMemberTypesInner());
-			for (Type<?> base : type.getAssignableSuperTypes()) {
-				for (Type<?> type : base.memberTypes.getCachedDeclaredMemberTypesInner()) {
+			for (ClassType<?> base : type.getAssignableSuperTypes()) {
+				for (ClassType<?> type : base.memberTypes.getCachedDeclaredMemberTypesInner()) {
 					if(type.isPublic() || type.isProtected()) {
 						list.add(type);
 					}

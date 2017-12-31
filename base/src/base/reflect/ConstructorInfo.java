@@ -1,15 +1,17 @@
 package base.reflect;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Type;
 
 import base.core.Core;
 
-public final class ConstructorInfo<T>{
+public final class ConstructorInfo<T> implements IAnnotatedReflectElement{
 
 	final Constructor<T> constructor;
 	
-	private Type<?>[] cachedParameterTypes;
+	private ClassType<?>[] cachedParameterTypes;
 	
 	ConstructorInfo(Constructor<T> constructor) {
 		this.constructor = constructor;
@@ -21,6 +23,24 @@ public final class ConstructorInfo<T>{
 		}
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		return this == obj;
+	}
+	
+	@Override
+	public String toString() {
+		return constructor.toString();
+	}
+	
+	public ClassType<?> getDeclaringType(){
+		return Types.typeOf(constructor.getDeclaringClass());
+	}
+	
+	public int getModifiers() {
+		return constructor.getModifiers();
+	}
+	
 	public int getParameterCount() {
 		return constructor.getParameterCount();
 	}
@@ -35,12 +55,12 @@ public final class ConstructorInfo<T>{
 		}
 	}
 
-	public Type<?>[] getParameterTypes(){
+	public ClassType<?>[] getParameterTypes(){
 		return getParameterTypesInner().clone();
 	}
 
 	public boolean isParameterTypesOf(Class<?>... parameterTypes) {
-		Type<?>[] types = getParameterTypesInner();
+		ClassType<?>[] types = getParameterTypesInner();
 		if(types.length != parameterTypes.length) {
 			return false;
 		}
@@ -52,10 +72,10 @@ public final class ConstructorInfo<T>{
 		return true;
 	}
 
-	private Type<?>[] getParameterTypesInner(){
+	private ClassType<?>[] getParameterTypesInner(){
 		if(cachedParameterTypes == null) {
 			Class<?>[] parameters = constructor.getParameterTypes();
-			cachedParameterTypes = new Type<?>[parameters.length];
+			cachedParameterTypes = new ClassType<?>[parameters.length];
 			for(int i=0; i<parameters.length; i++) {
 				cachedParameterTypes[i] = Types.typeOf(parameters[i]);
 			}
@@ -63,4 +83,49 @@ public final class ConstructorInfo<T>{
 		return cachedParameterTypes;
 	}
 
+	@Override
+	public <TAnnotation extends Annotation> TAnnotation getAnnotation(Class<TAnnotation> cl) {
+		return constructor.getDeclaredAnnotation(cl);
+	}
+
+	@Override
+	public Annotation[] getAnnotations() {
+		return constructor.getDeclaredAnnotations();
+	}
+
+	@Override
+	public <TAnnotation extends Annotation> TAnnotation[] getAnnotations(Class<TAnnotation> cl) {
+		return constructor.getDeclaredAnnotationsByType(cl);
+	}
+
+	@Override
+	public <TAnnotation extends Annotation> boolean hasAnnotation(Class<TAnnotation> cl) {
+		return constructor.getDeclaredAnnotation(cl) != null;
+	}
+	
+	private ClassType<?>[] cachedExceptions;
+
+	public ClassType<?>[] getExceptionTypes(){
+		return getCachedExceptionsInner().clone();
+	}
+	
+	public int getExceptionCount() {
+		return getCachedExceptionsInner().length;
+	}
+	
+	public Type[] getExceptionGenericTypes() {
+		return constructor.getGenericExceptionTypes();
+	}
+	
+	private ClassType<?>[] getCachedExceptionsInner(){
+		if(cachedExceptions == null) {
+			Class<?>[] exceptions = constructor.getExceptionTypes();
+			this.cachedExceptions = new ClassType[exceptions.length];
+			for(int i = 0; i<exceptions.length; i++) {
+				this.cachedExceptions[i] = Types.typeOf(exceptions[i]);
+			}
+		}
+		return cachedExceptions;
+	}
+	
 }

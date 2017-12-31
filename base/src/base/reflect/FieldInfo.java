@@ -2,8 +2,7 @@ package base.reflect;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.TypeVariable;
+import java.lang.reflect.Type;
 import java.util.Objects;
 
 import base.core.Core;
@@ -11,7 +10,7 @@ import base.core.Core;
 public final class FieldInfo implements IAnnotatedReflectElement, IAccessableReflectElement{
 
 	private final Field field;
-	private final Type type;
+	private final ClassType type;
 	
 	FieldInfo(Field field) {
 		this.field = field;
@@ -28,24 +27,12 @@ public final class FieldInfo implements IAnnotatedReflectElement, IAccessableRef
 		return field.getName();
 	}
 
-	public Type getType() {
+	public ClassType getType() {
 		return type;
 	}
 	
-	public TypeVariable<?> getGenericTypeVariable(){
-		java.lang.reflect.Type type = field.getGenericType();
-		if(type instanceof TypeVariable) {
-			return (TypeVariable<?>) type;
-		}
-		return null;
-	}
-	
-	public ParameterizedType getGenericParameterizedType() {
-		java.lang.reflect.Type type = field.getGenericType();
-		if(type instanceof ParameterizedType) {
-			return (ParameterizedType) type;
-		}
-		return null;
+	public Type getGenericType() {
+		return field.getGenericType();
 	}
 	
 	@Override
@@ -141,7 +128,7 @@ public final class FieldInfo implements IAnnotatedReflectElement, IAccessableRef
 		return field.getAnnotationsByType(cl);
 	}
 
-	public Type getDeclaringType() {
+	public ClassType getDeclaringType() {
 		return Types.typeOf(field.getDeclaringClass());
 	}
 	
@@ -150,4 +137,8 @@ public final class FieldInfo implements IAnnotatedReflectElement, IAccessableRef
 		return field.toString();
 	}
 
+	public int getModifiers() {
+		return field.getModifiers();
+	}
+	
 }

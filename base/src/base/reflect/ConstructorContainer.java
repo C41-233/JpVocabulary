@@ -9,7 +9,7 @@ final class ConstructorContainer<T> {
 	private final ConstructorInfo<T>[] constructors;
 	
 	@SuppressWarnings("unchecked")
-	public ConstructorContainer(Type<T> type) {
+	public ConstructorContainer(ClassType<T> type) {
 		Class<T> clazz =  type.clazz;
 		Constructor[] constructors =  clazz.getDeclaredConstructors();
 		this.constructors = new ConstructorInfo[constructors.length];

@@ -2,10 +2,10 @@ package base.xml;
 
 import org.w3c.dom.Element;
 
-import base.reflect.Type;
+import base.reflect.ClassType;
 
 interface IXmlReaderDeserializer {
 
-	public Object createElement(Type type, Element element);
+	public Object createElement(ClassType type, Element element);
 	
 }

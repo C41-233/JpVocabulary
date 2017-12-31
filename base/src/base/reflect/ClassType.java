@@ -1,12 +1,12 @@
 package base.reflect;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
 
 import base.core.Core;
 
-public final class Type<T> implements IAnnotatedReflectElement, IGenericReflectElement<Class<T>>, IAccessableReflectElement{
+public final class ClassType<T> implements IAnnotatedReflectElement, IGenericReflectElement<Class<T>>, IAccessableReflectElement{
 
 	final Class<T> clazz;
 	
@@ -16,7 +16,7 @@ public final class Type<T> implements IAnnotatedReflectElement, IGenericReflectE
 	final MemberTypeContainer memberTypes;
 	final NameContainer names;
 	
-	Type(Class<T> clazz) {
+	ClassType(Class<T> clazz) {
 		this.clazz = clazz;
 
 		this.assignables = new AssginableTypeContainer<>(this);
@@ -34,7 +34,7 @@ public final class Type<T> implements IAnnotatedReflectElement, IGenericReflectE
 		return clazz.getClassLoader();
 	}
 	
-	public Type<?> getArrayComponentType() {
+	public ClassType<?> getArrayComponentType() {
 		return Types.typeOf(clazz.getComponentType());
 	}
 
@@ -163,7 +163,7 @@ public final class Type<T> implements IAnnotatedReflectElement, IGenericReflectE
 		return clazz.getDeclaredAnnotation(cl);
 	}
 
-	public <TAnnotation extends Annotation> TAnnotation getDeclaredAnnotation(Type<TAnnotation> type) {
+	public <TAnnotation extends Annotation> TAnnotation getDeclaredAnnotation(ClassType<TAnnotation> type) {
 		return clazz.getDeclaredAnnotation(type.clazz);
 	}
 
@@ -185,7 +185,7 @@ public final class Type<T> implements IAnnotatedReflectElement, IGenericReflectE
 		return clazz.getDeclaredAnnotationsByType(cl);
 	}
 
-	public <TAnnotation extends Annotation> TAnnotation[] getDeclaredAnnotations(Type<TAnnotation> type) {
+	public <TAnnotation extends Annotation> TAnnotation[] getDeclaredAnnotations(ClassType<TAnnotation> type) {
 		return clazz.getDeclaredAnnotationsByType(type.clazz);
 	}
 	
@@ -198,7 +198,7 @@ public final class Type<T> implements IAnnotatedReflectElement, IGenericReflectE
 		return clazz.getDeclaredAnnotation(cl) != null;
 	}
 
-	public <TAnnotation extends Annotation> boolean hasDeclaredAnnotation(Type<TAnnotation> type) {
+	public <TAnnotation extends Annotation> boolean hasDeclaredAnnotation(ClassType<TAnnotation> type) {
 		return clazz.getDeclaredAnnotation(type.clazz) != null;
 	}
 	
@@ -206,7 +206,7 @@ public final class Type<T> implements IAnnotatedReflectElement, IGenericReflectE
 	// Super & Interface
 	////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	public <U> Type<? extends U> asSubTypeOf(Type<U> type){
+	public <U> ClassType<? extends U> asSubTypeOf(ClassType<U> type){
 		try {
 			return Types.typeOf(clazz.asSubclass(type.clazz));
 		}
@@ -215,7 +215,7 @@ public final class Type<T> implements IAnnotatedReflectElement, IGenericReflectE
 		}
 	}
 	
-	public <U> Type<? extends U> asSubTypeOf(Class<U> cl){
+	public <U> ClassType<? extends U> asSubTypeOf(Class<U> cl){
 		try {
 			return Types.typeOf(clazz.asSubclass(cl));
 		}
@@ -237,7 +237,7 @@ public final class Type<T> implements IAnnotatedReflectElement, IGenericReflectE
 		return clazz.isAssignableFrom(cls);
 	}
 	
-	public boolean isAssignableFrom(Type<?> type) {
+	public boolean isAssignableFrom(ClassType<?> type) {
 		return clazz.isAssignableFrom(type.clazz);
 	}
 	
@@ -245,44 +245,31 @@ public final class Type<T> implements IAnnotatedReflectElement, IGenericReflectE
 		return clazz.isInstance(object);
 	}
 
-	public Type<? super T>[] getDeclaredInterfaces() {
+	public ClassType<? super T>[] getDeclaredInterfaces() {
 		return assignables.getDeclaredInterfaces();
 	}
 	
-	public Type<? super T>[] getInterfaces(){
+	public ClassType<? super T>[] getInterfaces(){
 		return assignables.getInterfaces();
 	}
 
-	public Type<? super T> getSuperType() {
+	public ClassType<? super T> getSuperType() {
 		return Types.typeOf(clazz.getSuperclass());
 	}
 
-	public ParameterizedType getSuperGenericType(){
-		java.lang.reflect.Type genericType = clazz.getGenericSuperclass();
-		if(genericType instanceof ParameterizedType) {
-			return (ParameterizedType) genericType;
-		}
-		return null;
+	public Type getSuperGenericType(){
+		return clazz.getGenericSuperclass();
 	}
 	
-	public ParameterizedType getDeclaredGenericInterface(Class<? super T> interfaze) {
-		java.lang.reflect.Type[] genericTypes = clazz.getGenericInterfaces();
-		for(java.lang.reflect.Type genericType : genericTypes) {
-			if(genericType instanceof ParameterizedType) {
-				ParameterizedType parameterizedType = (ParameterizedType) genericType;
-				if(parameterizedType.getRawType() == interfaze) {
-					return parameterizedType;
-				}
-			}
-		}
-		return null;
+	public Type[] getDeclaredGenericInterfaces() {
+		return clazz.getGenericInterfaces();
 	}
 
-	public Type<? super T>[] getAssignableTypes(){
+	public ClassType<? super T>[] getAssignableTypes(){
 		return assignables.getExportTypes();
 	}
 
-	public Type<? super T>[] getAssignableSuperTypes() {
+	public ClassType<? super T>[] getAssignableSuperTypes() {
 		return assignables.getExportSuperTypes();
 	}
 
@@ -290,15 +277,15 @@ public final class Type<T> implements IAnnotatedReflectElement, IGenericReflectE
 	// Member Type
 	////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public Type<?>[] getDeclaredMemberTypes(){
+	public ClassType<?>[] getDeclaredMemberTypes(){
 		return memberTypes.getDeclaredMemberTypes();
 	}
 	
-	public Type<?>[] getMemberTypes(){
+	public ClassType<?>[] getMemberTypes(){
 		return memberTypes.getMemberTypes();
 	}
 
-	public Type<?> getEnclosingType(){
+	public ClassType<?> getEnclosingType(){
 		return Types.typeOf(clazz.getEnclosingClass());
 	}
 	

@@ -7,7 +7,7 @@ import java.util.List;
 import org.w3c.dom.Element;
 
 import base.reflect.FieldInfo;
-import base.reflect.Type;
+import base.reflect.ClassType;
 import base.reflect.Types;
 
 class SimpleXmlReaderDeserializer implements IXmlReaderDeserializer{
@@ -19,11 +19,11 @@ class SimpleXmlReaderDeserializer implements IXmlReaderDeserializer{
 	}
 
 	@Override
-	public Object createElement(Type type, Element element) {
+	public Object createElement(ClassType type, Element element) {
 		Object obj = type.newInstance();
 		
 		for(FieldInfo field : type.getFields()) {
-			Type fieldType = field.getType();
+			ClassType fieldType = field.getType();
 			
 			//数组
 			if(fieldType.isArray()) {
@@ -64,7 +64,7 @@ class SimpleXmlReaderDeserializer implements IXmlReaderDeserializer{
 			}
 		}
 		
-		Type fieldType = field.getType();
+		ClassType fieldType = field.getType();
 		Element fieldElement = XmlHelper.getChildElement(element, tagName);
 		if(fieldElement != null) {
 			return createElement(fieldType, fieldElement);
@@ -87,8 +87,8 @@ class SimpleXmlReaderDeserializer implements IXmlReaderDeserializer{
 		
 		Element[] childElements = XmlHelper.getChildElements(element, tagName);
 
-		Type fieldType = field.getType();
-		Type arrayComponentType = fieldType.getArrayComponentType();
+		ClassType fieldType = field.getType();
+		ClassType arrayComponentType = fieldType.getArrayComponentType();
 		Object array = Array.newInstance(arrayComponentType.asClass(), childElements.length);
 		for(int i=0; i<childElements.length; i++) {
 			Object childValue = createElement(arrayComponentType, childElements[i]);
@@ -118,7 +118,7 @@ class SimpleXmlReaderDeserializer implements IXmlReaderDeserializer{
 
 		Element[] childElements = XmlHelper.getChildElements(element, tagName);
 
-		Type componentType = Types.typeOf(listClass.value());
+		ClassType componentType = Types.typeOf(listClass.value());
 		List<Object> list = new ArrayList<>();
 		for(int i=0; i<childElements.length; i++) {
 			//基本类型
@@ -137,7 +137,7 @@ class SimpleXmlReaderDeserializer implements IXmlReaderDeserializer{
 
 	private Object createBasicElement(FieldInfo field, Element element) {
 		String tagName = field.getName();
-		Type fieldType = field.getType();
+		ClassType fieldType = field.getType();
 		
 		//只读取子类型
 		XmlTag xmlTag = field.getAnnotation(XmlTag.class);

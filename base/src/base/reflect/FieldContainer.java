@@ -6,12 +6,12 @@ import base.utility.collection.list.TypeArrayList;
 
 final class FieldContainer {
 
-	private final Type<?> type;
+	private final ClassType<?> type;
 	
 	private FieldInfo[] cachedDeclaredFields;
 	private FieldInfo[] cachedExportFields;
 	
-	public FieldContainer(Type<?> type) {
+	public FieldContainer(ClassType<?> type) {
 		this.type = type;
 	}
 
@@ -43,7 +43,7 @@ final class FieldContainer {
 		if(cachedExportFields == null) {
 			TypeArrayList<FieldInfo> list = new TypeArrayList<>(FieldInfo.class);
 			list.addAll(getCachedDeclaredFieldsInner());
-			for(Type<?> base : type.getAssignableSuperTypes()) {
+			for(ClassType<?> base : type.getAssignableSuperTypes()) {
 				for (FieldInfo field : base.fields.getCachedDeclaredFieldsInner()) {
 					if(field.isPublic() || field.isProtected()) {
 						list.add(field);

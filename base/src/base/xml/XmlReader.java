@@ -16,7 +16,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
-import base.reflect.Type;
+import base.reflect.ClassType;
 import base.reflect.Types;
 import base.utility.linq.Linq;
 
@@ -66,7 +66,7 @@ public class XmlReader {
 	private <T> T readInner(Document document, Class<T> clazz) {
 		Element root = document.getDocumentElement();
 		
-		Type<T> type = Types.typeOf(clazz);
+		ClassType<T> type = Types.typeOf(clazz);
 		IXmlReaderDeserializer deserializer = getDeserializer();
 		return (T) deserializer.createElement(type, root);
 	}
@@ -103,7 +103,7 @@ public class XmlReader {
 		List<Element> tags = Linq.from(root.getChildNodes()).instanceOf(Element.class).where(e->e.getTagName().equals(tag)).toList();
 		List<T> list = new ArrayList<>(tags.size());
 		
-		Type<T> type = Types.typeOf(clazz);
+		ClassType<T> type = Types.typeOf(clazz);
 
 		IXmlReaderDeserializer deserializer = getDeserializer();
 		for(Element e : tags) {
@@ -145,7 +145,7 @@ public class XmlReader {
 		
 		T[] arr = (T[]) Array.newInstance(clazz, tags.size());
 		
-		Type<T> type = Types.typeOf(clazz);
+		ClassType<T> type = Types.typeOf(clazz);
 		IXmlReaderDeserializer deserializer = getDeserializer();
 		for(int i=0; i<tags.size(); i++) {
 			arr[i] = (T) deserializer.createElement(type, tags.get(i));
