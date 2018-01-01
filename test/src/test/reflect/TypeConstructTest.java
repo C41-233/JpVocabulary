@@ -2,6 +2,8 @@ package test.reflect;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.IOException;
+
 import org.junit.Test;
 
 import base.reflect.ConstructorInfo;
@@ -16,7 +18,7 @@ public class TypeConstructTest {
 		public TestType() {
 			value = 0;
 		}
-		public TestType(Object obj) {
+		public TestType(Object obj) throws IOException{
 			value = -100;
 		}
 		public TestType(CharSequence c) {
@@ -42,7 +44,7 @@ public class TypeConstructTest {
 	}
 	
 	@Test
-	public void test1() {
+	public void test1() throws IOException {
 		TypeInfo<TestType> type = Types.typeOf(TestType.class);
 		assertEquals(new TestType(), type.newInstance());
 		assertEquals(new TestType(1), type.newInstance(1));
@@ -54,7 +56,8 @@ public class TypeConstructTest {
 	public void test2() {
 		TypeInfo<TestType> type = Types.typeOf(TestType.class);
 		ConstructorInfo<TestType> constructor = type.getConstructor(Object.class);
-		assertEquals(0, constructor.getExceptionCount());
+		assertEquals(1, constructor.getExceptionCount());
+		assertEquals(Types.typeOf(IOException.class), constructor.getExceptionTypes()[0]);
 	}
 
 }

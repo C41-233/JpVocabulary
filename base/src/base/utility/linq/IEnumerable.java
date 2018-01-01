@@ -65,7 +65,7 @@ public interface IEnumerable<T> extends Iterable<T>{
 	
 	@SuppressWarnings("unchecked")
 	public default <V> IReferenceEnumerable<V> cast(){
-		return new SelectEnumerable<T, V>(this, t->(V)t);
+		return (IReferenceEnumerable<V>) this;
 	}
 	
 	/**

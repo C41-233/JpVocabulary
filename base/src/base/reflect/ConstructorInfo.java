@@ -3,10 +3,10 @@ package base.reflect;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Parameter;
 import java.lang.reflect.Type;
 
 import base.core.Core;
+import base.utility.linq.Linq;
 
 public final class ConstructorInfo<T> 
 implements IAnnotatedReflectElement, IAccessableReflectElement, IInvokableReflectElement{
@@ -129,11 +129,10 @@ implements IAnnotatedReflectElement, IAccessableReflectElement, IInvokableReflec
 	
 	private TypeInfo<?>[] getCachedParameterTypesInner(){
 		if(cachedParameterTypes == null) {
-			Class<?>[] parameters = constructor.getParameterTypes();
-			cachedParameterTypes = new TypeInfo<?>[parameters.length];
-			for(int i=0; i<parameters.length; i++) {
-				cachedParameterTypes[i] = Types.typeOf(parameters[i]);
-			}
+			cachedParameterTypes = Linq.from(constructor.getParameterTypes())
+					.select(p->Types.typeOf(p))
+					.<TypeInfo>cast()
+					.toArray(TypeInfo.class);
 		}
 		return cachedParameterTypes;
 	}
@@ -141,11 +140,9 @@ implements IAnnotatedReflectElement, IAccessableReflectElement, IInvokableReflec
 	private ParameterInfo[] getCachedParameterInfosInner() {
 		if(cachedParameters == null)
 		{
-			Parameter[] parameters = constructor.getParameters();
-			this.cachedParameters = new ParameterInfo[parameters.length];
-			for(int i=0; i<parameters.length; i++) {
-				cachedParameters[i] = ReflectHelper.wrap(parameters[i]);
-			}
+			cachedParameters = Linq.from(constructor.getParameters())
+					.select(p->ReflectHelper.wrap(p))
+					.toArray(ParameterInfo.class);
 		}
 		return cachedParameters;
 	}
@@ -198,11 +195,10 @@ implements IAnnotatedReflectElement, IAccessableReflectElement, IInvokableReflec
 	
 	private TypeInfo<?>[] getCachedExceptionsInner(){
 		if(cachedExceptions == null) {
-			Class<?>[] exceptions = constructor.getExceptionTypes();
-			this.cachedExceptions = new TypeInfo[exceptions.length];
-			for(int i = 0; i<exceptions.length; i++) {
-				this.cachedExceptions[i] = Types.typeOf(exceptions[i]);
-			}
+			cachedExceptions = Linq.from(constructor.getExceptionTypes())
+					.select(e->Types.typeOf(e))
+					.<TypeInfo>cast()
+					.toArray(TypeInfo.class);
 		}
 		return cachedExceptions;
 	}
