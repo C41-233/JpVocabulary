@@ -1,0 +1,20 @@
+<formnoun name="の">
+	<value>
+		<meaning>表示事物、事实、理由。</meaning>
+		<example>
+			<jp>王さんの家へ行ったのは先週の何曜日でしたか。</jp>
+			<cn>去小王家是上星期几？</cn>
+		</example>
+		<example>
+			<jp>李さんは音楽を聞くのが好きです。</jp>
+			<cn>小李喜欢听音乐。</cn>
+		</example>
+	</value>
+	<value>
+		<meaning>省略指代的事物。</meaning>
+		<example>
+			<jp>大きいのは二元で、小さいのは一元です。</jp>
+			<cn>大的是二元钱，小的是一元钱。</cn>
+		</example>
+	</value>
+</formnoun>

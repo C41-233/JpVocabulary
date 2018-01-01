@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.validator.PublicClassValidator;
+
 import base.utility.linq.Linq;
 import base.xml.XmlListClass;
 import base.xml.XmlReader;
@@ -53,6 +55,7 @@ public class FormNoun extends HtmlControllerBase{
 		public List<ValueType> values = new ArrayList<>();
 		
 		private static class ValueType{
+			public String usage;
 			public String meaning;
 			@XmlListClass(ExampleType.class)
 			public List<ExampleType> examples = new ArrayList<>();

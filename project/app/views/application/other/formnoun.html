@@ -23,6 +23,7 @@
 			#{if data}
 				#{list items:data.values, as:'value'}
 					<div class="div-block">
+						#{if value.usage}<div class="usage">${value.usage}</div>#{/if}
 						<div>${value.meaning}</div>
 						<div class="div-examples">
 						#{list items:value.examples, as:'example'}
