@@ -14,7 +14,7 @@ final class ConstructorContainer<T> {
 		Constructor[] constructors =  clazz.getDeclaredConstructors();
 		this.constructors = new ConstructorInfo[constructors.length];
 		for(int i=0; i<constructors.length; i++) {
-			this.constructors[i] = Types.asConstructorInfo(constructors[i]);
+			this.constructors[i] = ReflectHelper.wrap(constructors[i]);
 		}
 	}
 

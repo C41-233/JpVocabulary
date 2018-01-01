@@ -1,7 +1,12 @@
 package base.reflect;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.Parameter;
 import java.util.ArrayList;
 import java.util.List;
+
+import base.utility.cache.WeakMemoryCache;
 
 final class ReflectHelper {
 
@@ -52,5 +57,32 @@ final class ReflectHelper {
 		}
 		return -1;
 	}
+
+	private static final WeakMemoryCache<Field, FieldInfo> fields = new WeakMemoryCache<>();
 	
+	public static FieldInfo wrap(Field field) {
+		if(field == null) {
+			return null;
+		}
+		return fields.getOrCreate(field, ()->new FieldInfo(field));
+	}
+	
+	private static final WeakMemoryCache<Constructor, ConstructorInfo> constructors = new WeakMemoryCache<>();
+	
+	@SuppressWarnings("unchecked")
+	public static <T> ConstructorInfo<T> wrap(Constructor<T> constructor){
+		if(constructor == null) {
+			return null;
+		}
+		return constructors.getOrCreate(constructor, ()->new ConstructorInfo<>(constructor));
+	}
+
+	private static final WeakMemoryCache<Parameter, ParameterInfo> parameters = new WeakMemoryCache<>();
+	
+	public static ParameterInfo wrap(Parameter parameter) {
+		if(parameter == null) {
+			return null;
+		}
+		return parameters.getOrCreate(parameter, ()->new ParameterInfo(parameter));
+	}
 }

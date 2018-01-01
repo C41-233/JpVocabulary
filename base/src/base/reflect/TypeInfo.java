@@ -51,6 +51,7 @@ public final class TypeInfo<T> implements IAnnotatedReflectElement, IGenericRefl
 		return clazz.getPackage();
 	}
 	
+	@Override
 	public int getModifiers() {
 		return clazz.getModifiers();
 	}
@@ -290,7 +291,7 @@ public final class TypeInfo<T> implements IAnnotatedReflectElement, IGenericRefl
 	}
 	
 	public ConstructorInfo<?> getEnclosingConstructor(){
-		return Types.asConstructorInfo(clazz.getEnclosingConstructor());
+		return ReflectHelper.wrap(clazz.getEnclosingConstructor());
 	}
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -9,7 +9,7 @@ import java.lang.reflect.Type;
 
 import base.core.ImpossibleException;
 
-public final class ParameterInfo implements IAnnotatedReflectElement{
+public final class ParameterInfo implements IModiferReflectElement, IAnnotatedReflectElement{
 
 	private final Parameter parameter;
 	
@@ -25,6 +25,11 @@ public final class ParameterInfo implements IAnnotatedReflectElement{
 	@Override
 	public int hashCode() {
 		return parameter.hashCode();
+	}
+	
+	@Override
+	public String toString() {
+		return parameter.toString();
 	}
 	
 	@Override
@@ -48,10 +53,10 @@ public final class ParameterInfo implements IAnnotatedReflectElement{
 	}
 	
 	@SuppressWarnings("unchecked")
-	public IFunctionReflectElement getDeclaringFunction() {
+	public IInvokableReflectElement getDeclaringFunction() {
 		Executable executable = parameter.getDeclaringExecutable();
 		if(executable instanceof Constructor) {
-			return Types.asConstructorInfo((Constructor) executable);
+			return ReflectHelper.wrap((Constructor) executable);
 		}
 		if(executable instanceof Method) {
 			return null;//TODO
@@ -67,8 +72,29 @@ public final class ParameterInfo implements IAnnotatedReflectElement{
 		return Types.typeOf(parameter.getType());
 	}
 	
+	@Override
+	public int getModifiers() {
+		return parameter.getModifiers();
+	}
+	
 	public Type getGenericType() {
 		return parameter.getParameterizedType();
+	}
+	
+	public boolean isImplicit() {
+		return parameter.isImplicit();
+	}
+	
+	public boolean isSynthetic() {
+		return parameter.isSynthetic();
+	}
+	
+	public boolean isVarArgs() {
+		return parameter.isVarArgs();
+	}
+	
+	public boolean isFinal() {
+		return Modifiers.isFinal(parameter);
 	}
 	
 }

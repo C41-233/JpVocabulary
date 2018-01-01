@@ -9,7 +9,7 @@ import java.lang.reflect.Type;
 import base.core.Core;
 
 public final class ConstructorInfo<T> 
-implements IAnnotatedReflectElement, IAccessableReflectElement, IFunctionReflectElement{
+implements IAnnotatedReflectElement, IAccessableReflectElement, IInvokableReflectElement{
 
 	final Constructor<T> constructor;
 	
@@ -42,6 +42,7 @@ implements IAnnotatedReflectElement, IAccessableReflectElement, IFunctionReflect
 		return Types.typeOf(constructor.getDeclaringClass());
 	}
 	
+	@Override
 	public int getModifiers() {
 		return constructor.getModifiers();
 	}
@@ -143,7 +144,7 @@ implements IAnnotatedReflectElement, IAccessableReflectElement, IFunctionReflect
 			Parameter[] parameters = constructor.getParameters();
 			this.cachedParameters = new ParameterInfo[parameters.length];
 			for(int i=0; i<parameters.length; i++) {
-				cachedParameters[i] = Types.asParameterInfo(parameters[i]);
+				cachedParameters[i] = ReflectHelper.wrap(parameters[i]);
 			}
 		}
 		return cachedParameters;

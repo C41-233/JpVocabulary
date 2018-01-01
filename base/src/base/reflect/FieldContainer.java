@@ -20,7 +20,7 @@ final class FieldContainer {
 			Field[] declared_fields = type.clazz.getDeclaredFields();
 			this.cachedDeclaredFields = new FieldInfo[declared_fields.length];
 			for(int i=0; i<declared_fields.length; i++) {
-				this.cachedDeclaredFields[i] = Types.asFieldInfo(declared_fields[i]);
+				this.cachedDeclaredFields[i] = ReflectHelper.wrap(declared_fields[i]);
 			}
 		}
 		return cachedDeclaredFields;

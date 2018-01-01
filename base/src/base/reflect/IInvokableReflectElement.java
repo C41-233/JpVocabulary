@@ -2,7 +2,10 @@ package base.reflect;
 
 import java.lang.reflect.Type;
 
-public interface IFunctionReflectElement {
+/**
+ * 可以被调用的反射元素。（构造方法、成员方法）
+ */
+public interface IInvokableReflectElement {
 
 	public int getParameterCount();
 	public TypeInfo<?>[] getParameterTypes();

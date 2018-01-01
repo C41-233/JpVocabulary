@@ -142,6 +142,7 @@ public final class FieldInfo implements IAnnotatedReflectElement, IAccessableRef
 		return field.toString();
 	}
 
+	@Override
 	public int getModifiers() {
 		return field.getModifiers();
 	}

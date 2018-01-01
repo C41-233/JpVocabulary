@@ -2,6 +2,9 @@ package base.reflect;
 
 import java.lang.annotation.Annotation;
 
+/**
+ * 存在注解的反射元素。
+ */
 public interface IAnnotatedReflectElement {
 	
 	public <TAnnotation extends Annotation> TAnnotation getAnnotation(Class<TAnnotation> cl);
