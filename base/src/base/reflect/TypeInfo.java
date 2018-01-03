@@ -12,6 +12,7 @@ public final class TypeInfo<T> implements IAnnotatedReflectElement, IGenericRefl
 	
 	final ConstructorContainer<T> constructors;
 	final FieldContainer fields;
+	final MethodContainer methods;
 	final AssginableTypeContainer<T> assignables;
 	final MemberTypeContainer memberTypes;
 	final NameContainer names;
@@ -21,6 +22,7 @@ public final class TypeInfo<T> implements IAnnotatedReflectElement, IGenericRefl
 
 		this.assignables = new AssginableTypeContainer<>(this);
 		this.memberTypes = new MemberTypeContainer(this);
+		this.methods = new MethodContainer(this);
 		this.fields = new FieldContainer(this);
 		this.constructors = new ConstructorContainer<>(this);
 		this.names = new NameContainer(this);
@@ -387,6 +389,14 @@ public final class TypeInfo<T> implements IAnnotatedReflectElement, IGenericRefl
 	
 	public T newInstance(Object...args){
 		return constructors.newInstance(args);
+	}
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Method
+	////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	public MethodInfo[] getDeclaredMethods() {
+		return methods.getDeclaredMethods();
 	}
 	
 }
