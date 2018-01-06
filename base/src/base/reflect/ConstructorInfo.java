@@ -9,7 +9,7 @@ import base.core.Core;
 import base.utility.linq.Linq;
 
 public final class ConstructorInfo<T> 
-implements IAnnotatedReflectElement, IAccessableReflectElement, IInvokableReflectElement{
+	implements IAnnotatedReflectElement, IAccessableReflectElement, IInvokableReflectElement{
 
 	final Constructor<T> constructor;
 	
@@ -141,7 +141,7 @@ implements IAnnotatedReflectElement, IAccessableReflectElement, IInvokableReflec
 		if(cachedParameters == null)
 		{
 			cachedParameters = Linq.from(constructor.getParameters())
-					.select(p->ReflectHelper.wrap(p))
+					.select(p->ReflectCache.wrap(p))
 					.toArray(ParameterInfo.class);
 		}
 		return cachedParameters;

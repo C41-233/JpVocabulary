@@ -56,7 +56,7 @@ public final class ParameterInfo implements IModiferReflectElement, IAnnotatedRe
 	public IInvokableReflectElement getDeclaringFunction() {
 		Executable executable = parameter.getDeclaringExecutable();
 		if(executable instanceof Constructor) {
-			return ReflectHelper.wrap((Constructor) executable);
+			return ReflectCache.wrap((Constructor) executable);
 		}
 		if(executable instanceof Method) {
 			return null;//TODO

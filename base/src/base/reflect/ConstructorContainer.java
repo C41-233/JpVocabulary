@@ -3,6 +3,7 @@ package base.reflect;
 import java.lang.reflect.Constructor;
 
 import base.core.Core;
+import base.utility.Strings;
 
 final class ConstructorContainer<T> {
 
@@ -14,7 +15,7 @@ final class ConstructorContainer<T> {
 		Constructor[] constructors =  clazz.getDeclaredConstructors();
 		this.constructors = new ConstructorInfo[constructors.length];
 		for(int i=0; i<constructors.length; i++) {
-			this.constructors[i] = ReflectHelper.wrap(constructors[i]);
+			this.constructors[i] = ReflectCache.wrap(constructors[i]);
 		}
 	}
 
@@ -33,23 +34,27 @@ final class ConstructorContainer<T> {
 
 	public T newInstance(Object...args){
 		ConstructorInfo<T> best = null;
+		ConstructorInfo<T> anotherBest = null; 
 		int min = Integer.MAX_VALUE;
 		
 		for(ConstructorInfo<T> constructor : constructors) {
-			int distance = ReflectHelper.getDistance(constructor.constructor.getParameterTypes(), args);
-			if(distance == 0) {
-				best = constructor;
-				break;
-			}
+			int distance = ReflectDistance.getDistance(constructor.constructor.getParameterTypes(), args);
 			if(distance < 0) {
 				continue;
 			}
 			if(distance < min) {
 				best = constructor;
+				anotherBest = null;
 				min = distance;
+			}
+			else if(distance == min) {
+				anotherBest = constructor;
 			}
 		}
 		if(best != null) {
+			if(anotherBest != null) {
+				throw new AmbigousMethodException(Strings.format("Ambigous call between %s and %s", best, anotherBest));
+			}
 			return best.newInstance(args);
 		}
 		throw Core.throwException(new NoSuchMethodException());

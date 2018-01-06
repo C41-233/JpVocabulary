@@ -6,7 +6,8 @@ import java.lang.reflect.TypeVariable;
 
 import base.core.Core;
 
-public final class TypeInfo<T> implements IAnnotatedReflectElement, IGenericReflectElement<Class<T>>, IAccessableReflectElement{
+public final class TypeInfo<T> 
+	implements IAnnotatedReflectElement, IGenericReflectElement<Class<T>>, IAccessableReflectElement{
 
 	final Class<T> clazz;
 	
@@ -293,7 +294,7 @@ public final class TypeInfo<T> implements IAnnotatedReflectElement, IGenericRefl
 	}
 	
 	public ConstructorInfo<?> getEnclosingConstructor(){
-		return ReflectHelper.wrap(clazz.getEnclosingConstructor());
+		return ReflectCache.wrap(clazz.getEnclosingConstructor());
 	}
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -399,4 +400,23 @@ public final class TypeInfo<T> implements IAnnotatedReflectElement, IGenericRefl
 		return methods.getDeclaredMethods();
 	}
 	
+	public MethodInfo[] getMethods() {
+		return methods.getMethods();
+	}
+	
+	public MethodInfo[] getDeclaredMethods(String name) {
+		return methods.getDeclaredMethods(name);
+	}
+	
+	public MethodInfo[] getMethods(String name) {
+		return methods.getMethods(name);
+	}
+	
+	public MethodInfo getDeclaredMethod(String name) {
+		return methods.getDeclaredMethod(name);
+	}
+	
+	public MethodInfo getMethod(String name) {
+		return methods.getMethod(name);
+	}
 }
