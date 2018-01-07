@@ -104,8 +104,16 @@ public final class MethodInfo
 		return Modifiers.isPrivate(method);
 	}
 
+	public boolean isSynthetic() {
+		return method.isSynthetic();
+	}
+	
 	public TypeInfo<?> getDeclaringType() {
 		return Types.typeOf(method.getDeclaringClass());
+	}
+
+	public TypeInfo getReturnType() {
+		return Types.typeOf(method.getReturnType());
 	}
 	
 }

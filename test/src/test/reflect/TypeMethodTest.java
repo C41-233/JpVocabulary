@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+import static base.AssertEx.assertThrow;
 
 import java.lang.reflect.Method;
 
@@ -11,6 +12,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.omg.PortableInterceptor.ObjectReferenceFactory;
 
+import base.reflect.AmbigousMethodException;
 import base.reflect.MethodInfo;
 import base.reflect.Modifiers;
 import base.reflect.TypeInfo;
@@ -25,6 +27,10 @@ public class TypeMethodTest {
 		
 		public Object func4() {return null;}
 		public void func4(String s) {}
+		
+		public Object func5() {return null; }
+		
+		public String func6() {return null;}
 	}
 	
 	private static class TestType extends TestTypeSuper{
@@ -34,6 +40,9 @@ public class TypeMethodTest {
 		
 		@Override
 		public String func4() {return null;}
+		@Override
+		public String func5() {return null;}
+		public String func6(int i) {return null;}
 	}
 	
 	private static final int ObjectMethodsCount;
@@ -59,8 +68,8 @@ public class TypeMethodTest {
 	
 	@Test
 	public void test1() {
-		assertEquals(4, typeSuper.getDeclaredMethods().length);
-		assertEquals(4 + ObjectMethodsCount, typeSuper.getMethods().length);
+		assertEquals(6, typeSuper.getDeclaredMethods().length);
+		assertEquals(6 + ObjectMethodsCount, typeSuper.getMethods().length);
 		
 		assertEquals(0, typeSuper.getMethods("func_nop").length);
 		assertEquals(1, typeSuper.getMethods("getClass").length);
@@ -72,8 +81,8 @@ public class TypeMethodTest {
 	
 	@Test
 	public void test2() {
-		assertEquals(4, type.getDeclaredMethods().length);
-		assertEquals(6 + ObjectMethodsCount, type.getMethods().length);
+		assertEquals(7, type.getDeclaredMethods().length);
+		assertEquals(10 + ObjectMethodsCount, type.getMethods().length);
 		
 		assertEquals(0, type.getMethods("func_nop").length);
 		assertNull(type.getDeclaredMethod("getClass"));
@@ -81,6 +90,9 @@ public class TypeMethodTest {
 
 		assertEquals(1, type.getMethods("func1").length);
 		assertEquals(3, type.getMethods("func4").length);
+		
+		assertEquals(Types.typeOf(String.class), type.getMethod("func5").getReturnType());
+		assertThrow(AmbigousMethodException.class, ()->{type.getMethod("func6");});
 	}
 
 	@Test

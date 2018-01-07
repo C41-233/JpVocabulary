@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
+import base.utility.Strings;
 import base.utility.collection.list.TypeArrayList;
 import base.utility.linq.Linq;
 
@@ -69,13 +70,7 @@ final class MethodContainer {
 		 if(group == null) {
 			 return null;
 		 }
-		 if(group.declared.length == 0) {
-			 return null;
-		 }
-		 if(group.declared.length > 1) {
-			 //throw new AmbigousMethodException();
-		 }
-		 return group.declared[0];
+		 return getMethodCustom(group.declared, name);
 	}
 	
 	public MethodInfo getMethod(String name) {
@@ -83,13 +78,29 @@ final class MethodContainer {
 		 if(group == null) {
 			 return null;
 		 }
-		 if(group.export.length == 0) {
-			 return null;
-		 }
-		 if(group.export.length > 1) {
-			// throw new AmbigousMethodException();
-		 }
-		 return group.export[0];
+		 return getMethodCustom(group.export, name);
+	}
+	
+	private MethodInfo getMethodCustom(MethodInfo[] methods, String name) {
+		int i = 0;
+		MethodInfo rst = null;
+		while(i < methods.length) {
+			MethodInfo method = methods[i];
+			if(method.getName().equals(name) && method.isSynthetic() == false) {
+				rst = method;
+				i++;
+				break;
+			}
+			i++;
+		}
+		while(i < methods.length) {
+			MethodInfo method = methods[i];
+			if(method.getName().equals(name) && method.isSynthetic() == false) {
+				throw new AmbigousMethodException(Strings.format("Ambigous method between %s and %s", rst, method));
+			}
+			i++;
+		}
+		return rst;
 	}
 	
 	private MethodInfo[] getCachedDeclaredMethodsInner() {
