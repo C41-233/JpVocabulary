@@ -1,0 +1,32 @@
+#{meta /}
+
+#{title '寒暄语'/}
+
+#{body}
+
+<div class="container">
+	<div class="row">
+		<div class="col-lg-3">
+			<h3>寒暄语</h3>
+			<ul class="list-group">
+				#{list items:contents, as:'content'}
+					#{if current.name==content.name}
+						<li class="list-group-item active">${content.name}</li>
+					#{/if}
+					#{else}
+						<a class="list-group-item" href="@{sentences.Greeting.page(content.name)}">${content.name}</a>
+					#{/else}
+				#{/list}
+			</ul>
+		</div>
+		<div class="col-lg-9">
+			<h3>${current.name}</h3>
+			<hr/>
+		</div>
+	</div>
+</div>
+
+#{/body}
+
+#{stylesheet}
+#{/stylesheet}

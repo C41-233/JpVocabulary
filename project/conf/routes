@@ -91,6 +91,8 @@ POST	/words/katakana/action/update-context	katakanas.KatakanaWordAPI.updateConte
 
 GET		/words/interjections					notionals.InterjectionWordIndex.index
 GET		/sentences/proverb						sentences.Proverb.index
+GET		/sentences/greeting						sentences.Greeting.index
+GET		/sentences/greeting/{name}				sentences.Greeting.page
 
 GET		/words/basic							basics.Basic.index
 GET		/words/basic/{index}					basics.Basic.detail
