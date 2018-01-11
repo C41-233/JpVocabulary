@@ -1,9 +1,9 @@
 package base.utility.linq;
 
-import base.utility.function.ICharSelector;
-import base.utility.function.ISelector;
-import base.utility.function.ISelectorEx;
-import base.utility.function.ISelectorInt;
+import base.utility.lambda.ISelector;
+import base.utility.lambda.ISelectorEx;
+import base.utility.lambda.ISelectorInt;
+import base.utility.lambda.selector.ICharSelector;
 
 class SelectEnumerable<T, V> implements IReferenceEnumerable<V>{
 

@@ -36,7 +36,7 @@ public class NotionalWordValue extends ModelBase implements INotionalWordValue{
 	@Column(name="type")
 	private int type;
 	public void setType(NotionalWordValueType type) {
-		Assert.notNull(type);
+		Assert.isNotNull(type);
 		this.type = type.value();
 	}
 

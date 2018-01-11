@@ -1,4 +1,4 @@
-package base.utility.function;
+package base.utility.lambda;
 
 @FunctionalInterface
 public interface IJoiner<T, U, V> {

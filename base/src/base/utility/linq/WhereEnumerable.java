@@ -1,7 +1,7 @@
 package base.utility.linq;
 
 import base.core.Reference;
-import base.utility.function.IReferencePredicate;
+import base.utility.lambda.IReferencePredicate;
 
 class WhereEnumerable<T> implements IReferenceEnumerable<T>{
 

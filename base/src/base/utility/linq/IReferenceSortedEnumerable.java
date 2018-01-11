@@ -3,7 +3,7 @@ package base.utility.linq;
 import java.util.Comparator;
 
 import base.utility.comparator.Comparators;
-import base.utility.function.ISelector;
+import base.utility.lambda.ISelector;
 
 public interface IReferenceSortedEnumerable<T> extends IReferenceEnumerable<T>{
 

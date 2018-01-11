@@ -1,12 +1,15 @@
 package base.reflect;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.lang.reflect.Type;
 import java.util.Objects;
 
 import base.utility.Arrays;
+import base.utility.linq.Linq;
 
 public final class MethodInfo 
-	implements IAccessableReflectElement{
+	implements IAccessableReflectElement, IAnnotatedReflectElement, IInvokableReflectElement{
 
 	private final Method method;
 	
@@ -29,8 +32,100 @@ public final class MethodInfo
 		return method.toString();
 	}
 	
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Name
+	////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	
 	public String getName() {
 		return method.getName();
+	}
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Attribute
+	////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	public boolean isStatic() {
+		return Modifiers.isStatic(method);
+	}
+
+	@Override
+	public int getModifiers() {
+		return method.getModifiers();
+	}
+
+	@Override
+	public boolean isPublic() {
+		return Modifiers.isPublic(method);
+	}
+
+	@Override
+	public boolean isProtected() {
+		return Modifiers.isProtected(method);
+	}
+
+	@Override
+	public boolean isInternal() {
+		return Modifiers.isInternal(method);
+	}
+
+	@Override
+	public boolean isPrivate() {
+		return Modifiers.isPrivate(method);
+	}
+
+	public boolean isSynthetic() {
+		return method.isSynthetic();
+	}
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Annotation
+	////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	@Override
+	public <TAnnotation extends Annotation> TAnnotation getAnnotation(Class<TAnnotation> cl) {
+		return method.getAnnotation(cl);
+	}
+
+	@Override
+	public Annotation[] getAnnotations() {
+		return method.getAnnotations();
+	}
+
+	@Override
+	public <TAnnotation extends Annotation> TAnnotation[] getAnnotations(Class<TAnnotation> cl) {
+		return method.getAnnotationsByType(cl);
+	}
+
+	@Override
+	public <TAnnotation extends Annotation> boolean hasAnnotation(Class<TAnnotation> cl) {
+		return method.isAnnotationPresent(cl);
+	}
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Signature
+	////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	public TypeInfo<?> getDeclaringType() {
+		return Types.typeOf(method.getDeclaringClass());
+	}
+
+	/**
+	 * 如果注解类型方法的默认值。
+	 */
+	@SuppressWarnings("unchecked")
+	public <V> V getDefaultValue() {
+		try {
+			return (V) method.getDefaultValue();
+		}
+		catch (TypeNotPresentException e) {
+			return null;
+		}
+	}
+	
+	public TypeInfo getReturnType() {
+		return Types.typeOf(method.getReturnType());
 	}
 
 	/**
@@ -74,46 +169,69 @@ public final class MethodInfo
 		
 		return true;
 	}
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Parameter
+	////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	private TypeInfo<?>[] cachedParameterTypes;
 	
-	public boolean isStatic() {
-		return Modifiers.isStatic(method);
-	}
-
-	@Override
-	public int getModifiers() {
-		return method.getModifiers();
-	}
-
-	@Override
-	public boolean isPublic() {
-		return Modifiers.isPublic(method);
-	}
-
-	@Override
-	public boolean isProtected() {
-		return Modifiers.isProtected(method);
-	}
-
-	@Override
-	public boolean isInternal() {
-		return Modifiers.isInternal(method);
-	}
-
-	@Override
-	public boolean isPrivate() {
-		return Modifiers.isPrivate(method);
-	}
-
-	public boolean isSynthetic() {
-		return method.isSynthetic();
+	private TypeInfo<?>[] getCachedParameterTypes(){
+		if(cachedParameterTypes == null) {
+			cachedParameterTypes = Linq.from(method.getParameterTypes()).select(c->Types.typeOf(c)).<TypeInfo>cast().toArray(TypeInfo.class);
+		}
+		return cachedParameterTypes;
 	}
 	
-	public TypeInfo<?> getDeclaringType() {
-		return Types.typeOf(method.getDeclaringClass());
+	@Override
+	public int getParameterCount() {
+		return getCachedParameterTypes().length;
 	}
 
-	public TypeInfo getReturnType() {
-		return Types.typeOf(method.getReturnType());
+	@Override
+	public TypeInfo<?>[] getParameterTypes() {
+		return getCachedParameterTypes().clone();
 	}
-	
+
+	@Override
+	public Type[] getParameterGenericTypes() {
+		return method.getGenericParameterTypes();
+	}
+
+	@Override
+	public boolean isParameterTypesOf(Class<?>... parameterTypes) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public ParameterInfo[] getParameters() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public TypeInfo<?>[] getExceptionTypes() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getExceptionCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Type[] getExceptionGenericTypes() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean hasVarArgs() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

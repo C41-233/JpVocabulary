@@ -50,7 +50,7 @@ public class KatakanaWord extends ModelBase implements IKatakanaWord{
 	}
 	
 	public void setAlias(String alias) {
-		Assert.notNull(alias);
+		Assert.isNotNull(alias);
 		this.alias = alias;
 	}
 	

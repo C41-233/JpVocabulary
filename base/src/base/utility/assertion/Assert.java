@@ -12,28 +12,28 @@ public final class Assert{
 		}
 	}
 	
-	public static void notNull(Object obj) {
+	public static void isNotNull(Object obj) {
 		is(obj!=null, "is null");
 	}
 	
 	public static void require(String value) {
-		notNull(value);
+		isNotNull(value);
 		is(value.trim().isEmpty()==false, "require string");
 	}
 	
 	public static void require(Object obj) {
-		notNull(obj);
+		isNotNull(obj);
 	}
 	
 	public static void require(String[] values) {
-		notNull(values);
+		isNotNull(values);
 		for(String value : values) {
 			require(value);
 		}
 	}
 	
 	public static void require(Iterable<String> values) {
-		notNull(values);
+		isNotNull(values);
 		for(String value : values) {
 			require(value);
 		}

@@ -14,12 +14,12 @@ import base.utility.collection.map.DefaultValueHashMap;
 import base.utility.collection.tuple.Tuple;
 import base.utility.collection.tuple.Tuple2;
 import base.utility.comparator.Comparators;
-import base.utility.function.IAction;
-import base.utility.function.IForeachAction;
-import base.utility.function.IJoiner;
-import base.utility.function.IReferencePredicate;
-import base.utility.function.ISelector;
-import base.utility.function.ISelectorEx;
+import base.utility.lambda.IForeachAction;
+import base.utility.lambda.IJoiner;
+import base.utility.lambda.IReferencePredicate;
+import base.utility.lambda.ISelector;
+import base.utility.lambda.ISelectorEx;
+import base.utility.lambda.action.IAction1;
 
 public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 
@@ -197,11 +197,11 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 		return base.core.Core.cast(map);
 	}
 	
-	public default void foreach(IAction<? super T> action) {
+	public default void foreach(IAction1<? super T> action) {
 		IEnumerator<T> enumerator = iterator();
 		while(enumerator.hasNext()) {
 			T obj = enumerator.next();
-			action.call(obj);
+			action.invoke(obj);
 		}
 	}
 	
