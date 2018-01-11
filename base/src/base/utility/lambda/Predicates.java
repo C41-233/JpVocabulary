@@ -1,6 +1,7 @@
 package base.utility.lambda;
 
 import base.utility.lambda.predicate.ICharPredicate;
+import base.utility.lambda.predicate.IPredicate;
 
 public final class Predicates {
 
@@ -92,7 +93,7 @@ public final class Predicates {
 		
 	}
 	
-	public static <T> IReferencePredicate<T> not(IReferencePredicate<T> predicate){
+	public static <T> IPredicate<T> not(IPredicate<T> predicate){
 		return s->predicate.is(s) == false;
 	}
 

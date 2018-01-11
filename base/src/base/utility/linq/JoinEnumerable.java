@@ -3,7 +3,7 @@ package base.utility.linq;
 import java.util.Iterator;
 
 import base.core.Reference;
-import base.utility.lambda.IJoiner;
+import base.utility.lambda.function.IJoiner;
 
 public class JoinEnumerable<T, U, V> implements IReferenceEnumerable<V>{
 

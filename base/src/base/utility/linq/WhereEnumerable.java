@@ -1,14 +1,14 @@
 package base.utility.linq;
 
 import base.core.Reference;
-import base.utility.lambda.IReferencePredicate;
+import base.utility.lambda.predicate.IPredicate;
 
 class WhereEnumerable<T> implements IReferenceEnumerable<T>{
 
 	private final IEnumerable<T> enumerable;
-	private final IReferencePredicate<? super T> predicate;
+	private final IPredicate<? super T> predicate;
 	
-	public WhereEnumerable(IEnumerable<T> enumerable, IReferencePredicate<? super T> predicate) {
+	public WhereEnumerable(IEnumerable<T> enumerable, IPredicate<? super T> predicate) {
 		this.enumerable = enumerable;
 		this.predicate = predicate;
 	}

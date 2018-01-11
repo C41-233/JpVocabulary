@@ -14,19 +14,19 @@ import base.utility.collection.map.DefaultValueHashMap;
 import base.utility.collection.tuple.Tuple;
 import base.utility.collection.tuple.Tuple2;
 import base.utility.comparator.Comparators;
-import base.utility.lambda.IForeachAction;
-import base.utility.lambda.IJoiner;
-import base.utility.lambda.IReferencePredicate;
 import base.utility.lambda.ISelector;
 import base.utility.lambda.ISelectorEx;
 import base.utility.lambda.action.IAction1;
+import base.utility.lambda.action.IForeachAction;
+import base.utility.lambda.function.IJoiner;
+import base.utility.lambda.predicate.IPredicate;
 
 public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 
 	@Override
 	public IEnumerator<T> iterator();
 
-	public default boolean isAll(IReferencePredicate<? super T> predicate) {
+	public default boolean isAll(IPredicate<? super T> predicate) {
 		IEnumerator<T> enumerator = iterator();
 		while(enumerator.hasNext()) {
 			T obj = enumerator.next();
@@ -37,7 +37,7 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 		return true;
 	}
 
-	public default boolean isNotAll(IReferencePredicate<? super T> predicate) {
+	public default boolean isNotAll(IPredicate<? super T> predicate) {
 		IEnumerator<T> enumerator = iterator();
 		while(enumerator.hasNext()) {
 			T obj = enumerator.next();
@@ -48,7 +48,7 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 		return false;
 	}
 	
-	public default boolean isExist(IReferencePredicate<? super T> predicate) {
+	public default boolean isExist(IPredicate<? super T> predicate) {
 		IEnumerator<T> enumerator = iterator();
 		while(enumerator.hasNext()) {
 			T obj = enumerator.next();
@@ -63,7 +63,7 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 		return isExist(obj->Objects.equals(obj, value));
 	}
 
-	public default boolean isNotExist(IReferencePredicate<? super T> predicate) {
+	public default boolean isNotExist(IPredicate<? super T> predicate) {
 		IEnumerator<T> enumerator = iterator();
 		while(enumerator.hasNext()) {
 			T obj = enumerator.next();
@@ -105,7 +105,7 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 		return null;
 	}
 
-	public default T findFirst(IReferencePredicate<? super T> predicate) {
+	public default T findFirst(IPredicate<? super T> predicate) {
 		IEnumerator<T> enumerator = iterator();
 		while(enumerator.hasNext()) {
 			T obj = enumerator.next();
@@ -129,7 +129,7 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 		return -1;
 	}
 	
-	public default int findFirstIndex(IReferencePredicate<? super T> predicate) {
+	public default int findFirstIndex(IPredicate<? super T> predicate) {
 		int index = 0;
 		IEnumerator<T> enumerator = iterator();
 		while(enumerator.hasNext()) {
@@ -154,7 +154,7 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 		return null;
 	}
 
-	public default int count(IReferencePredicate<T> predicate) {
+	public default int count(IPredicate<T> predicate) {
 		int count = 0;
 		IEnumerator<T> enumerator = iterator();
 		while(enumerator.hasNext()) {
@@ -210,7 +210,7 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 		int index = 0;
 		while(enumerator.hasNext()) {
 			T obj = enumerator.next();
-			action.action(obj, index++);
+			action.invoke(obj, index++);
 		}
 	}
 	
@@ -226,7 +226,7 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 		return new SelectManyEnumerable<T, V>(this, selector);
 	}
 	
-	public default IReferenceEnumerable<T> where(IReferencePredicate<? super T> predicate){
+	public default IReferenceEnumerable<T> where(IPredicate<? super T> predicate){
 		return new WhereEnumerable<T>(this, predicate);
 	}
 	
@@ -249,7 +249,7 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 		});
 	}
 
-	public default IReferenceSortedEnumerable<T> orderByCondition(IReferencePredicate<T> predicate){
+	public default IReferenceSortedEnumerable<T> orderByCondition(IPredicate<T> predicate){
 		return new OrderByEnumerable<T>(this, (t1, t2)->{
 			boolean b1 = predicate.is(t1);
 			boolean b2 = predicate.is(t2);

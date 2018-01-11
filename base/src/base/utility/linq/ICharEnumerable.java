@@ -3,8 +3,8 @@ package base.utility.linq;
 import java.util.List;
 import java.util.Objects;
 
-import base.utility.lambda.IForeachCharAction;
 import base.utility.lambda.action.ICharAction;
+import base.utility.lambda.action.IForeachCharAction;
 import base.utility.lambda.predicate.ICharPredicate;
 import base.utility.lambda.selector.ICharSelector;
 
@@ -49,7 +49,7 @@ public interface ICharEnumerable extends IEnumerable<Character>{
 		int i = 0;
 		while(enumerator.hasNext()) {
 			char ch = enumerator.nextChar();
-			action.action(ch, i++);
+			action.invoke(ch, i++);
 		}
 	}
 
