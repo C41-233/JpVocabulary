@@ -13,7 +13,7 @@ import po.IAdjectiveWordValue;
 @Table(name="adjective_values")
 public class AdjectiveWordValue extends ModelBase implements IAdjectiveWordValue{
 
-	@Column(name="verb_id")
+	@Column(name="adjective_id")
 	private long refId;
 	
 	public void setAdjectiveWordId(long id) {

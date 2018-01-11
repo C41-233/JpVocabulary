@@ -345,4 +345,9 @@ $(function(){
 			return $(this).find(":checked").length == 1
 		}
 	})
+	
+	$(".jp-input-search").focus(function(e){
+		var len = $(this).val().length
+		$(this).selection("set", 0, len)
+	})
 })

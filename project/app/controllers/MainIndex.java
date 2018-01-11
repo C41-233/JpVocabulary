@@ -43,6 +43,10 @@ public final class MainIndex extends HtmlControllerBase {
     public static void search(@Required @StringValue String q) {
     	renderArgs.put("query", q);
     	
+    	if(q.length() == 0) {
+    		index();
+    	}
+    	
     	//汉字
     	processCharacter(q);
     	
