@@ -1,9 +1,9 @@
 package base.utility.linq;
 
-import base.utility.lambda.ISelector;
-import base.utility.lambda.ISelectorEx;
-import base.utility.lambda.ISelectorInt;
 import base.utility.lambda.selector.ICharSelector;
+import base.utility.lambda.selector.ISelector;
+import base.utility.lambda.selector.ISelectorEx;
+import base.utility.lambda.selector.IIntConverter;
 
 class SelectEnumerable<T, V> implements IReferenceEnumerable<V>{
 
@@ -52,9 +52,9 @@ class SelectEnumerable<T, V> implements IReferenceEnumerable<V>{
 class SelectIntEnumerable<T> implements IIntEnumerable{
 
 	private final IEnumerable<T> enumerable;
-	private final ISelectorInt<T> selector;
+	private final IIntConverter<T> selector;
 	
-	public SelectIntEnumerable(IEnumerable<T> enumerable, ISelectorInt<T> selector) {
+	public SelectIntEnumerable(IEnumerable<T> enumerable, IIntConverter<T> selector) {
 		this.enumerable = enumerable;
 		this.selector = selector;
 	}
@@ -80,7 +80,7 @@ class SelectIntEnumerable<T> implements IIntEnumerable{
 
 		@Override
 		public int currentInt() {
-			return selector.select(enumerator.current());
+			return selector.convert(enumerator.current());
 		}
 		
 	}

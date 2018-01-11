@@ -14,12 +14,12 @@ import base.utility.collection.map.DefaultValueHashMap;
 import base.utility.collection.tuple.Tuple;
 import base.utility.collection.tuple.Tuple2;
 import base.utility.comparator.Comparators;
-import base.utility.lambda.ISelector;
-import base.utility.lambda.ISelectorEx;
 import base.utility.lambda.action.IAction1;
 import base.utility.lambda.action.IForeachAction;
 import base.utility.lambda.function.IJoiner;
 import base.utility.lambda.predicate.IPredicate;
+import base.utility.lambda.selector.ISelector;
+import base.utility.lambda.selector.ISelectorEx;
 
 public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 

@@ -1,7 +1,4 @@
-package base.utility.lambda;
-
-import base.utility.lambda.predicate.ICharPredicate;
-import base.utility.lambda.predicate.IPredicate;
+package base.utility.lambda.predicate;
 
 public final class Predicates {
 
