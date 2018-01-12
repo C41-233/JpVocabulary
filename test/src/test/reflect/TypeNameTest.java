@@ -101,10 +101,10 @@ public class TypeNameTest {
 	public void test10() {
 		@SuppressWarnings("rawtypes")
 		TypeInfo<ICloneable> type = Types.typeOf(ICloneable.class);
-		assertEquals("base.core.ICloneable", type.getName());
-		assertEquals("Lbase/core/ICloneable;", type.getVMSignatureName());
+		assertEquals("c41.core.ICloneable", type.getName());
+		assertEquals("Lc41/core/ICloneable;", type.getVMSignatureName());
 		assertEquals("ICloneable", type.getSimpleName());
-		assertEquals("base.core.ICloneable<T>", type.getGenericName());
+		assertEquals("c41.core.ICloneable<T>", type.getGenericName());
 		assertEquals("ICloneable<T>", type.getGenericSimpleName());
 	}
 

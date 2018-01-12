@@ -20,7 +20,7 @@ public final class Comparators {
 		return t1.compareTo(t2);
 	}
 
-	public static <T> ComparatorChain<T> chain(Comparator<T> comparator){
+	public static <T> ComparatorChain<T> compareBy(Comparator<T> comparator){
 		return new ComparatorChain<>(comparator);
 	}
 	

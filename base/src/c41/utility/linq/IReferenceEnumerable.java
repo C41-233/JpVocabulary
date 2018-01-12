@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Objects;
 
 import c41.utility.collection.map.DefaultValueHashMap;
@@ -181,20 +181,24 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 	}
 
 	public default <K> Map<K, IReferenceEnumerable<T>> toMap(ISelector<T, K> selector){
-		Map<K, ArrayListEnumerable<T>> map = new HashMap<>();
+		Map<K, ArrayList<T>> map = new HashMap<>();
 		IEnumerator<T> enumerator = iterator();
 		while(enumerator.hasNext()) {
 			T obj = enumerator.next();
 			K key = selector.select(obj);
-			ArrayListEnumerable<T> list = map.get(key);
+			ArrayList<T> list = map.get(key);
 			if(list == null) {
-				list = new ArrayListEnumerable<>();
+				list = new ArrayList<T>();
 				map.put(key, list);
 			}
 			list.add(obj);
 		}
 		
-		return c41.core.Core.cast(map);
+		Map<K, IReferenceEnumerable<T>> rst = new HashMap<>();
+		for(Entry<K, ArrayList<T>> kv : map.entrySet()) {
+			rst.put(kv.getKey(), new ListEnumerable<>(kv.getValue()));
+		}
+		return rst;
 	}
 	
 	public default void foreach(IAction1<? super T> action) {
@@ -287,118 +291,6 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 	
 	public default <U, V> IReferenceEnumerable<V> join(Iterable<U> other, IJoiner<T, U, V> joiner){
 		return new JoinEnumerable<>(this, other, joiner);
-	}
-	
-}
-
-class IterableEnumerable<T> implements IReferenceEnumerable<T>{
-	
-	private final Iterable<T> iterable;
-	
-	public IterableEnumerable(Iterable<T> iterable) {
-		this.iterable = iterable;
-	}
-
-	@Override
-	public IEnumerator<T> iterator() {
-		return new Enumerator();
-	}
-	
-	private class Enumerator implements IEnumerator<T>{
-
-		private final Iterator<T> iterator = iterable.iterator();
-		
-		private T current;
-		
-		@Override
-		public boolean hasNext() {
-			return iterator.hasNext();
-		}
-
-		@Override
-		public void moveNext() {
-			current = iterator.next();
-		}
-
-		@Override
-		public T current() {
-			return current;
-		}
-		
-	}
-	
-}
-
-class ArrayEnumerable<T> implements IReferenceEnumerable<T>{
-
-	private final T[] array;
-	
-	public ArrayEnumerable(T[] array) {
-		this.array = array;
-	}
-	
-	@Override
-	public IEnumerator<T> iterator() {
-		return new Enumerator();
-	}
-
-	private class Enumerator implements IEnumerator<T>{
-
-		private int index = -1;
-		
-		@Override
-		public boolean hasNext() {
-			return index+1 < array.length;
-		}
-
-		@Override
-		public void moveNext() {
-			++index;
-		}
-
-		@Override
-		public T current() {
-			return array[index];
-		}
-		
-	}
-	
-}
-
-class ArrayListEnumerable<T> implements IReferenceEnumerable<T>{
-	
-	private final ArrayList<T> list = new ArrayList<>(); 
-	
-	@Override
-	public IEnumerator<T> iterator() {
-		return new Enumerator();
-	}
-
-	public void add(T obj) {
-		list.add(obj);
-	}
-	
-	private class Enumerator implements IEnumerator<T>{
-
-		private final Iterator<T> iterator = list.iterator();
-		
-		private T current;
-		
-		@Override
-		public boolean hasNext() {
-			return iterator.hasNext();
-		}
-
-		@Override
-		public void moveNext() {
-			current = iterator.next();
-		}
-
-		@Override
-		public T current() {
-			return current;
-		}
-		
 	}
 	
 }

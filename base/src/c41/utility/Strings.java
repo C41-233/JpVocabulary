@@ -2,6 +2,8 @@ package c41.utility;
 
 public final class Strings{
 
+	public static final String Empty = "";
+	
 	private Strings() {}
 	
 	public static String format(String format, Object... args) {

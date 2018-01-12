@@ -8,7 +8,7 @@ public final class Arrays {
 		throw new StaticClassException();
 	}
 	
-	public static <T, K> boolean referenceEquals(T[] arrays1, K[] arrays2) {
+	public static <T, K> boolean equalsByReference(T[] arrays1, K[] arrays2) {
 		if(arrays1 == arrays2) {
 			return true;
 		}

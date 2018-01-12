@@ -318,9 +318,9 @@ public class Character extends ModelBase implements ICharacter{
 	
 		private void onChange() {
 			this.words.sort(
-				Comparators.<WordPair>chain(
+				Comparators.<WordPair>compareBy(
 					(w1, w2)->Comparators.compare(w1.getWord(), w2.getWord())
-				).chain(
+				).thenBy(
 					(w1, w2)->Comparators.compare(w1.getSyllable(), w2.getSyllable())
 				)
 			);

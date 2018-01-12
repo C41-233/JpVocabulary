@@ -163,7 +163,7 @@ public final class MethodInfo
 		}
 		
 		//参数列表必须一致
-		if(!Arrays.referenceEquals(this.method.getParameterTypes(), other.method.getParameterTypes())) {
+		if(!Arrays.equalsByReference(this.method.getParameterTypes(), other.method.getParameterTypes())) {
 			return false;
 		}
 		
