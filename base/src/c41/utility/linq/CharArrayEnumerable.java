@@ -27,7 +27,7 @@ class CharArrayEnumerable implements ICharEnumerable{
 		return new Enumerator();
 	}
 
-	private class Enumerator implements ICharEnumerator{
+	private class Enumerator extends CharEnumeratorBase{
 
 		private int i = -1;
 		
@@ -37,18 +37,12 @@ class CharArrayEnumerable implements ICharEnumerable{
 		}
 
 		@Override
-		public void moveNext() {
-			if(!hasNext()) {
-				throw EnumeratorOutOfRangeException.throwAfter();
-			}
+		public void doMoveNext() {
 			++i;
 		}
 
 		@Override
-		public char currentChar() {
-			if(i < 0) {
-				throw EnumeratorOutOfRangeException.throwBefore();
-			}
+		public char doCurrentChar() {
 			return array[i];
 		}
 		

@@ -15,7 +15,7 @@ class SkipEnumerable<T> implements IEnumerable<T>{
 		IEnumerator<T> enumerator = enumerable.iterator();
 		for(int i=0; i < skip; i++) {
 			if(!enumerator.hasNext()) {
-				throw EnumeratorOutOfRangeException.throwAfter();
+				throw EnumeratorException.throwAfter();
 			}
 			enumerator.moveNext();
 		}

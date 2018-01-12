@@ -23,7 +23,7 @@ class ArrayEnumerable<T> implements IReferenceEnumerable<T>{
 		return new Enumerator();
 	}
 
-	private class Enumerator implements IEnumerator<T>{
+	private class Enumerator extends EnumeratorBase<T>{
 
 		private int index = -1;
 		
@@ -33,18 +33,12 @@ class ArrayEnumerable<T> implements IReferenceEnumerable<T>{
 		}
 
 		@Override
-		public void moveNext() {
-			if(!hasNext()) {
-				throw EnumeratorOutOfRangeException.throwAfter();
-			}
+		public void doMoveNext() {
 			++index;
 		}
 
 		@Override
-		public T current() {
-			if(index < 0) {
-				throw EnumeratorOutOfRangeException.throwBefore();
-			}
+		public T doCurrent() {
 			return array[index];
 		}
 		

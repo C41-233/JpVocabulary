@@ -297,4 +297,8 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 		return new JoinEnumerable<>(this, other, joiner);
 	}
 	
+	public default <U, V> IReferenceEnumerable<V> join(U[] other, IJoiner<T, U, V> joiner){
+		return new JoinEnumerable<>(this, new ArrayEnumerable<>(other), joiner);
+	}
+	
 }

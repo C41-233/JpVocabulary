@@ -26,7 +26,7 @@ public interface IIntEnumerable extends IEnumerable<Integer>{
 			return enumerator.nextInt();
 		}
 		else {
-			throw EnumeratorOutOfRangeException.throwAfter();
+			throw EnumeratorException.throwAfter();
 		}
 	}
 	

@@ -115,7 +115,8 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public interface <span class="typeNameLabel">IEnumerator&lt;T&gt;</span>
 extends java.util.Iterator&lt;T&gt;</pre>
-<div class="block">Enumerator的基接口。</div>
+<div class="block">Enumerator的基接口。
+ 迭代器初始所在的位置是范围之前，此时不能调用current。</div>
 </li>
 </ul>
 </div>
@@ -136,7 +137,9 @@ extends java.util.Iterator&lt;T&gt;</pre>
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code><a href="../../../c41/utility/linq/IEnumerator.html" title="IEnumerator中的类型参数">T</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/linq/IEnumerator.html#current--">current</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/linq/IEnumerator.html#current--">current</a></span>()</code>
+<div class="block">获取当前元素。</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
@@ -144,11 +147,15 @@ extends java.util.Iterator&lt;T&gt;</pre>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/linq/IEnumerator.html#moveNext--">moveNext</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/linq/IEnumerator.html#moveNext--">moveNext</a></span>()</code>
+<div class="block">迭代器向后移动</div>
+</td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>default <a href="../../../c41/utility/linq/IEnumerator.html" title="IEnumerator中的类型参数">T</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/linq/IEnumerator.html#next--">next</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/linq/IEnumerator.html#next--">next</a></span>()</code>
+<div class="block">迭代器向后移动，并返回下一个元素。</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -192,9 +199,14 @@ extends java.util.Iterator&lt;T&gt;</pre>
 <li class="blockList">
 <h4>next</h4>
 <pre>default&nbsp;<a href="../../../c41/utility/linq/IEnumerator.html" title="IEnumerator中的类型参数">T</a>&nbsp;next()</pre>
+<div class="block">迭代器向后移动，并返回下一个元素。</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">指定者:</span></dt>
 <dd><code>next</code>&nbsp;在接口中&nbsp;<code>java.util.Iterator&lt;<a href="../../../c41/utility/linq/IEnumerator.html" title="IEnumerator中的类型参数">T</a>&gt;</code></dd>
+<dt><span class="returnLabel">返回:</span></dt>
+<dd>下一个元素</dd>
+<dt><span class="throwsLabel">抛出:</span></dt>
+<dd><code><a href="../../../c41/utility/linq/EnumeratorOutOfRangeException.html" title="c41.utility.linq中的类">EnumeratorOutOfRangeException</a></code> - 迭代器已经到达末尾</dd>
 </dl>
 </li>
 </ul>
@@ -205,6 +217,11 @@ extends java.util.Iterator&lt;T&gt;</pre>
 <li class="blockList">
 <h4>moveNext</h4>
 <pre>void&nbsp;moveNext()</pre>
+<div class="block">迭代器向后移动</div>
+<dl>
+<dt><span class="throwsLabel">抛出:</span></dt>
+<dd><code><a href="../../../c41/utility/linq/EnumeratorOutOfRangeException.html" title="c41.utility.linq中的类">EnumeratorOutOfRangeException</a></code> - 迭代器已经到达末尾</dd>
+</dl>
 </li>
 </ul>
 <a name="current--">
@@ -214,6 +231,13 @@ extends java.util.Iterator&lt;T&gt;</pre>
 <li class="blockList">
 <h4>current</h4>
 <pre><a href="../../../c41/utility/linq/IEnumerator.html" title="IEnumerator中的类型参数">T</a>&nbsp;current()</pre>
+<div class="block">获取当前元素。</div>
+<dl>
+<dt><span class="returnLabel">返回:</span></dt>
+<dd>当前元素</dd>
+<dt><span class="throwsLabel">抛出:</span></dt>
+<dd><code><a href="../../../c41/utility/linq/EnumeratorOutOfRangeException.html" title="c41.utility.linq中的类">EnumeratorOutOfRangeException</a></code> - 迭代器在范围之前</dd>
+</dl>
 </li>
 </ul>
 </li>

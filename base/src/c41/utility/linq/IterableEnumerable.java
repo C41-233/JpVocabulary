@@ -15,7 +15,7 @@ class IterableEnumerable<T> implements IReferenceEnumerable<T>{
 		return new Enumerator();
 	}
 	
-	private class Enumerator implements IEnumerator<T>{
+	private class Enumerator extends EnumeratorBase<T>{
 
 		private final Iterator<T> iterator = iterable.iterator();
 		
@@ -27,12 +27,12 @@ class IterableEnumerable<T> implements IReferenceEnumerable<T>{
 		}
 
 		@Override
-		public void moveNext() {
+		public void doMoveNext() {
 			current = iterator.next();
 		}
 
 		@Override
-		public T current() {
+		public T doCurrent() {
 			return current;
 		}
 		
