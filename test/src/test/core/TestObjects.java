@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import base.core.Core;
+import c41.core.Core;
 
 public class TestObjects {
 

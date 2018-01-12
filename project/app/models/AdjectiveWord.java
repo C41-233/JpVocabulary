@@ -4,8 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import base.utility.assertion.Assert;
-import base.utility.linq.Linq;
+import c41.utility.assertion.Assert;
+import c41.utility.linq.Linq;
 import core.model.ModelBase;
 import logic.LogicValidate;
 import po.AdjectiveWordType;

@@ -5,8 +5,8 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-import base.core.Core;
-import base.io.LineReader;
+import c41.core.Core;
+import c41.io.LineReader;
 
 class IndexManagerImplement implements IIndexManager{
 

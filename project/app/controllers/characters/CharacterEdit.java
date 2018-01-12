@@ -3,7 +3,7 @@ package controllers.characters;
 import java.util.ArrayList;
 import java.util.List;
 
-import base.utility.Strings;
+import c41.utility.Strings;
 import core.controller.HtmlControllerBase;
 import core.controller.validation.annotation.Id;
 import core.controller.validation.annotation.StringValue;

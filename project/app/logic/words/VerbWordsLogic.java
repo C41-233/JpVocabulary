@@ -4,10 +4,10 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
-import base.utility.Chars;
-import base.utility.collection.Iterables;
-import base.utility.comparator.Comparators;
-import base.utility.linq.Linq;
+import c41.utility.Chars;
+import c41.utility.collection.Iterables;
+import c41.utility.comparator.Comparators;
+import c41.utility.linq.Linq;
 import core.model.hql.HQL;
 import core.model.hql.HQLResult;
 import core.model.hql.Like;

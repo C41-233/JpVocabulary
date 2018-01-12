@@ -2,7 +2,7 @@ package core.logger;
 
 import org.apache.log4j.Logger;
 
-import base.utility.Strings;
+import c41.utility.Strings;
 import core.config.Config;
 
 public final class Logs {

@@ -20,7 +20,7 @@
 		>
 			<compilerarg value="-Xlint:unchecked"/>
         </javac>
-		<jar jarfile="${file.base.jar}" basedir="${folder.classes.output}" includes="base/**"/>
+		<jar jarfile="${file.base.jar}" basedir="${folder.classes.output}" includes="c41/**"/>
 		<delete dir="${folder.classes.output}" />
     </target>
 	

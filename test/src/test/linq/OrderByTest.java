@@ -8,8 +8,8 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import base.utility.comparator.Comparators;
-import base.utility.linq.Linq;
+import c41.utility.comparator.Comparators;
+import c41.utility.linq.Linq;
 
 public class OrderByTest {
 

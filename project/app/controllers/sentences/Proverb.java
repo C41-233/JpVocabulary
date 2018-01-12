@@ -3,8 +3,8 @@ package controllers.sentences;
 import java.util.ArrayList;
 import java.util.List;
 
-import base.utility.comparator.Comparators;
-import base.utility.linq.Linq;
+import c41.utility.comparator.Comparators;
+import c41.utility.linq.Linq;
 import core.controller.HtmlControllerBase;
 import logic.words.NotionalWordsQueryLogic;
 import po.INotionalWord;

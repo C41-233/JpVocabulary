@@ -3,9 +3,9 @@ package logic.convert;
 import java.util.Arrays;
 import java.util.List;
 
-import base.utility.Chars;
-import base.utility.linq.IReferenceEnumerable;
-import base.utility.linq.Linq;
+import c41.utility.Chars;
+import c41.utility.linq.IReferenceEnumerable;
+import c41.utility.linq.Linq;
 import logic.characters.CharactersQueryLogic;
 import po.ICharacter;
 

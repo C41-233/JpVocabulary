@@ -3,7 +3,7 @@ package logic;
 import java.util.HashSet;
 import java.util.List;
 
-import base.utility.Strings;
+import c41.utility.Strings;
 import logic.pinyins.WordQueryIndex;
 
 public abstract class LogicBase{

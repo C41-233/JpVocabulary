@@ -7,7 +7,7 @@ import java.util.Collections;
 
 import org.junit.Test;
 
-import base.utility.linq.Linq;
+import c41.utility.linq.Linq;
 
 public class ThenByTest {
 

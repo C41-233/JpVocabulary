@@ -12,11 +12,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.omg.PortableInterceptor.ObjectReferenceFactory;
 
-import base.reflect.AmbigousMethodException;
-import base.reflect.MethodInfo;
-import base.reflect.Modifiers;
-import base.reflect.TypeInfo;
-import base.reflect.Types;
+import c41.reflect.AmbigousMethodException;
+import c41.reflect.MethodInfo;
+import c41.reflect.Modifiers;
+import c41.reflect.TypeInfo;
+import c41.reflect.Types;
 
 @SuppressWarnings("unused")
 public class TypeMethodTest {

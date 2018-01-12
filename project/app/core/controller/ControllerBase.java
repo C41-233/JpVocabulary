@@ -8,9 +8,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
-import base.reflect.Types;
-import base.utility.Strings;
-import base.utility.generator.SequenceLongGenerator;
+import c41.reflect.Types;
+import c41.utility.Strings;
+import c41.utility.generator.SequenceLongGenerator;
 import core.controller.validation.NoSuchValidationException;
 import core.controller.validation.ProcessorManager;
 import core.controller.validation.ValidationFailException;

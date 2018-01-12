@@ -11,8 +11,8 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import base.utility.linq.IReferenceEnumerable;
-import base.utility.linq.Linq;
+import c41.utility.linq.IReferenceEnumerable;
+import c41.utility.linq.Linq;
 
 public class Test1 {
 

@@ -5,8 +5,8 @@ import java.util.List;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
 
-import base.utility.comparator.Comparators;
-import base.utility.linq.Linq;
+import c41.utility.comparator.Comparators;
+import c41.utility.linq.Linq;
 import po.WordFixword;
 
 class Fixwords{

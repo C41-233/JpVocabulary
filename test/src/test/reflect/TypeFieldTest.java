@@ -4,8 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import base.reflect.TypeInfo;
-import base.reflect.Types;
+import c41.reflect.TypeInfo;
+import c41.reflect.Types;
 
 public class TypeFieldTest {
 

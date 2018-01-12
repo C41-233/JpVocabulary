@@ -7,9 +7,9 @@ import org.apache.log4j.AppenderSkeleton;
 import org.apache.log4j.spi.LoggingEvent;
 import org.joda.time.DateTime;
 
-import base.core.Core;
-import base.io.FileWriter;
-import base.utility.Strings;
+import c41.core.Core;
+import c41.io.FileWriter;
+import c41.utility.Strings;
 
 public class JpFileAppender extends AppenderSkeleton {
 

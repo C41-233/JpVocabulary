@@ -3,8 +3,8 @@ package controllers.sentences;
 import java.io.File;
 import java.util.List;
 
-import base.utility.linq.Linq;
-import base.xml.XmlReader;
+import c41.utility.linq.Linq;
+import c41.xml.XmlReader;
 import core.controller.HtmlControllerBase;
 
 public class Greeting extends HtmlControllerBase{

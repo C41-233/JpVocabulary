@@ -3,8 +3,8 @@ package controllers.katakanas;
 import java.util.ArrayList;
 import java.util.List;
 
-import base.utility.Chars;
-import base.utility.linq.Linq;
+import c41.utility.Chars;
+import c41.utility.linq.Linq;
 import controllers.components.HTMLComponentsControllerBase;
 import core.controller.Route;
 import core.controller.RouteArgs;

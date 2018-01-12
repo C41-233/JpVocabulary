@@ -3,8 +3,8 @@ package controllers.characters;
 import java.util.Arrays;
 import java.util.List;
 
-import base.utility.Strings;
-import base.utility.linq.Linq;
+import c41.utility.Strings;
+import c41.utility.linq.Linq;
 import core.controller.AjaxControllerBase;
 import core.controller.Route;
 import core.controller.RouteArgs;
@@ -88,7 +88,7 @@ public final class CharacterAPI extends AjaxControllerBase {
 		@Array @StringValue(minLength=1) String[] words
 	) {
 		List<WordPair> wordList = Linq.from(words).select(s->{
-			String[] split = Strings.splitTokens(s);
+			String[] split = Strings.splitByWhitespace(s);
 			if(split.length != 2) {
 				badRequest("参数格式错误: "+s);
 			}

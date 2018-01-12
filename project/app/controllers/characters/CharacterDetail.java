@@ -3,8 +3,8 @@ package controllers.characters;
 import java.util.ArrayList;
 import java.util.List;
 
-import base.utility.Strings;
-import base.utility.linq.Linq;
+import c41.utility.Strings;
+import c41.utility.linq.Linq;
 import controllers.adjectives.AdjectiveWordDetail;
 import controllers.notionals.NotionalWordEdit;
 import controllers.verbs.VerbWordDetail;

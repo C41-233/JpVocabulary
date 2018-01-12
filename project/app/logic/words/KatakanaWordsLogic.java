@@ -3,8 +3,8 @@ package logic.words;
 import java.util.List;
 import java.util.Set;
 
-import base.utility.Chars;
-import base.utility.linq.Linq;
+import c41.utility.Chars;
+import c41.utility.linq.Linq;
 import core.model.hql.HQL;
 import core.model.hql.HQLResult;
 import core.model.hql.Like;

@@ -3,8 +3,8 @@ package controllers.notionals;
 import java.util.Arrays;
 import java.util.List;
 
-import base.core.Core;
-import base.utility.linq.Linq;
+import c41.core.Core;
+import c41.utility.linq.Linq;
 import core.controller.AjaxControllerBase;
 import core.controller.validation.annotation.Array;
 import core.controller.validation.annotation.Id;

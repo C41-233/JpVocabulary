@@ -2,7 +2,7 @@ package logic.characters;
 
 import java.util.List;
 
-import base.utility.linq.Linq;
+import c41.utility.linq.Linq;
 import logic.LogicBase;
 import models.Character;
 import models.NotionalWordValue;

@@ -12,9 +12,9 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import base.utility.assertion.Assert;
-import base.utility.comparator.Comparators;
-import base.utility.linq.Linq;
+import c41.utility.assertion.Assert;
+import c41.utility.comparator.Comparators;
+import c41.utility.linq.Linq;
 import core.model.ModelBase;
 import po.WordPair;
 import po.ICharacter;

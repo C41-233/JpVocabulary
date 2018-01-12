@@ -6,9 +6,9 @@ import java.io.IOException;
 
 import org.junit.Test;
 
-import base.reflect.ConstructorInfo;
-import base.reflect.TypeInfo;
-import base.reflect.Types;
+import c41.reflect.ConstructorInfo;
+import c41.reflect.TypeInfo;
+import c41.reflect.Types;
 
 public class TypeConstructTest {
 

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import base.utility.collection.map.HashArrayListMultiMap;
-import base.utility.linq.Linq;
+import c41.utility.collection.map.HashArrayListMultiMap;
+import c41.utility.linq.Linq;
 import controllers.katakanas.KatakanaWordEdit;
 import core.controller.HtmlControllerBase;
 import core.controller.Route;

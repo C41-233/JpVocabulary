@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import base.utility.linq.Linq;
+import c41.utility.linq.Linq;
 
 public final class ConcatSplit{
 

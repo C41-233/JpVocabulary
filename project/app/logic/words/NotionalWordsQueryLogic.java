@@ -2,7 +2,7 @@ package logic.words;
 
 import java.util.List;
 
-import base.utility.collection.Iterables;
+import c41.utility.collection.Iterables;
 import core.model.hql.And;
 import core.model.hql.Clause;
 import core.model.hql.HQL;

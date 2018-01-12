@@ -3,9 +3,9 @@ package controllers.components;
 import java.util.ArrayList;
 import java.util.List;
 
-import base.utility.Strings;
-import base.utility.linq.IReferenceEnumerable;
-import base.utility.linq.Linq;
+import c41.utility.Strings;
+import c41.utility.linq.IReferenceEnumerable;
+import c41.utility.linq.Linq;
 import core.controller.HtmlControllerBase;
 import logic.indexes.IIndexGroup;
 import logic.indexes.IIndexManager;

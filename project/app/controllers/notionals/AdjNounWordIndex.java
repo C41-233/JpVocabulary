@@ -1,6 +1,6 @@
 package controllers.notionals;
 
-import base.core.Core;
+import c41.core.Core;
 import core.controller.Route;
 import core.controller.RouteArgs;
 import core.controller.validation.annotation.Required;

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-import base.utility.linq.Linq;
+import c41.utility.linq.Linq;
 import controllers.adjectives.AdjectiveWordDetail;
 import controllers.characters.CharacterDetail;
 import controllers.katakanas.KatakanaWordEdit;
