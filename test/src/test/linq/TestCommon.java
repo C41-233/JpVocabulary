@@ -14,7 +14,7 @@ import org.junit.Test;
 import c41.utility.linq.IReferenceEnumerable;
 import c41.utility.linq.Linq;
 
-public class Test1 {
+public class TestCommon {
 
 	@Test
 	public void count() {

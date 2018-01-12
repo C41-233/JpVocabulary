@@ -13,7 +13,7 @@ public final class Assert{
 	}
 	
 	public static void isNotNull(Object obj) {
-		is(obj!=null, "is null");
+		is(obj!=null, "require not null");
 	}
 	
 	public static void require(String value) {

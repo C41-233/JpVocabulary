@@ -1,18 +1,14 @@
 package c41.utility.linq;
 
-import java.util.Objects;
-
 class CharArrayEnumerable implements ICharEnumerable{
 
 	private final char[] array;
 	
 	public CharArrayEnumerable(String string) {
-		Objects.requireNonNull(string);
 		this.array = string.toCharArray();
 	}
 	
 	public CharArrayEnumerable(char[] array) {
-		Objects.requireNonNull(array);
 		this.array = array;
 	}
 	
@@ -42,11 +38,17 @@ class CharArrayEnumerable implements ICharEnumerable{
 
 		@Override
 		public void moveNext() {
+			if(!hasNext()) {
+				throw EnumeratorOutOfRangeException.throwAfter();
+			}
 			++i;
 		}
 
 		@Override
 		public char currentChar() {
+			if(i < 0) {
+				throw EnumeratorOutOfRangeException.throwBefore();
+			}
 			return array[i];
 		}
 		

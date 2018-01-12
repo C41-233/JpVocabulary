@@ -23,7 +23,7 @@ public interface IIntEnumerable extends IEnumerable<Integer>{
 			return enumerator.nextInt();
 		}
 		else {
-			throw new IndexOutOfBoundsException();
+			throw EnumeratorOutOfRangeException.throwAfter();
 		}
 	}
 	

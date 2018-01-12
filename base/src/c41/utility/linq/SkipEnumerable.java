@@ -13,7 +13,10 @@ class SkipEnumerable<T> implements IEnumerable<T>{
 	@Override
 	public IEnumerator<T> iterator() {
 		IEnumerator<T> enumerator = enumerable.iterator();
-		for(int i=0; i<skip && enumerator.hasNext(); i++) {
+		for(int i=0; i < skip; i++) {
+			if(!enumerator.hasNext()) {
+				throw EnumeratorOutOfRangeException.throwAfter();
+			}
 			enumerator.moveNext();
 		}
 		return enumerator;

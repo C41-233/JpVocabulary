@@ -34,11 +34,17 @@ class ArrayEnumerable<T> implements IReferenceEnumerable<T>{
 
 		@Override
 		public void moveNext() {
+			if(!hasNext()) {
+				throw EnumeratorOutOfRangeException.throwAfter();
+			}
 			++index;
 		}
 
 		@Override
 		public T current() {
+			if(index < 0) {
+				throw EnumeratorOutOfRangeException.throwBefore();
+			}
 			return array[index];
 		}
 		
