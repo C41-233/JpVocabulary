@@ -14,7 +14,8 @@
             windowtitle="c41-base"  
             use="true"
 			failonwarning="true"
-		>  
+		>
+		<arg value="-notimestamp"/>
         </javadoc>  
 	</target>
 	<target name="all" depends="javadoc"/>
