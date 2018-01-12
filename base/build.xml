@@ -1,0 +1,21 @@
+<project default="all">
+	<property name="dir.src" value="src"/>
+	<property name="dir.doc.api" value="doc/api"/>
+	<target name="javadoc">
+		<delete dir="${dir.doc.api}"/>
+		<javadoc   
+            sourcepath="${dir.src}"   
+            packagenames="c41.*"   
+            destdir="${dir.doc.api}"  
+            charset="UTF8"  
+            docencoding="UTF8"  
+            encoding="UTF8"  
+            private="false"  
+            windowtitle="c41-base"  
+            use="true"
+			failonwarning="true"
+		>  
+        </javadoc>  
+	</target>
+	<target name="all" depends="javadoc"/>
+</project>

@@ -70,6 +70,7 @@ public interface IEnumerable<T> extends Iterable<T>{
 	
 	/**
 	 * 只允许数值基本类型及其包装类型的转换。
+	 * @return IIntEnumerable
 	 */
 	public default IIntEnumerable toInt() {
 		return new SelectIntEnumerable<T>(this, value->((Number)value).intValue());

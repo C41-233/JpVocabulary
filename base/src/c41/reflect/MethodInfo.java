@@ -112,7 +112,8 @@ public final class MethodInfo
 	}
 
 	/**
-	 * 如果注解类型方法的默认值。
+	 * 如果方法所在的类型是注解，则返回方法的默认值。
+	 * @return 方法的默认值。如果方法所在的类型不是注解，返回null
 	 */
 	@SuppressWarnings("unchecked")
 	public <V> V getDefaultValue() {
@@ -129,7 +130,9 @@ public final class MethodInfo
 	}
 
 	/**
-	 * 当前方法是否覆盖了另一个方法
+	 * 当前方法是否override了另一个方法
+	 * @param other 方法
+	 * @return 如果当前方法override了other
 	 */
 	public boolean isOverrideOf(MethodInfo other) {
 		//静态方法不能覆盖
