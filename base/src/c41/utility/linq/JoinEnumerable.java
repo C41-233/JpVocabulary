@@ -5,7 +5,7 @@ import java.util.Iterator;
 import c41.core.Reference;
 import c41.utility.lambda.function.IJoiner;
 
-public class JoinEnumerable<T, U, V> implements IReferenceEnumerable<V>{
+class JoinEnumerable<T, U, V> implements IReferenceEnumerable<V>{
 
 	private final Iterable<T> source1;
 	private final Iterable<U> source2;

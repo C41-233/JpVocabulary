@@ -21,6 +21,10 @@ import c41.utility.lambda.predicate.IPredicate;
 import c41.utility.lambda.selector.ISelector;
 import c41.utility.lambda.selector.ISelectorEx;
 
+/**
+ * 引用类型的Enumerable。
+ * @param <T>
+ */
 public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 
 	@Override

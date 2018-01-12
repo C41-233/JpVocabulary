@@ -1,5 +1,8 @@
 package c41.utility.linq;
 
+/**
+ * 基本类型char的Enumerator。
+ */
 public interface ICharEnumerator extends IEnumerator<Character>{
 
 	@Override

@@ -5,6 +5,10 @@ import java.util.Comparator;
 import c41.utility.comparator.Comparators;
 import c41.utility.lambda.selector.ISelector;
 
+/**
+ * 引用类型的有序Enumerable。
+ * @param <T> 查询元素
+ */
 public interface IReferenceSortedEnumerable<T> extends IReferenceEnumerable<T>{
 
 	@Override

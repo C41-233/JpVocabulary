@@ -2,6 +2,9 @@ package c41.utility.linq;
 
 import java.util.List;
 
+/**
+ * 基本类型int的Enumerable。
+ */
 public interface IIntEnumerable extends IEnumerable<Integer>{
 
 	@Override

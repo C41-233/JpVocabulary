@@ -5,6 +5,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Enumerable的基接口。
+ * @param <T> 查询元素
+ */
 public interface IEnumerable<T> extends Iterable<T>{
 
 	@Override

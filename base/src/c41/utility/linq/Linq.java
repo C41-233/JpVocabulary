@@ -10,6 +10,10 @@ import org.w3c.dom.NodeList;
 import c41.reflect.StaticClassException;
 import c41.utility.assertion.Assert;
 
+/**
+ * 用来操作Linq的各种方法。
+ * 一个Linq查询通常以Linq.from开始。
+ */
 public final class Linq {
 
 	private Linq() {

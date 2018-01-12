@@ -7,6 +7,9 @@ import c41.utility.lambda.action.IForeachCharAction;
 import c41.utility.lambda.predicate.ICharPredicate;
 import c41.utility.lambda.selector.ICharSelector;
 
+/**
+ * 基本类型char的Enumerator。
+ */
 public interface ICharEnumerable extends IEnumerable<Character>{
 
 	@Override

@@ -1,5 +1,8 @@
 package c41.utility.linq;
 
+/**
+ * 基本类型int的Enumerator。
+ */
 public interface IIntEnumerator extends IEnumerator<Integer>{
 
 	@Override
