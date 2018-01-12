@@ -12,7 +12,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import c41.utility.assertion.Assert;
+import c41.utility.assertion.Arguments;
 import c41.utility.comparator.Comparators;
 import c41.utility.linq.Linq;
 import core.model.ModelBase;
@@ -60,7 +60,7 @@ public class Character extends ModelBase implements ICharacter{
 		return this.jp;
 	}
 	public void setJpValue(String jp) {
-		Assert.require(jp);
+		Arguments.isNotEmpty(jp);
 		this.jp = jp;
 	}
 
@@ -69,7 +69,7 @@ public class Character extends ModelBase implements ICharacter{
 		return this.cn;
 	}
 	public void setCnValue(String cn) {
-		Assert.require(cn);
+		Arguments.isNotEmpty(cn);
 		this.cn = cn;
 	}
 	
@@ -78,7 +78,7 @@ public class Character extends ModelBase implements ICharacter{
 		return ConcatSplit.splitAsTokens(pinyins);
 	}
 	public void setPinyins(List<String> pinyins) {
-		Assert.require(pinyins);
+		Arguments.isAllNotEmpty(pinyins);
 		
 		Collections.sort(pinyins);
 		this.pinyins = ConcatSplit.concatTokens(pinyins);
@@ -91,7 +91,7 @@ public class Character extends ModelBase implements ICharacter{
 	}
 
 	public void addSyllable(String syllable) {
-		Assert.require(syllable);
+		Arguments.isNotEmpty(syllable);
 		
 		Syllables syllables = new Syllables(this.syllables);
 		syllables.addSyllable(syllable);
@@ -100,7 +100,7 @@ public class Character extends ModelBase implements ICharacter{
 	}
 	
 	public void deleteSyllable(String syllable) {
-		Assert.require(syllable);
+		Arguments.isNotEmpty(syllable);
 
 		Syllables syllables = new Syllables(this.syllables);
 		syllables.removeSyllable(syllable);
@@ -109,8 +109,8 @@ public class Character extends ModelBase implements ICharacter{
 	}
 
 	public void updateSyllable(String from, String to) {
-		Assert.require(from);
-		Assert.require(to);
+		Arguments.isNotEmpty(from);
+		Arguments.isNotEmpty(to);
 	
 		Syllables syllables = new Syllables(this.syllables);
 		syllables.updateSyllable(from, to);
@@ -119,7 +119,7 @@ public class Character extends ModelBase implements ICharacter{
 	}
 
 	public void updateSyllableMain(String syllable, boolean value) {
-		Assert.require(syllable);
+		Arguments.isNotEmpty(syllable);
 
 		Syllables syllables = new Syllables(this.syllables);
 		syllables.updateMain(syllable, value);
@@ -128,8 +128,8 @@ public class Character extends ModelBase implements ICharacter{
 	}
 
 	public void setSyllableWords(String syllable, List<WordPair> words) {
-		Assert.require(syllable);
-		Assert.require(words);
+		Arguments.isNotEmpty(syllable);
+		Arguments.isNotNull(words);
 		
 		Syllables syllables = new Syllables(this.syllables);
 		syllables.setSyllable(syllable, words);

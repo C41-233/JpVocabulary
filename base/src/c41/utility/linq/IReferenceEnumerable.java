@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
 
+import c41.utility.assertion.Arguments;
 import c41.utility.collection.map.DefaultValueHashMap;
 import c41.utility.collection.tuple.Tuple;
 import c41.utility.collection.tuple.Tuple2;
@@ -243,10 +244,12 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 	}
 	
 	public default IReferenceSortedEnumerable<T> orderBy(Comparator<? super T> comparator){
+		Arguments.isNotNull(comparator);
 		return new OrderByEnumerable<T>(this, comparator);
 	}
 	
 	public default <V extends Comparable<? super V>> IReferenceSortedEnumerable<T> orderBy(ISelector<? super T, V> selector){
+		Arguments.isNotNull(selector);
 		return new OrderByEnumerable<T>(this, (t1, t2)->Comparators.compare(selector.select(t1), selector.select(t2)));
 	}
 
@@ -258,6 +261,7 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 	}
 
 	public default IReferenceSortedEnumerable<T> orderByCondition(IPredicate<T> predicate){
+		Arguments.isNotNull(predicate);
 		return new OrderByEnumerable<T>(this, (t1, t2)->{
 			boolean b1 = predicate.is(t1);
 			boolean b2 = predicate.is(t2);
@@ -274,6 +278,8 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 	
 	@SuppressWarnings("unchecked")
 	public default <V> IReferenceEnumerable<IReferenceGroup<V, T>> groupBy(ISelector<T, V> selector){
+		Arguments.isNotNull(selector);
+		
 		DefaultValueHashMap<V, ReferenceGroup<V, T>> hashMap = new DefaultValueHashMap<>(key->new ReferenceGroup(key));
 		IEnumerator<T> enumerator = iterator();
 		while(enumerator.hasNext()) {
@@ -286,18 +292,24 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 	}
 	
 	public default IReferenceEnumerable<T> union(Iterable<? extends T> iterable){
+		Arguments.isNotNull(iterable);
 		return new UnionEnumerable<T>(this, Linq.from(iterable));
 	}
 	
 	public default <U> IReferenceEnumerable<Tuple2<T, U>> join(Iterable<U> other){
+		Arguments.isNotNull(other);
 		return new JoinEnumerable<>(this, other, (t, u)->Tuple.make(t, u));
 	}
 	
 	public default <U, V> IReferenceEnumerable<V> join(Iterable<U> other, IJoiner<T, U, V> joiner){
+		Arguments.isNotNull(other);
+		Arguments.isNotNull(joiner);
 		return new JoinEnumerable<>(this, other, joiner);
 	}
 	
 	public default <U, V> IReferenceEnumerable<V> join(U[] other, IJoiner<T, U, V> joiner){
+		Arguments.isNotNull(other);
+		Arguments.isNotNull(joiner);
 		return new JoinEnumerable<>(this, new ArrayEnumerable<>(other), joiner);
 	}
 	

@@ -4,7 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import c41.utility.assertion.Assert;
+import c41.utility.assertion.Arguments;
 import c41.utility.linq.Linq;
 import core.model.ModelBase;
 import po.INotionalWordValue;
@@ -29,14 +29,14 @@ public class NotionalWordValue extends ModelBase implements INotionalWordValue{
 	}
 	
 	public void setValue(String value) {
-		Assert.require(value);
+		Arguments.isNotEmpty(value);
 		this.value = value;
 	}
 	
 	@Column(name="type")
 	private int type;
 	public void setType(NotionalWordValueType type) {
-		Assert.isNotNull(type);
+		Arguments.isNotNull(type);
 		this.type = type.value();
 	}
 
@@ -48,7 +48,7 @@ public class NotionalWordValue extends ModelBase implements INotionalWordValue{
 	@Column(name="`index`")
 	private String index = ModelConstant.EmptyToken;
 	public void setIndexes(Iterable<String> indexes) {
-		Assert.require(indexes);
+		Arguments.isAllNotEmpty(indexes);
 		this.index = ConcatSplit.concatTokens(
 			Linq.from(indexes).orderBySelf()
 		);

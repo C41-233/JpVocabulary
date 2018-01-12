@@ -4,7 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import c41.utility.assertion.Assert;
+import c41.utility.assertion.Arguments;
 import c41.utility.linq.Linq;
 import core.model.ModelBase;
 import po.IKatakanaWord;
@@ -24,7 +24,7 @@ public class KatakanaWord extends ModelBase implements IKatakanaWord{
 	}
 	
 	public void setValue(String value) {
-		Assert.require(value);
+		Arguments.isNotEmpty(value);
 		this.value = value;
 	}
 
@@ -37,7 +37,7 @@ public class KatakanaWord extends ModelBase implements IKatakanaWord{
 	}
 	
 	public void setMeanings(Iterable<String> meanings) {
-		Assert.require(meanings);
+		Arguments.isAllNotEmpty(meanings);
 		this.meaning = ConcatSplit.concatLines(meanings);
 	}
 	
@@ -50,7 +50,7 @@ public class KatakanaWord extends ModelBase implements IKatakanaWord{
 	}
 	
 	public void setAlias(String alias) {
-		Assert.isNotNull(alias);
+		Arguments.isNotNull(alias);
 		this.alias = alias;
 	}
 	
@@ -64,7 +64,7 @@ public class KatakanaWord extends ModelBase implements IKatakanaWord{
 	
 	//带排序
 	public void setTypes(Iterable<KatakanaWordType> types) {
-		Assert.require(types);
+		Arguments.isNotNull(types);
 		this.types = ConcatSplit.concatTokens(
 			Linq.from(types)
 				.orderBy(t->t.ordinal())

@@ -136,23 +136,33 @@ extends java.lang.Iterable&lt;T&gt;</pre>
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>default &lt;V&gt;&nbsp;<a href="../../../c41/utility/linq/IReferenceEnumerable.html" title="c41.utility.linq中的接口">IReferenceEnumerable</a>&lt;V&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/linq/IEnumerable.html#cast--">cast</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/linq/IEnumerable.html#cast--">cast</a></span>()</code>
+<div class="block">将元素强制类型转换。</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>default int</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/linq/IEnumerable.html#count--">count</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/linq/IEnumerable.html#count--">count</a></span>()</code>
+<div class="block">返回元素的个数。</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>default boolean</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/linq/IEnumerable.html#hasDuplicate--">hasDuplicate</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/linq/IEnumerable.html#hasDuplicate--">hasDuplicate</a></span>()</code>
+<div class="block">是否存在重复元素。</div>
+</td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>default boolean</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/linq/IEnumerable.html#isEmpty--">isEmpty</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/linq/IEnumerable.html#isEmpty--">isEmpty</a></span>()</code>
+<div class="block">是否是一个空查询（元素的个数为0）。</div>
+</td>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>default boolean</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/linq/IEnumerable.html#isNotEmpty--">isNotEmpty</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/linq/IEnumerable.html#isNotEmpty--">isNotEmpty</a></span>()</code>
+<div class="block">是否是一个非空查询（元素的个数不为0）。</div>
+</td>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code><a href="../../../c41/utility/linq/IEnumerator.html" title="c41.utility.linq中的接口">IEnumerator</a>&lt;<a href="../../../c41/utility/linq/IEnumerable.html" title="IEnumerable中的类型参数">T</a>&gt;</code></td>
@@ -160,21 +170,27 @@ extends java.lang.Iterable&lt;T&gt;</pre>
 </tr>
 <tr id="i6" class="altColor">
 <td class="colFirst"><code>default <a href="../../../c41/utility/linq/IEnumerable.html" title="c41.utility.linq中的接口">IEnumerable</a>&lt;<a href="../../../c41/utility/linq/IEnumerable.html" title="IEnumerable中的类型参数">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/linq/IEnumerable.html#skip-int-">skip</a></span>(int&nbsp;n)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/linq/IEnumerable.html#skip-int-">skip</a></span>(int&nbsp;n)</code>
+<div class="block">跳过前n个元素。</div>
+</td>
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code>default <a href="../../../c41/utility/linq/IIntEnumerable.html" title="c41.utility.linq中的接口">IIntEnumerable</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/linq/IEnumerable.html#toInt--">toInt</a></span>()</code>
-<div class="block">只允许数值基本类型及其包装类型的转换。</div>
+<div class="block">将元素转换为int。</div>
 </td>
 </tr>
 <tr id="i8" class="altColor">
 <td class="colFirst"><code>default java.util.List&lt;<a href="../../../c41/utility/linq/IEnumerable.html" title="IEnumerable中的类型参数">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/linq/IEnumerable.html#toList--">toList</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/linq/IEnumerable.html#toList--">toList</a></span>()</code>
+<div class="block">将所有元素以List的形式返回，元素的顺序与查询的顺序一致。</div>
+</td>
 </tr>
 <tr id="i9" class="rowColor">
 <td class="colFirst"><code>default java.util.Set&lt;<a href="../../../c41/utility/linq/IEnumerable.html" title="IEnumerable中的类型参数">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/linq/IEnumerable.html#toSet--">toSet</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/linq/IEnumerable.html#toSet--">toSet</a></span>()</code>
+<div class="block">将所有元素以Set的形式返回。</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -218,6 +234,11 @@ extends java.lang.Iterable&lt;T&gt;</pre>
 <li class="blockList">
 <h4>count</h4>
 <pre>default&nbsp;int&nbsp;count()</pre>
+<div class="block">返回元素的个数。</div>
+<dl>
+<dt><span class="returnLabel">返回:</span></dt>
+<dd>元素个数</dd>
+</dl>
 </li>
 </ul>
 <a name="toList--">
@@ -227,6 +248,11 @@ extends java.lang.Iterable&lt;T&gt;</pre>
 <li class="blockList">
 <h4>toList</h4>
 <pre>default&nbsp;java.util.List&lt;<a href="../../../c41/utility/linq/IEnumerable.html" title="IEnumerable中的类型参数">T</a>&gt;&nbsp;toList()</pre>
+<div class="block">将所有元素以List的形式返回，元素的顺序与查询的顺序一致。</div>
+<dl>
+<dt><span class="returnLabel">返回:</span></dt>
+<dd>List</dd>
+</dl>
 </li>
 </ul>
 <a name="toSet--">
@@ -236,6 +262,11 @@ extends java.lang.Iterable&lt;T&gt;</pre>
 <li class="blockList">
 <h4>toSet</h4>
 <pre>default&nbsp;java.util.Set&lt;<a href="../../../c41/utility/linq/IEnumerable.html" title="IEnumerable中的类型参数">T</a>&gt;&nbsp;toSet()</pre>
+<div class="block">将所有元素以Set的形式返回。</div>
+<dl>
+<dt><span class="returnLabel">返回:</span></dt>
+<dd>Set</dd>
+</dl>
 </li>
 </ul>
 <a name="hasDuplicate--">
@@ -245,6 +276,12 @@ extends java.lang.Iterable&lt;T&gt;</pre>
 <li class="blockList">
 <h4>hasDuplicate</h4>
 <pre>default&nbsp;boolean&nbsp;hasDuplicate()</pre>
+<div class="block">是否存在重复元素。
+ 元素的比较依赖<code>equals</code>。</div>
+<dl>
+<dt><span class="returnLabel">返回:</span></dt>
+<dd>如果存在重复元素，则返回true。</dd>
+</dl>
 </li>
 </ul>
 <a name="isEmpty--">
@@ -254,6 +291,11 @@ extends java.lang.Iterable&lt;T&gt;</pre>
 <li class="blockList">
 <h4>isEmpty</h4>
 <pre>default&nbsp;boolean&nbsp;isEmpty()</pre>
+<div class="block">是否是一个空查询（元素的个数为0）。</div>
+<dl>
+<dt><span class="returnLabel">返回:</span></dt>
+<dd>如果是一个空查询，则返回true</dd>
+</dl>
 </li>
 </ul>
 <a name="isNotEmpty--">
@@ -263,6 +305,11 @@ extends java.lang.Iterable&lt;T&gt;</pre>
 <li class="blockList">
 <h4>isNotEmpty</h4>
 <pre>default&nbsp;boolean&nbsp;isNotEmpty()</pre>
+<div class="block">是否是一个非空查询（元素的个数不为0）。</div>
+<dl>
+<dt><span class="returnLabel">返回:</span></dt>
+<dd>如果是一个非空查询，则返回true</dd>
+</dl>
 </li>
 </ul>
 <a name="skip-int-">
@@ -272,6 +319,14 @@ extends java.lang.Iterable&lt;T&gt;</pre>
 <li class="blockList">
 <h4>skip</h4>
 <pre>default&nbsp;<a href="../../../c41/utility/linq/IEnumerable.html" title="c41.utility.linq中的接口">IEnumerable</a>&lt;<a href="../../../c41/utility/linq/IEnumerable.html" title="IEnumerable中的类型参数">T</a>&gt;&nbsp;skip(int&nbsp;n)</pre>
+<div class="block">跳过前n个元素。
+ 如果在延迟执行时，跳过的个数超出了迭代器范围，则抛出<code>NoSuchElementException</code>。</div>
+<dl>
+<dt><span class="paramLabel">参数:</span></dt>
+<dd><code>n</code> - 跳过的元素个数</dd>
+<dt><span class="returnLabel">返回:</span></dt>
+<dd>跳过后的查询</dd>
+</dl>
 </li>
 </ul>
 <a name="cast--">
@@ -281,6 +336,11 @@ extends java.lang.Iterable&lt;T&gt;</pre>
 <li class="blockList">
 <h4>cast</h4>
 <pre>default&nbsp;&lt;V&gt;&nbsp;<a href="../../../c41/utility/linq/IReferenceEnumerable.html" title="c41.utility.linq中的接口">IReferenceEnumerable</a>&lt;V&gt;&nbsp;cast()</pre>
+<div class="block">将元素强制类型转换。</div>
+<dl>
+<dt><span class="returnLabel">返回:</span></dt>
+<dd>转换后的Enumerable。</dd>
+</dl>
 </li>
 </ul>
 <a name="toInt--">
@@ -290,7 +350,7 @@ extends java.lang.Iterable&lt;T&gt;</pre>
 <li class="blockList">
 <h4>toInt</h4>
 <pre>default&nbsp;<a href="../../../c41/utility/linq/IIntEnumerable.html" title="c41.utility.linq中的接口">IIntEnumerable</a>&nbsp;toInt()</pre>
-<div class="block">只允许数值基本类型及其包装类型的转换。</div>
+<div class="block">将元素转换为int。</div>
 <dl>
 <dt><span class="returnLabel">返回:</span></dt>
 <dd>IIntEnumerable</dd>

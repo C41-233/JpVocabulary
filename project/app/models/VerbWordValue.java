@@ -4,7 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import c41.utility.assertion.Assert;
+import c41.utility.assertion.Arguments;
 import c41.utility.linq.Linq;
 import core.model.ModelBase;
 import po.IVerbWordValue;
@@ -29,7 +29,7 @@ public class VerbWordValue extends ModelBase implements IVerbWordValue{
 	private String value;
 	
 	public void setValue(String value) {
-		Assert.require(value);
+		Arguments.isNotEmpty(value);
 		this.value = value;
 	}
 	
@@ -42,7 +42,7 @@ public class VerbWordValue extends ModelBase implements IVerbWordValue{
 	private String index = ModelConstant.EmptyToken;
 	
 	public void setIndexes(Iterable<String> indexes) {
-		Assert.require(indexes);
+		Arguments.isAllNotEmpty(indexes);
 		this.index = ConcatSplit.concatTokens(Linq.from(indexes).orderBySelf());
 	}
 	

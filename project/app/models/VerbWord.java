@@ -4,7 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import c41.utility.assertion.Assert;
+import c41.utility.assertion.Arguments;
 import c41.utility.linq.Linq;
 import core.model.ModelBase;
 import logic.LogicValidate;
@@ -25,7 +25,7 @@ public class VerbWord extends ModelBase implements IVerbWord{
 	}
 	
 	public void setMeanings(Iterable<String> meanings) {
-		Assert.require(meanings);
+		Arguments.isAllNotEmpty(meanings);
 		this.meaning = ConcatSplit.concatLines(meanings);
 	}
 	
@@ -38,7 +38,7 @@ public class VerbWord extends ModelBase implements IVerbWord{
 	}
 	
 	public void setTypes(Iterable<VerbWordType> types) {
-		Assert.require(types);
+		Arguments.isNotNull(types);
 		this.types = ConcatSplit.concatTokens(
 			Linq.from(types)
 				.orderBy(t->t.ordinal())
