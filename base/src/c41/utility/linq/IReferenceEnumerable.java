@@ -12,12 +12,14 @@ import java.util.Objects;
 
 import c41.utility.assertion.Arguments;
 import c41.utility.collection.map.DefaultValueHashMap;
-import c41.utility.collection.tuple.Tuples;
 import c41.utility.collection.tuple.Tuple2;
+import c41.utility.collection.tuple.Tuples;
 import c41.utility.comparator.Comparators;
 import c41.utility.lambda.action.IAction1;
 import c41.utility.lambda.action.IForeachAction;
 import c41.utility.lambda.function.IJoiner;
+import c41.utility.lambda.predicate.ICharPredicate;
+import c41.utility.lambda.predicate.IIntPredicate;
 import c41.utility.lambda.predicate.IPredicate;
 import c41.utility.lambda.selector.ISelector;
 import c41.utility.lambda.selector.ISelectorEx;
@@ -31,6 +33,13 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 	@Override
 	public IEnumerator<T> iterator();
 
+	/**
+	 * 所有元素都满足谓词。
+	 * @param predicate 谓词
+	 * @return 如果所有元素都满足谓词，则返回true
+	 * @see ICharEnumerable#isAll(ICharPredicate)
+	 * @see IIntEnumerable#isAll(IIntPredicate)
+	 */
 	public default boolean isAll(IPredicate<? super T> predicate) {
 		Arguments.isNotNull(predicate);
 		
@@ -44,6 +53,11 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 		return true;
 	}
 
+	/**
+	 * 非所有元素都满足谓词。
+	 * @param predicate 谓词
+	 * @return 如果非所有元素都满足谓词，返回true
+	 */
 	public default boolean isNotAll(IPredicate<? super T> predicate) {
 		Arguments.isNotNull(predicate);
 		

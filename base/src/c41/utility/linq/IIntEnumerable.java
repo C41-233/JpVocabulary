@@ -3,6 +3,9 @@ package c41.utility.linq;
 import java.util.List;
 
 import c41.utility.assertion.Arguments;
+import c41.utility.lambda.predicate.ICharPredicate;
+import c41.utility.lambda.predicate.IIntPredicate;
+import c41.utility.lambda.predicate.IPredicate;
 
 /**
  * 基本类型int的Enumerable。
@@ -11,6 +14,26 @@ public interface IIntEnumerable extends IEnumerable<Integer>{
 
 	@Override
 	public IIntEnumerator iterator();
+
+	/**
+	 * 所有元素都满足谓词。
+	 * @param predicate 谓词
+	 * @return 如果所有元素都满足谓词，则返回true
+	 * @see IReferenceEnumerable#isAll(IPredicate)
+	 * @see ICharEnumerable#isAll(ICharPredicate)
+	 */
+	public default boolean isAll(IIntPredicate predicate) {
+		Arguments.isNotNull(predicate);
+		
+		IIntEnumerator enumerator = iterator();
+		while(enumerator.hasNext()) {
+			int val = enumerator.nextInt();
+			if(predicate.is(val) == false) {
+				return false;
+			}
+		}
+		return true;
+	}
 	
 	public default int[] toArray() {
 		List<Integer> list = toList();

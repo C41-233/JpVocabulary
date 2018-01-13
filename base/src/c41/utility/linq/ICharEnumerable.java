@@ -6,6 +6,8 @@ import c41.utility.assertion.Arguments;
 import c41.utility.lambda.action.ICharAction;
 import c41.utility.lambda.action.IForeachCharAction;
 import c41.utility.lambda.predicate.ICharPredicate;
+import c41.utility.lambda.predicate.IIntPredicate;
+import c41.utility.lambda.predicate.IPredicate;
 import c41.utility.lambda.selector.ICharSelector;
 
 /**
@@ -20,6 +22,8 @@ public interface ICharEnumerable extends IEnumerable<Character>{
 	 * 所有元素都满足谓词。
 	 * @param predicate 谓词
 	 * @return 如果所有元素都满足谓词，则返回true
+	 * @see IReferenceEnumerable#isAll(IPredicate)
+	 * @see IIntEnumerable#isAll(IIntPredicate)
 	 */
 	public default boolean isAll(ICharPredicate predicate) {
 		Arguments.isNotNull(predicate);

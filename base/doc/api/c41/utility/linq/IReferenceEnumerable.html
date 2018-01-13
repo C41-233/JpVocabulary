@@ -180,7 +180,9 @@ extends <a href="../../../c41/utility/linq/IEnumerable.html" title="c41.utility.
 </tr>
 <tr id="i11" class="rowColor">
 <td class="colFirst"><code>default boolean</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/linq/IReferenceEnumerable.html#isAll-c41.utility.lambda.predicate.IPredicate-">isAll</a></span>(<a href="../../../c41/utility/lambda/predicate/IPredicate.html" title="c41.utility.lambda.predicate中的接口">IPredicate</a>&lt;? super <a href="../../../c41/utility/linq/IReferenceEnumerable.html" title="IReferenceEnumerable中的类型参数">T</a>&gt;&nbsp;predicate)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/linq/IReferenceEnumerable.html#isAll-c41.utility.lambda.predicate.IPredicate-">isAll</a></span>(<a href="../../../c41/utility/lambda/predicate/IPredicate.html" title="c41.utility.lambda.predicate中的接口">IPredicate</a>&lt;? super <a href="../../../c41/utility/linq/IReferenceEnumerable.html" title="IReferenceEnumerable中的类型参数">T</a>&gt;&nbsp;predicate)</code>
+<div class="block">所有元素都满足谓词。</div>
+</td>
 </tr>
 <tr id="i12" class="altColor">
 <td class="colFirst"><code>default boolean</code></td>
@@ -192,7 +194,9 @@ extends <a href="../../../c41/utility/linq/IEnumerable.html" title="c41.utility.
 </tr>
 <tr id="i14" class="altColor">
 <td class="colFirst"><code>default boolean</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/linq/IReferenceEnumerable.html#isNotAll-c41.utility.lambda.predicate.IPredicate-">isNotAll</a></span>(<a href="../../../c41/utility/lambda/predicate/IPredicate.html" title="c41.utility.lambda.predicate中的接口">IPredicate</a>&lt;? super <a href="../../../c41/utility/linq/IReferenceEnumerable.html" title="IReferenceEnumerable中的类型参数">T</a>&gt;&nbsp;predicate)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/linq/IReferenceEnumerable.html#isNotAll-c41.utility.lambda.predicate.IPredicate-">isNotAll</a></span>(<a href="../../../c41/utility/lambda/predicate/IPredicate.html" title="c41.utility.lambda.predicate中的接口">IPredicate</a>&lt;? super <a href="../../../c41/utility/linq/IReferenceEnumerable.html" title="IReferenceEnumerable中的类型参数">T</a>&gt;&nbsp;predicate)</code>
+<div class="block">非所有元素都满足谓词。</div>
+</td>
 </tr>
 <tr id="i15" class="rowColor">
 <td class="colFirst"><code>default boolean</code></td>
@@ -323,6 +327,16 @@ extends <a href="../../../c41/utility/linq/IEnumerable.html" title="c41.utility.
 <li class="blockList">
 <h4>isAll</h4>
 <pre>default&nbsp;boolean&nbsp;isAll(<a href="../../../c41/utility/lambda/predicate/IPredicate.html" title="c41.utility.lambda.predicate中的接口">IPredicate</a>&lt;? super <a href="../../../c41/utility/linq/IReferenceEnumerable.html" title="IReferenceEnumerable中的类型参数">T</a>&gt;&nbsp;predicate)</pre>
+<div class="block">所有元素都满足谓词。</div>
+<dl>
+<dt><span class="paramLabel">参数:</span></dt>
+<dd><code>predicate</code> - 谓词</dd>
+<dt><span class="returnLabel">返回:</span></dt>
+<dd>如果所有元素都满足谓词，则返回true</dd>
+<dt><span class="seeLabel">另请参阅:</span></dt>
+<dd><a href="../../../c41/utility/linq/ICharEnumerable.html#isAll-c41.utility.lambda.predicate.ICharPredicate-"><code>ICharEnumerable.isAll(ICharPredicate)</code></a>, 
+<a href="../../../c41/utility/linq/IIntEnumerable.html#isAll-c41.utility.lambda.predicate.IIntPredicate-"><code>IIntEnumerable.isAll(IIntPredicate)</code></a></dd>
+</dl>
 </li>
 </ul>
 <a name="isNotAll-c41.utility.lambda.predicate.IPredicate-">
@@ -332,6 +346,13 @@ extends <a href="../../../c41/utility/linq/IEnumerable.html" title="c41.utility.
 <li class="blockList">
 <h4>isNotAll</h4>
 <pre>default&nbsp;boolean&nbsp;isNotAll(<a href="../../../c41/utility/lambda/predicate/IPredicate.html" title="c41.utility.lambda.predicate中的接口">IPredicate</a>&lt;? super <a href="../../../c41/utility/linq/IReferenceEnumerable.html" title="IReferenceEnumerable中的类型参数">T</a>&gt;&nbsp;predicate)</pre>
+<div class="block">非所有元素都满足谓词。</div>
+<dl>
+<dt><span class="paramLabel">参数:</span></dt>
+<dd><code>predicate</code> - 谓词</dd>
+<dt><span class="returnLabel">返回:</span></dt>
+<dd>如果非所有元素都满足谓词，返回true</dd>
+</dl>
 </li>
 </ul>
 <a name="isExist-c41.utility.lambda.predicate.IPredicate-">
