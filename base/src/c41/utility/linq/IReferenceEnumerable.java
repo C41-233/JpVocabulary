@@ -32,6 +32,8 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 	public IEnumerator<T> iterator();
 
 	public default boolean isAll(IPredicate<? super T> predicate) {
+		Arguments.isNotNull(predicate);
+		
 		IEnumerator<T> enumerator = iterator();
 		while(enumerator.hasNext()) {
 			T obj = enumerator.next();
@@ -43,6 +45,8 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 	}
 
 	public default boolean isNotAll(IPredicate<? super T> predicate) {
+		Arguments.isNotNull(predicate);
+		
 		IEnumerator<T> enumerator = iterator();
 		while(enumerator.hasNext()) {
 			T obj = enumerator.next();
@@ -54,6 +58,8 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 	}
 	
 	public default boolean isExist(IPredicate<? super T> predicate) {
+		Arguments.isNotNull(predicate);
+		
 		IEnumerator<T> enumerator = iterator();
 		while(enumerator.hasNext()) {
 			T obj = enumerator.next();
@@ -69,6 +75,8 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 	}
 
 	public default boolean isNotExist(IPredicate<? super T> predicate) {
+		Arguments.isNotNull(predicate);
+		
 		IEnumerator<T> enumerator = iterator();
 		while(enumerator.hasNext()) {
 			T obj = enumerator.next();
@@ -92,6 +100,8 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 	}
 	
 	public default T at(int index) {
+		Arguments.is(index>=0, "%d < 0", index);
+		
 		IEnumerator<T> enumerator = iterator();
 		for(int i=0; i<index && enumerator.hasNext(); i++, enumerator.moveNext());
 		if(enumerator.hasNext()) {
@@ -111,6 +121,8 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 	}
 
 	public default T findFirst(IPredicate<? super T> predicate) {
+		Arguments.isNotNull(predicate);
+		
 		IEnumerator<T> enumerator = iterator();
 		while(enumerator.hasNext()) {
 			T obj = enumerator.next();
@@ -135,6 +147,8 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 	}
 	
 	public default int findFirstIndex(IPredicate<? super T> predicate) {
+		Arguments.isNotNull(predicate);
+		
 		int index = 0;
 		IEnumerator<T> enumerator = iterator();
 		while(enumerator.hasNext()) {
@@ -160,6 +174,8 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 	}
 
 	public default int count(IPredicate<T> predicate) {
+		Arguments.isNotNull(predicate);
+		
 		int count = 0;
 		IEnumerator<T> enumerator = iterator();
 		while(enumerator.hasNext()) {
@@ -173,6 +189,8 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 
 	@SuppressWarnings("unchecked")
 	public default T[] toArray(Class<T> type) {
+		Arguments.isNotNull(type);
+		
 		List<T> list = toList();
 		T[] array = (T[]) Array.newInstance(type, list.size());
 		for(int i=0; i<list.size(); i++) {
@@ -182,10 +200,13 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 	}
 
 	public default T[] toArray(T[] array) {
+		Arguments.isNotNull(array);
 		return toList().toArray(array);
 	}
 
 	public default <K> Map<K, IReferenceEnumerable<T>> toMap(ISelector<T, K> selector){
+		Arguments.isNotNull(selector);
+		
 		Map<K, ArrayList<T>> map = new HashMap<>();
 		IEnumerator<T> enumerator = iterator();
 		while(enumerator.hasNext()) {
@@ -207,6 +228,8 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 	}
 	
 	public default void foreach(IAction1<? super T> action) {
+		Arguments.isNotNull(action);
+		
 		IEnumerator<T> enumerator = iterator();
 		while(enumerator.hasNext()) {
 			T obj = enumerator.next();
@@ -215,6 +238,8 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 	}
 	
 	public default void foreach(IForeachAction<? super T> action) {
+		Arguments.isNotNull(action);
+		
 		IEnumerator<T> enumerator = iterator();
 		int index = 0;
 		while(enumerator.hasNext()) {
@@ -224,22 +249,27 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 	}
 	
 	public default <V> IReferenceEnumerable<V> select(ISelector<? super T, ? extends V> selector){
+		Arguments.isNotNull(selector);
 		return new SelectEnumerable<T, V>(this, selector);
 	}
 
 	public default <V> IReferenceEnumerable<V> select(ISelectorEx<? super T, ? extends V> selector){
+		Arguments.isNotNull(selector);
 		return new SelectEnumerable<T, V>(this, selector);
 	}
 	
 	public default <V> IReferenceEnumerable<V> selectMany(ISelector<? super T, ? extends Iterable<? extends V>> selector){
+		Arguments.isNotNull(selector);
 		return new SelectManyEnumerable<T, V>(this, selector);
 	}
 	
 	public default IReferenceEnumerable<T> where(IPredicate<? super T> predicate){
+		Arguments.isNotNull(predicate);
 		return new WhereEnumerable<T>(this, predicate);
 	}
 	
 	public default <V> IReferenceEnumerable<V> instanceOf(Class<V> cl){
+		Arguments.isNotNull(cl);
 		return where(c->cl.isInstance(c)).cast();
 	}
 	
@@ -262,6 +292,7 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 
 	public default IReferenceSortedEnumerable<T> orderByCondition(IPredicate<T> predicate){
 		Arguments.isNotNull(predicate);
+		
 		return new OrderByEnumerable<T>(this, (t1, t2)->{
 			boolean b1 = predicate.is(t1);
 			boolean b2 = predicate.is(t2);
