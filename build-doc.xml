@@ -1,0 +1,39 @@
+<project default="all">
+	<macrodef name="builddoc">
+		<attribute name="name"/>
+		<attribute name="title" default="@{name}"/>
+		<element name="classpath" optional="yes" implicit="yes"/>
+		<sequential>
+			<delete dir="@{name}/doc/api"/>
+			<javadoc   
+				sourcepath="@{name}/src"   
+				packagenames="c41.*"   
+				destdir="@{name}/doc/api"  
+				charset="UTF8"  
+				docencoding="UTF8"  
+				encoding="UTF8"  
+				private="false"  
+				windowtitle="@{title}"  
+				use="true"
+				failonwarning="true"
+			>
+				<arg value="-notimestamp"/>
+				<classpath/>
+			</javadoc>  
+		</sequential>
+	</macrodef>
+
+	<target name="build-base">
+		<builddoc name="base" title="c41-base"/>
+	</target>
+	
+	<target name="build-simple-xml">
+		<builddoc name="simple-xml">
+			<classpath>
+				<pathelement location="base/bin"/>
+			</classpath>
+		</builddoc>
+	</target>
+	
+	<target name="all" depends="build-base,build-simple-xml"/>
+</project>

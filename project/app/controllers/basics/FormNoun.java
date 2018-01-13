@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import c41.utility.linq.Linq;
-import c41.xml.XmlListClass;
-import c41.xml.XmlReader;
+import c41.xml.simple.XmlReader;
+import c41.xml.simple.annotation.XmlListClass;
 import core.controller.HtmlControllerBase;
 
 public class FormNoun extends HtmlControllerBase{

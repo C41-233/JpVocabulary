@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import c41.xml.XmlReader;
+import c41.xml.simple.XmlReader;
 
 public class XmlTest {
 
