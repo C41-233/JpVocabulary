@@ -19,7 +19,7 @@ public final class Types {
 			return null;
 		}
 		
-		return classes.getOrCreate(clazz, ()->new TypeInfo<T>(clazz));
+		return classes.getOrCreate(clazz, ()->new TypeInfo<>(clazz));
 	}
 	
 	public static TypeInfo<?> typeOf(String clazz){

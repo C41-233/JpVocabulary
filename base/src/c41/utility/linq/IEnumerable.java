@@ -98,7 +98,7 @@ public interface IEnumerable<T> extends Iterable<T>{
 	 */
 	public default IEnumerable<T> skip(int n){
 		Arguments.is(n>=0, "%d < 0", n);
-		return new SkipEnumerable<T>(this, n);
+		return new SkipEnumerable<>(this, n);
 	}
 	
 	
@@ -116,7 +116,7 @@ public interface IEnumerable<T> extends Iterable<T>{
 	 * @return IIntEnumerable
 	 */
 	public default IIntEnumerable toInt() {
-		return new SelectIntEnumerable<T>(this, value->((Number)value).intValue());
+		return new SelectIntEnumerable<>(this, value->((Number)value).intValue());
 	}
 	
 }

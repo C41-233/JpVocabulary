@@ -29,7 +29,7 @@ class WhereEnumerable<T> implements IReferenceEnumerable<T>{
 			while(enumerator.hasNext()) {
 				T value = enumerator.next();
 				if(predicate.is(value)) {
-					this.next = new Reference<T>(value);
+					this.next = new Reference<>(value);
 					break;
 				}
 			}
@@ -43,7 +43,7 @@ class WhereEnumerable<T> implements IReferenceEnumerable<T>{
 		@Override
 		public void moveNext() {
 			if(current == null) {
-				current = new Reference<T>();
+				current = new Reference<>();
 			}
 			current.value = next.value;
 			while(enumerator.hasNext()) {

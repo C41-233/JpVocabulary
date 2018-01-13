@@ -12,7 +12,7 @@ import java.util.Objects;
 
 import c41.utility.assertion.Arguments;
 import c41.utility.collection.map.DefaultValueHashMap;
-import c41.utility.collection.tuple.Tuple;
+import c41.utility.collection.tuple.Tuples;
 import c41.utility.collection.tuple.Tuple2;
 import c41.utility.comparator.Comparators;
 import c41.utility.lambda.action.IAction1;
@@ -214,7 +214,7 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 			K key = selector.select(obj);
 			ArrayList<T> list = map.get(key);
 			if(list == null) {
-				list = new ArrayList<T>();
+				list = new ArrayList<>();
 				map.put(key, list);
 			}
 			list.add(obj);
@@ -250,22 +250,22 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 	
 	public default <V> IReferenceEnumerable<V> select(ISelector<? super T, ? extends V> selector){
 		Arguments.isNotNull(selector);
-		return new SelectEnumerable<T, V>(this, selector);
+		return new SelectEnumerable<>(this, selector);
 	}
 
 	public default <V> IReferenceEnumerable<V> select(ISelectorEx<? super T, ? extends V> selector){
 		Arguments.isNotNull(selector);
-		return new SelectEnumerable<T, V>(this, selector);
+		return new SelectEnumerable<>(this, selector);
 	}
 	
 	public default <V> IReferenceEnumerable<V> selectMany(ISelector<? super T, ? extends Iterable<? extends V>> selector){
 		Arguments.isNotNull(selector);
-		return new SelectManyEnumerable<T, V>(this, selector);
+		return new SelectManyEnumerable<>(this, selector);
 	}
 	
 	public default IReferenceEnumerable<T> where(IPredicate<? super T> predicate){
 		Arguments.isNotNull(predicate);
-		return new WhereEnumerable<T>(this, predicate);
+		return new WhereEnumerable<>(this, predicate);
 	}
 	
 	public default <V> IReferenceEnumerable<V> instanceOf(Class<V> cl){
@@ -275,17 +275,17 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 	
 	public default IReferenceSortedEnumerable<T> orderBy(Comparator<? super T> comparator){
 		Arguments.isNotNull(comparator);
-		return new OrderByEnumerable<T>(this, comparator);
+		return new OrderByEnumerable<>(this, comparator);
 	}
 	
 	public default <V extends Comparable<? super V>> IReferenceSortedEnumerable<T> orderBy(ISelector<? super T, V> selector){
 		Arguments.isNotNull(selector);
-		return new OrderByEnumerable<T>(this, (t1, t2)->Comparators.compare(selector.select(t1), selector.select(t2)));
+		return new OrderByEnumerable<>(this, (t1, t2)->Comparators.compare(selector.select(t1), selector.select(t2)));
 	}
 
 	@SuppressWarnings("unchecked")
 	public default IReferenceSortedEnumerable<T> orderBySelf(){
-		return new OrderByEnumerable<T>(this, (t1, t2)->{
+		return new OrderByEnumerable<>(this, (t1, t2)->{
 			return Comparators.compare((Comparable)t1, (Comparable)t2);
 		});
 	}
@@ -293,7 +293,7 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 	public default IReferenceSortedEnumerable<T> orderByCondition(IPredicate<T> predicate){
 		Arguments.isNotNull(predicate);
 		
-		return new OrderByEnumerable<T>(this, (t1, t2)->{
+		return new OrderByEnumerable<>(this, (t1, t2)->{
 			boolean b1 = predicate.is(t1);
 			boolean b2 = predicate.is(t2);
 			
@@ -324,12 +324,12 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 	
 	public default IReferenceEnumerable<T> union(Iterable<? extends T> iterable){
 		Arguments.isNotNull(iterable);
-		return new UnionEnumerable<T>(this, Linq.from(iterable));
+		return new UnionEnumerable<>(this, Linq.from(iterable));
 	}
 	
 	public default <U> IReferenceEnumerable<Tuple2<T, U>> join(Iterable<U> other){
 		Arguments.isNotNull(other);
-		return new JoinEnumerable<>(this, other, (t, u)->Tuple.make(t, u));
+		return new JoinEnumerable<>(this, other, (t, u)->Tuples.make(t, u));
 	}
 	
 	public default <U, V> IReferenceEnumerable<V> join(Iterable<U> other, IJoiner<T, U, V> joiner){

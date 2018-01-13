@@ -17,17 +17,17 @@ public interface IReferenceSortedEnumerable<T> extends IReferenceEnumerable<T>{
 	
 	public default IReferenceSortedEnumerable<T> thenBy(Comparator<? super T> comparator){
 		Arguments.isNotNull(comparator);
-		return new ThenByEnumerable<T>(this, comparator);
+		return new ThenByEnumerable<>(this, comparator);
 	}
 
 	public default <V extends Comparable<? super V>> IReferenceSortedEnumerable<T> thenBy(ISelector<T, V> selector){
 		Arguments.isNotNull(selector);
-		return new ThenByEnumerable<T>(this, (t1, t2)->Comparators.compare(selector.select(t1), selector.select(t2)));
+		return new ThenByEnumerable<>(this, (t1, t2)->Comparators.compare(selector.select(t1), selector.select(t2)));
 	}
 	
 	@SuppressWarnings("unchecked")
 	public default IReferenceSortedEnumerable<T> thenBySelf(){
-		return new ThenByEnumerable<T>(this, (t1, t2)->{
+		return new ThenByEnumerable<>(this, (t1, t2)->{
 			return Comparators.compare((Comparable)t1, (Comparable)t2);
 		});
 	}

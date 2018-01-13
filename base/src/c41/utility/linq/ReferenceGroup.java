@@ -11,7 +11,7 @@ class ReferenceGroup<TKey, TValue> implements IReferenceGroup<TKey, TValue>{
 	public ReferenceGroup(TKey key) {
 		this.key = key;
 		this.values = new ArrayList<>();
-		this.enumerable = new IterableEnumerable<TValue>(this.values);
+		this.enumerable = new IterableEnumerable<>(this.values);
 	}
 	
 	@Override

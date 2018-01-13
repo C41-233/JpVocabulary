@@ -13,7 +13,7 @@ public class WeakMemoryCache<K, V>{
 	private final HashMap<K, WeakReference<V>> data = new HashMap<>();
 
 	public synchronized void put(K key, V value) {
-		data.put(key, new WeakReference<V>(value));
+		data.put(key, new WeakReference<>(value));
 	}
 	
 	public synchronized V get(K key) {
@@ -33,13 +33,13 @@ public class WeakMemoryCache<K, V>{
 		WeakReference<V> ref = data.get(key);
 		if(ref == null) {
 			V value = factory.create();
-			data.put(key, new WeakReference<V>(value));
+			data.put(key, new WeakReference<>(value));
 			return value;
 		}
 		V value = ref.get();
 		if(value == null) {
 			value = factory.create();
-			data.put(key, new WeakReference<V>(value));
+			data.put(key, new WeakReference<>(value));
 		}
 		return value;
 	}

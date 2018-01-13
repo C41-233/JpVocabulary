@@ -32,7 +32,7 @@ public final class Linq {
 	
 	public static <T> IReferenceEnumerable<T> from(Iterable<T> iterable){
 		Arguments.isNotNull(iterable);
-		return new IterableEnumerable<T>(iterable);
+		return new IterableEnumerable<>(iterable);
 	}
 	
 	public static <T> IReferenceEnumerable<T> from(Iterator<T> iterator){
@@ -46,7 +46,7 @@ public final class Linq {
 	
 	public static <T> IReferenceEnumerable<T> from(T[] array){
 		Arguments.isNotNull(array);
-		return new ArrayEnumerable<T>(array);
+		return new ArrayEnumerable<>(array);
 	}
 	
 	public static <T> IReferenceEnumerable<T> from(Enumeration<T> enumeration){

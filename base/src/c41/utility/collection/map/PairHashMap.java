@@ -9,7 +9,7 @@ public class PairHashMap <TKey1, TKey2, TValue>{
 	public TValue put(TKey1 key1, TKey2 key2, TValue value) {
 		HashMap<TKey2, TValue> entry = map.get(key1);
 		if(entry == null) {
-			entry = new HashMap<TKey2, TValue>();
+			entry = new HashMap<>();
 			map.put(key1, entry);
 		}
 		return entry.put(key2, value);

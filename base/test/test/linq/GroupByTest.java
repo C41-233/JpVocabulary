@@ -26,7 +26,7 @@ public class GroupByTest {
 	
 	@Test
 	public void test() {
-		List<Value> list = new ArrayList<Value>();
+		List<Value> list = new ArrayList<>();
 		list.add(new Value(1, 11));
 		list.add(new Value(1, 12));
 		list.add(new Value(1, 13));

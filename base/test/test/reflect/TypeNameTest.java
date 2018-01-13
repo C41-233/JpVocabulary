@@ -64,7 +64,6 @@ public class TypeNameTest {
 
 	@Test
 	public void test7() {
-		@SuppressWarnings("rawtypes")
 		TypeInfo<Map.Entry> type = Types.typeOf(Map.Entry.class);
 		assertEquals("java.util.Map$Entry", type.getName());
 		assertEquals("Ljava/util/Map$Entry;", type.getVMSignatureName());
@@ -80,7 +79,6 @@ public class TypeNameTest {
 	
 	@Test
 	public void test8() {
-		@SuppressWarnings("rawtypes")
 		TypeInfo<? extends Predicate> type = Types.typeOf(predicate.getClass());
 		assertEquals("test.reflect.TypeNameTest$1", type.getName());
 		assertEquals("Ltest/reflect/TypeNameTest$1;", type.getVMSignatureName());
@@ -89,7 +87,6 @@ public class TypeNameTest {
 
 	@Test
 	public void test9() {
-		@SuppressWarnings("rawtypes")
 		TypeInfo<ArrayList> type = Types.typeOf(ArrayList.class);
 		assertEquals("java.util.ArrayList", type.getName());
 		assertEquals("Ljava/util/ArrayList;", type.getVMSignatureName());
@@ -99,7 +96,6 @@ public class TypeNameTest {
 
 	@Test
 	public void test10() {
-		@SuppressWarnings("rawtypes")
 		TypeInfo<ICloneable> type = Types.typeOf(ICloneable.class);
 		assertEquals("c41.core.ICloneable", type.getName());
 		assertEquals("Lc41/core/ICloneable;", type.getVMSignatureName());
