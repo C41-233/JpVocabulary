@@ -10,6 +10,6 @@ import java.lang.annotation.Target;
 @Target(FIELD)
 public @interface XmlListClass {
 
-	public Class value();
+	public Class<?> value();
 	
 }

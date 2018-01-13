@@ -8,7 +8,7 @@ class TypeProviers {
 	private interface ITypeProvider<T>{
 		public T create(String value);
 	}
-	private static HashMap<Class, ITypeProvider> providers = new HashMap<>();
+	private static HashMap<Class<?>, ITypeProvider<?>> providers = new HashMap<>();
 	
 	static {
 		providers.put(String.class, value->value);
@@ -16,12 +16,12 @@ class TypeProviers {
 		providers.put(long.class, value->Long.parseLong(value));
 	}
 	
-	public static boolean contains(Class clazz) {
+	public static boolean contains(Class<?> clazz) {
 		return providers.containsKey(clazz);
 	}
 	
-	public static Object create(Class clazz, String value) {
-		ITypeProvider provider = providers.get(clazz);
+	public static Object create(Class<?> clazz, String value) {
+		ITypeProvider<?> provider = providers.get(clazz);
 		if(provider == null) {
 			return null;
 		}

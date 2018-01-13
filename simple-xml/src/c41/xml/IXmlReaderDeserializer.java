@@ -6,6 +6,6 @@ import c41.reflect.TypeInfo;
 
 interface IXmlReaderDeserializer {
 
-	public Object createElement(TypeInfo type, Element element);
+	public Object createElement(TypeInfo<?> type, Element element);
 	
 }

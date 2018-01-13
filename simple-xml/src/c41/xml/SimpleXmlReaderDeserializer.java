@@ -19,23 +19,23 @@ class SimpleXmlReaderDeserializer implements IXmlReaderDeserializer{
 	}
 
 	@Override
-	public Object createElement(TypeInfo type, Element element) {
+	public Object createElement(TypeInfo<?> type, Element element) {
 		Object obj = type.newInstance();
 		
 		for(FieldInfo field : type.getFields()) {
-			TypeInfo fieldType = field.getType();
+			TypeInfo<?> fieldType = field.getType();
 			
-			//数组
+			//鏁扮粍
 			if(fieldType.isArray()) {
 				Object array = createArrayObjectElement(field, element);
 				field.setValue(obj, array);
 			}
-			//列表
+			//鍒楄〃
 			else if(fieldType.asClass() == List.class) {
 				Object list = createListObjectElement(field, element);
 				field.setValue(obj, list);
 			}
-			//普通类型
+			//鏅�氱被鍨�
 			else if(TypeProviers.contains(fieldType.asClass()))
 			{
 				Object value = createBasicElement(field, element);
@@ -43,7 +43,7 @@ class SimpleXmlReaderDeserializer implements IXmlReaderDeserializer{
 					field.setValue(obj, value);
 				}
 			}
-			//级联类型
+			//绾ц仈绫诲瀷
 			else {
 				Object value = createObjectElement(field, element);
 				if(value != null) {
@@ -57,14 +57,14 @@ class SimpleXmlReaderDeserializer implements IXmlReaderDeserializer{
 	private Object createObjectElement(FieldInfo field, Element element) {
 		String tagName = field.getName();
 		{
-			//指定子标签
+			//鎸囧畾瀛愭爣绛�
 			String xmlTagName = getXmlTagValue(field);
 			if(xmlTagName != null) {
 				tagName = xmlTagName;
 			}
 		}
 		
-		TypeInfo fieldType = field.getType();
+		TypeInfo<?> fieldType = field.getType();
 		Element fieldElement = XmlHelper.getChildElement(element, tagName);
 		if(fieldElement != null) {
 			return createElement(fieldType, fieldElement);
@@ -75,7 +75,7 @@ class SimpleXmlReaderDeserializer implements IXmlReaderDeserializer{
 	private Object createArrayObjectElement(FieldInfo field, Element element) {
 		String tagName = field.getName();
 		{
-			//指定子标签
+			//鎸囧畾瀛愭爣绛�
 			String xmlTagName = getXmlTagValue(field);
 			if(xmlTagName != null) {
 				tagName = xmlTagName;
@@ -87,8 +87,8 @@ class SimpleXmlReaderDeserializer implements IXmlReaderDeserializer{
 		
 		Element[] childElements = XmlHelper.getChildElements(element, tagName);
 
-		TypeInfo fieldType = field.getType();
-		TypeInfo arrayComponentType = fieldType.getArrayComponentType();
+		TypeInfo<?> fieldType = field.getType();
+		TypeInfo<?> arrayComponentType = fieldType.getArrayComponentType();
 		Object array = Array.newInstance(arrayComponentType.asClass(), childElements.length);
 		for(int i=0; i<childElements.length; i++) {
 			Object childValue = createElement(arrayComponentType, childElements[i]);
@@ -97,7 +97,6 @@ class SimpleXmlReaderDeserializer implements IXmlReaderDeserializer{
 		return array;
 	}
 
-	@SuppressWarnings("unchecked")
 	private Object createListObjectElement(FieldInfo field, Element element) {
 		XmlListClass listClass = field.getAnnotation(XmlListClass.class);
 		if(listClass == null) {
@@ -106,7 +105,7 @@ class SimpleXmlReaderDeserializer implements IXmlReaderDeserializer{
 		
 		String tagName = field.getName();
 		{
-			//指定其子标签
+			//鎸囧畾鍏跺瓙鏍囩
 			String xmlTagName = getXmlTagValue(field);
 			if(xmlTagName != null) {
 				tagName = xmlTagName;
@@ -118,15 +117,15 @@ class SimpleXmlReaderDeserializer implements IXmlReaderDeserializer{
 
 		Element[] childElements = XmlHelper.getChildElements(element, tagName);
 
-		TypeInfo componentType = Types.typeOf(listClass.value());
+		TypeInfo<?> componentType = Types.typeOf(listClass.value());
 		List<Object> list = new ArrayList<>();
 		for(int i=0; i<childElements.length; i++) {
-			//基本类型
+			//鍩烘湰绫诲瀷
 			Object childValue;
 			if(TypeProviers.contains(componentType.asClass())) {
 				childValue = TypeProviers.create(componentType.asClass(), childElements[i].getTextContent());
 			}
-			//级联类型
+			//绾ц仈绫诲瀷
 			else {
 				childValue = createElement(componentType, childElements[i]);
 			}
@@ -137,9 +136,9 @@ class SimpleXmlReaderDeserializer implements IXmlReaderDeserializer{
 
 	private Object createBasicElement(FieldInfo field, Element element) {
 		String tagName = field.getName();
-		TypeInfo fieldType = field.getType();
+		TypeInfo<?> fieldType = field.getType();
 		
-		//只读取子类型
+		//鍙鍙栧瓙绫诲瀷
 		XmlTag xmlTag = field.getAnnotation(XmlTag.class);
 		if(xmlTag != null) {
 			tagName = xmlTag.value().equals("") ? tagName : xmlTag.value();
@@ -152,13 +151,13 @@ class SimpleXmlReaderDeserializer implements IXmlReaderDeserializer{
 			}
 		}
 		
-		//只读取文本
+		//鍙鍙栨枃鏈�
 		XmlText xmlText = field.getAnnotation(XmlText.class);
 		if(xmlText != null) {
 			return TypeProviers.create(fieldType.asClass(), element.getTextContent());
 		}
 		
-		//只读取属性
+		//鍙鍙栧睘鎬�
 		XmlAttribute xmlAttribute = field.getAnnotation(XmlAttribute.class);
 		if(xmlAttribute != null) {
 			tagName = xmlAttribute.value().equals("") ? tagName : xmlAttribute.value();
@@ -166,12 +165,12 @@ class SimpleXmlReaderDeserializer implements IXmlReaderDeserializer{
 			return TypeProviers.create(fieldType.asClass(), value);
 		}
 		
-		//字段为默认读取文本
+		//瀛楁涓洪粯璁よ鍙栨枃鏈�
 		if(tagName.equals(settings.defaultTextFieldName)) {
 			return TypeProviers.create(fieldType.asClass(), element.getTextContent());
 		}
 		
-		//其他情况先读取属性，再读取子类型
+		//鍏朵粬鎯呭喌鍏堣鍙栧睘鎬э紝鍐嶈鍙栧瓙绫诲瀷
 		if(element.hasAttribute(tagName)) {
 			String value = element.getAttribute(tagName);
 			return TypeProviers.create(fieldType.asClass(), value);
