@@ -23,6 +23,7 @@ public interface ICharEnumerable extends IEnumerable<Character>{
 	 */
 	public default boolean isAll(ICharPredicate predicate) {
 		Arguments.isNotNull(predicate);
+		
 		ICharEnumerator enumerator = iterator();
 		while(enumerator.hasNext()) {
 			char ch = enumerator.nextChar();
@@ -40,6 +41,7 @@ public interface ICharEnumerable extends IEnumerable<Character>{
 	 */
 	public default boolean isNotAll(ICharPredicate predicate) {
 		Arguments.isNotNull(predicate);
+		
 		ICharEnumerator enumerator = iterator();
 		while(enumerator.hasNext()) {
 			char ch = enumerator.nextChar();
@@ -69,6 +71,7 @@ public interface ICharEnumerable extends IEnumerable<Character>{
 	 */
 	public default void foreach(IForeachCharAction action) {
 		Arguments.isNotNull(action);
+		
 		ICharEnumerator enumerator = iterator();
 		int i = 0;
 		while(enumerator.hasNext()) {
@@ -83,6 +86,7 @@ public interface ICharEnumerable extends IEnumerable<Character>{
 	 */
 	public default void foreach(ICharAction action) {
 		Arguments.isNotNull(action);
+		
 		ICharEnumerator enumerator = iterator();
 		while(enumerator.hasNext()) {
 			char ch = enumerator.nextChar();

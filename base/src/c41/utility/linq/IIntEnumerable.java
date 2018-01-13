@@ -23,6 +23,7 @@ public interface IIntEnumerable extends IEnumerable<Integer>{
 	
 	public default int at(int index) {
 		Arguments.is(index>=0, "%d < 0", index);
+		
 		IIntEnumerator enumerator = iterator();
 		for(int i=0; i<index && enumerator.hasNext(); i++, enumerator.moveNext());
 		if(enumerator.hasNext()) {
