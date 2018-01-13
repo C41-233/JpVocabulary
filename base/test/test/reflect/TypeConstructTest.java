@@ -10,6 +10,7 @@ import c41.reflect.ConstructorInfo;
 import c41.reflect.TypeInfo;
 import c41.reflect.Types;
 
+@SuppressWarnings("all")
 public class TypeConstructTest {
 
 	private static class TestType{
@@ -40,6 +41,11 @@ public class TypeConstructTest {
 		@Override
 		public String toString() {
 			return String.valueOf(value);
+		}
+		
+		@Override
+		public int hashCode() {
+			return super.hashCode();
 		}
 	}
 	

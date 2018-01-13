@@ -25,13 +25,16 @@ public interface IIntEnumerable extends IEnumerable<Integer>{
 		Arguments.is(index>=0, "%d < 0", index);
 		
 		IIntEnumerator enumerator = iterator();
-		for(int i=0; i<index && enumerator.hasNext(); i++, enumerator.moveNext());
+		for(int i = 0; i < index; i++) {
+			if(!enumerator.hasNext()) {
+				throw EnumeratorException.throwAfter();
+			}
+			enumerator.moveNext();
+		}
 		if(enumerator.hasNext()) {
 			return enumerator.nextInt();
 		}
-		else {
-			throw EnumeratorException.throwAfter();
-		}
+		throw EnumeratorException.throwAfter();
 	}
 	
 }

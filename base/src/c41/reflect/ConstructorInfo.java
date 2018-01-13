@@ -20,6 +20,7 @@ public final class ConstructorInfo<T>
 			constructor.setAccessible(true);
 		}
 		catch (SecurityException e) {
+			//ignore
 		}
 	}
 

@@ -18,7 +18,7 @@ import c41.reflect.Modifiers;
 import c41.reflect.TypeInfo;
 import c41.reflect.Types;
 
-@SuppressWarnings("unused")
+@SuppressWarnings("all")
 public class TypeMethodTest {
 
 	private static class TestTypeSuper{

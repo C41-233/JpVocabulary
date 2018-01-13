@@ -9,6 +9,7 @@ import c41.reflect.ConstructorInfo;
 import c41.reflect.TypeInfo;
 import c41.reflect.Types;
 
+@SuppressWarnings("all")
 public class TypeTest {
 
 	@Test

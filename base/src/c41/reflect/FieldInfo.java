@@ -20,6 +20,7 @@ public final class FieldInfo implements IAnnotatedReflectElement, IAccessableRef
 			this.field.setAccessible(true);
 		}
 		catch (SecurityException e) {
+			//ignore
 		}
 	}
 	

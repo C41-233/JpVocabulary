@@ -103,13 +103,16 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 		Arguments.is(index>=0, "%d < 0", index);
 		
 		IEnumerator<T> enumerator = iterator();
-		for(int i=0; i<index && enumerator.hasNext(); i++, enumerator.moveNext());
+		for(int i=0; i<index && enumerator.hasNext(); i++) {
+			if(!enumerator.hasNext()) {
+				throw EnumeratorException.throwAfter();
+			}
+			enumerator.moveNext();
+		}
 		if(enumerator.hasNext()) {
 			return enumerator.next();
 		}
-		else {
-			throw new IndexOutOfBoundsException();
-		}
+		throw EnumeratorException.throwAfter();
 	}
 
 	public default T first() {
