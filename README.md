@@ -30,3 +30,6 @@
 执行build.bat，等待构建  
 执行start.bat，随后访问 http://127.0.0.1:9000/ 可以看到主界面，第一次因为要编译可能要等一段时间。
   
+## 文档
+API for c41-base https://c41-233.github.io/JpVocabulary/base/doc/api/index.html
+API for simple-xml https://c41-233.github.io/JpVocabulary/simple-xml/doc/api/index.html
