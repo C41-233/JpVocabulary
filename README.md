@@ -32,4 +32,5 @@
   
 ## 文档
 API for c41-base https://c41-233.github.io/JpVocabulary/base/doc/api/index.html
+
 API for simple-xml https://c41-233.github.io/JpVocabulary/simple-xml/doc/api/index.html
