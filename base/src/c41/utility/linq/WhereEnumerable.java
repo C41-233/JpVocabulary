@@ -1,7 +1,7 @@
 package c41.utility.linq;
 
 import c41.core.Reference;
-import c41.utility.lambda.predicate.IPredicate;
+import c41.lambda.predicate.IPredicate;
 
 class WhereEnumerable<T> implements IReferenceEnumerable<T>{
 

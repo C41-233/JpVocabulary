@@ -75,6 +75,10 @@
 <ul class="horizontal">
 <li><a href="c41/core/package-tree.html">c41.core</a>, </li>
 <li><a href="c41/io/package-tree.html">c41.io</a>, </li>
+<li><a href="c41/lambda/action/package-tree.html">c41.lambda.action</a>, </li>
+<li><a href="c41/lambda/function/package-tree.html">c41.lambda.function</a>, </li>
+<li><a href="c41/lambda/predicate/package-tree.html">c41.lambda.predicate</a>, </li>
+<li><a href="c41/lambda/selector/package-tree.html">c41.lambda.selector</a>, </li>
 <li><a href="c41/reflect/package-tree.html">c41.reflect</a>, </li>
 <li><a href="c41/utility/package-tree.html">c41.utility</a>, </li>
 <li><a href="c41/utility/assertion/package-tree.html">c41.utility.assertion</a>, </li>
@@ -85,10 +89,6 @@
 <li><a href="c41/utility/collection/tuple/package-tree.html">c41.utility.collection.tuple</a>, </li>
 <li><a href="c41/utility/comparator/package-tree.html">c41.utility.comparator</a>, </li>
 <li><a href="c41/utility/generator/package-tree.html">c41.utility.generator</a>, </li>
-<li><a href="c41/utility/lambda/action/package-tree.html">c41.utility.lambda.action</a>, </li>
-<li><a href="c41/utility/lambda/function/package-tree.html">c41.utility.lambda.function</a>, </li>
-<li><a href="c41/utility/lambda/predicate/package-tree.html">c41.utility.lambda.predicate</a>, </li>
-<li><a href="c41/utility/lambda/selector/package-tree.html">c41.utility.lambda.selector</a>, </li>
 <li><a href="c41/utility/linq/package-tree.html">c41.utility.linq</a></li>
 </ul>
 </div>
@@ -117,7 +117,7 @@
 <li type="circle">c41.reflect.<a href="c41/reflect/Modifiers.html" title="c41.reflect中的类"><span class="typeNameLink">Modifiers</span></a></li>
 <li type="circle">c41.utility.collection.map.<a href="c41/utility/collection/map/PairHashMap.html" title="c41.utility.collection.map中的类"><span class="typeNameLink">PairHashMap</span></a>&lt;TKey1,TKey2,TValue&gt;</li>
 <li type="circle">c41.reflect.<a href="c41/reflect/ParameterInfo.html" title="c41.reflect中的类"><span class="typeNameLink">ParameterInfo</span></a> (implements c41.reflect.<a href="c41/reflect/IAnnotatedReflectElement.html" title="c41.reflect中的接口">IAnnotatedReflectElement</a>, c41.reflect.<a href="c41/reflect/IModiferReflectElement.html" title="c41.reflect中的接口">IModiferReflectElement</a>)</li>
-<li type="circle">c41.utility.lambda.predicate.<a href="c41/utility/lambda/predicate/Predicates.html" title="c41.utility.lambda.predicate中的类"><span class="typeNameLink">Predicates</span></a></li>
+<li type="circle">c41.lambda.predicate.<a href="c41/lambda/predicate/Predicates.html" title="c41.lambda.predicate中的类"><span class="typeNameLink">Predicates</span></a></li>
 <li type="circle">c41.core.<a href="c41/core/Reference.html" title="c41.core中的类"><span class="typeNameLink">Reference</span></a>&lt;T&gt;</li>
 <li type="circle">c41.reflect.<a href="c41/reflect/Reflects.html" title="c41.reflect中的类"><span class="typeNameLink">Reflects</span></a></li>
 <li type="circle">c41.utility.generator.<a href="c41/utility/generator/SequenceLongGenerator.html" title="c41.utility.generator中的类"><span class="typeNameLink">SequenceLongGenerator</span></a> (implements c41.utility.generator.<a href="c41/utility/generator/ILongGenerator.html" title="c41.utility.generator中的接口">ILongGenerator</a>)</li>
@@ -172,48 +172,48 @@
 </li>
 <li type="circle">c41.utility.collection.map.<a href="c41/utility/collection/map/DefaultValueHashMap.IFactory.html" title="c41.utility.collection.map中的接口"><span class="typeNameLink">DefaultValueHashMap.IFactory</span></a>&lt;TKey,TValue&gt;</li>
 <li type="circle">c41.utility.collection.map.<a href="c41/utility/collection/map/DefaultValueHashMap.ISimpleFactory.html" title="c41.utility.collection.map中的接口"><span class="typeNameLink">DefaultValueHashMap.ISimpleFactory</span></a>&lt;TValue&gt;</li>
-<li type="circle">c41.utility.lambda.action.<a href="c41/utility/lambda/action/IAction.html" title="c41.utility.lambda.action中的接口"><span class="typeNameLink">IAction</span></a></li>
-<li type="circle">c41.utility.lambda.action.<a href="c41/utility/lambda/action/IAction1.html" title="c41.utility.lambda.action中的接口"><span class="typeNameLink">IAction1</span></a>&lt;T1&gt;
+<li type="circle">c41.lambda.action.<a href="c41/lambda/action/IAction.html" title="c41.lambda.action中的接口"><span class="typeNameLink">IAction</span></a></li>
+<li type="circle">c41.lambda.action.<a href="c41/lambda/action/IAction1.html" title="c41.lambda.action中的接口"><span class="typeNameLink">IAction1</span></a>&lt;T1&gt;
 <ul>
-<li type="circle">c41.utility.lambda.action.<a href="c41/utility/lambda/action/ICharAction.html" title="c41.utility.lambda.action中的接口"><span class="typeNameLink">ICharAction</span></a></li>
+<li type="circle">c41.lambda.action.<a href="c41/lambda/action/ICharAction.html" title="c41.lambda.action中的接口"><span class="typeNameLink">ICharAction</span></a></li>
 </ul>
 </li>
-<li type="circle">c41.utility.lambda.action.<a href="c41/utility/lambda/action/IAction2.html" title="c41.utility.lambda.action中的接口"><span class="typeNameLink">IAction2</span></a>&lt;T1,T2&gt;
+<li type="circle">c41.lambda.action.<a href="c41/lambda/action/IAction2.html" title="c41.lambda.action中的接口"><span class="typeNameLink">IAction2</span></a>&lt;T1,T2&gt;
 <ul>
-<li type="circle">c41.utility.lambda.action.<a href="c41/utility/lambda/action/IForeachAction.html" title="c41.utility.lambda.action中的接口"><span class="typeNameLink">IForeachAction</span></a>&lt;T&gt;
+<li type="circle">c41.lambda.action.<a href="c41/lambda/action/IForeachAction.html" title="c41.lambda.action中的接口"><span class="typeNameLink">IForeachAction</span></a>&lt;T&gt;
 <ul>
-<li type="circle">c41.utility.lambda.action.<a href="c41/utility/lambda/action/IForeachCharAction.html" title="c41.utility.lambda.action中的接口"><span class="typeNameLink">IForeachCharAction</span></a></li>
+<li type="circle">c41.lambda.action.<a href="c41/lambda/action/IForeachCharAction.html" title="c41.lambda.action中的接口"><span class="typeNameLink">IForeachCharAction</span></a></li>
 </ul>
 </li>
-<li type="circle">c41.utility.lambda.action.<a href="c41/utility/lambda/action/IForeachCharAction.html" title="c41.utility.lambda.action中的接口"><span class="typeNameLink">IForeachCharAction</span></a></li>
+<li type="circle">c41.lambda.action.<a href="c41/lambda/action/IForeachCharAction.html" title="c41.lambda.action中的接口"><span class="typeNameLink">IForeachCharAction</span></a></li>
 </ul>
 </li>
 <li type="circle">c41.reflect.<a href="c41/reflect/IAnnotatedReflectElement.html" title="c41.reflect中的接口"><span class="typeNameLink">IAnnotatedReflectElement</span></a></li>
-<li type="circle">c41.utility.lambda.function.<a href="c41/utility/lambda/function/IFunction.html" title="c41.utility.lambda.function中的接口"><span class="typeNameLink">IFunction</span></a>&lt;R&gt;</li>
-<li type="circle">c41.utility.lambda.function.<a href="c41/utility/lambda/function/IFunction1.html" title="c41.utility.lambda.function中的接口"><span class="typeNameLink">IFunction1</span></a>&lt;R,T1&gt;
+<li type="circle">c41.lambda.function.<a href="c41/lambda/function/IFunction.html" title="c41.lambda.function中的接口"><span class="typeNameLink">IFunction</span></a>&lt;R&gt;</li>
+<li type="circle">c41.lambda.function.<a href="c41/lambda/function/IFunction1.html" title="c41.lambda.function中的接口"><span class="typeNameLink">IFunction1</span></a>&lt;R,T1&gt;
 <ul>
-<li type="circle">c41.utility.lambda.predicate.<a href="c41/utility/lambda/predicate/ICharPredicate.html" title="c41.utility.lambda.predicate中的接口"><span class="typeNameLink">ICharPredicate</span></a></li>
-<li type="circle">c41.utility.lambda.selector.<a href="c41/utility/lambda/selector/ICharSelector.html" title="c41.utility.lambda.selector中的接口"><span class="typeNameLink">ICharSelector</span></a>&lt;V&gt;</li>
-<li type="circle">c41.utility.lambda.selector.<a href="c41/utility/lambda/selector/IIntConverter.html" title="c41.utility.lambda.selector中的接口"><span class="typeNameLink">IIntConverter</span></a>&lt;T&gt;</li>
-<li type="circle">c41.utility.lambda.predicate.<a href="c41/utility/lambda/predicate/IIntPredicate.html" title="c41.utility.lambda.predicate中的接口"><span class="typeNameLink">IIntPredicate</span></a></li>
-<li type="circle">c41.utility.lambda.predicate.<a href="c41/utility/lambda/predicate/IPredicate.html" title="c41.utility.lambda.predicate中的接口"><span class="typeNameLink">IPredicate</span></a>&lt;T&gt;
+<li type="circle">c41.lambda.predicate.<a href="c41/lambda/predicate/ICharPredicate.html" title="c41.lambda.predicate中的接口"><span class="typeNameLink">ICharPredicate</span></a></li>
+<li type="circle">c41.lambda.selector.<a href="c41/lambda/selector/ICharSelector.html" title="c41.lambda.selector中的接口"><span class="typeNameLink">ICharSelector</span></a>&lt;V&gt;</li>
+<li type="circle">c41.lambda.selector.<a href="c41/lambda/selector/IIntConverter.html" title="c41.lambda.selector中的接口"><span class="typeNameLink">IIntConverter</span></a>&lt;T&gt;</li>
+<li type="circle">c41.lambda.predicate.<a href="c41/lambda/predicate/IIntPredicate.html" title="c41.lambda.predicate中的接口"><span class="typeNameLink">IIntPredicate</span></a></li>
+<li type="circle">c41.lambda.predicate.<a href="c41/lambda/predicate/IPredicate.html" title="c41.lambda.predicate中的接口"><span class="typeNameLink">IPredicate</span></a>&lt;T&gt;
 <ul>
-<li type="circle">c41.utility.lambda.predicate.<a href="c41/utility/lambda/predicate/ICharPredicate.html" title="c41.utility.lambda.predicate中的接口"><span class="typeNameLink">ICharPredicate</span></a></li>
-<li type="circle">c41.utility.lambda.predicate.<a href="c41/utility/lambda/predicate/IIntPredicate.html" title="c41.utility.lambda.predicate中的接口"><span class="typeNameLink">IIntPredicate</span></a></li>
+<li type="circle">c41.lambda.predicate.<a href="c41/lambda/predicate/ICharPredicate.html" title="c41.lambda.predicate中的接口"><span class="typeNameLink">ICharPredicate</span></a></li>
+<li type="circle">c41.lambda.predicate.<a href="c41/lambda/predicate/IIntPredicate.html" title="c41.lambda.predicate中的接口"><span class="typeNameLink">IIntPredicate</span></a></li>
 </ul>
 </li>
-<li type="circle">c41.utility.lambda.selector.<a href="c41/utility/lambda/selector/ISelector.html" title="c41.utility.lambda.selector中的接口"><span class="typeNameLink">ISelector</span></a>&lt;T,V&gt;
+<li type="circle">c41.lambda.selector.<a href="c41/lambda/selector/ISelector.html" title="c41.lambda.selector中的接口"><span class="typeNameLink">ISelector</span></a>&lt;T,V&gt;
 <ul>
-<li type="circle">c41.utility.lambda.selector.<a href="c41/utility/lambda/selector/ICharSelector.html" title="c41.utility.lambda.selector中的接口"><span class="typeNameLink">ICharSelector</span></a>&lt;V&gt;</li>
-<li type="circle">c41.utility.lambda.selector.<a href="c41/utility/lambda/selector/IIntConverter.html" title="c41.utility.lambda.selector中的接口"><span class="typeNameLink">IIntConverter</span></a>&lt;T&gt;</li>
+<li type="circle">c41.lambda.selector.<a href="c41/lambda/selector/ICharSelector.html" title="c41.lambda.selector中的接口"><span class="typeNameLink">ICharSelector</span></a>&lt;V&gt;</li>
+<li type="circle">c41.lambda.selector.<a href="c41/lambda/selector/IIntConverter.html" title="c41.lambda.selector中的接口"><span class="typeNameLink">IIntConverter</span></a>&lt;T&gt;</li>
 </ul>
 </li>
 </ul>
 </li>
-<li type="circle">c41.utility.lambda.function.<a href="c41/utility/lambda/function/IFunction2.html" title="c41.utility.lambda.function中的接口"><span class="typeNameLink">IFunction2</span></a>&lt;R,T1,T2&gt;
+<li type="circle">c41.lambda.function.<a href="c41/lambda/function/IFunction2.html" title="c41.lambda.function中的接口"><span class="typeNameLink">IFunction2</span></a>&lt;R,T1,T2&gt;
 <ul>
-<li type="circle">c41.utility.lambda.function.<a href="c41/utility/lambda/function/IJoiner.html" title="c41.utility.lambda.function中的接口"><span class="typeNameLink">IJoiner</span></a>&lt;T1,T2,V&gt;</li>
-<li type="circle">c41.utility.lambda.selector.<a href="c41/utility/lambda/selector/ISelectorEx.html" title="c41.utility.lambda.selector中的接口"><span class="typeNameLink">ISelectorEx</span></a>&lt;T,V&gt;</li>
+<li type="circle">c41.lambda.function.<a href="c41/lambda/function/IJoiner.html" title="c41.lambda.function中的接口"><span class="typeNameLink">IJoiner</span></a>&lt;T1,T2,V&gt;</li>
+<li type="circle">c41.lambda.selector.<a href="c41/lambda/selector/ISelectorEx.html" title="c41.lambda.selector中的接口"><span class="typeNameLink">ISelectorEx</span></a>&lt;T,V&gt;</li>
 </ul>
 </li>
 <li type="circle">c41.utility.generator.<a href="c41/utility/generator/IGenerator.html" title="c41.utility.generator中的接口"><span class="typeNameLink">IGenerator</span></a>&lt;T&gt;
@@ -264,11 +264,9 @@
 <ul>
 <li type="circle">c41.utility.linq.<a href="c41/utility/linq/ICharEnumerator.html" title="c41.utility.linq中的接口"><span class="typeNameLink">ICharEnumerator</span></a></li>
 <li type="circle">c41.utility.linq.<a href="c41/utility/linq/IIntEnumerator.html" title="c41.utility.linq中的接口"><span class="typeNameLink">IIntEnumerator</span></a></li>
-<li type="circle">c41.utility.linq.<a href="c41/utility/linq/ISortedEnumerator.html" title="c41.utility.linq中的接口"><span class="typeNameLink">ISortedEnumerator</span></a>&lt;T&gt;</li>
 </ul>
 </li>
 <li type="circle">c41.utility.linq.<a href="c41/utility/linq/IIntEnumerator.html" title="c41.utility.linq中的接口"><span class="typeNameLink">IIntEnumerator</span></a></li>
-<li type="circle">c41.utility.linq.<a href="c41/utility/linq/ISortedEnumerator.html" title="c41.utility.linq中的接口"><span class="typeNameLink">ISortedEnumerator</span></a>&lt;T&gt;</li>
 </ul>
 </li>
 <li type="circle">c41.utility.collection.list.<a href="c41/utility/collection/list/ITypeCollection.html" title="c41.utility.collection.list中的接口"><span class="typeNameLink">ITypeCollection</span></a>&lt;T&gt;</li>

@@ -1,6 +1,6 @@
 package c41.utility.linq;
 
-import c41.utility.lambda.selector.ICharSelector;
+import c41.lambda.selector.ICharSelector;
 
 class CharSelectEnumerable<V> implements IReferenceEnumerable<V>{
 

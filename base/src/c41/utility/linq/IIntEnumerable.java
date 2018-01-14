@@ -2,10 +2,10 @@ package c41.utility.linq;
 
 import java.util.List;
 
+import c41.lambda.predicate.ICharPredicate;
+import c41.lambda.predicate.IIntPredicate;
+import c41.lambda.predicate.IPredicate;
 import c41.utility.assertion.Arguments;
-import c41.utility.lambda.predicate.ICharPredicate;
-import c41.utility.lambda.predicate.IIntPredicate;
-import c41.utility.lambda.predicate.IPredicate;
 
 /**
  * 基本类型int的Enumerable。

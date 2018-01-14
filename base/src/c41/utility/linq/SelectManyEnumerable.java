@@ -2,7 +2,7 @@ package c41.utility.linq;
 
 import java.util.Iterator;
 
-import c41.utility.lambda.selector.ISelector;
+import c41.lambda.selector.ISelector;
 
 class SelectManyEnumerable<T, V> implements IReferenceEnumerable<V>{
 

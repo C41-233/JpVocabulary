@@ -10,19 +10,19 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
 
+import c41.lambda.action.IAction1;
+import c41.lambda.action.IForeachAction;
+import c41.lambda.function.IJoiner;
+import c41.lambda.predicate.ICharPredicate;
+import c41.lambda.predicate.IIntPredicate;
+import c41.lambda.predicate.IPredicate;
+import c41.lambda.selector.ISelector;
+import c41.lambda.selector.ISelectorEx;
 import c41.utility.assertion.Arguments;
 import c41.utility.collection.map.DefaultValueHashMap;
 import c41.utility.collection.tuple.Tuple2;
 import c41.utility.collection.tuple.Tuples;
 import c41.utility.comparator.Comparators;
-import c41.utility.lambda.action.IAction1;
-import c41.utility.lambda.action.IForeachAction;
-import c41.utility.lambda.function.IJoiner;
-import c41.utility.lambda.predicate.ICharPredicate;
-import c41.utility.lambda.predicate.IIntPredicate;
-import c41.utility.lambda.predicate.IPredicate;
-import c41.utility.lambda.selector.ISelector;
-import c41.utility.lambda.selector.ISelectorEx;
 
 /**
  * 引用类型的Enumerable。

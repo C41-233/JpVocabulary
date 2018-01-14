@@ -1,7 +1,7 @@
 package logic;
 
+import c41.lambda.predicate.Predicates;
 import c41.utility.Chars;
-import c41.utility.lambda.predicate.Predicates;
 import c41.utility.linq.Linq;
 
 public final class LogicValidate {

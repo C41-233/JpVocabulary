@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":6,"i1":18,"i2":18,"i3":18};
+var methods = {"i0":6,"i1":18,"i2":18};
 var tabs = {65535:["t0","所有方法"],2:["t2","实例方法"],4:["t3","抽象方法"],16:["t5","默认方法"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -50,7 +50,7 @@ var activeTableTab = "activeTableTab";
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../c41/utility/linq/IReferenceGroup.html" title="c41.utility.linq中的接口"><span class="typeNameLink">上一个类</span></a></li>
-<li><a href="../../../c41/utility/linq/ISortedEnumerator.html" title="c41.utility.linq中的接口"><span class="typeNameLink">下一个类</span></a></li>
+<li><a href="../../../c41/utility/linq/Linq.html" title="c41.utility.linq中的类"><span class="typeNameLink">下一个类</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../index.html?c41/utility/linq/IReferenceSortedEnumerable.html" target="_top">框架</a></li>
@@ -131,18 +131,14 @@ extends <a href="../../../c41/utility/linq/IReferenceEnumerable.html" title="c41
 <th class="colLast" scope="col">方法和说明</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code><a href="../../../c41/utility/linq/ISortedEnumerator.html" title="c41.utility.linq中的接口">ISortedEnumerator</a>&lt;<a href="../../../c41/utility/linq/IReferenceSortedEnumerable.html" title="IReferenceSortedEnumerable中的类型参数">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/linq/IReferenceSortedEnumerable.html#iterator--">iterator</a></span>()</code>&nbsp;</td>
-</tr>
-<tr id="i1" class="rowColor">
-<td class="colFirst"><code>default <a href="../../../c41/utility/linq/IReferenceSortedEnumerable.html" title="c41.utility.linq中的接口">IReferenceSortedEnumerable</a>&lt;<a href="../../../c41/utility/linq/IReferenceSortedEnumerable.html" title="IReferenceSortedEnumerable中的类型参数">T</a>&gt;</code></td>
+<td class="colFirst"><code><a href="../../../c41/utility/linq/IReferenceSortedEnumerable.html" title="c41.utility.linq中的接口">IReferenceSortedEnumerable</a>&lt;<a href="../../../c41/utility/linq/IReferenceSortedEnumerable.html" title="IReferenceSortedEnumerable中的类型参数">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/linq/IReferenceSortedEnumerable.html#thenBy-java.util.Comparator-">thenBy</a></span>(java.util.Comparator&lt;? super <a href="../../../c41/utility/linq/IReferenceSortedEnumerable.html" title="IReferenceSortedEnumerable中的类型参数">T</a>&gt;&nbsp;comparator)</code>&nbsp;</td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i1" class="rowColor">
 <td class="colFirst"><code>default &lt;V extends java.lang.Comparable&lt;? super V&gt;&gt;<br><a href="../../../c41/utility/linq/IReferenceSortedEnumerable.html" title="c41.utility.linq中的接口">IReferenceSortedEnumerable</a>&lt;<a href="../../../c41/utility/linq/IReferenceSortedEnumerable.html" title="IReferenceSortedEnumerable中的类型参数">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/linq/IReferenceSortedEnumerable.html#thenBy-c41.utility.lambda.selector.ISelector-">thenBy</a></span>(<a href="../../../c41/utility/lambda/selector/ISelector.html" title="c41.utility.lambda.selector中的接口">ISelector</a>&lt;<a href="../../../c41/utility/linq/IReferenceSortedEnumerable.html" title="IReferenceSortedEnumerable中的类型参数">T</a>,V&gt;&nbsp;selector)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/linq/IReferenceSortedEnumerable.html#thenBy-c41.lambda.selector.ISelector-">thenBy</a></span>(<a href="../../../c41/lambda/selector/ISelector.html" title="c41.lambda.selector中的接口">ISelector</a>&lt;<a href="../../../c41/utility/linq/IReferenceSortedEnumerable.html" title="IReferenceSortedEnumerable中的类型参数">T</a>,V&gt;&nbsp;selector)</code>&nbsp;</td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>default <a href="../../../c41/utility/linq/IReferenceSortedEnumerable.html" title="c41.utility.linq中的接口">IReferenceSortedEnumerable</a>&lt;<a href="../../../c41/utility/linq/IReferenceSortedEnumerable.html" title="IReferenceSortedEnumerable中的类型参数">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/linq/IReferenceSortedEnumerable.html#thenBySelf--">thenBySelf</a></span>()</code>&nbsp;</td>
 </tr>
@@ -152,7 +148,7 @@ extends <a href="../../../c41/utility/linq/IReferenceEnumerable.html" title="c41
 <!--   -->
 </a>
 <h3>从接口继承的方法&nbsp;c41.utility.linq.<a href="../../../c41/utility/linq/IReferenceEnumerable.html" title="c41.utility.linq中的接口">IReferenceEnumerable</a></h3>
-<code><a href="../../../c41/utility/linq/IReferenceEnumerable.html#at-int-">at</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#count-c41.utility.lambda.predicate.IPredicate-">count</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#findFirst-c41.utility.lambda.predicate.IPredicate-">findFirst</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#findFirstDuplicate--">findFirstDuplicate</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#findFirstIndex-c41.utility.lambda.predicate.IPredicate-">findFirstIndex</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#findFirstIndex-T-">findFirstIndex</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#first--">first</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#foreach-c41.utility.lambda.action.IAction1-">foreach</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#foreach-c41.utility.lambda.action.IForeachAction-">foreach</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#groupBy-c41.utility.lambda.selector.ISelector-">groupBy</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#instanceOf-java.lang.Class-">instanceOf</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#isAll-c41.utility.lambda.predicate.IPredicate-">isAll</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#isExist-c41.utility.lambda.predicate.IPredicate-">isExist</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#isExist-T-">isExist</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#isNotAll-c41.utility.lambda.predicate.IPredicate-">isNotAll</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#isNotExist-c41.utility.lambda.predicate.IPredicate-">isNotExist</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#isNotExist-T-">isNotExist</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#isNotExistAnyOf-java.lang.Object...-">isNotExistAnyOf</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#join-java.lang.Iterable-">join</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#join-java.lang.Iterable-c41.utility.lambda.function.IJoiner-">join</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#join-U:A-c41.utility.lambda.function.IJoiner-">join</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#orderBy-java.util.Comparator-">orderBy</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#orderBy-c41.utility.lambda.selector.ISelector-">orderBy</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#orderByCondition-c41.utility.lambda.predicate.IPredicate-">orderByCondition</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#orderBySelf--">orderBySelf</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#select-c41.utility.lambda.selector.ISelector-">select</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#select-c41.utility.lambda.selector.ISelectorEx-">select</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#selectMany-c41.utility.lambda.selector.ISelector-">selectMany</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#toArray-java.lang.Class-">toArray</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#toArray-T:A-">toArray</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#toMap-c41.utility.lambda.selector.ISelector-">toMap</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#union-java.lang.Iterable-">union</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#where-c41.utility.lambda.predicate.IPredicate-">where</a></code></li>
+<code><a href="../../../c41/utility/linq/IReferenceEnumerable.html#at-int-">at</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#count-c41.lambda.predicate.IPredicate-">count</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#findFirst-c41.lambda.predicate.IPredicate-">findFirst</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#findFirstDuplicate--">findFirstDuplicate</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#findFirstIndex-c41.lambda.predicate.IPredicate-">findFirstIndex</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#findFirstIndex-T-">findFirstIndex</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#first--">first</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#foreach-c41.lambda.action.IAction1-">foreach</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#foreach-c41.lambda.action.IForeachAction-">foreach</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#groupBy-c41.lambda.selector.ISelector-">groupBy</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#instanceOf-java.lang.Class-">instanceOf</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#isAll-c41.lambda.predicate.IPredicate-">isAll</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#isExist-c41.lambda.predicate.IPredicate-">isExist</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#isExist-T-">isExist</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#isNotAll-c41.lambda.predicate.IPredicate-">isNotAll</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#isNotExist-c41.lambda.predicate.IPredicate-">isNotExist</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#isNotExist-T-">isNotExist</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#isNotExistAnyOf-java.lang.Object...-">isNotExistAnyOf</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#iterator--">iterator</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#join-java.lang.Iterable-">join</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#join-java.lang.Iterable-c41.lambda.function.IJoiner-">join</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#join-U:A-c41.lambda.function.IJoiner-">join</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#orderBy-java.util.Comparator-">orderBy</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#orderBy-c41.lambda.selector.ISelector-">orderBy</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#orderByCondition-c41.lambda.predicate.IPredicate-">orderByCondition</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#orderBySelf--">orderBySelf</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#select-c41.lambda.selector.ISelector-">select</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#select-c41.lambda.selector.ISelectorEx-">select</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#selectMany-c41.lambda.selector.ISelector-">selectMany</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#toArray-java.lang.Class-">toArray</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#toArray-T:A-">toArray</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#toMap-c41.lambda.selector.ISelector-">toMap</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#union-java.lang.Iterable-">union</a>, <a href="../../../c41/utility/linq/IReferenceEnumerable.html#where-c41.lambda.predicate.IPredicate-">where</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.c41.utility.linq.IEnumerable">
@@ -182,39 +178,22 @@ extends <a href="../../../c41/utility/linq/IReferenceEnumerable.html" title="c41
 <!--   -->
 </a>
 <h3>方法详细资料</h3>
-<a name="iterator--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>iterator</h4>
-<pre><a href="../../../c41/utility/linq/ISortedEnumerator.html" title="c41.utility.linq中的接口">ISortedEnumerator</a>&lt;<a href="../../../c41/utility/linq/IReferenceSortedEnumerable.html" title="IReferenceSortedEnumerable中的类型参数">T</a>&gt;&nbsp;iterator()</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">指定者:</span></dt>
-<dd><code><a href="../../../c41/utility/linq/IEnumerable.html#iterator--">iterator</a></code>&nbsp;在接口中&nbsp;<code><a href="../../../c41/utility/linq/IEnumerable.html" title="c41.utility.linq中的接口">IEnumerable</a>&lt;<a href="../../../c41/utility/linq/IReferenceSortedEnumerable.html" title="IReferenceSortedEnumerable中的类型参数">T</a>&gt;</code></dd>
-<dt><span class="overrideSpecifyLabel">指定者:</span></dt>
-<dd><code><a href="../../../c41/utility/linq/IReferenceEnumerable.html#iterator--">iterator</a></code>&nbsp;在接口中&nbsp;<code><a href="../../../c41/utility/linq/IReferenceEnumerable.html" title="c41.utility.linq中的接口">IReferenceEnumerable</a>&lt;<a href="../../../c41/utility/linq/IReferenceSortedEnumerable.html" title="IReferenceSortedEnumerable中的类型参数">T</a>&gt;</code></dd>
-<dt><span class="overrideSpecifyLabel">指定者:</span></dt>
-<dd><code>iterator</code>&nbsp;在接口中&nbsp;<code>java.lang.Iterable&lt;<a href="../../../c41/utility/linq/IReferenceSortedEnumerable.html" title="IReferenceSortedEnumerable中的类型参数">T</a>&gt;</code></dd>
-</dl>
-</li>
-</ul>
 <a name="thenBy-java.util.Comparator-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>thenBy</h4>
-<pre>default&nbsp;<a href="../../../c41/utility/linq/IReferenceSortedEnumerable.html" title="c41.utility.linq中的接口">IReferenceSortedEnumerable</a>&lt;<a href="../../../c41/utility/linq/IReferenceSortedEnumerable.html" title="IReferenceSortedEnumerable中的类型参数">T</a>&gt;&nbsp;thenBy(java.util.Comparator&lt;? super <a href="../../../c41/utility/linq/IReferenceSortedEnumerable.html" title="IReferenceSortedEnumerable中的类型参数">T</a>&gt;&nbsp;comparator)</pre>
+<pre><a href="../../../c41/utility/linq/IReferenceSortedEnumerable.html" title="c41.utility.linq中的接口">IReferenceSortedEnumerable</a>&lt;<a href="../../../c41/utility/linq/IReferenceSortedEnumerable.html" title="IReferenceSortedEnumerable中的类型参数">T</a>&gt;&nbsp;thenBy(java.util.Comparator&lt;? super <a href="../../../c41/utility/linq/IReferenceSortedEnumerable.html" title="IReferenceSortedEnumerable中的类型参数">T</a>&gt;&nbsp;comparator)</pre>
 </li>
 </ul>
-<a name="thenBy-c41.utility.lambda.selector.ISelector-">
+<a name="thenBy-c41.lambda.selector.ISelector-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>thenBy</h4>
-<pre>default&nbsp;&lt;V extends java.lang.Comparable&lt;? super V&gt;&gt;&nbsp;<a href="../../../c41/utility/linq/IReferenceSortedEnumerable.html" title="c41.utility.linq中的接口">IReferenceSortedEnumerable</a>&lt;<a href="../../../c41/utility/linq/IReferenceSortedEnumerable.html" title="IReferenceSortedEnumerable中的类型参数">T</a>&gt;&nbsp;thenBy(<a href="../../../c41/utility/lambda/selector/ISelector.html" title="c41.utility.lambda.selector中的接口">ISelector</a>&lt;<a href="../../../c41/utility/linq/IReferenceSortedEnumerable.html" title="IReferenceSortedEnumerable中的类型参数">T</a>,V&gt;&nbsp;selector)</pre>
+<pre>default&nbsp;&lt;V extends java.lang.Comparable&lt;? super V&gt;&gt;&nbsp;<a href="../../../c41/utility/linq/IReferenceSortedEnumerable.html" title="c41.utility.linq中的接口">IReferenceSortedEnumerable</a>&lt;<a href="../../../c41/utility/linq/IReferenceSortedEnumerable.html" title="IReferenceSortedEnumerable中的类型参数">T</a>&gt;&nbsp;thenBy(<a href="../../../c41/lambda/selector/ISelector.html" title="c41.lambda.selector中的接口">ISelector</a>&lt;<a href="../../../c41/utility/linq/IReferenceSortedEnumerable.html" title="IReferenceSortedEnumerable中的类型参数">T</a>,V&gt;&nbsp;selector)</pre>
 </li>
 </ul>
 <a name="thenBySelf--">
@@ -255,7 +234,7 @@ extends <a href="../../../c41/utility/linq/IReferenceEnumerable.html" title="c41
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../c41/utility/linq/IReferenceGroup.html" title="c41.utility.linq中的接口"><span class="typeNameLink">上一个类</span></a></li>
-<li><a href="../../../c41/utility/linq/ISortedEnumerator.html" title="c41.utility.linq中的接口"><span class="typeNameLink">下一个类</span></a></li>
+<li><a href="../../../c41/utility/linq/Linq.html" title="c41.utility.linq中的类"><span class="typeNameLink">下一个类</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../index.html?c41/utility/linq/IReferenceSortedEnumerable.html" target="_top">框架</a></li>

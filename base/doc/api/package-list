@@ -1,5 +1,9 @@
 c41.core
 c41.io
+c41.lambda.action
+c41.lambda.function
+c41.lambda.predicate
+c41.lambda.selector
 c41.reflect
 c41.utility
 c41.utility.assertion
@@ -10,8 +14,4 @@ c41.utility.collection.map
 c41.utility.collection.tuple
 c41.utility.comparator
 c41.utility.generator
-c41.utility.lambda.action
-c41.utility.lambda.function
-c41.utility.lambda.predicate
-c41.utility.lambda.selector
 c41.utility.linq

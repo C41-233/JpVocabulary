@@ -2,7 +2,7 @@ package c41.utility.linq;
 
 import java.util.Iterator;
 
-import c41.utility.lambda.function.IJoiner;
+import c41.lambda.function.IJoiner;
 
 class JoinEnumerable<T, U, V> implements IReferenceEnumerable<V>{
 

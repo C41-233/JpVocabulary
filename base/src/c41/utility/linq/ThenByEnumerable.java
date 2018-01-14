@@ -3,12 +3,14 @@ package c41.utility.linq;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-class ThenByEnumerable<T> implements IReferenceSortedEnumerable<T>{
+import c41.utility.assertion.Arguments;
 
-	private final IReferenceSortedEnumerable<T> enumerable;
+class ThenByEnumerable<T> extends ReferenceSortedEnumerableBase<T>{
+
+	private final ReferenceSortedEnumerableBase<T> enumerable;
 	private final Comparator<? super T> comparator;
 	
-	public ThenByEnumerable(IReferenceSortedEnumerable<T> enumerable, Comparator<? super T> comparator) {
+	public ThenByEnumerable(ReferenceSortedEnumerableBase<T> enumerable, Comparator<? super T> comparator) {
 		this.enumerable = enumerable;
 		this.comparator = comparator;
 	}
@@ -16,6 +18,12 @@ class ThenByEnumerable<T> implements IReferenceSortedEnumerable<T>{
 	@Override
 	public ISortedEnumerator<T> iterator() {
 		return new Enumerator();
+	}
+
+	@Override
+	public IReferenceSortedEnumerable<T> thenBy(Comparator<? super T> comparator) {
+		Arguments.isNotNull(comparator);
+		return new ThenByEnumerable<>(this, comparator);
 	}
 	
 	private class Enumerator implements ISortedEnumerator<T>{

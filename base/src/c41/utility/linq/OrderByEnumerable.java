@@ -3,7 +3,7 @@ package c41.utility.linq;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-class OrderByEnumerable<T> implements IReferenceSortedEnumerable<T>{
+class OrderByEnumerable<T> extends ReferenceSortedEnumerableBase<T>{
 
 	private final IEnumerable<T> enumerable;
 	private final Comparator<? super T> comparator;
@@ -55,5 +55,5 @@ class OrderByEnumerable<T> implements IReferenceSortedEnumerable<T>{
 		}
 
 	}
-	
+
 }

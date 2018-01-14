@@ -1,6 +1,6 @@
 package c41.utility.linq;
 
-import c41.utility.lambda.selector.IIntConverter;
+import c41.lambda.selector.IIntConverter;
 
 class SelectIntEnumerable<T> implements IIntEnumerable{
 

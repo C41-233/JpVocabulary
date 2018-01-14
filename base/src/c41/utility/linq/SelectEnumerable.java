@@ -1,7 +1,7 @@
 package c41.utility.linq;
 
-import c41.utility.lambda.selector.ISelector;
-import c41.utility.lambda.selector.ISelectorEx;
+import c41.lambda.selector.ISelector;
+import c41.lambda.selector.ISelectorEx;
 
 class SelectEnumerable<T, V> implements IReferenceEnumerable<V>{
 
