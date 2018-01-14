@@ -18,6 +18,7 @@ import c41.lambda.predicate.IIntPredicate;
 import c41.lambda.predicate.IPredicate;
 import c41.lambda.selector.ISelector;
 import c41.lambda.selector.ISelectorEx;
+import c41.utility.algorithm.LinearSearch;
 import c41.utility.assertion.Arguments;
 import c41.utility.collection.map.DefaultValueHashMap;
 import c41.utility.collection.tuple.Tuple2;
@@ -41,16 +42,7 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 	 * @see IIntEnumerable#isAll(IIntPredicate)
 	 */
 	public default boolean isAll(IPredicate<? super T> predicate) {
-		Arguments.isNotNull(predicate);
-		
-		IEnumerator<T> enumerator = iterator();
-		while(enumerator.hasNext()) {
-			T obj = enumerator.next();
-			if(predicate.is(obj) == false) {
-				return false;
-			}
-		}
-		return true;
+		return LinearSearch.isAll(this, predicate);
 	}
 
 	/**
@@ -59,35 +51,42 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 	 * @return 如果非所有元素都满足谓词，返回true
 	 */
 	public default boolean isNotAll(IPredicate<? super T> predicate) {
-		Arguments.isNotNull(predicate);
-		
-		IEnumerator<T> enumerator = iterator();
-		while(enumerator.hasNext()) {
-			T obj = enumerator.next();
-			if(predicate.is(obj) == false) {
-				return true;
-			}
-		}
-		return false;
+		return LinearSearch.isNotAll(this, predicate);
 	}
 	
+	/**
+	 * 存在满足谓词的元素。
+	 * @param predicate 谓词
+	 * @return 如果存在，则返回true
+	 */
 	public default boolean isExist(IPredicate<? super T> predicate) {
-		Arguments.isNotNull(predicate);
-		
-		IEnumerator<T> enumerator = iterator();
-		while(enumerator.hasNext()) {
-			T obj = enumerator.next();
-			if(predicate.is(obj)) {
-				return true;
-			}
-		}
-		return false;
+		return LinearSearch.isExist(this, predicate);
 	}
 
+	/**
+	 * 存在与{@code value}相等的元素。
+	 * 比较以{@code equals}的方式进行。
+	 * @param value 元素
+	 * @return 如果存在，则返回true
+	 */
 	public default boolean isExist(T value) {
 		return isExist(obj->Objects.equals(obj, value));
 	}
 
+	/**
+	 * 存在与@{code value}引用相同的元素。
+	 * @param value 元素
+	 * @return 如果存在，则返回true
+	 */
+	public default boolean isExistReference(T value) {
+		return isExist(obj->obj == value);
+	}
+	
+	/**
+	 * 不存在满足谓词的元素。
+	 * @param predicate 谓词
+	 * @return 如果不存在，则返回true
+	 */
 	public default boolean isNotExist(IPredicate<? super T> predicate) {
 		Arguments.isNotNull(predicate);
 		
@@ -101,11 +100,37 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 		return true;
 	}
 	
+	/**
+	 * 不存在与{@code value}相等的元素。
+	 * 比较以{@code equals}的方式进行。
+	 * @param value 元素
+	 * @return 如果不存在，则返回true
+	 */
 	public default boolean isNotExist(T value) {
 		return isNotExist(obj->Objects.equals(obj, value));
 	}
 
+	/**
+	 * 不存在与{@code value}引用相同的元素。
+	 * @param value 元素
+	 * @return 如果不存在，则返回true
+	 */
+	public default boolean isNotExistReference(T value) {
+		return isNotExist(obj->obj == value);
+	}
+	
+	/**
+	 * 不存在与任何一个指定元素相等的元素。
+	 * @param values 多个指定元素
+	 * @return 如果不存在，则返回true
+	 */
 	public default boolean isNotExistAnyOf(Object... values){
+		Arguments.isNotNull(values);
+		
+		if(values.length <= 16) {
+			return isNotExist(obj->LinearSearch.isExist(values, obj));
+		}
+		
 		HashSet<Object> set = new HashSet<>();
 		for(Object value : values) {
 			set.add(value);

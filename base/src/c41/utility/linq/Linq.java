@@ -3,6 +3,7 @@ package c41.utility.linq;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Iterator;
+import java.util.List;
 
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -29,24 +30,30 @@ public final class Linq {
 		Arguments.isNotNull(array);
 		return new CharArrayEnumerable(array);
 	}
+
+	public static <T> IReferenceEnumerable<T> from(T[] array){
+		Arguments.isNotNull(array);
+		return new ArrayEnumerable<>(array);
+	}
 	
 	public static <T> IReferenceEnumerable<T> from(Iterable<T> iterable){
 		Arguments.isNotNull(iterable);
+		
+		if(iterable instanceof List) {
+			return new ListEnumerable<>((List<T>)iterable);
+		}
+		
 		return new IterableEnumerable<>(iterable);
 	}
 	
 	public static <T> IReferenceEnumerable<T> from(Iterator<T> iterator){
 		Arguments.isNotNull(iterator);
+		
 		ArrayList<T> list = new ArrayList<>();
 		while(iterator.hasNext()) {
 			list.add(iterator.next());
 		}
 		return from(list);
-	}
-	
-	public static <T> IReferenceEnumerable<T> from(T[] array){
-		Arguments.isNotNull(array);
-		return new ArrayEnumerable<>(array);
 	}
 	
 	public static <T> IReferenceEnumerable<T> from(Enumeration<T> enumeration){

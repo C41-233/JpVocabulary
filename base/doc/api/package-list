@@ -6,6 +6,7 @@ c41.lambda.predicate
 c41.lambda.selector
 c41.reflect
 c41.utility
+c41.utility.algorithm
 c41.utility.assertion
 c41.utility.cache
 c41.utility.collection
