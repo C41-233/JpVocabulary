@@ -4,11 +4,11 @@
 		<attribute name="title" default="@{name}"/>
 		<element name="classpath" optional="yes" implicit="yes"/>
 		<sequential>
-			<delete dir="@{name}/doc/api"/>
+			<delete dir="docs/api/@{name}"/>
 			<javadoc   
 				sourcepath="@{name}/src"   
 				packagenames="c41.*"   
-				destdir="@{name}/doc/api"  
+				destdir="docs/api/@{name}"  
 				charset="UTF8"  
 				docencoding="UTF8"  
 				encoding="UTF8"  
