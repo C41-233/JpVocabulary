@@ -6,7 +6,6 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 
 import c41.lambda.function.IFunction;
-import c41.utility.assertion.Arguments;
 import c41.utility.collection.Iterables;
 
 /**
@@ -67,7 +66,6 @@ public interface IEnumerable<T> extends Iterable<T>{
 	 * @return 跳过后的查询
 	 */
 	public default IEnumerable<T> skip(int n){
-		Arguments.is(n>=0, "%d < 0", n);
 		return new SkipEnumerable<>(this, n);
 	}
 

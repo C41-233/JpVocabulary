@@ -131,6 +131,20 @@ public final class Iterators {
 		return -1;
 	}
 
+	public static <T> int findFirstIndex(Iterator<T> iterator, T value) {
+		Arguments.isNotNull(iterator);
+		
+		int index = 0;
+		while(iterator.hasNext()) {
+			T obj = iterator.next();
+			if(Objects.equals(obj, value)) {
+				return index;
+			}
+			index++;
+		}
+		return -1;
+	}
+
 	public static <T> T findFirstOrCreateDefault(Iterator<T> iterator, IPredicate<? super T> predicate, IFunction<? extends T> defProvider) {
 		Arguments.isNotNull(iterator);
 		Arguments.isNotNull(predicate);

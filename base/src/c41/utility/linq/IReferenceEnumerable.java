@@ -42,7 +42,6 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 	 * @throws NoSuchElementException 下标超出迭代器范围
 	 */
 	public default T at(int index) {
-		Arguments.is(index>=0, "%d < 0", index);
 		return Iterables.at(this, index);
 	}
 
@@ -75,16 +74,7 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 	}
 
 	public default int findFirstIndex(T value) {
-		int index = 0;
-		IEnumerator<T> enumerator = iterator();
-		while(enumerator.hasNext()) {
-			T obj = enumerator.next();
-			if(Objects.equals(obj, value)) {
-				return index;
-			}
-			index++;
-		}
-		return -1;
+		return Iterables.findFirstIndex(this, value);
 	}
 	
 	public default T findFirstOrCreateDefault(IPredicate<? super T> predicate, IFunction<? extends T> defProvider) {

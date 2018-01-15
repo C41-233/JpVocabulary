@@ -151,4 +151,9 @@ public final class Iterables {
 		return Iterators.toSet(iterable.iterator());
 	}
 	
+	public static <T> int findFirstIndex(Iterable<T> iterable, T value) {
+		Arguments.isNotNull(iterable);
+		return Iterators.findFirstIndex(iterable.iterator(), value);
+	}
+	
 }
