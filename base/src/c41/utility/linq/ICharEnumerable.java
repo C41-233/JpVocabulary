@@ -100,6 +100,7 @@ public interface ICharEnumerable extends IEnumerable<Character>{
 	
 	/**
 	 * 对每一个元素进行投影。
+	 * @param <V> 投影类型
 	 * @param selector 投影
 	 * @return 投影后的元素查询
 	 */

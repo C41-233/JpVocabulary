@@ -1,4 +1,4 @@
-package c41.utility;
+package c41.utility.collection;
 
 import c41.reflect.StaticClassException;
 

@@ -1,5 +1,9 @@
 package c41.utility.linq;
 
+import java.util.NoSuchElementException;
+
+import c41.utility.assertion.Arguments;
+
 class ArrayEnumerable<T> implements IReferenceEnumerable<T>{
 
 	private final T[] array;
@@ -15,6 +19,11 @@ class ArrayEnumerable<T> implements IReferenceEnumerable<T>{
 
 	@Override
 	public T at(int i) {
+		Arguments.is(i>=0, "%d < 0", i);
+		
+		if(i >= array.length) {
+			throw new NoSuchElementException();
+		}
 		return array[i];
 	}
 	

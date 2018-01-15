@@ -2,6 +2,7 @@ package c41.utility.linq;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import c41.lambda.predicate.ICharPredicate;
 import c41.lambda.predicate.IIntPredicate;
@@ -14,8 +15,28 @@ import c41.utility.assertion.Arguments;
  */
 public interface IIntEnumerable extends IEnumerable<Integer>{
 
-	@Override
-	public IIntEnumerator iterator();
+	/**
+	 * 查询指定下标的值。
+	 * @param index 下标
+	 * @return 指定值
+	 * @throws IllegalArgumentException index &lt; 0
+	 * @throws NoSuchElementException 下标超出迭代器范围
+	 */
+	public default int at(int index) {
+		Arguments.is(index>=0, "%d < 0", index);
+		
+		IIntEnumerator enumerator = iterator();
+		for(int i=0; i<index; i++) {
+			if(!enumerator.hasNext()) {
+				throw new NoSuchElementException();
+			}
+			enumerator.moveNext();
+		}
+		if(enumerator.hasNext()) {
+			return enumerator.nextInt();
+		}
+		throw new NoSuchElementException();
+	}
 
 	/**
 	 * 所有元素都满足谓词。
@@ -35,24 +56,6 @@ public interface IIntEnumerable extends IEnumerable<Integer>{
 			}
 		}
 		return true;
-	}
-
-	/**
-	 * 非所有元素都满足谓词。
-	 * @param predicate 谓词
-	 * @return 如果非所有元素都满足谓词，返回true
-	 */
-	public default boolean isNotAll(IIntPredicate predicate) {
-		Arguments.isNotNull(predicate);
-		
-		IIntEnumerator enumerator = iterator();
-		while(enumerator.hasNext()) {
-			int val = enumerator.nextInt();
-			if(predicate.is(val) == false) {
-				return true;
-			}
-		}
-		return false;
 	}
 
 	/**
@@ -80,6 +83,24 @@ public interface IIntEnumerable extends IEnumerable<Integer>{
 	 */
 	public default boolean isExist(int value) {
 		return isExist(val->val == value);
+	}
+
+	/**
+	 * 非所有元素都满足谓词。
+	 * @param predicate 谓词
+	 * @return 如果非所有元素都满足谓词，返回true
+	 */
+	public default boolean isNotAll(IIntPredicate predicate) {
+		Arguments.isNotNull(predicate);
+		
+		IIntEnumerator enumerator = iterator();
+		while(enumerator.hasNext()) {
+			int val = enumerator.nextInt();
+			if(predicate.is(val) == false) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -126,6 +147,9 @@ public interface IIntEnumerable extends IEnumerable<Integer>{
 		return isNotExist(val->Arrays.binarySearch(set, val)>=0);
 	}
 	
+	@Override
+	public IIntEnumerator iterator();
+	
 	public default int[] toArray() {
 		List<Integer> list = toList();
 		int[] array = new int[list.size()];
@@ -133,22 +157,6 @@ public interface IIntEnumerable extends IEnumerable<Integer>{
 			array[i] = list.get(i);
 		}
 		return array;
-	}
-	
-	public default int at(int index) {
-		Arguments.is(index>=0, "%d < 0", index);
-		
-		IIntEnumerator enumerator = iterator();
-		for(int i = 0; i < index; i++) {
-			if(!enumerator.hasNext()) {
-				throw EnumeratorException.throwAfter();
-			}
-			enumerator.moveNext();
-		}
-		if(enumerator.hasNext()) {
-			return enumerator.nextInt();
-		}
-		throw EnumeratorException.throwAfter();
 	}
 	
 }

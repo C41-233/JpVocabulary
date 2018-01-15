@@ -5,7 +5,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 import java.util.Objects;
 
-import c41.utility.Arrays;
+import c41.utility.collection.Arrays;
 import c41.utility.linq.Linq;
 
 public final class MethodInfo 
@@ -113,6 +113,7 @@ public final class MethodInfo
 
 	/**
 	 * 如果方法所在的类型是注解，则返回方法的默认值。
+	 * @param <V> 泛型返回类型
 	 * @return 方法的默认值。如果方法所在的类型不是注解，返回null
 	 */
 	@SuppressWarnings("unchecked")

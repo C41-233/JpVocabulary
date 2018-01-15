@@ -1,5 +1,7 @@
 package c41.utility.linq;
 
+import java.util.NoSuchElementException;
+
 class SkipEnumerable<T> implements IEnumerable<T>{
 
 	private final IEnumerable<T> enumerable;
@@ -15,7 +17,7 @@ class SkipEnumerable<T> implements IEnumerable<T>{
 		IEnumerator<T> enumerator = enumerable.iterator();
 		for(int i=0; i < skip; i++) {
 			if(!enumerator.hasNext()) {
-				throw EnumeratorException.throwAfter();
+				throw new NoSuchElementException();
 			}
 			enumerator.moveNext();
 		}

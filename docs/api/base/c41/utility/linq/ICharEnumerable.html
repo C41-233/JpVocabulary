@@ -178,7 +178,7 @@ extends <a href="../../../c41/utility/linq/IEnumerable.html" title="c41.utility.
 <!--   -->
 </a>
 <h3>从接口继承的方法&nbsp;c41.utility.linq.<a href="../../../c41/utility/linq/IEnumerable.html" title="c41.utility.linq中的接口">IEnumerable</a></h3>
-<code><a href="../../../c41/utility/linq/IEnumerable.html#cast--">cast</a>, <a href="../../../c41/utility/linq/IEnumerable.html#count--">count</a>, <a href="../../../c41/utility/linq/IEnumerable.html#hasDuplicate--">hasDuplicate</a>, <a href="../../../c41/utility/linq/IEnumerable.html#isEmpty--">isEmpty</a>, <a href="../../../c41/utility/linq/IEnumerable.html#isNotEmpty--">isNotEmpty</a>, <a href="../../../c41/utility/linq/IEnumerable.html#toInt--">toInt</a>, <a href="../../../c41/utility/linq/IEnumerable.html#toList--">toList</a>, <a href="../../../c41/utility/linq/IEnumerable.html#toSet--">toSet</a></code></li>
+<code><a href="../../../c41/utility/linq/IEnumerable.html#cast--">cast</a>, <a href="../../../c41/utility/linq/IEnumerable.html#count--">count</a>, <a href="../../../c41/utility/linq/IEnumerable.html#hasDuplicate--">hasDuplicate</a>, <a href="../../../c41/utility/linq/IEnumerable.html#isEmpty--">isEmpty</a>, <a href="../../../c41/utility/linq/IEnumerable.html#isNotEmpty--">isNotEmpty</a>, <a href="../../../c41/utility/linq/IEnumerable.html#toCollection-c41.lambda.function.IFunction-">toCollection</a>, <a href="../../../c41/utility/linq/IEnumerable.html#toInt--">toInt</a>, <a href="../../../c41/utility/linq/IEnumerable.html#toList--">toList</a>, <a href="../../../c41/utility/linq/IEnumerable.html#toSet--">toSet</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.java.lang.Iterable">
@@ -302,6 +302,8 @@ extends <a href="../../../c41/utility/linq/IEnumerable.html" title="c41.utility.
 <pre>default&nbsp;&lt;V&gt;&nbsp;<a href="../../../c41/utility/linq/IReferenceEnumerable.html" title="c41.utility.linq中的接口">IReferenceEnumerable</a>&lt;V&gt;&nbsp;select(<a href="../../../c41/lambda/selector/ICharSelector.html" title="c41.lambda.selector中的接口">ICharSelector</a>&lt;? extends V&gt;&nbsp;selector)</pre>
 <div class="block">对每一个元素进行投影。</div>
 <dl>
+<dt><span class="paramLabel">类型参数:</span></dt>
+<dd><code>V</code> - 投影类型</dd>
 <dt><span class="paramLabel">参数:</span></dt>
 <dd><code>selector</code> - 投影</dd>
 <dt><span class="returnLabel">返回:</span></dt>

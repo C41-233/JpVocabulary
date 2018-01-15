@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":18,"i1":18,"i2":18,"i3":18,"i4":18,"i5":6,"i6":18,"i7":18,"i8":18,"i9":18};
+var methods = {"i0":18,"i1":18,"i2":18,"i3":18,"i4":18,"i5":6,"i6":18,"i7":18,"i8":18,"i9":18,"i10":18};
 var tabs = {65535:["t0","所有方法"],2:["t2","实例方法"],4:["t3","抽象方法"],16:["t5","默认方法"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -175,18 +175,24 @@ extends java.lang.Iterable&lt;T&gt;</pre>
 </td>
 </tr>
 <tr id="i7" class="rowColor">
+<td class="colFirst"><code>default &lt;TCollection extends java.util.Collection&lt;<a href="../../../c41/utility/linq/IEnumerable.html" title="IEnumerable中的类型参数">T</a>&gt;&gt;<br>TCollection</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/linq/IEnumerable.html#toCollection-c41.lambda.function.IFunction-">toCollection</a></span>(<a href="../../../c41/lambda/function/IFunction.html" title="c41.lambda.function中的接口">IFunction</a>&lt;TCollection&gt;&nbsp;provider)</code>
+<div class="block">将所有元素以Collection的形式返回，元素被加入的顺序与迭代器的顺序一致。</div>
+</td>
+</tr>
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>default <a href="../../../c41/utility/linq/IIntEnumerable.html" title="c41.utility.linq中的接口">IIntEnumerable</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/linq/IEnumerable.html#toInt--">toInt</a></span>()</code>
 <div class="block">将元素转换为int。</div>
 </td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>default java.util.List&lt;<a href="../../../c41/utility/linq/IEnumerable.html" title="IEnumerable中的类型参数">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/linq/IEnumerable.html#toList--">toList</a></span>()</code>
-<div class="block">将所有元素以List的形式返回，元素的顺序与查询的顺序一致。</div>
+<div class="block">将所有元素以List的形式返回，元素的顺序与迭代器的顺序一致。</div>
 </td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code>default java.util.Set&lt;<a href="../../../c41/utility/linq/IEnumerable.html" title="IEnumerable中的类型参数">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/linq/IEnumerable.html#toSet--">toSet</a></span>()</code>
 <div class="block">将所有元素以Set的形式返回。</div>
@@ -214,16 +220,19 @@ extends java.lang.Iterable&lt;T&gt;</pre>
 <!--   -->
 </a>
 <h3>方法详细资料</h3>
-<a name="iterator--">
+<a name="cast--">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>iterator</h4>
-<pre><a href="../../../c41/utility/linq/IEnumerator.html" title="c41.utility.linq中的接口">IEnumerator</a>&lt;<a href="../../../c41/utility/linq/IEnumerable.html" title="IEnumerable中的类型参数">T</a>&gt;&nbsp;iterator()</pre>
+<h4>cast</h4>
+<pre>default&nbsp;&lt;V&gt;&nbsp;<a href="../../../c41/utility/linq/IReferenceEnumerable.html" title="c41.utility.linq中的接口">IReferenceEnumerable</a>&lt;V&gt;&nbsp;cast()</pre>
+<div class="block">将元素强制类型转换。</div>
 <dl>
-<dt><span class="overrideSpecifyLabel">指定者:</span></dt>
-<dd><code>iterator</code>&nbsp;在接口中&nbsp;<code>java.lang.Iterable&lt;<a href="../../../c41/utility/linq/IEnumerable.html" title="IEnumerable中的类型参数">T</a>&gt;</code></dd>
+<dt><span class="paramLabel">类型参数:</span></dt>
+<dd><code>V</code> - 转化类型</dd>
+<dt><span class="returnLabel">返回:</span></dt>
+<dd>转换后的Enumerable。</dd>
 </dl>
 </li>
 </ul>
@@ -241,34 +250,6 @@ extends java.lang.Iterable&lt;T&gt;</pre>
 </dl>
 </li>
 </ul>
-<a name="toList--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>toList</h4>
-<pre>default&nbsp;java.util.List&lt;<a href="../../../c41/utility/linq/IEnumerable.html" title="IEnumerable中的类型参数">T</a>&gt;&nbsp;toList()</pre>
-<div class="block">将所有元素以List的形式返回，元素的顺序与查询的顺序一致。</div>
-<dl>
-<dt><span class="returnLabel">返回:</span></dt>
-<dd>List</dd>
-</dl>
-</li>
-</ul>
-<a name="toSet--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>toSet</h4>
-<pre>default&nbsp;java.util.Set&lt;<a href="../../../c41/utility/linq/IEnumerable.html" title="IEnumerable中的类型参数">T</a>&gt;&nbsp;toSet()</pre>
-<div class="block">将所有元素以Set的形式返回。</div>
-<dl>
-<dt><span class="returnLabel">返回:</span></dt>
-<dd>Set</dd>
-</dl>
-</li>
-</ul>
 <a name="hasDuplicate--">
 <!--   -->
 </a>
@@ -276,11 +257,10 @@ extends java.lang.Iterable&lt;T&gt;</pre>
 <li class="blockList">
 <h4>hasDuplicate</h4>
 <pre>default&nbsp;boolean&nbsp;hasDuplicate()</pre>
-<div class="block">是否存在重复元素。
- 元素的比较依赖<code>equals</code>。</div>
+<div class="block">是否存在重复元素。</div>
 <dl>
 <dt><span class="returnLabel">返回:</span></dt>
-<dd>如果存在重复元素，则返回true。</dd>
+<dd>如果存在重复元素，则返回true</dd>
 </dl>
 </li>
 </ul>
@@ -312,6 +292,19 @@ extends java.lang.Iterable&lt;T&gt;</pre>
 </dl>
 </li>
 </ul>
+<a name="iterator--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>iterator</h4>
+<pre><a href="../../../c41/utility/linq/IEnumerator.html" title="c41.utility.linq中的接口">IEnumerator</a>&lt;<a href="../../../c41/utility/linq/IEnumerable.html" title="IEnumerable中的类型参数">T</a>&gt;&nbsp;iterator()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">指定者:</span></dt>
+<dd><code>iterator</code>&nbsp;在接口中&nbsp;<code>java.lang.Iterable&lt;<a href="../../../c41/utility/linq/IEnumerable.html" title="IEnumerable中的类型参数">T</a>&gt;</code></dd>
+</dl>
+</li>
+</ul>
 <a name="skip-int-">
 <!--   -->
 </a>
@@ -329,24 +322,28 @@ extends java.lang.Iterable&lt;T&gt;</pre>
 </dl>
 </li>
 </ul>
-<a name="cast--">
+<a name="toCollection-c41.lambda.function.IFunction-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>cast</h4>
-<pre>default&nbsp;&lt;V&gt;&nbsp;<a href="../../../c41/utility/linq/IReferenceEnumerable.html" title="c41.utility.linq中的接口">IReferenceEnumerable</a>&lt;V&gt;&nbsp;cast()</pre>
-<div class="block">将元素强制类型转换。</div>
+<h4>toCollection</h4>
+<pre>default&nbsp;&lt;TCollection extends java.util.Collection&lt;<a href="../../../c41/utility/linq/IEnumerable.html" title="IEnumerable中的类型参数">T</a>&gt;&gt;&nbsp;TCollection&nbsp;toCollection(<a href="../../../c41/lambda/function/IFunction.html" title="c41.lambda.function中的接口">IFunction</a>&lt;TCollection&gt;&nbsp;provider)</pre>
+<div class="block">将所有元素以Collection的形式返回，元素被加入的顺序与迭代器的顺序一致。</div>
 <dl>
+<dt><span class="paramLabel">类型参数:</span></dt>
+<dd><code>TCollection</code> - 集合类型</dd>
+<dt><span class="paramLabel">参数:</span></dt>
+<dd><code>provider</code> - 创建Collection</dd>
 <dt><span class="returnLabel">返回:</span></dt>
-<dd>转换后的Enumerable。</dd>
+<dd>collection</dd>
 </dl>
 </li>
 </ul>
 <a name="toInt--">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>toInt</h4>
 <pre>default&nbsp;<a href="../../../c41/utility/linq/IIntEnumerable.html" title="c41.utility.linq中的接口">IIntEnumerable</a>&nbsp;toInt()</pre>
@@ -354,6 +351,34 @@ extends java.lang.Iterable&lt;T&gt;</pre>
 <dl>
 <dt><span class="returnLabel">返回:</span></dt>
 <dd>IIntEnumerable</dd>
+</dl>
+</li>
+</ul>
+<a name="toList--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>toList</h4>
+<pre>default&nbsp;java.util.List&lt;<a href="../../../c41/utility/linq/IEnumerable.html" title="IEnumerable中的类型参数">T</a>&gt;&nbsp;toList()</pre>
+<div class="block">将所有元素以List的形式返回，元素的顺序与迭代器的顺序一致。</div>
+<dl>
+<dt><span class="returnLabel">返回:</span></dt>
+<dd>List</dd>
+</dl>
+</li>
+</ul>
+<a name="toSet--">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>toSet</h4>
+<pre>default&nbsp;java.util.Set&lt;<a href="../../../c41/utility/linq/IEnumerable.html" title="IEnumerable中的类型参数">T</a>&gt;&nbsp;toSet()</pre>
+<div class="block">将所有元素以Set的形式返回。</div>
+<dl>
+<dt><span class="returnLabel">返回:</span></dt>
+<dd>Set</dd>
 </dl>
 </li>
 </ul>

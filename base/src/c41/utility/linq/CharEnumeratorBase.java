@@ -1,5 +1,7 @@
 package c41.utility.linq;
 
+import java.util.NoSuchElementException;
+
 abstract class CharEnumeratorBase implements ICharEnumerator{
 
 	private boolean isBefore = true;
@@ -7,7 +9,7 @@ abstract class CharEnumeratorBase implements ICharEnumerator{
 	@Override
 	public final void moveNext() {
 		if(!hasNext()) {
-			EnumeratorException.throwBefore();
+			throw new NoSuchElementException();
 		}
 		doMoveNext();
 		isBefore = false;
@@ -18,7 +20,7 @@ abstract class CharEnumeratorBase implements ICharEnumerator{
 	@Override
 	public final char currentChar() {
 		if(isBefore) {
-			EnumeratorException.throwAfter();
+			throw new NoSuchElementException();
 		}
 		return doCurrentChar();
 	}

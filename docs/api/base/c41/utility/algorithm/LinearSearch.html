@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":9,"i1":9,"i2":9,"i3":9,"i4":9,"i5":9,"i6":9,"i7":9,"i8":9};
+var methods = {"i0":9,"i1":9,"i2":9};
 var tabs = {65535:["t0","所有方法"],1:["t1","静态方法"],8:["t4","具体方法"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -130,61 +130,19 @@ extends java.lang.Object</pre>
 <th class="colLast" scope="col">方法和说明</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code>static &lt;T&gt;&nbsp;boolean</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/algorithm/LinearSearch.html#isAll-java.lang.Iterable-c41.lambda.predicate.IPredicate-">isAll</a></span>(java.lang.Iterable&lt;T&gt;&nbsp;iterable,
-     <a href="../../../c41/lambda/predicate/IPredicate.html" title="c41.lambda.predicate中的接口">IPredicate</a>&lt;? super T&gt;&nbsp;predicate)</code>
-<div class="block">所有元素都满足谓词。</div>
-</td>
-</tr>
-<tr id="i1" class="rowColor">
-<td class="colFirst"><code>static &lt;T&gt;&nbsp;boolean</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/algorithm/LinearSearch.html#isAll-java.util.Iterator-c41.lambda.predicate.IPredicate-">isAll</a></span>(java.util.Iterator&lt;T&gt;&nbsp;iterator,
-     <a href="../../../c41/lambda/predicate/IPredicate.html" title="c41.lambda.predicate中的接口">IPredicate</a>&lt;? super T&gt;&nbsp;predicate)</code>
-<div class="block">迭代器所有元素都满足谓词。</div>
-</td>
-</tr>
-<tr id="i2" class="altColor">
 <td class="colFirst"><code>static boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/algorithm/LinearSearch.html#isExist-int:A-int-">isExist</a></span>(int[]&nbsp;array,
        int&nbsp;value)</code>&nbsp;</td>
 </tr>
-<tr id="i3" class="rowColor">
-<td class="colFirst"><code>static &lt;T&gt;&nbsp;boolean</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/algorithm/LinearSearch.html#isExist-java.lang.Iterable-c41.lambda.predicate.IPredicate-">isExist</a></span>(java.lang.Iterable&lt;T&gt;&nbsp;iterable,
-       <a href="../../../c41/lambda/predicate/IPredicate.html" title="c41.lambda.predicate中的接口">IPredicate</a>&lt;? super T&gt;&nbsp;predicate)</code>
-<div class="block">存在满足谓词的元素。</div>
-</td>
-</tr>
-<tr id="i4" class="altColor">
-<td class="colFirst"><code>static &lt;T&gt;&nbsp;boolean</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/algorithm/LinearSearch.html#isExist-java.util.Iterator-c41.lambda.predicate.IPredicate-">isExist</a></span>(java.util.Iterator&lt;T&gt;&nbsp;iterator,
-       <a href="../../../c41/lambda/predicate/IPredicate.html" title="c41.lambda.predicate中的接口">IPredicate</a>&lt;? super T&gt;&nbsp;predicate)</code>
-<div class="block">迭代器存在满足谓词的元素。</div>
-</td>
-</tr>
-<tr id="i5" class="rowColor">
+<tr id="i1" class="rowColor">
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/algorithm/LinearSearch.html#isExist-T:A-c41.lambda.predicate.IPredicate-">isExist</a></span>(T[]&nbsp;array,
        <a href="../../../c41/lambda/predicate/IPredicate.html" title="c41.lambda.predicate中的接口">IPredicate</a>&lt;? super T&gt;&nbsp;predicate)</code>&nbsp;</td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/algorithm/LinearSearch.html#isExist-T:A-T-">isExist</a></span>(T[]&nbsp;array,
        T&nbsp;value)</code>&nbsp;</td>
-</tr>
-<tr id="i7" class="rowColor">
-<td class="colFirst"><code>static &lt;T&gt;&nbsp;boolean</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/algorithm/LinearSearch.html#isNotAll-java.lang.Iterable-c41.lambda.predicate.IPredicate-">isNotAll</a></span>(java.lang.Iterable&lt;T&gt;&nbsp;iterable,
-        <a href="../../../c41/lambda/predicate/IPredicate.html" title="c41.lambda.predicate中的接口">IPredicate</a>&lt;? super T&gt;&nbsp;predicate)</code>
-<div class="block">非所有元素都满足谓词。</div>
-</td>
-</tr>
-<tr id="i8" class="altColor">
-<td class="colFirst"><code>static &lt;T&gt;&nbsp;boolean</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/algorithm/LinearSearch.html#isNotAll-java.util.Iterator-c41.lambda.predicate.IPredicate-">isNotAll</a></span>(java.util.Iterator&lt;T&gt;&nbsp;iterator,
-        <a href="../../../c41/lambda/predicate/IPredicate.html" title="c41.lambda.predicate中的接口">IPredicate</a>&lt;? super T&gt;&nbsp;predicate)</code>
-<div class="block">迭代器非所有元素都满足谓词。</div>
-</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -208,78 +166,6 @@ extends java.lang.Object</pre>
 <!--   -->
 </a>
 <h3>方法详细资料</h3>
-<a name="isAll-java.util.Iterator-c41.lambda.predicate.IPredicate-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>isAll</h4>
-<pre>public static&nbsp;&lt;T&gt;&nbsp;boolean&nbsp;isAll(java.util.Iterator&lt;T&gt;&nbsp;iterator,
-                                <a href="../../../c41/lambda/predicate/IPredicate.html" title="c41.lambda.predicate中的接口">IPredicate</a>&lt;? super T&gt;&nbsp;predicate)</pre>
-<div class="block">迭代器所有元素都满足谓词。</div>
-<dl>
-<dt><span class="paramLabel">参数:</span></dt>
-<dd><code>iterator</code> - 迭代器</dd>
-<dd><code>predicate</code> - 谓词</dd>
-<dt><span class="returnLabel">返回:</span></dt>
-<dd>如果所有元素都满足谓词，则返回true</dd>
-</dl>
-</li>
-</ul>
-<a name="isAll-java.lang.Iterable-c41.lambda.predicate.IPredicate-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>isAll</h4>
-<pre>public static&nbsp;&lt;T&gt;&nbsp;boolean&nbsp;isAll(java.lang.Iterable&lt;T&gt;&nbsp;iterable,
-                                <a href="../../../c41/lambda/predicate/IPredicate.html" title="c41.lambda.predicate中的接口">IPredicate</a>&lt;? super T&gt;&nbsp;predicate)</pre>
-<div class="block">所有元素都满足谓词。</div>
-<dl>
-<dt><span class="paramLabel">参数:</span></dt>
-<dd><code>iterable</code> - 容器</dd>
-<dd><code>predicate</code> - 谓词</dd>
-<dt><span class="returnLabel">返回:</span></dt>
-<dd>如果所有元素都满足谓词，则返回true</dd>
-</dl>
-</li>
-</ul>
-<a name="isNotAll-java.util.Iterator-c41.lambda.predicate.IPredicate-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>isNotAll</h4>
-<pre>public static&nbsp;&lt;T&gt;&nbsp;boolean&nbsp;isNotAll(java.util.Iterator&lt;T&gt;&nbsp;iterator,
-                                   <a href="../../../c41/lambda/predicate/IPredicate.html" title="c41.lambda.predicate中的接口">IPredicate</a>&lt;? super T&gt;&nbsp;predicate)</pre>
-<div class="block">迭代器非所有元素都满足谓词。</div>
-<dl>
-<dt><span class="paramLabel">参数:</span></dt>
-<dd><code>iterator</code> - 迭代器</dd>
-<dd><code>predicate</code> - 谓词</dd>
-<dt><span class="returnLabel">返回:</span></dt>
-<dd>如果非所有元素都满足谓词，返回true</dd>
-</dl>
-</li>
-</ul>
-<a name="isNotAll-java.lang.Iterable-c41.lambda.predicate.IPredicate-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>isNotAll</h4>
-<pre>public static&nbsp;&lt;T&gt;&nbsp;boolean&nbsp;isNotAll(java.lang.Iterable&lt;T&gt;&nbsp;iterable,
-                                   <a href="../../../c41/lambda/predicate/IPredicate.html" title="c41.lambda.predicate中的接口">IPredicate</a>&lt;? super T&gt;&nbsp;predicate)</pre>
-<div class="block">非所有元素都满足谓词。</div>
-<dl>
-<dt><span class="paramLabel">参数:</span></dt>
-<dd><code>iterable</code> - 容器</dd>
-<dd><code>predicate</code> - 谓词</dd>
-<dt><span class="returnLabel">返回:</span></dt>
-<dd>如果非所有元素都满足谓词，返回true</dd>
-</dl>
-</li>
-</ul>
 <a name="isExist-int:A-int-">
 <!--   -->
 </a>
@@ -288,18 +174,6 @@ extends java.lang.Object</pre>
 <h4>isExist</h4>
 <pre>public static&nbsp;boolean&nbsp;isExist(int[]&nbsp;array,
                               int&nbsp;value)</pre>
-</li>
-</ul>
-<a name="isExist-java.lang.Object:A-java.lang.Object-">
-<!--   -->
-</a><a name="isExist-T:A-T-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>isExist</h4>
-<pre>public static&nbsp;&lt;T&gt;&nbsp;boolean&nbsp;isExist(T[]&nbsp;array,
-                                  T&nbsp;value)</pre>
 </li>
 </ul>
 <a name="isExist-java.lang.Object:A-c41.lambda.predicate.IPredicate-">
@@ -314,40 +188,16 @@ extends java.lang.Object</pre>
                                   <a href="../../../c41/lambda/predicate/IPredicate.html" title="c41.lambda.predicate中的接口">IPredicate</a>&lt;? super T&gt;&nbsp;predicate)</pre>
 </li>
 </ul>
-<a name="isExist-java.lang.Iterable-c41.lambda.predicate.IPredicate-">
+<a name="isExist-java.lang.Object:A-java.lang.Object-">
 <!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>isExist</h4>
-<pre>public static&nbsp;&lt;T&gt;&nbsp;boolean&nbsp;isExist(java.lang.Iterable&lt;T&gt;&nbsp;iterable,
-                                  <a href="../../../c41/lambda/predicate/IPredicate.html" title="c41.lambda.predicate中的接口">IPredicate</a>&lt;? super T&gt;&nbsp;predicate)</pre>
-<div class="block">存在满足谓词的元素。</div>
-<dl>
-<dt><span class="paramLabel">参数:</span></dt>
-<dd><code>iterable</code> - 容器</dd>
-<dd><code>predicate</code> - 谓词</dd>
-<dt><span class="returnLabel">返回:</span></dt>
-<dd>如果存在，则返回true</dd>
-</dl>
-</li>
-</ul>
-<a name="isExist-java.util.Iterator-c41.lambda.predicate.IPredicate-">
+</a><a name="isExist-T:A-T-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>isExist</h4>
-<pre>public static&nbsp;&lt;T&gt;&nbsp;boolean&nbsp;isExist(java.util.Iterator&lt;T&gt;&nbsp;iterator,
-                                  <a href="../../../c41/lambda/predicate/IPredicate.html" title="c41.lambda.predicate中的接口">IPredicate</a>&lt;? super T&gt;&nbsp;predicate)</pre>
-<div class="block">迭代器存在满足谓词的元素。</div>
-<dl>
-<dt><span class="paramLabel">参数:</span></dt>
-<dd><code>iterator</code> - 迭代器</dd>
-<dd><code>predicate</code> - 谓词</dd>
-<dt><span class="returnLabel">返回:</span></dt>
-<dd>如果存在，则返回true</dd>
-</dl>
+<pre>public static&nbsp;&lt;T&gt;&nbsp;boolean&nbsp;isExist(T[]&nbsp;array,
+                                  T&nbsp;value)</pre>
 </li>
 </ul>
 </li>

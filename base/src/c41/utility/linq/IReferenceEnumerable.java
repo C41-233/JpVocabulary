@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 
 import c41.lambda.action.IAction1;
@@ -20,6 +21,7 @@ import c41.lambda.selector.ISelector;
 import c41.lambda.selector.ISelectorEx;
 import c41.utility.algorithm.LinearSearch;
 import c41.utility.assertion.Arguments;
+import c41.utility.collection.Iterables;
 import c41.utility.collection.map.DefaultValueHashMap;
 import c41.utility.collection.tuple.Tuple2;
 import c41.utility.collection.tuple.Tuples;
@@ -27,12 +29,126 @@ import c41.utility.comparator.Comparators;
 
 /**
  * 引用类型的Enumerable。
- * @param <T>
+ * @param <T> 元素类型
  */
 public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 
-	@Override
-	public IEnumerator<T> iterator();
+	/**
+	 * 查询指定下标的元素。
+	 * @param index 下标
+	 * @return 指定元素
+	 * @throws IllegalArgumentException index &lt; 0
+	 * @throws NoSuchElementException 下标超出迭代器范围
+	 */
+	public default T at(int index) {
+		Arguments.is(index>=0, "%d < 0", index);
+		return Iterables.at(this, index);
+	}
+
+	public default int count(IPredicate<? super T> predicate) {
+		return Iterables.count(this, predicate);
+	}
+
+	public default T findFirst(IPredicate<? super T> predicate) {
+		return Iterables.findFirst(this, predicate);
+	}
+	
+	public default T findFirstOrDefault(IPredicate<? super T> predicate) {
+		return Iterables.findFirstOrDefault(this, predicate);
+	}
+
+	public default T findFirstOrDefault(IPredicate<? super T> predicate, T def) {
+		return Iterables.findFirstOrDefault(this, predicate, def);
+	}
+	
+	public default T findFirstDuplicate() {
+		return Iterables.findFirstDuplicate(this);
+	}
+
+	public default T findFirstDuplicateOrDefault() {
+		return Iterables.findFirstDuplicateOrDefault(this);
+	}
+	
+	public default T findFirstDuplicateOrDefault(T def) {
+		return Iterables.findFirstDuplicateOrDefault(this, def);
+	}
+	
+	public default int findFirstIndex(IPredicate<? super T> predicate) {
+		Arguments.isNotNull(predicate);
+		
+		int index = 0;
+		IEnumerator<T> enumerator = iterator();
+		while(enumerator.hasNext()) {
+			T obj = enumerator.next();
+			if(predicate.is(obj)) {
+				return index;
+			}
+			index++;
+		}
+		return -1;
+	}
+
+	public default int findFirstIndex(T value) {
+		int index = 0;
+		IEnumerator<T> enumerator = iterator();
+		while(enumerator.hasNext()) {
+			T obj = enumerator.next();
+			if(Objects.equals(obj, value)) {
+				return index;
+			}
+			index++;
+		}
+		return -1;
+	}
+	
+	public default T first() {
+		IEnumerator<T> enumerator = iterator();
+		if(enumerator.hasNext()) {
+			return enumerator.next();
+		}
+		return null;
+	}
+	
+	public default void foreach(IAction1<? super T> action) {
+		Arguments.isNotNull(action);
+		
+		IEnumerator<T> enumerator = iterator();
+		while(enumerator.hasNext()) {
+			T obj = enumerator.next();
+			action.invoke(obj);
+		}
+	}
+
+	public default void foreach(IForeachAction<? super T> action) {
+		Arguments.isNotNull(action);
+		
+		IEnumerator<T> enumerator = iterator();
+		int index = 0;
+		while(enumerator.hasNext()) {
+			T obj = enumerator.next();
+			action.invoke(obj, index++);
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public default <V> IReferenceEnumerable<IReferenceGroup<V, T>> groupBy(ISelector<T, V> selector){
+		Arguments.isNotNull(selector);
+		
+		DefaultValueHashMap<V, ReferenceGroup<V, T>> hashMap = new DefaultValueHashMap<>(key->new ReferenceGroup(key));
+		IEnumerator<T> enumerator = iterator();
+		while(enumerator.hasNext()) {
+			T value = enumerator.next();
+			V key = selector.select(value);
+			ReferenceGroup<V, T> group = hashMap.get(key);
+			group.values.add(value);
+		}
+		return new IterableEnumerable(hashMap.values());
+	}
+	
+	public default <V> IReferenceEnumerable<V> instanceOf(Class<V> cl){
+		Arguments.isNotNull(cl);
+		return where(c->cl.isInstance(c)).cast();
+	}
 
 	/**
 	 * 所有元素都满足谓词。
@@ -42,25 +158,16 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 	 * @see IIntEnumerable#isAll(IIntPredicate)
 	 */
 	public default boolean isAll(IPredicate<? super T> predicate) {
-		return LinearSearch.isAll(this, predicate);
+		return Iterables.isAll(this, predicate);
 	}
 
-	/**
-	 * 非所有元素都满足谓词。
-	 * @param predicate 谓词
-	 * @return 如果非所有元素都满足谓词，返回true
-	 */
-	public default boolean isNotAll(IPredicate<? super T> predicate) {
-		return LinearSearch.isNotAll(this, predicate);
-	}
-	
 	/**
 	 * 存在满足谓词的元素。
 	 * @param predicate 谓词
 	 * @return 如果存在，则返回true
 	 */
 	public default boolean isExist(IPredicate<? super T> predicate) {
-		return LinearSearch.isExist(this, predicate);
+		return Iterables.isExist(this, predicate);
 	}
 
 	/**
@@ -72,7 +179,7 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 	public default boolean isExist(T value) {
 		return isExist(obj->Objects.equals(obj, value));
 	}
-
+	
 	/**
 	 * 存在与@{code value}引用相同的元素。
 	 * @param value 元素
@@ -81,7 +188,16 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 	public default boolean isExistReference(T value) {
 		return isExist(obj->obj == value);
 	}
-	
+
+	/**
+	 * 非所有元素都满足谓词。
+	 * @param predicate 谓词
+	 * @return 如果非所有元素都满足谓词，返回true
+	 */
+	public default boolean isNotAll(IPredicate<? super T> predicate) {
+		return Iterables.isNotAll(this, predicate);
+	}
+
 	/**
 	 * 不存在满足谓词的元素。
 	 * @param predicate 谓词
@@ -99,7 +215,7 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 		}
 		return true;
 	}
-	
+
 	/**
 	 * 不存在与{@code value}相等的元素。
 	 * 比较以{@code equals}的方式进行。
@@ -110,15 +226,6 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 		return isNotExist(obj->Objects.equals(obj, value));
 	}
 
-	/**
-	 * 不存在与{@code value}引用相同的元素。
-	 * @param value 元素
-	 * @return 如果不存在，则返回true
-	 */
-	public default boolean isNotExistReference(T value) {
-		return isNotExist(obj->obj == value);
-	}
-	
 	/**
 	 * 不存在与任何一个指定元素相等的元素。
 	 * @param values 多个指定元素
@@ -137,98 +244,85 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 		}
 		return isNotExist(obj->set.contains(obj));
 	}
-	
-	public default T at(int index) {
-		Arguments.is(index>=0, "%d < 0", index);
-		
-		IEnumerator<T> enumerator = iterator();
-		for(int i=0; i<index && enumerator.hasNext(); i++) {
-			if(!enumerator.hasNext()) {
-				throw EnumeratorException.throwAfter();
-			}
-			enumerator.moveNext();
-		}
-		if(enumerator.hasNext()) {
-			return enumerator.next();
-		}
-		throw EnumeratorException.throwAfter();
-	}
 
-	public default T first() {
-		IEnumerator<T> enumerator = iterator();
-		if(enumerator.hasNext()) {
-			return enumerator.next();
-		}
-		return null;
-	}
-
-	public default T findFirst(IPredicate<? super T> predicate) {
-		Arguments.isNotNull(predicate);
-		
-		IEnumerator<T> enumerator = iterator();
-		while(enumerator.hasNext()) {
-			T obj = enumerator.next();
-			if(predicate.is(obj)) {
-				return obj;
-			}
-		}
-		return null;
-	}
-
-	public default int findFirstIndex(T value) {
-		int index = 0;
-		IEnumerator<T> enumerator = iterator();
-		while(enumerator.hasNext()) {
-			T obj = enumerator.next();
-			if(Objects.equals(obj, value)) {
-				return index;
-			}
-			index++;
-		}
-		return -1;
+	/**
+	 * 不存在与{@code value}引用相同的元素。
+	 * @param value 元素
+	 * @return 如果不存在，则返回true
+	 */
+	public default boolean isNotExistReference(T value) {
+		return isNotExist(obj->obj == value);
 	}
 	
-	public default int findFirstIndex(IPredicate<? super T> predicate) {
+	@Override
+	public IEnumerator<T> iterator();
+	
+	public default <U> IReferenceEnumerable<Tuple2<T, U>> join(Iterable<U> other){
+		Arguments.isNotNull(other);
+		return new JoinEnumerable<>(this, other, (t, u)->Tuples.make(t, u));
+	}
+	
+	public default <U, V> IReferenceEnumerable<V> join(Iterable<U> other, IJoiner<T, U, V> joiner){
+		Arguments.isNotNull(other);
+		Arguments.isNotNull(joiner);
+		return new JoinEnumerable<>(this, other, joiner);
+	}
+
+	public default <U, V> IReferenceEnumerable<V> join(U[] other, IJoiner<T, U, V> joiner){
+		Arguments.isNotNull(other);
+		Arguments.isNotNull(joiner);
+		return new JoinEnumerable<>(this, new ArrayEnumerable<>(other), joiner);
+	}
+	
+	public default IReferenceSortedEnumerable<T> orderBy(Comparator<? super T> comparator){
+		Arguments.isNotNull(comparator);
+		return new OrderByEnumerable<>(this, comparator);
+	}
+	
+	public default <V extends Comparable<? super V>> IReferenceSortedEnumerable<T> orderBy(ISelector<? super T, V> selector){
+		Arguments.isNotNull(selector);
+		return new OrderByEnumerable<>(this, (t1, t2)->Comparators.compare(selector.select(t1), selector.select(t2)));
+	}
+	
+	public default IReferenceSortedEnumerable<T> orderByCondition(IPredicate<T> predicate){
 		Arguments.isNotNull(predicate);
 		
-		int index = 0;
-		IEnumerator<T> enumerator = iterator();
-		while(enumerator.hasNext()) {
-			T obj = enumerator.next();
-			if(predicate.is(obj)) {
-				return index;
+		return new OrderByEnumerable<>(this, (t1, t2)->{
+			boolean b1 = predicate.is(t1);
+			boolean b2 = predicate.is(t2);
+			
+			if(b1 && !b2) {
+				return -1; 
 			}
-			index++;
-		}
-		return -1;
+			if(b2 && !b1) {
+				return 1;
+			}
+			return 0;
+		});
+	}
+	
+	@SuppressWarnings("unchecked")
+	public default IReferenceSortedEnumerable<T> orderBySelf(){
+		return new OrderByEnumerable<>(this, (t1, t2)->{
+			return Comparators.compare((Comparable)t1, (Comparable)t2);
+		});
+	}
+	
+	public default <V> IReferenceEnumerable<V> select(ISelector<? super T, ? extends V> selector){
+		Arguments.isNotNull(selector);
+		return new SelectEnumerable<>(this, selector);
 	}
 
-	public default T findFirstDuplicate() {
-		HashSet<T> set = new HashSet<>();
-		IEnumerator<T> enumerator = iterator();
-		while(enumerator.hasNext()) {
-			T obj = enumerator.next();
-			if(set.add(obj) == false) {
-				return obj;
-			}
-		}
-		return null;
+	public default <V> IReferenceEnumerable<V> select(ISelectorEx<? super T, ? extends V> selector){
+		Arguments.isNotNull(selector);
+		return new SelectEnumerable<>(this, selector);
 	}
 
-	public default int count(IPredicate<T> predicate) {
-		Arguments.isNotNull(predicate);
-		
-		int count = 0;
-		IEnumerator<T> enumerator = iterator();
-		while(enumerator.hasNext()) {
-			T obj = enumerator.next();
-			if(predicate.is(obj)) {
-				count++;
-			}
-		}
-		return count;
+	public default <V> IReferenceEnumerable<V> selectMany(ISelector<? super T, ? extends Iterable<? extends V>> selector){
+		Arguments.isNotNull(selector);
+		return new SelectManyEnumerable<>(this, selector);
 	}
-
+	
 	@SuppressWarnings("unchecked")
 	public default T[] toArray(Class<T> type) {
 		Arguments.isNotNull(type);
@@ -240,12 +334,12 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 		}
 		return array;
 	}
-
+	
 	public default T[] toArray(T[] array) {
 		Arguments.isNotNull(array);
 		return toList().toArray(array);
 	}
-
+	
 	public default <K> Map<K, IReferenceEnumerable<T>> toMap(ISelector<T, K> selector){
 		Arguments.isNotNull(selector);
 		
@@ -269,121 +363,14 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 		return rst;
 	}
 	
-	public default void foreach(IAction1<? super T> action) {
-		Arguments.isNotNull(action);
-		
-		IEnumerator<T> enumerator = iterator();
-		while(enumerator.hasNext()) {
-			T obj = enumerator.next();
-			action.invoke(obj);
-		}
-	}
-	
-	public default void foreach(IForeachAction<? super T> action) {
-		Arguments.isNotNull(action);
-		
-		IEnumerator<T> enumerator = iterator();
-		int index = 0;
-		while(enumerator.hasNext()) {
-			T obj = enumerator.next();
-			action.invoke(obj, index++);
-		}
-	}
-	
-	public default <V> IReferenceEnumerable<V> select(ISelector<? super T, ? extends V> selector){
-		Arguments.isNotNull(selector);
-		return new SelectEnumerable<>(this, selector);
-	}
-
-	public default <V> IReferenceEnumerable<V> select(ISelectorEx<? super T, ? extends V> selector){
-		Arguments.isNotNull(selector);
-		return new SelectEnumerable<>(this, selector);
-	}
-	
-	public default <V> IReferenceEnumerable<V> selectMany(ISelector<? super T, ? extends Iterable<? extends V>> selector){
-		Arguments.isNotNull(selector);
-		return new SelectManyEnumerable<>(this, selector);
-	}
-	
-	public default IReferenceEnumerable<T> where(IPredicate<? super T> predicate){
-		Arguments.isNotNull(predicate);
-		return new WhereEnumerable<>(this, predicate);
-	}
-	
-	public default <V> IReferenceEnumerable<V> instanceOf(Class<V> cl){
-		Arguments.isNotNull(cl);
-		return where(c->cl.isInstance(c)).cast();
-	}
-	
-	public default IReferenceSortedEnumerable<T> orderBy(Comparator<? super T> comparator){
-		Arguments.isNotNull(comparator);
-		return new OrderByEnumerable<>(this, comparator);
-	}
-	
-	public default <V extends Comparable<? super V>> IReferenceSortedEnumerable<T> orderBy(ISelector<? super T, V> selector){
-		Arguments.isNotNull(selector);
-		return new OrderByEnumerable<>(this, (t1, t2)->Comparators.compare(selector.select(t1), selector.select(t2)));
-	}
-
-	@SuppressWarnings("unchecked")
-	public default IReferenceSortedEnumerable<T> orderBySelf(){
-		return new OrderByEnumerable<>(this, (t1, t2)->{
-			return Comparators.compare((Comparable)t1, (Comparable)t2);
-		});
-	}
-
-	public default IReferenceSortedEnumerable<T> orderByCondition(IPredicate<T> predicate){
-		Arguments.isNotNull(predicate);
-		
-		return new OrderByEnumerable<>(this, (t1, t2)->{
-			boolean b1 = predicate.is(t1);
-			boolean b2 = predicate.is(t2);
-			
-			if(b1 && !b2) {
-				return -1; 
-			}
-			if(b2 && !b1) {
-				return 1;
-			}
-			return 0;
-		});
-	}
-	
-	@SuppressWarnings("unchecked")
-	public default <V> IReferenceEnumerable<IReferenceGroup<V, T>> groupBy(ISelector<T, V> selector){
-		Arguments.isNotNull(selector);
-		
-		DefaultValueHashMap<V, ReferenceGroup<V, T>> hashMap = new DefaultValueHashMap<>(key->new ReferenceGroup(key));
-		IEnumerator<T> enumerator = iterator();
-		while(enumerator.hasNext()) {
-			T value = enumerator.next();
-			V key = selector.select(value);
-			ReferenceGroup<V, T> group = hashMap.get(key);
-			group.values.add(value);
-		}
-		return new IterableEnumerable(hashMap.values());
-	}
-	
 	public default IReferenceEnumerable<T> union(Iterable<? extends T> iterable){
 		Arguments.isNotNull(iterable);
 		return new UnionEnumerable<>(this, Linq.from(iterable));
 	}
 	
-	public default <U> IReferenceEnumerable<Tuple2<T, U>> join(Iterable<U> other){
-		Arguments.isNotNull(other);
-		return new JoinEnumerable<>(this, other, (t, u)->Tuples.make(t, u));
-	}
-	
-	public default <U, V> IReferenceEnumerable<V> join(Iterable<U> other, IJoiner<T, U, V> joiner){
-		Arguments.isNotNull(other);
-		Arguments.isNotNull(joiner);
-		return new JoinEnumerable<>(this, other, joiner);
-	}
-	
-	public default <U, V> IReferenceEnumerable<V> join(U[] other, IJoiner<T, U, V> joiner){
-		Arguments.isNotNull(other);
-		Arguments.isNotNull(joiner);
-		return new JoinEnumerable<>(this, new ArrayEnumerable<>(other), joiner);
+	public default IReferenceEnumerable<T> where(IPredicate<? super T> predicate){
+		Arguments.isNotNull(predicate);
+		return new WhereEnumerable<>(this, predicate);
 	}
 	
 }

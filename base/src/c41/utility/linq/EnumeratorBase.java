@@ -1,5 +1,7 @@
 package c41.utility.linq;
 
+import java.util.NoSuchElementException;
+
 abstract class EnumeratorBase<T> implements IEnumerator<T>{
 
 	private boolean isBefore = true;
@@ -7,7 +9,7 @@ abstract class EnumeratorBase<T> implements IEnumerator<T>{
 	@Override
 	public final void moveNext() {
 		if(!hasNext()) {
-			throw EnumeratorException.throwAfter();
+			throw new NoSuchElementException();
 		}
 		doMoveNext();
 		isBefore = false;
@@ -18,7 +20,7 @@ abstract class EnumeratorBase<T> implements IEnumerator<T>{
 	@Override
 	public final T current() {
 		if(isBefore) {
-			throw EnumeratorException.throwBefore();
+			throw new NoSuchElementException();
 		}
 		return doCurrent();
 	}
