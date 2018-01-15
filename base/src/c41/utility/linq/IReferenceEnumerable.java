@@ -13,6 +13,7 @@ import java.util.Objects;
 
 import c41.lambda.action.IAction1;
 import c41.lambda.action.IForeachAction;
+import c41.lambda.function.IFunction;
 import c41.lambda.function.IJoiner;
 import c41.lambda.predicate.ICharPredicate;
 import c41.lambda.predicate.IIntPredicate;
@@ -53,18 +54,14 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 		return Iterables.findFirst(this, predicate);
 	}
 	
-	public default T findFirstOrDefault(IPredicate<? super T> predicate) {
-		return Iterables.findFirstOrDefault(this, predicate);
-	}
-
-	public default T findFirstOrDefault(IPredicate<? super T> predicate, T def) {
-		return Iterables.findFirstOrDefault(this, predicate, def);
-	}
-	
 	public default T findFirstDuplicate() {
 		return Iterables.findFirstDuplicate(this);
 	}
 
+	public default T findFirstDuplicateOrCreateDefault(IFunction<? extends T> defProvider) {
+		return Iterables.findFirstDuplicateOrCreateDefault(this, defProvider);
+	}
+	
 	public default T findFirstDuplicateOrDefault() {
 		return Iterables.findFirstDuplicateOrDefault(this);
 	}
@@ -74,18 +71,7 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 	}
 	
 	public default int findFirstIndex(IPredicate<? super T> predicate) {
-		Arguments.isNotNull(predicate);
-		
-		int index = 0;
-		IEnumerator<T> enumerator = iterator();
-		while(enumerator.hasNext()) {
-			T obj = enumerator.next();
-			if(predicate.is(obj)) {
-				return index;
-			}
-			index++;
-		}
-		return -1;
+		return Iterables.findFirstIndex(this, predicate);
 	}
 
 	public default int findFirstIndex(T value) {
@@ -99,6 +85,18 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 			index++;
 		}
 		return -1;
+	}
+	
+	public default T findFirstOrCreateDefault(IPredicate<? super T> predicate, IFunction<? extends T> defProvider) {
+		return Iterables.findFirstOrCreateDefault(this, predicate, defProvider);
+	}
+	
+	public default T findFirstOrDefault(IPredicate<? super T> predicate) {
+		return Iterables.findFirstOrDefault(this, predicate);
+	}
+
+	public default T findFirstOrDefault(IPredicate<? super T> predicate, T def) {
+		return Iterables.findFirstOrDefault(this, predicate, def);
 	}
 	
 	public default T first() {

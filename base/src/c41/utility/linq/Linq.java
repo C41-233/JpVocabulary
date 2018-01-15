@@ -69,5 +69,11 @@ public final class Linq {
 		Arguments.isNotNull(nodes);
 		return new NodeListEnumerable(nodes);
 	}
+	
+	@SafeVarargs
+	public static <T> IReferenceEnumerable<T> fromElements(T...elements) {
+		Arguments.isNotNull(elements);
+		return new ArrayEnumerable<>(elements);
+	}
 
 }

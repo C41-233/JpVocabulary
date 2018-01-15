@@ -3,7 +3,7 @@ package logic.words;
 import java.util.List;
 import java.util.Set;
 
-import c41.utility.collection.Iterables;
+import c41.utility.collection.Iterators;
 import c41.utility.linq.Linq;
 import core.model.hql.HQL;
 import core.model.hql.HQLResult;
@@ -30,7 +30,7 @@ public final class AdjectiveWordsLogic extends LogicBase{
 		//更新单词索引
 		for(AdjectiveWordValue value : word.getValues()) {
 			List<String> indexes = WordQueryIndex.getWordQueryIndex(value.getValue());
-			if(Iterables.equals(value.getIndexes(), indexes) == false) {
+			if(Iterators.equals(value.getIndexes(), indexes) == false) {
 				value.setIndexes(indexes);
 				value.save();
 			}

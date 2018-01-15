@@ -2,7 +2,7 @@ package logic.words;
 
 import java.util.List;
 
-import c41.utility.collection.Iterables;
+import c41.utility.collection.Iterators;
 import core.model.hql.And;
 import core.model.hql.Clause;
 import core.model.hql.HQL;
@@ -50,7 +50,7 @@ public final class NotionalWordsQueryLogic {
 		//更新单词的索引
 		for(NotionalWordValue value : word.getValues()) {
 			List<String> indexes = WordQueryIndex.getWordQueryIndex(value.getValue());
-			if(Iterables.equals(value.getIndexes(), indexes) == false) {
+			if(Iterators.equals(value.getIndexes(), indexes) == false) {
 				value.setIndexes(indexes);
 				value.save();
 			}

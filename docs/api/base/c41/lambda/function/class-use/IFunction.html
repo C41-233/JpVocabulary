@@ -132,8 +132,35 @@
 </tr>
 <tbody>
 <tr class="altColor">
+<td class="colFirst"><code>static &lt;T&gt;&nbsp;T</code></td>
+<td class="colLast"><span class="typeNameLabel">Iterables.</span><code><span class="memberNameLink"><a href="../../../../c41/utility/collection/Iterables.html#findFirstDuplicateOrCreateDefault-java.lang.Iterable-c41.lambda.function.IFunction-">findFirstDuplicateOrCreateDefault</a></span>(java.lang.Iterable&lt;T&gt;&nbsp;iterable,
+                                 <a href="../../../../c41/lambda/function/IFunction.html" title="c41.lambda.function中的接口">IFunction</a>&lt;? extends T&gt;&nbsp;defProvider)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static &lt;T&gt;&nbsp;T</code></td>
+<td class="colLast"><span class="typeNameLabel">Iterators.</span><code><span class="memberNameLink"><a href="../../../../c41/utility/collection/Iterators.html#findFirstDuplicateOrCreateDefault-java.util.Iterator-c41.lambda.function.IFunction-">findFirstDuplicateOrCreateDefault</a></span>(java.util.Iterator&lt;T&gt;&nbsp;iterator,
+                                 <a href="../../../../c41/lambda/function/IFunction.html" title="c41.lambda.function中的接口">IFunction</a>&lt;? extends T&gt;&nbsp;defProvider)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static &lt;T&gt;&nbsp;T</code></td>
+<td class="colLast"><span class="typeNameLabel">Iterables.</span><code><span class="memberNameLink"><a href="../../../../c41/utility/collection/Iterables.html#findFirstOrCreateDefault-java.lang.Iterable-c41.lambda.predicate.IPredicate-c41.lambda.function.IFunction-">findFirstOrCreateDefault</a></span>(java.lang.Iterable&lt;T&gt;&nbsp;iterable,
+                        <a href="../../../../c41/lambda/predicate/IPredicate.html" title="c41.lambda.predicate中的接口">IPredicate</a>&lt;? super T&gt;&nbsp;predicate,
+                        <a href="../../../../c41/lambda/function/IFunction.html" title="c41.lambda.function中的接口">IFunction</a>&lt;? extends T&gt;&nbsp;defProvider)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static &lt;T&gt;&nbsp;T</code></td>
+<td class="colLast"><span class="typeNameLabel">Iterators.</span><code><span class="memberNameLink"><a href="../../../../c41/utility/collection/Iterators.html#findFirstOrCreateDefault-java.util.Iterator-c41.lambda.predicate.IPredicate-c41.lambda.function.IFunction-">findFirstOrCreateDefault</a></span>(java.util.Iterator&lt;T&gt;&nbsp;iterator,
+                        <a href="../../../../c41/lambda/predicate/IPredicate.html" title="c41.lambda.predicate中的接口">IPredicate</a>&lt;? super T&gt;&nbsp;predicate,
+                        <a href="../../../../c41/lambda/function/IFunction.html" title="c41.lambda.function中的接口">IFunction</a>&lt;? extends T&gt;&nbsp;defProvider)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><code>static &lt;T,TCollection extends java.util.Collection&lt;T&gt;&gt;<br>TCollection</code></td>
 <td class="colLast"><span class="typeNameLabel">Iterables.</span><code><span class="memberNameLink"><a href="../../../../c41/utility/collection/Iterables.html#toCollection-java.lang.Iterable-c41.lambda.function.IFunction-">toCollection</a></span>(java.lang.Iterable&lt;T&gt;&nbsp;iterable,
+            <a href="../../../../c41/lambda/function/IFunction.html" title="c41.lambda.function中的接口">IFunction</a>&lt;TCollection&gt;&nbsp;provider)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static &lt;T,TCollection extends java.util.Collection&lt;T&gt;&gt;<br>TCollection</code></td>
+<td class="colLast"><span class="typeNameLabel">Iterators.</span><code><span class="memberNameLink"><a href="../../../../c41/utility/collection/Iterators.html#toCollection-java.util.Iterator-c41.lambda.function.IFunction-">toCollection</a></span>(java.util.Iterator&lt;T&gt;&nbsp;iterator,
             <a href="../../../../c41/lambda/function/IFunction.html" title="c41.lambda.function中的接口">IFunction</a>&lt;TCollection&gt;&nbsp;provider)</code>&nbsp;</td>
 </tr>
 </tbody>
@@ -150,6 +177,15 @@
 <th class="colLast" scope="col">方法和说明</th>
 </tr>
 <tbody>
+<tr class="altColor">
+<td class="colFirst"><code>default <a href="../../../../c41/utility/linq/IReferenceEnumerable.html" title="IReferenceEnumerable中的类型参数">T</a></code></td>
+<td class="colLast"><span class="typeNameLabel">IReferenceEnumerable.</span><code><span class="memberNameLink"><a href="../../../../c41/utility/linq/IReferenceEnumerable.html#findFirstDuplicateOrCreateDefault-c41.lambda.function.IFunction-">findFirstDuplicateOrCreateDefault</a></span>(<a href="../../../../c41/lambda/function/IFunction.html" title="c41.lambda.function中的接口">IFunction</a>&lt;? extends <a href="../../../../c41/utility/linq/IReferenceEnumerable.html" title="IReferenceEnumerable中的类型参数">T</a>&gt;&nbsp;defProvider)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>default <a href="../../../../c41/utility/linq/IReferenceEnumerable.html" title="IReferenceEnumerable中的类型参数">T</a></code></td>
+<td class="colLast"><span class="typeNameLabel">IReferenceEnumerable.</span><code><span class="memberNameLink"><a href="../../../../c41/utility/linq/IReferenceEnumerable.html#findFirstOrCreateDefault-c41.lambda.predicate.IPredicate-c41.lambda.function.IFunction-">findFirstOrCreateDefault</a></span>(<a href="../../../../c41/lambda/predicate/IPredicate.html" title="c41.lambda.predicate中的接口">IPredicate</a>&lt;? super <a href="../../../../c41/utility/linq/IReferenceEnumerable.html" title="IReferenceEnumerable中的类型参数">T</a>&gt;&nbsp;predicate,
+                        <a href="../../../../c41/lambda/function/IFunction.html" title="c41.lambda.function中的接口">IFunction</a>&lt;? extends <a href="../../../../c41/utility/linq/IReferenceEnumerable.html" title="IReferenceEnumerable中的类型参数">T</a>&gt;&nbsp;defProvider)</code>&nbsp;</td>
+</tr>
 <tr class="altColor">
 <td class="colFirst"><code>default &lt;TCollection extends java.util.Collection&lt;<a href="../../../../c41/utility/linq/IEnumerable.html" title="IEnumerable中的类型参数">T</a>&gt;&gt;<br>TCollection</code></td>
 <td class="colLast"><span class="typeNameLabel">IEnumerable.</span><code><span class="memberNameLink"><a href="../../../../c41/utility/linq/IEnumerable.html#toCollection-c41.lambda.function.IFunction-">toCollection</a></span>(<a href="../../../../c41/lambda/function/IFunction.html" title="c41.lambda.function中的接口">IFunction</a>&lt;TCollection&gt;&nbsp;provider)</code>

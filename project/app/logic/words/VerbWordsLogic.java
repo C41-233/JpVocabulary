@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import c41.utility.Chars;
-import c41.utility.collection.Iterables;
+import c41.utility.collection.Iterators;
 import c41.utility.comparator.Comparators;
 import c41.utility.linq.Linq;
 import core.model.hql.HQL;
@@ -33,7 +33,7 @@ public final class VerbWordsLogic extends LogicBase{
 		//更新单词索引
 		for(VerbWordValue value : word.getValues()) {
 			List<String> indexes = WordQueryIndex.getWordQueryIndex(value.getValue());
-			if(Iterables.equals(value.getIndexes(), indexes) == false) {
+			if(Iterators.equals(value.getIndexes(), indexes) == false) {
 				value.setIndexes(indexes);
 				value.save();
 			}

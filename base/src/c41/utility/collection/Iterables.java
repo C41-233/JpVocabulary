@@ -1,12 +1,7 @@
 package c41.utility.collection;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Objects;
 import java.util.Set;
 
 import c41.lambda.function.IFunction;
@@ -22,141 +17,77 @@ public final class Iterables {
 	
 	public static <T> T at(Iterable<T> iterable, int index) {
 		Arguments.isNotNull(iterable);
-		Arguments.is(index>=0, "%d < 0", index);
-		
-		Iterator<T> iterator = iterable.iterator();
-		for(int i=0; i<index; i++) {
-			if(!iterator.hasNext()) {
-				throw new NoSuchElementException();
-			}
-			iterator.next();
-		}
-		if(iterator.hasNext()) {
-			return iterator.next();
-		}
-		throw new NoSuchElementException();
+		return Iterators.at(iterable.iterator(), index);
 	}
 
 	public static int count(Iterable<?> iterable) {
 		Arguments.isNotNull(iterable);
-		
-		Iterator<?> enumerator = iterable.iterator();
-		int count = 0;
-		while(enumerator.hasNext()) {
-			enumerator.next();
-			count++;
-		}
-		return count;
+		return Iterators.count(iterable.iterator());
 	}
 
 	public static <T> int count(Iterable<T> iterable, IPredicate<? super T> predicate) {
 		Arguments.isNotNull(iterable);
-		Arguments.isNotNull(predicate);
-		
-		int count = 0;
-		Iterator<T> iterator = iterable.iterator();
-		while(iterator.hasNext()) {
-			T obj = iterator.next();
-			if(predicate.is(obj)) {
-				count++;
-			}
-		}
-		return count;
+		return Iterators.count(iterable.iterator(), predicate);
 	}
 
-	@SuppressWarnings("unlikely-arg-type")
-	public static <T, V> boolean equals(Iterable<T> it1, Iterable<V> it2) {
-		Arguments.isNotNull(it1);
-		Arguments.isNotNull(it2);
-		
-		Iterator<T> iterator1 = it1.iterator();
-		Iterator<V> iterator2 = it2.iterator();
-		while(iterator1.hasNext() && iterator2.hasNext()) {
-			if(Objects.equals(iterator1.next(), iterator2.next()) == false) {
-				return false;
-			}
+	public static <T, V> boolean equals(Iterable<T> iterable1, Iterable<V> iterable2) {
+		if(iterable1 == iterable2) {
+			return true;
 		}
-		if(iterator1.hasNext() || iterator2.hasNext()) {
+		if(iterable1 == null || iterable2 == null) {
 			return false;
 		}
-		return true;
+		return Iterators.equals(iterable1.iterator(), iterable2.iterator());
 	}
 
 	public static <T> T findFirst(Iterable<T> iterable, IPredicate<? super T> predicate) {
 		Arguments.isNotNull(iterable);
-		Arguments.isNotNull(predicate);
-		
-		Iterator<T> iterator = iterable.iterator();
-		while(iterator.hasNext()) {
-			T obj = iterator.next();
-			if(predicate.is(obj)) {
-				return obj;
-			}
-		}
-		throw new NoSuchElementException();
+		return Iterators.findFirst(iterable.iterator(), predicate);
 	}
 	
 	public static <T> T findFirstDuplicate(Iterable<T> iterable) {
 		Arguments.isNotNull(iterable);
-		
-		HashSet<T> set = new HashSet<>();
-		Iterator<T> iterator = iterable.iterator();
-		while(iterator.hasNext()) {
-			T obj = iterator.next();
-			if(set.add(obj) == false) {
-				return obj;
-			}
-		}
-		throw new NoSuchElementException();
+		return Iterators.findFirstDuplicate(iterable.iterator());
 	}
 
-	public static <T> T findFirstDuplicateOrDefault(Iterable<T> iterable) {
-		return findFirstDuplicateOrDefault(iterable, null);
+	public static <T> T findFirstDuplicateOrCreateDefault(Iterable<T> iterable, IFunction<? extends T> defProvider){
+		Arguments.isNotNull(iterable);
+		return Iterators.findFirstDuplicateOrCreateDefault(iterable.iterator(), defProvider);
 	}
 	
+	public static <T> T findFirstDuplicateOrDefault(Iterable<T> iterable) {
+		Arguments.isNotNull(iterable);
+		return Iterators.findFirstDuplicateOrDefault(iterable.iterator());
+	}
+
 	public static <T> T findFirstDuplicateOrDefault(Iterable<T> iterable, T def) {
 		Arguments.isNotNull(iterable);
-		
-		HashSet<T> set = new HashSet<>();
-		Iterator<T> iterator = iterable.iterator();
-		while(iterator.hasNext()) {
-			T obj = iterator.next();
-			if(set.add(obj) == false) {
-				return obj;
-			}
-		}
-		return def;
+		return Iterators.findFirstDuplicateOrDefault(iterable.iterator(), def);
+	}
+	
+	public static <T> int findFirstIndex(Iterable<T> iterable, IPredicate<? super T> predicate) {
+		Arguments.isNotNull(iterable);
+		return Iterators.findFirstIndex(iterable.iterator(), predicate);
+	}
+
+	public static <T> T findFirstOrCreateDefault(Iterable<T> iterable, IPredicate<? super T> predicate, IFunction<? extends T> defProvider) {
+		Arguments.isNotNull(iterable);
+		return Iterators.findFirstOrCreateDefault(iterable.iterator(), predicate, defProvider);
 	}
 	
 	public static <T> T findFirstOrDefault(Iterable<T> iterable, IPredicate<? super T> predicate) {
-		return findFirstOrDefault(iterable, predicate, null);
-	}
-
-	public static <T> T findFirstOrDefault(Iterable<T> iterable, IPredicate<? super T> predicate, T def) {
 		Arguments.isNotNull(iterable);
-		Arguments.isNotNull(predicate);
-		
-		Iterator<T> iterator = iterable.iterator();
-		while(iterator.hasNext()) {
-			T obj = iterator.next();
-			if(predicate.is(obj)) {
-				return obj;
-			}
-		}
-		return def;
+		return Iterators.findFirstOrDefault(iterable.iterator(), predicate);
 	}
 	
+	public static <T> T findFirstOrDefault(Iterable<T> iterable, IPredicate<? super T> predicate, T def) {
+		Arguments.isNotNull(iterable);
+		return Iterators.findFirstOrDefault(iterable.iterator(), predicate, def);
+	}
+
 	public static boolean hasDuplicate(Iterable<?> iterable) {
 		Arguments.isNotNull(iterable);
-
-		HashSet<Object> set = new HashSet<>();
-		Iterator<?> iterator = iterable.iterator();
-		while(iterator.hasNext()) {
-			if(set.add(iterator.next()) == false) {
-				return true;
-			}
-		}
-		return false;
+		return Iterators.hasDuplicate(iterable.iterator());
 	}
 
 	/**
@@ -168,32 +99,12 @@ public final class Iterables {
 	 */
 	public static <T> boolean isAll(Iterable<T> iterable, IPredicate<? super T> predicate) {
 		Arguments.isNotNull(iterable);
-		return Iterables.isAll(iterable.iterator(), predicate);
-	}
-
-	/**
-	 * 迭代器所有元素都满足谓词。
-	 * @param <T> 泛型参数
-	 * @param iterator 迭代器
-	 * @param predicate 谓词
-	 * @return 如果所有元素都满足谓词，则返回true
-	 */
-	public static <T> boolean isAll(Iterator<T> iterator, IPredicate<? super T> predicate) {
-		Arguments.isNotNull(iterator);
-		Arguments.isNotNull(predicate);
-		
-		while(iterator.hasNext()) {
-			T obj = iterator.next();
-			if(predicate.is(obj) == false) {
-				return false;
-			}
-		}
-		return true;
+		return Iterators.isAll(iterable.iterator(), predicate);
 	}
 
 	public static boolean isEmpty(Iterable<?> iterable) {
 		Arguments.isNotNull(iterable);
-		return iterable.iterator().hasNext() == false;
+		return Iterators.isEmpty(iterable.iterator());
 	}
 
 	/**
@@ -207,26 +118,6 @@ public final class Iterables {
 		Arguments.isNotNull(iterable);
 		return isExist(iterable, predicate);
 	}
-
-	/**
-	 * 迭代器存在满足谓词的元素。
-	 * @param <T> 泛型参数
-	 * @param iterator 迭代器
-	 * @param predicate 谓词
-	 * @return 如果存在，则返回true
-	 */
-	public static <T> boolean isExist(Iterator<T> iterator, IPredicate<? super T> predicate) {
-		Arguments.isNotNull(iterator);
-		Arguments.isNotNull(predicate);
-		
-		while(iterator.hasNext()) {
-			T obj = iterator.next();
-			if(predicate.is(obj)) {
-				return true;
-			}
-		}
-		return false;
-	}
 	
 	/**
 	 * 非所有元素都满足谓词。
@@ -237,51 +128,27 @@ public final class Iterables {
 	 */
 	public static <T> boolean isNotAll(Iterable<T> iterable, IPredicate<? super T> predicate) {
 		Arguments.isNotNull(iterable);
-		return Iterables.isNotAll(iterable.iterator(), predicate);
-	}
-	
-	/**
-	 * 迭代器非所有元素都满足谓词。
-	 * @param <T> 泛型参数
-	 * @param iterator 迭代器
-	 * @param predicate 谓词
-	 * @return 如果非所有元素都满足谓词，返回true
-	 */
-	public static <T> boolean isNotAll(Iterator<T> iterator, IPredicate<? super T> predicate) {
-		Arguments.isNotNull(iterator);
-		Arguments.isNotNull(predicate);
-		
-		while(iterator.hasNext()) {
-			T obj = iterator.next();
-			if(predicate.is(obj) == false) {
-				return true;
-			}
-		}
-		return false;
+		return Iterators.isNotAll(iterable.iterator(), predicate);
 	}
 	
 	public static boolean isNotEmpty(Iterable<?> iterable) {
-		return isEmpty(iterable) == false;
+		Arguments.isNotNull(iterable);
+		return Iterators.isNotEmpty(iterable.iterator());
 	}
 	
 	public static <T, TCollection extends Collection<T>> TCollection toCollection(Iterable<T> iterable, IFunction<TCollection> provider) {
 		Arguments.isNotNull(iterable);
-		Arguments.isNotNull(provider);
-		
-		TCollection collection = provider.invoke();
-		Iterator<T> iterator = iterable.iterator();
-		while(iterator.hasNext()) {
-			collection.add(iterator.next());
-		}
-		return collection;
+		return Iterators.toCollection(iterable.iterator(), provider);
 	}
 	
 	public static <T> List<T> toList(Iterable<T> iterable){
-		return toCollection(iterable, ()->new ArrayList<>());
+		Arguments.isNotNull(iterable);
+		return Iterators.toList(iterable.iterator());
 	}
 	
 	public static <T> Set<T> toSet(Iterable<T> iterable){
-		return toCollection(iterable, ()->new HashSet<>());
+		Arguments.isNotNull(iterable);
+		return Iterators.toSet(iterable.iterator());
 	}
 	
 }
