@@ -118,9 +118,9 @@ public final class Iterables {
 	 * @param function 对每个元素执行的操作，返回false表示break
 	 * @return 执行的次数
 	 */
-	public static <T> int foreach(Iterable<T> iterable, IBooleanFunction1<? super T> function) {
+	public static <T> int foreachEx(Iterable<T> iterable, IBooleanFunction1<? super T> function) {
 		Arguments.isNotNull(iterable);
-		return Iterators.foreach(iterable.iterator(), function);
+		return Iterators.foreachEx(iterable.iterator(), function);
 	}
 	
 	/**
@@ -142,9 +142,9 @@ public final class Iterables {
 	 * @param function 对每个元素执行的操作，参数包含当前元素及其下标，返回false表示break
 	 * @return 执行的次数
 	 */
-	public static <T> int foreach(Iterable<T> iterable, IForeachFunction<? super T> function) {
+	public static <T> int foreachEx(Iterable<T> iterable, IForeachFunction<? super T> function) {
 		Arguments.isNotNull(iterable);
-		return Iterators.foreach(iterable.iterator(), function);
+		return Iterators.foreachEx(iterable.iterator(), function);
 	}
 	
 	public static boolean hasDuplicate(Iterable<?> iterable) {

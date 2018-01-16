@@ -91,9 +91,9 @@ public class CharacterDetail extends HtmlControllerBase{
 				INotionalWord word = value.getWord();
 				wordVO.value = value.getValue();
 				wordVO.href = Route.get(NotionalWordEdit.class, "index", new RouteArgs().put("id", word.getId()).put("refer", request.url));
-				Linq.from(word.getSyllables()).foreach(s->wordVO.alias.add(s));
-				Linq.from(word.getMeanings()).foreach(m->wordVO.meanings.add(m));
-				Linq.from(word.getTypes()).select(t->t.toString()).foreach(t->wordVO.types.add(t));
+				Linq.from(word.getSyllables()).foreachEx(s->wordVO.alias.add(s));
+				Linq.from(word.getMeanings()).foreachEx(m->wordVO.meanings.add(m));
+				Linq.from(word.getTypes()).select(t->t.toString()).foreachEx(t->wordVO.types.add(t));
 				wordsVO.add(wordVO);
 			}
 		}
@@ -104,9 +104,9 @@ public class CharacterDetail extends HtmlControllerBase{
 				IVerbWord word = value.getWord();
 				wordVO.value = value.getValue();
 				wordVO.href = Route.get(VerbWordDetail.class, "index", new RouteArgs().put("id", word.getId()).put("refer", request.url));
-				Linq.from(word.getSyllables()).foreach(s->wordVO.alias.add(s));
-				Linq.from(word.getMeanings()).foreach(m->wordVO.meanings.add(m));
-				Linq.from(word.getTypes()).select(t->t.toString()).foreach(t->wordVO.types.add(t));
+				Linq.from(word.getSyllables()).foreachEx(s->wordVO.alias.add(s));
+				Linq.from(word.getMeanings()).foreachEx(m->wordVO.meanings.add(m));
+				Linq.from(word.getTypes()).select(t->t.toString()).foreachEx(t->wordVO.types.add(t));
 				wordsVO.add(wordVO);
 			}
 		}
@@ -117,10 +117,10 @@ public class CharacterDetail extends HtmlControllerBase{
 				IAdjectiveWord word = value.getWord();
 				wordVO.value = value.getValue();
 				wordVO.href = Route.get(AdjectiveWordDetail.class, "index", new RouteArgs().put("id", word.getId()).put("refer", request.url));
-				Linq.from(word.getSyllables()).foreach(s->wordVO.alias.add(s));
-				Linq.from(word.getMeanings()).foreach(m->wordVO.meanings.add(m));
+				Linq.from(word.getSyllables()).foreachEx(s->wordVO.alias.add(s));
+				Linq.from(word.getMeanings()).foreachEx(m->wordVO.meanings.add(m));
 				wordVO.types.add("形容词");
-				Linq.from(word.getTypes()).select(t->t.toString()).foreach(t->wordVO.types.add(t));
+				Linq.from(word.getTypes()).select(t->t.toString()).foreachEx(t->wordVO.types.add(t));
 				wordsVO.add(wordVO);
 			}
 		}

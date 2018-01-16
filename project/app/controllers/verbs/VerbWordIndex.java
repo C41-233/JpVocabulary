@@ -54,24 +54,24 @@ public class VerbWordIndex extends HTMLComponentsControllerBase{
 					.select(t->t.getValue())
 					.where(t->LogicValidate.isValidSyllable(t)==false)
 					.orderBy(VerbWordsLogic.ValueComparator)
-					.foreach(t->vo.alias.add(t));
+					.foreachEx(t->vo.alias.add(t));
 			}
 			else {
-				Linq.from(word.getSyllables()).foreach(t->vo.alias.add(t));
+				Linq.from(word.getSyllables()).foreachEx(t->vo.alias.add(t));
 			}
 			
 			vo.href = Route.get(VerbWordDetail.class, "index", new RouteArgs().put("id", word.getId()).put("refer", request.url));
 			
-			Linq.from(word.getMeanings()).foreach(t->vo.meanings.add(t));
+			Linq.from(word.getMeanings()).foreachEx(t->vo.meanings.add(t));
 			
-			Linq.from(word.getTypes()).select(t->t.toSimple()).foreach(t->vo.types.add(t));
+			Linq.from(word.getTypes()).select(t->t.toSimple()).foreachEx(t->vo.types.add(t));
 			
 			Linq.from(word.getFixwords()).select(t->{
 				FixwordVO fixwordVO = new FixwordVO();
 				fixwordVO.value = t.getValue();
 				fixwordVO.meaning = t.getMeaning();
 				return fixwordVO;
-			}).foreach(t->vo.fixwords.add(t));
+			}).foreachEx(t->vo.fixwords.add(t));
 			
 			wordsVO.add(vo);
 		}

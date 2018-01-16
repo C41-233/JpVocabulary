@@ -73,7 +73,7 @@ public final class MainIndex extends HtmlControllerBase {
 			vo.href = Route.get(CharacterDetail.class, "index", new RouteArgs().put("id", character.getId()).put("refer", request.url));
 			vo.jp = character.getJpValue();
 			Linq.from(character.getCnValue()).foreach(c->vo.cns.add(c));
-			Linq.from(character.getPinyins()).select(c->Pinyins.toPinyin(c)).foreach(c->vo.pinyins.add(c));
+			Linq.from(character.getPinyins()).select(c->Pinyins.toPinyin(c)).foreachEx(c->vo.pinyins.add(c));
 			for(ICharacterSyllable syllable : character.getSyllables()) {
 				CharacterSyllableVO syllableVO = new CharacterSyllableVO();
 				syllableVO.value = syllable.getValue();
@@ -112,9 +112,9 @@ public final class MainIndex extends HtmlControllerBase {
 
     			wordVO.href = Route.get(NotionalWordEdit.class, "index", new RouteArgs().put("id", word.getId()).put("refer", request.url));
     			wordVO.value = value.getValue();
-    			Linq.from(word.getValues()).select(v->v.getValue()).where(s->s.equals(wordVO.value)==false).foreach(v->wordVO.alias.add(v));
-    			Linq.from(word.getMeanings()).foreach(m->wordVO.meanings.add(m));
-    			Linq.from(word.getTypes()).foreach(t->wordVO.types.add(t.toString()));
+    			Linq.from(word.getValues()).select(v->v.getValue()).where(s->s.equals(wordVO.value)==false).foreachEx(v->wordVO.alias.add(v));
+    			Linq.from(word.getMeanings()).foreachEx(m->wordVO.meanings.add(m));
+    			Linq.from(word.getTypes()).foreachEx(t->wordVO.types.add(t.toString()));
     			
     			wordsVO.add(wordVO);
     		}
@@ -131,9 +131,9 @@ public final class MainIndex extends HtmlControllerBase {
     			WordVO wordVO = new WordVO();
     			wordVO.value = value.getValue();
     			wordVO.href = Route.get(VerbWordDetail.class, "index", new RouteArgs().put("id", word.getId()).put("refer", request.url));
-    			Linq.from(word.getValues()).select(w->w.getValue()).where(s->s.equals(wordVO.value)==false).foreach(s->wordVO.alias.add(s));
-    			Linq.from(word.getMeanings()).foreach(m->wordVO.meanings.add(m));
-    			Linq.from(word.getTypes()).foreach(t->wordVO.types.add(t.toFull()));
+    			Linq.from(word.getValues()).select(w->w.getValue()).where(s->s.equals(wordVO.value)==false).foreachEx(s->wordVO.alias.add(s));
+    			Linq.from(word.getMeanings()).foreachEx(m->wordVO.meanings.add(m));
+    			Linq.from(word.getTypes()).foreachEx(t->wordVO.types.add(t.toFull()));
     			for(WordFixword fixword : word.getFixwords()) {
     				WordMeaningVO fixwordVO = new WordMeaningVO();
     				fixwordVO.word = fixword.getValue();
@@ -156,9 +156,9 @@ public final class MainIndex extends HtmlControllerBase {
     			WordVO wordVO = new WordVO();
     			wordVO.value = value.getValue();
     			wordVO.href = Route.get(AdjectiveWordDetail.class, "index", new RouteArgs().put("id", word.getId()).put("refer", request.url));
-    			Linq.from(word.getValues()).select(w->w.getValue()).where(s->s.equals(wordVO.value)==false).foreach(s->wordVO.alias.add(s));
-    			Linq.from(word.getMeanings()).foreach(m->wordVO.meanings.add(m));
-    			Linq.from(word.getTypes()).foreach(t->wordVO.types.add(t.toString()));
+    			Linq.from(word.getValues()).select(w->w.getValue()).where(s->s.equals(wordVO.value)==false).foreachEx(s->wordVO.alias.add(s));
+    			Linq.from(word.getMeanings()).foreachEx(m->wordVO.meanings.add(m));
+    			Linq.from(word.getTypes()).foreachEx(t->wordVO.types.add(t.toString()));
     			
     			for(WordFixword fixword : word.getFixwords()) {
     				WordMeaningVO fixwordVO = new WordMeaningVO();
@@ -213,8 +213,8 @@ public final class MainIndex extends HtmlControllerBase {
 			wordVO.context = word.getContext().toString();
 			wordVO.alias = word.getAlias();
 			
-			Linq.from(word.getMeanings()).foreach(m->wordVO.meanings.add(m));
-			Linq.from(word.getTypes()).foreach(t->wordVO.types.add(t.toString()));
+			Linq.from(word.getMeanings()).foreachEx(m->wordVO.meanings.add(m));
+			Linq.from(word.getTypes()).foreachEx(t->wordVO.types.add(t.toString()));
 			
 			katakanasVO.add(wordVO);
     	}

@@ -70,15 +70,15 @@ public final class AdjectiveWordDetail extends HtmlControllerBase{
 			
 		renderArgs.put("converts", convertsVO);
 		
-		Linq.from(word.getTypes()).foreach(t->wordVO.types.add(t.toString()));
-		Linq.from(word.getMeanings()).select(m->m+"。").foreach(m->wordVO.meanings.add(m));
+		Linq.from(word.getTypes()).foreachEx(t->wordVO.types.add(t.toString()));
+		Linq.from(word.getMeanings()).select(m->m+"。").foreachEx(m->wordVO.meanings.add(m));
 		Linq.from(word.getFixwords())
 			.select(f->{
 				FixwordVO vo = new FixwordVO();
 				vo.value = f.getValue();
 				vo.meaning = f.getMeaning();
 				return vo;
-			}).foreach(m->wordVO.fixwords.add(m));
+			}).foreachEx(m->wordVO.fixwords.add(m));
 		
 		renderArgs.put("word", wordVO);
 		

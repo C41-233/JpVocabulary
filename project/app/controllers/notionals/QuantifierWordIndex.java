@@ -58,7 +58,7 @@ public class QuantifierWordIndex extends HtmlControllerBase{
 				vo.alias = word.getAlias();
 				vo.context = word.getContext().toString();
 				
-				Linq.from(word.getMeanings()).foreach(m->vo.meanings.add(m));
+				Linq.from(word.getMeanings()).foreachEx(m->vo.meanings.add(m));
 
 				katakanasVO.add(vo);
 			}
@@ -73,8 +73,8 @@ public class QuantifierWordIndex extends HtmlControllerBase{
 		vo.href = Route.get(NotionalWordEdit.class, "index", new RouteArgs().put("id", word.getId()).put("refer", request.url));
 		vo.value = value;
 		
-		Linq.from(alias).foreach(s->vo.syllables.add(s));
-		Linq.from(word.getMeanings()).foreach(m->vo.meanings.add(m));
+		Linq.from(alias).foreachEx(s->vo.syllables.add(s));
+		Linq.from(word.getMeanings()).foreachEx(m->vo.meanings.add(m));
 		
 		wordsVO.add(vo);
 	}

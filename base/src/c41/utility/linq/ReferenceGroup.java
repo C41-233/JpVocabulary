@@ -4,9 +4,10 @@ import java.util.ArrayList;
 
 class ReferenceGroup<TKey, TValue> implements IReferenceGroup<TKey, TValue>{
 
-	public final TKey key;
 	private final IReferenceEnumerable<TValue> enumerable;
-	public final ArrayList<TValue> values;
+
+	final TKey key;
+	final ArrayList<TValue> values;
 	
 	public ReferenceGroup(TKey key) {
 		this.key = key;

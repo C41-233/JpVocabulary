@@ -25,7 +25,6 @@ import c41.lambda.selector.ISelectorEx;
 import c41.utility.algorithm.LinearSearch;
 import c41.utility.assertion.Arguments;
 import c41.utility.collection.Iterables;
-import c41.utility.collection.map.DefaultValueHashMap;
 import c41.utility.collection.tuple.Tuple2;
 import c41.utility.collection.tuple.Tuples;
 import c41.utility.comparator.Comparators;
@@ -104,8 +103,8 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 		return Iterables.foreach(this, action);
 	}
 
-	public default int foreach(IBooleanFunction1<? super T> function) {
-		return Iterables.foreach(this, function);
+	public default int foreachEx(IBooleanFunction1<? super T> function) {
+		return Iterables.foreachEx(this, function);
 	}
 
 	/**
@@ -117,23 +116,12 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 		return Iterables.foreach(this, action);
 	}
 	
-	public default int foreach(IForeachFunction<? super T> function) {
-		return Iterables.foreach(this, function);
+	public default int foreachEx(IForeachFunction<? super T> function) {
+		return Iterables.foreachEx(this, function);
 	}
 	
-	@SuppressWarnings("unchecked")
-	public default <V> IReferenceEnumerable<IReferenceGroup<V, T>> groupBy(ISelector<T, V> selector){
-		Arguments.isNotNull(selector);
-		
-		DefaultValueHashMap<V, ReferenceGroup<V, T>> hashMap = new DefaultValueHashMap<>(key->new ReferenceGroup(key));
-		IEnumerator<T> enumerator = iterator();
-		while(enumerator.hasNext()) {
-			T value = enumerator.next();
-			V key = selector.select(value);
-			ReferenceGroup<V, T> group = hashMap.get(key);
-			group.values.add(value);
-		}
-		return new IterableEnumerable(hashMap.values());
+	public default <V> IReferenceGroupEnumerable<V, T> groupBy(ISelector<T, V> selector){
+		return new GroupByReferenceEnumerable<>(this, selector);
 	}
 	
 	public default <V> IReferenceEnumerable<V> instanceOf(Class<V> cl){
