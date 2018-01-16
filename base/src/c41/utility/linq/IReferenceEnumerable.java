@@ -13,6 +13,8 @@ import java.util.Objects;
 
 import c41.lambda.action.IAction1;
 import c41.lambda.action.IForeachAction;
+import c41.lambda.function.IBooleanFunction1;
+import c41.lambda.function.IForeachFunction;
 import c41.lambda.function.IFunction;
 import c41.lambda.function.IJoiner;
 import c41.lambda.predicate.ICharPredicate;
@@ -102,6 +104,10 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 		return Iterables.foreach(this, action);
 	}
 
+	public default int foreach(IBooleanFunction1<? super T> function) {
+		return Iterables.foreach(this, function);
+	}
+
 	/**
 	 * 对每个元素执行操作。
 	 * @param action 对每个元素执行的操作，参数包含当前元素及其下标
@@ -109,6 +115,10 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 	 */
 	public default int foreach(IForeachAction<? super T> action) {
 		return Iterables.foreach(this, action);
+	}
+	
+	public default int foreach(IForeachFunction<? super T> function) {
+		return Iterables.foreach(this, function);
 	}
 	
 	@SuppressWarnings("unchecked")
