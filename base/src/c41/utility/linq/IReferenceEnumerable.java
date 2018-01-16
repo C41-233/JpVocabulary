@@ -120,7 +120,7 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 		return Iterables.foreachEx(this, function);
 	}
 	
-	public default <V> IReferenceGroupEnumerable<V, T> groupBy(ISelector<T, V> selector){
+	public default <K> IReferenceGroupEnumerable<K, T> groupBy(ISelector<T, K> selector){
 		return new GroupByReferenceEnumerable<>(this, selector);
 	}
 	
