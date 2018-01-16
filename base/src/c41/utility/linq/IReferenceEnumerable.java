@@ -90,32 +90,25 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 	}
 	
 	public default T first() {
-		IEnumerator<T> enumerator = iterator();
-		if(enumerator.hasNext()) {
-			return enumerator.next();
-		}
-		return null;
-	}
-	
-	public default void foreach(IAction1<? super T> action) {
-		Arguments.isNotNull(action);
-		
-		IEnumerator<T> enumerator = iterator();
-		while(enumerator.hasNext()) {
-			T obj = enumerator.next();
-			action.invoke(obj);
-		}
+		return Iterables.first(this);
 	}
 
-	public default void foreach(IForeachAction<? super T> action) {
-		Arguments.isNotNull(action);
-		
-		IEnumerator<T> enumerator = iterator();
-		int index = 0;
-		while(enumerator.hasNext()) {
-			T obj = enumerator.next();
-			action.invoke(obj, index++);
-		}
+	/**
+	 * 对每个元素执行操作。
+	 * @param action 对每个元素执行的操作
+	 * @return 执行的次数
+	 */
+	public default int foreach(IAction1<? super T> action) {
+		return Iterables.foreach(this, action);
+	}
+
+	/**
+	 * 对每个元素执行操作。
+	 * @param action 对每个元素执行的操作，参数包含当前元素及其下标
+	 * @return 执行的次数
+	 */
+	public default int foreach(IForeachAction<? super T> action) {
+		return Iterables.foreach(this, action);
 	}
 	
 	@SuppressWarnings("unchecked")

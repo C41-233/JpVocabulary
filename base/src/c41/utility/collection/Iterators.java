@@ -9,6 +9,8 @@ import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Set;
 
+import c41.lambda.action.IAction1;
+import c41.lambda.action.IForeachAction;
 import c41.lambda.function.IFunction;
 import c41.lambda.predicate.IPredicate;
 import c41.reflect.StaticClassException;
@@ -167,6 +169,11 @@ public final class Iterators {
 		return findFirstOrCreateDefault(iterator, predicate, ()->def);
 	}
 
+	public static <T> T first(Iterator<T> iterator) {
+		Arguments.isNotNull(iterator);
+		return iterator.next();
+	}
+
 	public static boolean hasDuplicate(Iterator<?> iterator) {
 		Arguments.isNotNull(iterator);
 	
@@ -262,9 +269,45 @@ public final class Iterators {
 	public static <T> List<T> toList(Iterator<T> iterator){
 		return toCollection(iterator, ()->new ArrayList<>());
 	}
-
+	
 	public static <T> Set<T> toSet(Iterator<T> iterator){
 		return toCollection(iterator, ()->new HashSet<>());
 	}
-	
+
+	/**
+	 * 对每个元素执行操作。
+	 * @param <T> 泛型参数
+	 * @param iterator 迭代器
+	 * @param action 对每个元素执行的操作
+	 * @return 执行的次数
+	 */
+	public static <T> int foreach(Iterator<T> iterator, IAction1<? super T> action) {
+		Arguments.isNotNull(iterator);
+		Arguments.isNotNull(action);
+		
+		int count = 0;
+		while(iterator.hasNext()) {
+			action.invoke(iterator.next());
+			count++;
+		}
+		return count;
+	}
+
+	/**
+	 * 对每个元素执行操作。
+	 * @param <T> 泛型参数
+	 * @param iterator 迭代器
+	 * @param action 对每个元素执行的操作，参数包含当前元素及其下标
+	 * @return 执行的次数
+	 */
+	public static <T> int foreach(Iterator<T> iterator, IForeachAction<? super T> action) {
+		Arguments.isNotNull(iterator);
+		Arguments.isNotNull(action);
+		
+		int count = 0;
+		while(iterator.hasNext()) {
+			action.invoke(iterator.next(), count++);
+		}
+		return count;
+	}
 }

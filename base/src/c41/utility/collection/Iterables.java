@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
+import c41.lambda.action.IAction1;
+import c41.lambda.action.IForeachAction;
 import c41.lambda.function.IFunction;
 import c41.lambda.predicate.IPredicate;
 import c41.reflect.StaticClassException;
@@ -155,5 +157,33 @@ public final class Iterables {
 		Arguments.isNotNull(iterable);
 		return Iterators.findFirstIndex(iterable.iterator(), value);
 	}
-	
+
+	public static <T> T first(Iterable<T> iterable) {
+		Arguments.isNotNull(iterable);
+		return Iterators.first(iterable.iterator());
+	}
+
+	/**
+	 * 对每个元素执行操作。
+	 * @param <T> 泛型参数
+	 * @param iterable 迭代器
+	 * @param action 对每个元素执行的操作
+	 * @return 执行的次数
+	 */
+	public static <T> int foreach(Iterable<T> iterable, IAction1<? super T> action) {		
+		Arguments.isNotNull(iterable);
+		return Iterators.foreach(iterable.iterator(), action);
+	}
+
+	/**
+	 * 对每个元素执行操作。
+	 * @param <T> 泛型参数
+	 * @param iterable 迭代器
+	 * @param action 对每个元素执行的操作，参数包含当前元素及其下标
+	 * @return 执行的次数
+	 */
+	public static <T> int foreach(Iterable<T> iterable, IForeachAction<? super T> action) {	
+		Arguments.isNotNull(iterable);
+		return Iterators.foreach(iterable.iterator(), action);
+	}
 }
