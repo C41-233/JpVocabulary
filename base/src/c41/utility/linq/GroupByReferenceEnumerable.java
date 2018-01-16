@@ -1,32 +1,31 @@
 package c41.utility.linq;
 
-import c41.core.Core;
 import c41.lambda.selector.ISelector;
 import c41.utility.assertion.Arguments;
 import c41.utility.collection.map.DefaultValueHashMap;
 
 class GroupByReferenceEnumerable<K, V> implements IReferenceGroupEnumerable<K, V>{
 
-	private final IterableEnumerable<ReferenceGroup<K, V>> enumerable;
+	private final IReferenceEnumerable<IReferenceGroup<K, V>> enumerable;
 	
 	public GroupByReferenceEnumerable(IReferenceEnumerable<V> enumerable, ISelector<V, K> selector) {
 		Arguments.isNotNull(enumerable);
 		Arguments.isNotNull(selector);
 
 		IEnumerator<V> enumerator = enumerable.iterator();
-		DefaultValueHashMap<K, ReferenceGroup<K, V>> hashMap = new DefaultValueHashMap<>(key->new ReferenceGroup<>(key));
+		DefaultValueHashMap<K, ReferenceGroup<K, V>> keyToGroups = new DefaultValueHashMap<>(key->new ReferenceGroup<>(key));
 		while(enumerator.hasNext()) {
 			V value = enumerator.next();
 			K key = selector.select(value);
-			ReferenceGroup<K, V> group = hashMap.get(key);
-			group.values.add(value);
+			ReferenceGroup<K, V> group = keyToGroups.get(key);
+			group.add(value);
 		}
-		this.enumerable = new IterableEnumerable<>(hashMap.values());
+		this.enumerable = Linq.from(keyToGroups.values()).cast();
 	}
 	
 	@Override
 	public IEnumerator<IReferenceGroup<K, V>> iterator() {
-		return Core.cast(enumerable.iterator());
+		return enumerable.iterator();
 	}
 	
 }

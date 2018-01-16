@@ -6,8 +6,8 @@ class ReferenceGroup<TKey, TValue> implements IReferenceGroup<TKey, TValue>{
 
 	private final IReferenceEnumerable<TValue> enumerable;
 
-	final TKey key;
-	final ArrayList<TValue> values;
+	private final TKey key;
+	private final ArrayList<TValue> values;
 	
 	public ReferenceGroup(TKey key) {
 		this.key = key;
@@ -23,6 +23,10 @@ class ReferenceGroup<TKey, TValue> implements IReferenceGroup<TKey, TValue>{
 	@Override
 	public TKey getKey() {
 		return key;
+	}
+	
+	public void add(TValue value) {
+		this.values.add(value);
 	}
 	
 }
