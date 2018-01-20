@@ -199,6 +199,24 @@ public final class Iterators {
 	 * 对每个元素执行操作。
 	 * @param <T> 泛型参数
 	 * @param iterator 迭代器
+	 * @param action 对每个元素执行的操作，参数包含当前元素及其下标
+	 * @return 执行的次数
+	 */
+	public static <T> int foreach(Iterator<T> iterator, IForeachAction<? super T> action) {
+		Arguments.isNotNull(iterator);
+		Arguments.isNotNull(action);
+		
+		int count = 0;
+		while(iterator.hasNext()) {
+			action.invoke(iterator.next(), count++);
+		}
+		return count;
+	}
+
+	/**
+	 * 对每个元素执行操作。
+	 * @param <T> 泛型参数
+	 * @param iterator 迭代器
 	 * @param function 对每个元素执行的操作，返回false表示break
 	 * @return 执行的次数
 	 */
@@ -212,24 +230,6 @@ public final class Iterators {
 			if(!next) {
 				break;
 			}
-		}
-		return count;
-	}
-
-	/**
-	 * 对每个元素执行操作。
-	 * @param <T> 泛型参数
-	 * @param iterator 迭代器
-	 * @param action 对每个元素执行的操作，参数包含当前元素及其下标
-	 * @return 执行的次数
-	 */
-	public static <T> int foreach(Iterator<T> iterator, IForeachAction<? super T> action) {
-		Arguments.isNotNull(iterator);
-		Arguments.isNotNull(action);
-		
-		int count = 0;
-		while(iterator.hasNext()) {
-			action.invoke(iterator.next(), count++);
 		}
 		return count;
 	}
@@ -312,6 +312,30 @@ public final class Iterators {
 		return false;
 	}
 	
+	public static <T> boolean isExist(Iterator<T> iterator, T value) {
+		Arguments.isNotNull(iterator);
+		
+		while(iterator.hasNext()) {
+			T obj = iterator.next();
+			if(Objects.equals(obj, value)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public static <T> boolean isExistReference(Iterator<T> iterator, T value) {
+		Arguments.isNotNull(iterator);
+		
+		while(iterator.hasNext()) {
+			T obj = iterator.next();
+			if(obj == value) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	/**
 	 * 迭代器非所有元素都满足谓词。
 	 * @param <T> 泛型参数
@@ -336,6 +360,31 @@ public final class Iterators {
 		return isEmpty(iterable) == false;
 	}
 
+	public static <T> boolean isNotExist(Iterator<T> iterator, IPredicate<? super T> predicate) {
+		Arguments.isNotNull(iterator);
+		Arguments.isNotNull(predicate);
+
+		while(iterator.hasNext()) {
+			T obj = iterator.next();
+			if(predicate.is(obj)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public static <T> boolean isNotExist(Iterator<T> iterator, T value){
+		Arguments.isNotNull(iterator);
+
+		while(iterator.hasNext()) {
+			T obj = iterator.next();
+			if(Objects.equals(obj, value)) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
 	public static <T, TCollection extends Collection<T>> TCollection toCollection(Iterator<T> iterator, IFunction<TCollection> provider) {
 		Arguments.isNotNull(iterator);
 		Arguments.isNotNull(provider);

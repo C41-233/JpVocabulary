@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.NoSuchElementException;
-import java.util.Objects;
 
 import c41.lambda.action.IAction1;
 import c41.lambda.action.IForeachAction;
@@ -156,7 +155,7 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 	 * @return 如果存在，则返回true
 	 */
 	public default boolean isExist(T value) {
-		return isExist(obj->Objects.equals(obj, value));
+		return Iterables.isExist(this, value);
 	}
 	
 	/**
@@ -165,7 +164,7 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 	 * @return 如果存在，则返回true
 	 */
 	public default boolean isExistReference(T value) {
-		return isExist(obj->obj == value);
+		return Iterables.isExistReference(this, value);
 	}
 
 	/**
@@ -183,16 +182,7 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 	 * @return 如果不存在，则返回true
 	 */
 	public default boolean isNotExist(IPredicate<? super T> predicate) {
-		Arguments.isNotNull(predicate);
-		
-		IEnumerator<T> enumerator = iterator();
-		while(enumerator.hasNext()) {
-			T obj = enumerator.next();
-			if(predicate.is(obj)) {
-				return false;
-			}
-		}
-		return true;
+		return Iterables.isNotExist(this, predicate);
 	}
 
 	/**
@@ -202,7 +192,7 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 	 * @return 如果不存在，则返回true
 	 */
 	public default boolean isNotExist(T value) {
-		return isNotExist(obj->Objects.equals(obj, value));
+		return Iterables.isNotExist(this, value);
 	}
 
 	/**
