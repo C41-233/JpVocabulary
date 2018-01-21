@@ -3,11 +3,14 @@ package c41.utility.linq;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import c41.utility.assertion.Arguments;
+
 class NodeListEnumerable implements IReferenceEnumerable<Node>{
 
 	private final NodeList nodes;
 	
 	public NodeListEnumerable(NodeList nodes) {
+		Arguments.isNotNull(nodes);
 		this.nodes = nodes;
 	}
 

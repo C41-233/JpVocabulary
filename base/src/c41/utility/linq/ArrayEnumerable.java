@@ -9,6 +9,7 @@ class ArrayEnumerable<T> implements IReferenceEnumerable<T>{
 	private final T[] array;
 	
 	public ArrayEnumerable(T[] array) {
+		Arguments.isNotNull(array);
 		this.array = array;
 	}
 	

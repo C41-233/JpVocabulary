@@ -333,12 +333,10 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 	}
 	
 	public default IReferenceEnumerable<T> union(Iterable<? extends T> iterable){
-		Arguments.isNotNull(iterable);
 		return new UnionEnumerable<>(this, Linq.from(iterable));
 	}
 	
 	public default IReferenceEnumerable<T> where(IPredicate<? super T> predicate){
-		Arguments.isNotNull(predicate);
 		return new WhereEnumerable<>(this, predicate);
 	}
 	

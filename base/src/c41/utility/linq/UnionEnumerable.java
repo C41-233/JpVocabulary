@@ -1,11 +1,16 @@
 package c41.utility.linq;
 
+import c41.utility.assertion.Arguments;
+
 class UnionEnumerable<T> implements IReferenceEnumerable<T>{
 
 	private final IEnumerable<? extends T> enumerable1;
 	private final IEnumerable<? extends T> enumerable2;
 	
 	public UnionEnumerable(IEnumerable<? extends T> enumerable1, IEnumerable<? extends T> enumerable2) {
+		Arguments.isNotNull(enumerable1);
+		Arguments.isNotNull(enumerable2);
+		
 		this.enumerable1 = enumerable1;
 		this.enumerable2 = enumerable2;
 	}

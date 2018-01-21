@@ -1,6 +1,7 @@
 package c41.utility.linq;
 
 import c41.lambda.predicate.IPredicate;
+import c41.utility.assertion.Arguments;
 
 class WhereEnumerable<T> implements IReferenceEnumerable<T>{
 
@@ -8,6 +9,9 @@ class WhereEnumerable<T> implements IReferenceEnumerable<T>{
 	private final IPredicate<? super T> predicate;
 	
 	public WhereEnumerable(IEnumerable<T> enumerable, IPredicate<? super T> predicate) {
+		Arguments.isNotNull(enumerable);
+		Arguments.isNotNull(predicate);
+		
 		this.enumerable = enumerable;
 		this.predicate = predicate;
 	}

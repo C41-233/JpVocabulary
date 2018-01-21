@@ -4,25 +4,28 @@ import java.util.Iterator;
 
 import c41.utility.assertion.Arguments;
 
-class IterableEnumerable<T> implements IReferenceEnumerable<T>{
-	
-	private final Iterable<T> iterable;
-	
-	public IterableEnumerable(Iterable<T> iterable) {
-		Arguments.isNotNull(iterable);
-		this.iterable = iterable;
-	}
+class IteratorEnumerable<T> implements IReferenceEnumerable<T> {
 
+	private final Enumerator enumerator;
+	
+	public IteratorEnumerable(Iterator<T> iterator) {
+		Arguments.isNotNull(iterator);
+		this.enumerator = new Enumerator(iterator);
+	}
+	
 	@Override
 	public IEnumerator<T> iterator() {
-		return new Enumerator();
+		return enumerator;
 	}
-	
+
 	private final class Enumerator extends EnumeratorBase<T>{
 
-		private final Iterator<T> iterator = iterable.iterator();
-		
+		private final Iterator<T> iterator;
 		private T current;
+		
+		public Enumerator(Iterator<T> iterator) {
+			this.iterator = iterator;
+		}
 		
 		@Override
 		public boolean hasNext() {

@@ -1,14 +1,18 @@
 package c41.utility.linq;
 
+import c41.utility.assertion.Arguments;
+
 class CharArrayEnumerable implements ICharEnumerable{
 
 	private final char[] array;
 	
 	public CharArrayEnumerable(String string) {
+		Arguments.isNotNull(string);
 		this.array = string.toCharArray();
 	}
 	
 	public CharArrayEnumerable(char[] array) {
+		Arguments.isNotNull(array);
 		this.array = array;
 	}
 	
