@@ -21,7 +21,7 @@ class JoinEnumerable<T, U, V> implements IReferenceEnumerable<V>{
 		return new Enumerator();
 	}
 
-	private class Enumerator extends EnumeratorBase<V>{
+	private final class Enumerator extends EnumeratorBase<V>{
 
 		private final Iterator<T> data1 = source1.iterator();
 		private Iterator<U> data2 = source2.iterator();

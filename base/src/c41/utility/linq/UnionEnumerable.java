@@ -15,7 +15,7 @@ class UnionEnumerable<T> implements IReferenceEnumerable<T>{
 		return new Enumerator();
 	}
 
-	private class Enumerator implements IEnumerator<T>{
+	private final class Enumerator extends EnumeratorBase<T>{
 
 		private IEnumerator<? extends T> enumerator1 = enumerable1.iterator();
 		private IEnumerator<? extends T> enumerator2 = null; //延迟构造
@@ -34,7 +34,7 @@ class UnionEnumerable<T> implements IReferenceEnumerable<T>{
 		}
 
 		@Override
-		public void moveNext() {
+		public void doMoveNext() {
 			if(enumerator1 != null) {
 				if(enumerator1.hasNext()) {
 					enumerator1.moveNext();
@@ -49,7 +49,7 @@ class UnionEnumerable<T> implements IReferenceEnumerable<T>{
 		}
 
 		@Override
-		public T current() {
+		public T doCurrent() {
 			if(enumerator1 != null) {
 				return enumerator1.current();
 			}

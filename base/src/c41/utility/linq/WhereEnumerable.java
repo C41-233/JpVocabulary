@@ -1,6 +1,5 @@
 package c41.utility.linq;
 
-import c41.core.Reference;
 import c41.lambda.predicate.IPredicate;
 
 class WhereEnumerable<T> implements IReferenceEnumerable<T>{
@@ -18,18 +17,20 @@ class WhereEnumerable<T> implements IReferenceEnumerable<T>{
 		return new Enumerator();
 	}
 
-	private class Enumerator implements IEnumerator<T>{
+	private final class Enumerator extends EnumeratorBase<T>{
 
 		private final IEnumerator<T> enumerator = enumerable.iterator();
 		
-		private Reference<T> current;
-		private Reference<T> next;
+		private T current;
+		private T next;
+		private boolean hasNext = false;
 		
 		public Enumerator() {
 			while(enumerator.hasNext()) {
 				T value = enumerator.next();
 				if(predicate.is(value)) {
-					this.next = new Reference<>(value);
+					this.next = value;
+					hasNext = true;
 					break;
 				}
 			}
@@ -37,28 +38,26 @@ class WhereEnumerable<T> implements IReferenceEnumerable<T>{
 		
 		@Override
 		public boolean hasNext() {
-			return next != null;
+			return hasNext;
 		}
 
 		@Override
-		public void moveNext() {
-			if(current == null) {
-				current = new Reference<>();
-			}
-			current.value = next.value;
+		public void doMoveNext() {
+			current = next;
 			while(enumerator.hasNext()) {
 				T value = enumerator.next();
 				if(predicate.is(value)) {
-					this.next.value = value;
+					this.next = value;
 					return;
 				}
 			}
 			this.next = null;
+			hasNext = false;
 		}
 
 		@Override
-		public T current() {
-			return current.value;
+		public T doCurrent() {
+			return current;
 		}
 		
 	}

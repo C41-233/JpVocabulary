@@ -26,7 +26,7 @@ class ThenByEnumerable<T> extends ReferenceSortedEnumerableBase<T>{
 		return new ThenByEnumerable<>(this, comparator);
 	}
 	
-	private class Enumerator implements ISortedEnumerator<T>{
+	private final class Enumerator extends EnumeratorBase<T> implements ISortedEnumerator<T>{
 
 		private final ArrayList<T> list = new ArrayList<>();
 		private ISortedEnumerator<T> enumerator = enumerable.iterator();
@@ -48,7 +48,7 @@ class ThenByEnumerable<T> extends ReferenceSortedEnumerableBase<T>{
 		}
 
 		@Override
-		public void moveNext() {
+		public void doMoveNext() {
 			if(index >= 0) {
 				list.set(index, null); //gc
 			}
@@ -66,7 +66,7 @@ class ThenByEnumerable<T> extends ReferenceSortedEnumerableBase<T>{
 		}
 
 		@Override
-		public T current() {
+		public T doCurrent() {
 			return list.get(index);
 		}
 

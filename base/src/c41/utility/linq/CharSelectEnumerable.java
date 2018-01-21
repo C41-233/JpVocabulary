@@ -17,7 +17,7 @@ class CharSelectEnumerable<V> implements IReferenceEnumerable<V>{
 		return new Enumerator();
 	}
 
-	private class Enumerator implements IEnumerator<V>{
+	private final class Enumerator implements IEnumerator<V>{
 
 		private final ICharEnumerator enumerator = enumerable.iterator();
 		

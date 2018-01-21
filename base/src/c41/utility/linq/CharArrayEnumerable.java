@@ -27,7 +27,7 @@ class CharArrayEnumerable implements ICharEnumerable{
 		return new Enumerator();
 	}
 
-	private class Enumerator extends CharEnumeratorBase{
+	private final class Enumerator extends CharEnumeratorBase{
 
 		private int i = -1;
 		

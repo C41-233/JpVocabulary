@@ -22,7 +22,7 @@ class SelectEnumerable<T, V> implements IReferenceEnumerable<V>{
 		return new Enumerator();
 	}
 
-	private class Enumerator implements IEnumerator<V>{
+	private final class Enumerator implements IEnumerator<V>{
 
 		private final IEnumerator<T> enumerator = enumerable.iterator();
 		private int index = -1;

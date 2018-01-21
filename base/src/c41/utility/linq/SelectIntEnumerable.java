@@ -17,7 +17,7 @@ class SelectIntEnumerable<T> implements IIntEnumerable{
 		return new Enumerator();
 	}
 	
-	private class Enumerator implements IIntEnumerator{
+	private final class Enumerator implements IIntEnumerator{
 
 		private final IEnumerator<T> enumerator = enumerable.iterator();
 		

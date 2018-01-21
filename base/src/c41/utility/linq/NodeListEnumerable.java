@@ -16,7 +16,7 @@ class NodeListEnumerable implements IReferenceEnumerable<Node>{
 		return new Enumerator();
 	}
 
-	private class Enumerator implements IEnumerator<Node>
+	private final class Enumerator extends EnumeratorBase<Node>
 	{
 
 		private int index = -1;
@@ -27,12 +27,12 @@ class NodeListEnumerable implements IReferenceEnumerable<Node>{
 		}
 
 		@Override
-		public void moveNext() {
+		public void doMoveNext() {
 			index++;
 		}
 
 		@Override
-		public Node current() {
+		public Node doCurrent() {
 			return nodes.item(index);
 		}
 		

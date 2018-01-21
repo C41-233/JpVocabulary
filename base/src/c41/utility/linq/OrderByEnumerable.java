@@ -18,7 +18,7 @@ class OrderByEnumerable<T> extends ReferenceSortedEnumerableBase<T>{
 		return new Enumerator();
 	}
 
-	private class Enumerator implements ISortedEnumerator<T>{
+	private final class Enumerator extends EnumeratorBase<T> implements ISortedEnumerator<T>{
 
 		private final ArrayList<T> queue = new ArrayList<>();
 		private int index = -1;
@@ -42,7 +42,7 @@ class OrderByEnumerable<T> extends ReferenceSortedEnumerableBase<T>{
 		}
 		
 		@Override
-		public void moveNext() {
+		public void doMoveNext() {
 			if(index >= 0) {
 				queue.set(index, null); //gc
 			}
@@ -50,7 +50,7 @@ class OrderByEnumerable<T> extends ReferenceSortedEnumerableBase<T>{
 		}
 
 		@Override
-		public T current() {
+		public T doCurrent() {
 			return queue.get(index);
 		}
 

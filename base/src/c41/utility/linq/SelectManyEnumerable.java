@@ -19,7 +19,7 @@ class SelectManyEnumerable<T, V> implements IReferenceEnumerable<V>{
 		return new Enumerator();
 	}
 	
-	private class Enumerator implements IEnumerator<V>{
+	private final class Enumerator extends EnumeratorBase<V>{
 
 		private IEnumerator<T> enumerator = enumerable.iterator();
 		private Iterator<? extends V> iterator;
@@ -42,7 +42,7 @@ class SelectManyEnumerable<T, V> implements IReferenceEnumerable<V>{
 		}
 
 		@Override
-		public void moveNext() {
+		public void doMoveNext() {
 			current = iterator.next();
 			if(iterator.hasNext()) {
 				return;
@@ -59,7 +59,7 @@ class SelectManyEnumerable<T, V> implements IReferenceEnumerable<V>{
 		}
 
 		@Override
-		public V current() {
+		public V doCurrent() {
 			return current;
 		}
 		

@@ -32,7 +32,7 @@ class ArrayEnumerable<T> implements IReferenceEnumerable<T>{
 		return new Enumerator();
 	}
 
-	private class Enumerator extends EnumeratorBase<T>{
+	private final class Enumerator extends EnumeratorBase<T>{
 
 		private int index = -1;
 		
