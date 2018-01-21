@@ -211,8 +211,8 @@ extends <a href="../../../c41/utility/linq/IEnumerable.html" title="c41.utility.
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/linq/IReferenceEnumerable.html#foreachEx-c41.lambda.function.IForeachFunction-">foreachEx</a></span>(<a href="../../../c41/lambda/function/IForeachFunction.html" title="c41.lambda.function中的接口">IForeachFunction</a>&lt;? super <a href="../../../c41/utility/linq/IReferenceEnumerable.html" title="IReferenceEnumerable中的类型参数">T</a>&gt;&nbsp;function)</code>&nbsp;</td>
 </tr>
 <tr id="i17" class="rowColor">
-<td class="colFirst"><code>default &lt;V&gt;&nbsp;<a href="../../../c41/utility/linq/IReferenceGroupEnumerable.html" title="c41.utility.linq中的接口">IReferenceGroupEnumerable</a>&lt;V,<a href="../../../c41/utility/linq/IReferenceEnumerable.html" title="IReferenceEnumerable中的类型参数">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/linq/IReferenceEnumerable.html#groupBy-c41.lambda.selector.ISelector-">groupBy</a></span>(<a href="../../../c41/lambda/selector/ISelector.html" title="c41.lambda.selector中的接口">ISelector</a>&lt;<a href="../../../c41/utility/linq/IReferenceEnumerable.html" title="IReferenceEnumerable中的类型参数">T</a>,V&gt;&nbsp;selector)</code>&nbsp;</td>
+<td class="colFirst"><code>default &lt;K&gt;&nbsp;<a href="../../../c41/utility/linq/IReferenceGroupEnumerable.html" title="c41.utility.linq中的接口">IReferenceGroupEnumerable</a>&lt;K,<a href="../../../c41/utility/linq/IReferenceEnumerable.html" title="IReferenceEnumerable中的类型参数">T</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/linq/IReferenceEnumerable.html#groupBy-c41.lambda.selector.ISelector-">groupBy</a></span>(<a href="../../../c41/lambda/selector/ISelector.html" title="c41.lambda.selector中的接口">ISelector</a>&lt;<a href="../../../c41/utility/linq/IReferenceEnumerable.html" title="IReferenceEnumerable中的类型参数">T</a>,K&gt;&nbsp;selector)</code>&nbsp;</td>
 </tr>
 <tr id="i18" class="altColor">
 <td class="colFirst"><code>default &lt;V&gt;&nbsp;<a href="../../../c41/utility/linq/IReferenceEnumerable.html" title="c41.utility.linq中的接口">IReferenceEnumerable</a>&lt;V&gt;</code></td>
@@ -518,15 +518,6 @@ extends <a href="../../../c41/utility/linq/IEnumerable.html" title="c41.utility.
 </dl>
 </li>
 </ul>
-<a name="foreachEx-c41.lambda.function.IBooleanFunction1-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>foreachEx</h4>
-<pre>default&nbsp;int&nbsp;foreachEx(<a href="../../../c41/lambda/function/IBooleanFunction1.html" title="c41.lambda.function中的接口">IBooleanFunction1</a>&lt;? super <a href="../../../c41/utility/linq/IReferenceEnumerable.html" title="IReferenceEnumerable中的类型参数">T</a>&gt;&nbsp;function)</pre>
-</li>
-</ul>
 <a name="foreach-c41.lambda.action.IForeachAction-">
 <!--   -->
 </a>
@@ -541,6 +532,15 @@ extends <a href="../../../c41/utility/linq/IEnumerable.html" title="c41.utility.
 <dt><span class="returnLabel">返回:</span></dt>
 <dd>执行的次数</dd>
 </dl>
+</li>
+</ul>
+<a name="foreachEx-c41.lambda.function.IBooleanFunction1-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>foreachEx</h4>
+<pre>default&nbsp;int&nbsp;foreachEx(<a href="../../../c41/lambda/function/IBooleanFunction1.html" title="c41.lambda.function中的接口">IBooleanFunction1</a>&lt;? super <a href="../../../c41/utility/linq/IReferenceEnumerable.html" title="IReferenceEnumerable中的类型参数">T</a>&gt;&nbsp;function)</pre>
 </li>
 </ul>
 <a name="foreachEx-c41.lambda.function.IForeachFunction-">
@@ -558,7 +558,7 @@ extends <a href="../../../c41/utility/linq/IEnumerable.html" title="c41.utility.
 <ul class="blockList">
 <li class="blockList">
 <h4>groupBy</h4>
-<pre>default&nbsp;&lt;V&gt;&nbsp;<a href="../../../c41/utility/linq/IReferenceGroupEnumerable.html" title="c41.utility.linq中的接口">IReferenceGroupEnumerable</a>&lt;V,<a href="../../../c41/utility/linq/IReferenceEnumerable.html" title="IReferenceEnumerable中的类型参数">T</a>&gt;&nbsp;groupBy(<a href="../../../c41/lambda/selector/ISelector.html" title="c41.lambda.selector中的接口">ISelector</a>&lt;<a href="../../../c41/utility/linq/IReferenceEnumerable.html" title="IReferenceEnumerable中的类型参数">T</a>,V&gt;&nbsp;selector)</pre>
+<pre>default&nbsp;&lt;K&gt;&nbsp;<a href="../../../c41/utility/linq/IReferenceGroupEnumerable.html" title="c41.utility.linq中的接口">IReferenceGroupEnumerable</a>&lt;K,<a href="../../../c41/utility/linq/IReferenceEnumerable.html" title="IReferenceEnumerable中的类型参数">T</a>&gt;&nbsp;groupBy(<a href="../../../c41/lambda/selector/ISelector.html" title="c41.lambda.selector中的接口">ISelector</a>&lt;<a href="../../../c41/utility/linq/IReferenceEnumerable.html" title="IReferenceEnumerable中的类型参数">T</a>,K&gt;&nbsp;selector)</pre>
 </li>
 </ul>
 <a name="instanceOf-java.lang.Class-">

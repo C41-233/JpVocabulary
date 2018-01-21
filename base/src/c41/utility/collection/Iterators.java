@@ -16,6 +16,7 @@ import c41.lambda.function.IForeachFunction;
 import c41.lambda.function.IFunction;
 import c41.lambda.predicate.IPredicate;
 import c41.reflect.StaticClassException;
+import c41.utility.algorithm.LinearSearch;
 import c41.utility.assertion.Arguments;
 
 public final class Iterators {
@@ -385,6 +386,21 @@ public final class Iterators {
 		return true;
 	}
 	
+	public static boolean isNotExistAnyOf(Iterator<?> iterator, Object...values) {
+		Arguments.isNotNull(iterator);
+		Arguments.isNotNull(values);
+		
+		if(values.length <= 16) {
+			return isNotExist(iterator, (Object obj)->LinearSearch.isExist(values, obj));
+		}
+		
+		HashSet<Object> set = new HashSet<>();
+		for(Object value : values) {
+			set.add(value);
+		}
+		return isNotExist(iterator, (Object obj)->set.contains(obj));
+	}
+
 	public static <T, TCollection extends Collection<T>> TCollection toCollection(Iterator<T> iterator, IFunction<TCollection> provider) {
 		Arguments.isNotNull(iterator);
 		Arguments.isNotNull(provider);
@@ -395,7 +411,7 @@ public final class Iterators {
 		}
 		return collection;
 	}
-
+	
 	public static <T> List<T> toList(Iterator<T> iterator){
 		return toCollection(iterator, ()->new ArrayList<>());
 	}
@@ -403,5 +419,4 @@ public final class Iterators {
 	public static <T> Set<T> toSet(Iterator<T> iterator){
 		return toCollection(iterator, ()->new HashSet<>());
 	}
-	
 }

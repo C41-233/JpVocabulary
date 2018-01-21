@@ -181,6 +181,16 @@ public final class Iterables {
 		return isExist(iterable, predicate);
 	}
 
+	public static <T> boolean isExist(Iterable<T> iterable, T value) {
+		Arguments.isNotNull(iterable);
+		return Iterators.isExist(iterable.iterator(), value);
+	}
+
+	public static <T> boolean isExistReference(Iterable<T> iterable, T value) {
+		Arguments.isNotNull(iterable);
+		return Iterators.isExistReference(iterable.iterator(), value);
+	}
+
 	/**
 	 * 非所有元素都满足谓词。
 	 * @param <T> 泛型参数
@@ -197,12 +207,22 @@ public final class Iterables {
 		Arguments.isNotNull(iterable);
 		return Iterators.isNotEmpty(iterable.iterator());
 	}
-
+	
 	public static <T> boolean isNotExist(Iterable<T> iterable, IPredicate<? super T> predicate) {
 		Arguments.isNotNull(iterable);
 		return Iterators.isNotExist(iterable.iterator(), predicate);
 	}
-
+	
+	public static <T> boolean isNotExist(Iterable<T> iterable, T value) {
+		Arguments.isNotNull(iterable);
+		return Iterators.isNotExist(iterable.iterator(), value);
+	}
+	
+	public static boolean isNotExistAnyOf(Iterable<?> iterable, Object...values) {
+		Arguments.isNotNull(iterable);
+		return Iterators.isNotExistAnyOf(iterable.iterator(), values);
+	}
+	
 	public static <T, TCollection extends Collection<T>> TCollection toCollection(Iterable<T> iterable, IFunction<TCollection> provider) {
 		Arguments.isNotNull(iterable);
 		return Iterators.toCollection(iterable.iterator(), provider);
@@ -216,21 +236,6 @@ public final class Iterables {
 	public static <T> Set<T> toSet(Iterable<T> iterable){
 		Arguments.isNotNull(iterable);
 		return Iterators.toSet(iterable.iterator());
-	}
-	
-	public static <T> boolean isNotExist(Iterable<T> iterable, T value) {
-		Arguments.isNotNull(iterable);
-		return Iterators.isNotExist(iterable.iterator(), value);
-	}
-	
-	public static <T> boolean isExist(Iterable<T> iterable, T value) {
-		Arguments.isNotNull(iterable);
-		return Iterators.isExist(iterable.iterator(), value);
-	}
-	
-	public static <T> boolean isExistReference(Iterable<T> iterable, T value) {
-		Arguments.isNotNull(iterable);
-		return Iterators.isExistReference(iterable.iterator(), value);
 	}
 	
 }

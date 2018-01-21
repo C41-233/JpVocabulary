@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":9,"i1":9,"i2":9,"i3":9,"i4":9,"i5":9,"i6":9,"i7":9,"i8":9,"i9":9,"i10":9,"i11":9,"i12":9,"i13":9,"i14":9,"i15":9,"i16":9,"i17":9,"i18":9,"i19":9,"i20":9,"i21":9,"i22":9,"i23":9,"i24":9,"i25":9,"i26":9,"i27":9};
+var methods = {"i0":9,"i1":9,"i2":9,"i3":9,"i4":9,"i5":9,"i6":9,"i7":9,"i8":9,"i9":9,"i10":9,"i11":9,"i12":9,"i13":9,"i14":9,"i15":9,"i16":9,"i17":9,"i18":9,"i19":9,"i20":9,"i21":9,"i22":9,"i23":9,"i24":9,"i25":9,"i26":9,"i27":9,"i28":9,"i29":9,"i30":9,"i31":9,"i32":9};
 var tabs = {65535:["t0","所有方法"],1:["t1","静态方法"],8:["t4","具体方法"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -254,25 +254,50 @@ extends java.lang.Object</pre>
 </tr>
 <tr id="i23" class="rowColor">
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;boolean</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/collection/Iterators.html#isExist-java.util.Iterator-T-">isExist</a></span>(java.util.Iterator&lt;T&gt;&nbsp;iterator,
+       T&nbsp;value)</code>&nbsp;</td>
+</tr>
+<tr id="i24" class="altColor">
+<td class="colFirst"><code>static &lt;T&gt;&nbsp;boolean</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/collection/Iterators.html#isExistReference-java.util.Iterator-T-">isExistReference</a></span>(java.util.Iterator&lt;T&gt;&nbsp;iterator,
+                T&nbsp;value)</code>&nbsp;</td>
+</tr>
+<tr id="i25" class="rowColor">
+<td class="colFirst"><code>static &lt;T&gt;&nbsp;boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/collection/Iterators.html#isNotAll-java.util.Iterator-c41.lambda.predicate.IPredicate-">isNotAll</a></span>(java.util.Iterator&lt;T&gt;&nbsp;iterator,
         <a href="../../../c41/lambda/predicate/IPredicate.html" title="c41.lambda.predicate中的接口">IPredicate</a>&lt;? super T&gt;&nbsp;predicate)</code>
 <div class="block">迭代器非所有元素都满足谓词。</div>
 </td>
 </tr>
-<tr id="i24" class="altColor">
+<tr id="i26" class="altColor">
 <td class="colFirst"><code>static boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/collection/Iterators.html#isNotEmpty-java.util.Iterator-">isNotEmpty</a></span>(java.util.Iterator&lt;?&gt;&nbsp;iterable)</code>&nbsp;</td>
 </tr>
-<tr id="i25" class="rowColor">
+<tr id="i27" class="rowColor">
+<td class="colFirst"><code>static &lt;T&gt;&nbsp;boolean</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/collection/Iterators.html#isNotExist-java.util.Iterator-c41.lambda.predicate.IPredicate-">isNotExist</a></span>(java.util.Iterator&lt;T&gt;&nbsp;iterator,
+          <a href="../../../c41/lambda/predicate/IPredicate.html" title="c41.lambda.predicate中的接口">IPredicate</a>&lt;? super T&gt;&nbsp;predicate)</code>&nbsp;</td>
+</tr>
+<tr id="i28" class="altColor">
+<td class="colFirst"><code>static &lt;T&gt;&nbsp;boolean</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/collection/Iterators.html#isNotExist-java.util.Iterator-T-">isNotExist</a></span>(java.util.Iterator&lt;T&gt;&nbsp;iterator,
+          T&nbsp;value)</code>&nbsp;</td>
+</tr>
+<tr id="i29" class="rowColor">
+<td class="colFirst"><code>static boolean</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/collection/Iterators.html#isNotExistAnyOf-java.util.Iterator-java.lang.Object...-">isNotExistAnyOf</a></span>(java.util.Iterator&lt;?&gt;&nbsp;iterator,
+               java.lang.Object...&nbsp;values)</code>&nbsp;</td>
+</tr>
+<tr id="i30" class="altColor">
 <td class="colFirst"><code>static &lt;T,TCollection extends java.util.Collection&lt;T&gt;&gt;<br>TCollection</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/collection/Iterators.html#toCollection-java.util.Iterator-c41.lambda.function.IFunction-">toCollection</a></span>(java.util.Iterator&lt;T&gt;&nbsp;iterator,
             <a href="../../../c41/lambda/function/IFunction.html" title="c41.lambda.function中的接口">IFunction</a>&lt;TCollection&gt;&nbsp;provider)</code>&nbsp;</td>
 </tr>
-<tr id="i26" class="altColor">
+<tr id="i31" class="rowColor">
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;java.util.List&lt;T&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/collection/Iterators.html#toList-java.util.Iterator-">toList</a></span>(java.util.Iterator&lt;T&gt;&nbsp;iterator)</code>&nbsp;</td>
 </tr>
-<tr id="i27" class="rowColor">
+<tr id="i32" class="altColor">
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;java.util.Set&lt;T&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/collection/Iterators.html#toSet-java.util.Iterator-">toSet</a></span>(java.util.Iterator&lt;T&gt;&nbsp;iterator)</code>&nbsp;</td>
 </tr>
@@ -472,26 +497,6 @@ extends java.lang.Object</pre>
 </dl>
 </li>
 </ul>
-<a name="foreachEx-java.util.Iterator-c41.lambda.function.IBooleanFunction1-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>foreachEx</h4>
-<pre>public static&nbsp;&lt;T&gt;&nbsp;int&nbsp;foreachEx(java.util.Iterator&lt;T&gt;&nbsp;iterator,
-                                <a href="../../../c41/lambda/function/IBooleanFunction1.html" title="c41.lambda.function中的接口">IBooleanFunction1</a>&lt;? super T&gt;&nbsp;function)</pre>
-<div class="block">对每个元素执行操作。</div>
-<dl>
-<dt><span class="paramLabel">类型参数:</span></dt>
-<dd><code>T</code> - 泛型参数</dd>
-<dt><span class="paramLabel">参数:</span></dt>
-<dd><code>iterator</code> - 迭代器</dd>
-<dd><code>function</code> - 对每个元素执行的操作，返回false表示break</dd>
-<dt><span class="returnLabel">返回:</span></dt>
-<dd>执行的次数</dd>
-</dl>
-</li>
-</ul>
 <a name="foreach-java.util.Iterator-c41.lambda.action.IForeachAction-">
 <!--   -->
 </a>
@@ -507,6 +512,26 @@ extends java.lang.Object</pre>
 <dt><span class="paramLabel">参数:</span></dt>
 <dd><code>iterator</code> - 迭代器</dd>
 <dd><code>action</code> - 对每个元素执行的操作，参数包含当前元素及其下标</dd>
+<dt><span class="returnLabel">返回:</span></dt>
+<dd>执行的次数</dd>
+</dl>
+</li>
+</ul>
+<a name="foreachEx-java.util.Iterator-c41.lambda.function.IBooleanFunction1-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>foreachEx</h4>
+<pre>public static&nbsp;&lt;T&gt;&nbsp;int&nbsp;foreachEx(java.util.Iterator&lt;T&gt;&nbsp;iterator,
+                                <a href="../../../c41/lambda/function/IBooleanFunction1.html" title="c41.lambda.function中的接口">IBooleanFunction1</a>&lt;? super T&gt;&nbsp;function)</pre>
+<div class="block">对每个元素执行操作。</div>
+<dl>
+<dt><span class="paramLabel">类型参数:</span></dt>
+<dd><code>T</code> - 泛型参数</dd>
+<dt><span class="paramLabel">参数:</span></dt>
+<dd><code>iterator</code> - 迭代器</dd>
+<dd><code>function</code> - 对每个元素执行的操作，返回false表示break</dd>
 <dt><span class="returnLabel">返回:</span></dt>
 <dd>执行的次数</dd>
 </dl>
@@ -590,6 +615,30 @@ extends java.lang.Object</pre>
 </dl>
 </li>
 </ul>
+<a name="isExist-java.util.Iterator-java.lang.Object-">
+<!--   -->
+</a><a name="isExist-java.util.Iterator-T-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>isExist</h4>
+<pre>public static&nbsp;&lt;T&gt;&nbsp;boolean&nbsp;isExist(java.util.Iterator&lt;T&gt;&nbsp;iterator,
+                                  T&nbsp;value)</pre>
+</li>
+</ul>
+<a name="isExistReference-java.util.Iterator-java.lang.Object-">
+<!--   -->
+</a><a name="isExistReference-java.util.Iterator-T-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>isExistReference</h4>
+<pre>public static&nbsp;&lt;T&gt;&nbsp;boolean&nbsp;isExistReference(java.util.Iterator&lt;T&gt;&nbsp;iterator,
+                                           T&nbsp;value)</pre>
+</li>
+</ul>
 <a name="isNotAll-java.util.Iterator-c41.lambda.predicate.IPredicate-">
 <!--   -->
 </a>
@@ -617,6 +666,38 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>isNotEmpty</h4>
 <pre>public static&nbsp;boolean&nbsp;isNotEmpty(java.util.Iterator&lt;?&gt;&nbsp;iterable)</pre>
+</li>
+</ul>
+<a name="isNotExist-java.util.Iterator-c41.lambda.predicate.IPredicate-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>isNotExist</h4>
+<pre>public static&nbsp;&lt;T&gt;&nbsp;boolean&nbsp;isNotExist(java.util.Iterator&lt;T&gt;&nbsp;iterator,
+                                     <a href="../../../c41/lambda/predicate/IPredicate.html" title="c41.lambda.predicate中的接口">IPredicate</a>&lt;? super T&gt;&nbsp;predicate)</pre>
+</li>
+</ul>
+<a name="isNotExist-java.util.Iterator-java.lang.Object-">
+<!--   -->
+</a><a name="isNotExist-java.util.Iterator-T-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>isNotExist</h4>
+<pre>public static&nbsp;&lt;T&gt;&nbsp;boolean&nbsp;isNotExist(java.util.Iterator&lt;T&gt;&nbsp;iterator,
+                                     T&nbsp;value)</pre>
+</li>
+</ul>
+<a name="isNotExistAnyOf-java.util.Iterator-java.lang.Object...-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>isNotExistAnyOf</h4>
+<pre>public static&nbsp;boolean&nbsp;isNotExistAnyOf(java.util.Iterator&lt;?&gt;&nbsp;iterator,
+                                      java.lang.Object...&nbsp;values)</pre>
 </li>
 </ul>
 <a name="toCollection-java.util.Iterator-c41.lambda.function.IFunction-">

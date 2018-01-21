@@ -4,7 +4,6 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -21,7 +20,6 @@ import c41.lambda.predicate.IIntPredicate;
 import c41.lambda.predicate.IPredicate;
 import c41.lambda.selector.ISelector;
 import c41.lambda.selector.ISelectorEx;
-import c41.utility.algorithm.LinearSearch;
 import c41.utility.assertion.Arguments;
 import c41.utility.collection.Iterables;
 import c41.utility.collection.tuple.Tuple2;
@@ -102,10 +100,6 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 		return Iterables.foreach(this, action);
 	}
 
-	public default int foreachEx(IBooleanFunction1<? super T> function) {
-		return Iterables.foreachEx(this, function);
-	}
-
 	/**
 	 * 对每个元素执行操作。
 	 * @param action 对每个元素执行的操作，参数包含当前元素及其下标
@@ -113,6 +107,10 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 	 */
 	public default int foreach(IForeachAction<? super T> action) {
 		return Iterables.foreach(this, action);
+	}
+
+	public default int foreachEx(IBooleanFunction1<? super T> function) {
+		return Iterables.foreachEx(this, function);
 	}
 	
 	public default int foreachEx(IForeachFunction<? super T> function) {
@@ -201,17 +199,7 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 	 * @return 如果不存在，则返回true
 	 */
 	public default boolean isNotExistAnyOf(Object... values){
-		Arguments.isNotNull(values);
-		
-		if(values.length <= 16) {
-			return isNotExist(obj->LinearSearch.isExist(values, obj));
-		}
-		
-		HashSet<Object> set = new HashSet<>();
-		for(Object value : values) {
-			set.add(value);
-		}
-		return isNotExist(obj->set.contains(obj));
+		return Iterables.isNotExistAnyOf(this, values);
 	}
 
 	/**
