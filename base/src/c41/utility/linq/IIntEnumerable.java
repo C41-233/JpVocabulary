@@ -5,23 +5,13 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import c41.lambda.predicate.ICharPredicate;
-import c41.lambda.predicate.IIntPredicate;
+import c41.lambda.predicate.*;
 import c41.lambda.predicate.IPredicate;
 import c41.utility.algorithm.LinearSearch;
 import c41.utility.assertion.Arguments;
 
-/**
- * 基本类型int的Enumerable。
- */
 public interface IIntEnumerable extends IEnumerable<Integer>{
 
-	/**
-	 * 查询指定下标的值。
-	 * @param index 下标
-	 * @return 指定值
-	 * @throws IllegalArgumentException index &lt; 0
-	 * @throws NoSuchElementException 下标超出迭代器范围
-	 */
 	public default int at(int index) {
 		Arguments.is(index>=0, "%d < 0", index);
 		
@@ -38,13 +28,6 @@ public interface IIntEnumerable extends IEnumerable<Integer>{
 		throw new NoSuchElementException();
 	}
 
-	/**
-	 * 所有元素都满足谓词。
-	 * @param predicate 谓词
-	 * @return 如果所有元素都满足谓词，则返回true
-	 * @see IReferenceEnumerable#isAll(IPredicate)
-	 * @see ICharEnumerable#isAll(ICharPredicate)
-	 */
 	public default boolean isAll(IIntPredicate predicate) {
 		Arguments.isNotNull(predicate);
 		
