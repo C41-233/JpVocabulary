@@ -3,6 +3,7 @@ package c41.utility.linq;
 import java.util.Iterator;
 
 import c41.lambda.function.IJoiner;
+import c41.utility.assertion.Arguments;
 
 class JoinEnumerable<T, U, V> implements IReferenceEnumerable<V>{
 
@@ -11,6 +12,10 @@ class JoinEnumerable<T, U, V> implements IReferenceEnumerable<V>{
 	private final IJoiner<T, U, V> joiner;
 	
 	public JoinEnumerable(Iterable<T> source1, Iterable<U> source2, IJoiner<T, U, V> joiner) {
+		Arguments.isNotNull(source1);
+		Arguments.isNotNull(source2);
+		Arguments.isNotNull(joiner);
+		
 		this.source1 = source1;
 		this.source2 = source2;
 		this.joiner = joiner;

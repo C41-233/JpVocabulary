@@ -2,6 +2,7 @@ package c41.utility.linq;
 
 import c41.lambda.selector.ISelector;
 import c41.lambda.selector.ISelectorEx;
+import c41.utility.assertion.Arguments;
 
 class SelectEnumerable<T, V> implements IReferenceEnumerable<V>{
 
@@ -13,6 +14,9 @@ class SelectEnumerable<T, V> implements IReferenceEnumerable<V>{
 	}
 	
 	public SelectEnumerable(IEnumerable<T> enumerable, ISelectorEx<? super T, ? extends V> selector) {
+		Arguments.isNotNull(enumerable);
+		Arguments.isNotNull(selector);
+		
 		this.enumerable = enumerable;
 		this.selector = selector;
 	}

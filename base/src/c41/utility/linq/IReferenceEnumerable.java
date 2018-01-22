@@ -1,10 +1,8 @@
 package c41.utility.linq;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.NoSuchElementException;
@@ -208,40 +206,38 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 	 * @return 如果不存在，则返回true
 	 */
 	public default boolean isNotExistReference(T value) {
-		return isNotExist(obj->obj == value);
+		return Iterables.isNotExistReference(this, value);
 	}
 	
 	@Override
 	public IEnumerator<T> iterator();
 	
 	public default <U> IReferenceEnumerable<Tuple2<T, U>> join(Iterable<U> other){
-		Arguments.isNotNull(other);
 		return new JoinEnumerable<>(this, other, (t, u)->Tuples.make(t, u));
 	}
 	
 	public default <U, V> IReferenceEnumerable<V> join(Iterable<U> other, IJoiner<T, U, V> joiner){
-		Arguments.isNotNull(other);
-		Arguments.isNotNull(joiner);
 		return new JoinEnumerable<>(this, other, joiner);
 	}
 
 	public default <U, V> IReferenceEnumerable<V> join(U[] other, IJoiner<T, U, V> joiner){
-		Arguments.isNotNull(other);
-		Arguments.isNotNull(joiner);
 		return new JoinEnumerable<>(this, new ArrayEnumerable<>(other), joiner);
 	}
 	
 	public default IReferenceSortedEnumerable<T> orderBy(Comparator<? super T> comparator){
-		Arguments.isNotNull(comparator);
 		return new OrderByEnumerable<>(this, comparator);
 	}
 	
 	public default <V extends Comparable<? super V>> IReferenceSortedEnumerable<T> orderBy(ISelector<? super T, V> selector){
-		Arguments.isNotNull(selector);
 		return new OrderByEnumerable<>(this, (t1, t2)->Comparators.compare(selector.select(t1), selector.select(t2)));
 	}
 	
-	public default IReferenceSortedEnumerable<T> orderByCondition(IPredicate<T> predicate){
+	/**
+	 * 对元素按照条件排序，条件成立的排在前，条件不成立的排在后
+	 * @param predicate 谓词
+	 * @return 排序后的查询
+	 */
+	public default IReferenceSortedEnumerable<T> orderByPredicate(IPredicate<T> predicate){
 		Arguments.isNotNull(predicate);
 		
 		return new OrderByEnumerable<>(this, (t1, t2)->{
@@ -258,43 +254,34 @@ public interface IReferenceEnumerable<T> extends IEnumerable<T>{
 		});
 	}
 	
-	@SuppressWarnings("unchecked")
+	/**
+	 * 对元素进行自然排序
+	 * @return 排序后的查询
+	 */
 	public default IReferenceSortedEnumerable<T> orderBySelf(){
 		return new OrderByEnumerable<>(this, (t1, t2)->{
-			return Comparators.compare((Comparable)t1, (Comparable)t2);
+			return Comparators.compareNatural(t1, t2);
 		});
 	}
 	
 	public default <V> IReferenceEnumerable<V> select(ISelector<? super T, ? extends V> selector){
-		Arguments.isNotNull(selector);
 		return new SelectEnumerable<>(this, selector);
 	}
 
 	public default <V> IReferenceEnumerable<V> select(ISelectorEx<? super T, ? extends V> selector){
-		Arguments.isNotNull(selector);
 		return new SelectEnumerable<>(this, selector);
 	}
 
 	public default <V> IReferenceEnumerable<V> selectMany(ISelector<? super T, ? extends Iterable<? extends V>> selector){
-		Arguments.isNotNull(selector);
 		return new SelectManyEnumerable<>(this, selector);
 	}
 	
-	@SuppressWarnings("unchecked")
 	public default T[] toArray(Class<T> type) {
-		Arguments.isNotNull(type);
-		
-		List<T> list = toList();
-		T[] array = (T[]) Array.newInstance(type, list.size());
-		for(int i=0; i<list.size(); i++) {
-			array[i] = list.get(i);
-		}
-		return array;
+		return Iterables.toArray(this, type);
 	}
 	
 	public default T[] toArray(T[] array) {
-		Arguments.isNotNull(array);
-		return toList().toArray(array);
+		return Iterables.toArray(this, array);
 	}
 	
 	public default <K> Map<K, IReferenceEnumerable<T>> toMap(ISelector<T, K> selector){

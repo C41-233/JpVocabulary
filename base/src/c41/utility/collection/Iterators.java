@@ -1,5 +1,6 @@
 package c41.utility.collection;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -66,8 +67,7 @@ public final class Iterators {
 		return count;
 	}
 
-	@SuppressWarnings("unlikely-arg-type")
-	public static <T, V> boolean equals(Iterator<T> iterator1, Iterator<V> iterator2) {
+	public static boolean equals(Iterator<?> iterator1, Iterator<?> iterator2) {
 		if(iterator1 == iterator2) {
 			return true;
 		}
@@ -293,6 +293,18 @@ public final class Iterators {
 		return iterator.hasNext() == false;
 	}
 
+	public static boolean isExist(Iterator<?> iterator, Object value) {
+		Arguments.isNotNull(iterator);
+		
+		while(iterator.hasNext()) {
+			Object obj = iterator.next();
+			if(Objects.equals(obj, value)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	/**
 	 * 迭代器存在满足谓词的元素。
 	 * @param <T> 泛型参数
@@ -313,23 +325,11 @@ public final class Iterators {
 		return false;
 	}
 	
-	public static <T> boolean isExist(Iterator<T> iterator, T value) {
+	public static boolean isExistReference(Iterator<?> iterator, Object value) {
 		Arguments.isNotNull(iterator);
 		
 		while(iterator.hasNext()) {
-			T obj = iterator.next();
-			if(Objects.equals(obj, value)) {
-				return true;
-			}
-		}
-		return false;
-	}
-	
-	public static <T> boolean isExistReference(Iterator<T> iterator, T value) {
-		Arguments.isNotNull(iterator);
-		
-		while(iterator.hasNext()) {
-			T obj = iterator.next();
+			Object obj = iterator.next();
 			if(obj == value) {
 				return true;
 			}
@@ -361,6 +361,18 @@ public final class Iterators {
 		return isEmpty(iterable) == false;
 	}
 
+	public static boolean isNotExist(Iterator<?> iterator, Object value){
+		Arguments.isNotNull(iterator);
+
+		while(iterator.hasNext()) {
+			Object obj = iterator.next();
+			if(Objects.equals(obj, value)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 	public static <T> boolean isNotExist(Iterator<T> iterator, IPredicate<? super T> predicate) {
 		Arguments.isNotNull(iterator);
 		Arguments.isNotNull(predicate);
@@ -368,18 +380,6 @@ public final class Iterators {
 		while(iterator.hasNext()) {
 			T obj = iterator.next();
 			if(predicate.is(obj)) {
-				return false;
-			}
-		}
-		return true;
-	}
-
-	public static <T> boolean isNotExist(Iterator<T> iterator, T value){
-		Arguments.isNotNull(iterator);
-
-		while(iterator.hasNext()) {
-			T obj = iterator.next();
-			if(Objects.equals(obj, value)) {
 				return false;
 			}
 		}
@@ -400,7 +400,35 @@ public final class Iterators {
 		}
 		return isNotExist(iterator, (Object obj)->set.contains(obj));
 	}
+	
+	public static boolean isNotExistReference(Iterator<?> iterator, Object value) {
+		Arguments.isNotNull(iterator);
 
+		while(iterator.hasNext()) {
+			Object obj = iterator.next();
+			if(obj == value) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	@SuppressWarnings("unchecked")
+	public static <T> T[] toArray(Iterator<T> iterator, Class<T> type) {
+		Arguments.isNotNull(type);
+		
+		List<T> list = toList(iterator);
+		T[] array = (T[]) Array.newInstance(type, list.size());
+		return list.toArray(array);
+	}
+	
+	public static <T> T[] toArray(Iterator<T> iterator, T[] array) {
+		Arguments.isNotNull(array);
+		
+		List<T> list = toList(iterator); 
+		return list.toArray(array);
+	}
+	
 	public static <T, TCollection extends Collection<T>> TCollection toCollection(Iterator<T> iterator, IFunction<TCollection> provider) {
 		Arguments.isNotNull(iterator);
 		Arguments.isNotNull(provider);
@@ -419,4 +447,5 @@ public final class Iterators {
 	public static <T> Set<T> toSet(Iterator<T> iterator){
 		return toCollection(iterator, ()->new HashSet<>());
 	}
+	
 }

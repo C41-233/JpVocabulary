@@ -34,7 +34,7 @@ public class OrderByTest {
 	@Test
 	public void test2() {
 		List<Integer> out = Linq.from(list)
-			.orderByCondition(t->t%2==0)
+			.orderByPredicate(t->t%2==0)
 			.thenBySelf()
 			.toList();
 		for(int i=0, j=0; i<5000; i++, j+=2) {

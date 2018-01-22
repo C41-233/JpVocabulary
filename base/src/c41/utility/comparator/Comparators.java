@@ -20,7 +20,24 @@ public final class Comparators {
 		return t1.compareTo(t2);
 	}
 
-	public static <T> ComparatorChain<T> compareBy(Comparator<T> comparator){
+	@SuppressWarnings("unchecked")
+	public static <T> int compareNatural(T obj1, T obj2) {
+		if(obj1 instanceof Comparable && obj2 instanceof Comparable) {
+			return compare((Comparable)obj1, (Comparable)obj2);
+		}
+		if(obj1 == obj2) {
+			return 0;
+		}
+		if(obj1 == null) {
+			return 1;
+		}
+		if(obj2 == null) {
+			return -1;
+		}
+		return compare(obj1.toString(), obj2.toString());
+	}
+	
+	public static <T> ComparatorChain<T> by(Comparator<T> comparator){
 		return new ComparatorChain<>(comparator);
 	}
 	

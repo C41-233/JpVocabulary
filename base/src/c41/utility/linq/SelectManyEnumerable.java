@@ -3,6 +3,7 @@ package c41.utility.linq;
 import java.util.Iterator;
 
 import c41.lambda.selector.ISelector;
+import c41.utility.assertion.Arguments;
 
 class SelectManyEnumerable<T, V> implements IReferenceEnumerable<V>{
 
@@ -10,6 +11,9 @@ class SelectManyEnumerable<T, V> implements IReferenceEnumerable<V>{
 	private final ISelector<? super T, ? extends Iterable<? extends V>> selector;
 	
 	public SelectManyEnumerable(IEnumerable<T> enumerable, ISelector<? super T, ? extends Iterable<? extends V>> selector) {
+		Arguments.isNotNull(enumerable);
+		Arguments.isNotNull(selector);
+		
 		this.enumerable = enumerable;
 		this.selector = selector;
 	}

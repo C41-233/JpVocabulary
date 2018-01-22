@@ -3,12 +3,17 @@ package c41.utility.linq;
 import java.util.ArrayList;
 import java.util.Comparator;
 
+import c41.utility.assertion.Arguments;
+
 class OrderByEnumerable<T> extends ReferenceSortedEnumerableBase<T>{
 
 	private final IEnumerable<T> enumerable;
 	private final Comparator<? super T> comparator;
 	
 	public OrderByEnumerable(IEnumerable<T> enumerable, Comparator<? super T> comparator) {
+		Arguments.isNotNull(enumerable);
+		Arguments.isNotNull(comparator);
+		
 		this.enumerable = enumerable;
 		this.comparator = comparator;
 	}
