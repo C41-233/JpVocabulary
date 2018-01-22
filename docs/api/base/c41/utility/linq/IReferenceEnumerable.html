@@ -300,11 +300,15 @@ extends <a href="../../../c41/utility/linq/IEnumerable.html" title="c41.utility.
 </tr>
 <tr id="i34" class="altColor">
 <td class="colFirst"><code>default <a href="../../../c41/utility/linq/IReferenceSortedEnumerable.html" title="c41.utility.linq中的接口">IReferenceSortedEnumerable</a>&lt;<a href="../../../c41/utility/linq/IReferenceEnumerable.html" title="IReferenceEnumerable中的类型参数">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/linq/IReferenceEnumerable.html#orderByCondition-c41.lambda.predicate.IPredicate-">orderByCondition</a></span>(<a href="../../../c41/lambda/predicate/IPredicate.html" title="c41.lambda.predicate中的接口">IPredicate</a>&lt;<a href="../../../c41/utility/linq/IReferenceEnumerable.html" title="IReferenceEnumerable中的类型参数">T</a>&gt;&nbsp;predicate)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/linq/IReferenceEnumerable.html#orderByPredicate-c41.lambda.predicate.IPredicate-">orderByPredicate</a></span>(<a href="../../../c41/lambda/predicate/IPredicate.html" title="c41.lambda.predicate中的接口">IPredicate</a>&lt;<a href="../../../c41/utility/linq/IReferenceEnumerable.html" title="IReferenceEnumerable中的类型参数">T</a>&gt;&nbsp;predicate)</code>
+<div class="block">对元素按照条件排序，条件成立的排在前，条件不成立的排在后</div>
+</td>
 </tr>
 <tr id="i35" class="rowColor">
 <td class="colFirst"><code>default <a href="../../../c41/utility/linq/IReferenceSortedEnumerable.html" title="c41.utility.linq中的接口">IReferenceSortedEnumerable</a>&lt;<a href="../../../c41/utility/linq/IReferenceEnumerable.html" title="IReferenceEnumerable中的类型参数">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/linq/IReferenceEnumerable.html#orderBySelf--">orderBySelf</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/linq/IReferenceEnumerable.html#orderBySelf--">orderBySelf</a></span>()</code>
+<div class="block">对元素进行自然排序</div>
+</td>
 </tr>
 <tr id="i36" class="altColor">
 <td class="colFirst"><code>default &lt;V&gt;&nbsp;<a href="../../../c41/utility/linq/IReferenceEnumerable.html" title="c41.utility.linq中的接口">IReferenceEnumerable</a>&lt;V&gt;</code></td>
@@ -791,13 +795,20 @@ extends <a href="../../../c41/utility/linq/IEnumerable.html" title="c41.utility.
 <pre>default&nbsp;&lt;V extends java.lang.Comparable&lt;? super V&gt;&gt;&nbsp;<a href="../../../c41/utility/linq/IReferenceSortedEnumerable.html" title="c41.utility.linq中的接口">IReferenceSortedEnumerable</a>&lt;<a href="../../../c41/utility/linq/IReferenceEnumerable.html" title="IReferenceEnumerable中的类型参数">T</a>&gt;&nbsp;orderBy(<a href="../../../c41/lambda/selector/ISelector.html" title="c41.lambda.selector中的接口">ISelector</a>&lt;? super <a href="../../../c41/utility/linq/IReferenceEnumerable.html" title="IReferenceEnumerable中的类型参数">T</a>,V&gt;&nbsp;selector)</pre>
 </li>
 </ul>
-<a name="orderByCondition-c41.lambda.predicate.IPredicate-">
+<a name="orderByPredicate-c41.lambda.predicate.IPredicate-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>orderByCondition</h4>
-<pre>default&nbsp;<a href="../../../c41/utility/linq/IReferenceSortedEnumerable.html" title="c41.utility.linq中的接口">IReferenceSortedEnumerable</a>&lt;<a href="../../../c41/utility/linq/IReferenceEnumerable.html" title="IReferenceEnumerable中的类型参数">T</a>&gt;&nbsp;orderByCondition(<a href="../../../c41/lambda/predicate/IPredicate.html" title="c41.lambda.predicate中的接口">IPredicate</a>&lt;<a href="../../../c41/utility/linq/IReferenceEnumerable.html" title="IReferenceEnumerable中的类型参数">T</a>&gt;&nbsp;predicate)</pre>
+<h4>orderByPredicate</h4>
+<pre>default&nbsp;<a href="../../../c41/utility/linq/IReferenceSortedEnumerable.html" title="c41.utility.linq中的接口">IReferenceSortedEnumerable</a>&lt;<a href="../../../c41/utility/linq/IReferenceEnumerable.html" title="IReferenceEnumerable中的类型参数">T</a>&gt;&nbsp;orderByPredicate(<a href="../../../c41/lambda/predicate/IPredicate.html" title="c41.lambda.predicate中的接口">IPredicate</a>&lt;<a href="../../../c41/utility/linq/IReferenceEnumerable.html" title="IReferenceEnumerable中的类型参数">T</a>&gt;&nbsp;predicate)</pre>
+<div class="block">对元素按照条件排序，条件成立的排在前，条件不成立的排在后</div>
+<dl>
+<dt><span class="paramLabel">参数:</span></dt>
+<dd><code>predicate</code> - 谓词</dd>
+<dt><span class="returnLabel">返回:</span></dt>
+<dd>排序后的查询</dd>
+</dl>
 </li>
 </ul>
 <a name="orderBySelf--">
@@ -807,6 +818,11 @@ extends <a href="../../../c41/utility/linq/IEnumerable.html" title="c41.utility.
 <li class="blockList">
 <h4>orderBySelf</h4>
 <pre>default&nbsp;<a href="../../../c41/utility/linq/IReferenceSortedEnumerable.html" title="c41.utility.linq中的接口">IReferenceSortedEnumerable</a>&lt;<a href="../../../c41/utility/linq/IReferenceEnumerable.html" title="IReferenceEnumerable中的类型参数">T</a>&gt;&nbsp;orderBySelf()</pre>
+<div class="block">对元素进行自然排序</div>
+<dl>
+<dt><span class="returnLabel">返回:</span></dt>
+<dd>排序后的查询</dd>
+</dl>
 </li>
 </ul>
 <a name="select-c41.lambda.selector.ISelector-">

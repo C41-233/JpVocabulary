@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":9,"i1":9,"i2":9};
+var methods = {"i0":9,"i1":9,"i2":9,"i3":9};
 var tabs = {65535:["t0","所有方法"],1:["t1","静态方法"],8:["t4","具体方法"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -130,18 +130,23 @@ extends java.lang.Object</pre>
 <th class="colLast" scope="col">方法和说明</th>
 </tr>
 <tr id="i0" class="altColor">
+<td class="colFirst"><code>static &lt;T&gt;&nbsp;<a href="../../../c41/utility/comparator/ComparatorChain.html" title="c41.utility.comparator中的类">ComparatorChain</a>&lt;T&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/comparator/Comparators.html#by-java.util.Comparator-">by</a></span>(java.util.Comparator&lt;T&gt;&nbsp;comparator)</code>&nbsp;</td>
+</tr>
+<tr id="i1" class="rowColor">
 <td class="colFirst"><code>static int</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/comparator/Comparators.html#compare-int-int-">compare</a></span>(int&nbsp;t1,
        int&nbsp;t2)</code>&nbsp;</td>
 </tr>
-<tr id="i1" class="rowColor">
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>static &lt;T extends java.lang.Comparable&lt;? super T&gt;&gt;<br>int</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/comparator/Comparators.html#compare-T-T-">compare</a></span>(T&nbsp;t1,
        T&nbsp;t2)</code>&nbsp;</td>
 </tr>
-<tr id="i2" class="altColor">
-<td class="colFirst"><code>static &lt;T&gt;&nbsp;<a href="../../../c41/utility/comparator/ComparatorChain.html" title="c41.utility.comparator中的类">ComparatorChain</a>&lt;T&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/comparator/Comparators.html#compareBy-java.util.Comparator-">compareBy</a></span>(java.util.Comparator&lt;T&gt;&nbsp;comparator)</code>&nbsp;</td>
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code>static &lt;T&gt;&nbsp;int</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../c41/utility/comparator/Comparators.html#compareNatural-T-T-">compareNatural</a></span>(T&nbsp;obj1,
+              T&nbsp;obj2)</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -187,13 +192,25 @@ extends java.lang.Object</pre>
                                                                       T&nbsp;t2)</pre>
 </li>
 </ul>
-<a name="compareBy-java.util.Comparator-">
+<a name="compareNatural-java.lang.Object-java.lang.Object-">
+<!--   -->
+</a><a name="compareNatural-T-T-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>compareNatural</h4>
+<pre>public static&nbsp;&lt;T&gt;&nbsp;int&nbsp;compareNatural(T&nbsp;obj1,
+                                     T&nbsp;obj2)</pre>
+</li>
+</ul>
+<a name="by-java.util.Comparator-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
-<h4>compareBy</h4>
-<pre>public static&nbsp;&lt;T&gt;&nbsp;<a href="../../../c41/utility/comparator/ComparatorChain.html" title="c41.utility.comparator中的类">ComparatorChain</a>&lt;T&gt;&nbsp;compareBy(java.util.Comparator&lt;T&gt;&nbsp;comparator)</pre>
+<h4>by</h4>
+<pre>public static&nbsp;&lt;T&gt;&nbsp;<a href="../../../c41/utility/comparator/ComparatorChain.html" title="c41.utility.comparator中的类">ComparatorChain</a>&lt;T&gt;&nbsp;by(java.util.Comparator&lt;T&gt;&nbsp;comparator)</pre>
 </li>
 </ul>
 </li>
