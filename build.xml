@@ -1,0 +1,81 @@
+<project default="build">
+	<property name="folder.project" value="project"/>
+	<property name="folder.tmp" value="${folder.project}/tmp"/>
+	<property name="folder.classes.output" value="${folder.tmp}/bin"/>
+	<property name="folder.lib" value="${folder.project}/lib"/>
+	<property name="file.core.jar" value="${folder.lib}/java-c41.jar"/>
+	<property name="file.simple-xml.jar" value="${folder.lib}/simple-xml.jar"/>
+	<property name="file.ext.jar" value="${folder.lib}/ext.jar"/>
+
+	<target name="create-folder">
+		<mkdir dir="log"/>
+		<mkdir dir="db/backup"/>
+	</target>
+	
+    <target name="build-simple-xml">
+		<mkdir dir="${folder.classes.output}"/>
+        <javac 
+			srcdir="simple-xml/src" 
+			destdir="${folder.classes.output}"
+			encoding="utf-8"
+			includeantruntime="false"
+		>
+			<compilerarg value="-Xlint:unchecked"/>
+			<classpath>
+				<pathelement location="${file.core.jar}"/>
+			</classpath>
+        </javac>
+		<jar jarfile="${file.simple-xml.jar}" basedir="${folder.classes.output}" includes="c41/**"/>
+		<delete dir="${folder.classes.output}" />
+    </target>
+	
+    <target name="build-ext">
+		<mkdir dir="${folder.classes.output}"/>
+        <javac 
+			srcdir="${folder.project}/ext" 
+			destdir="${folder.classes.output}"
+			encoding="utf-8"
+			includeantruntime="false"
+		>
+			<compilerarg value="-Xlint:unchecked"/>
+			<classpath>
+				<pathelement location="${folder.project}/play-1.4.4/framework/lib/log4j-1.2.17.jar"/>
+				<pathelement location="${folder.project}/play-1.4.4/framework/lib/joda-time-2.9.7.jar"/>
+				<pathelement location="${file.core.jar}"/>
+			</classpath>
+        </javac>
+		<jar jarfile="${file.ext.jar}" basedir="${folder.classes.output}" includes="**/*"/>
+		<delete dir="${folder.classes.output}" />
+    </target>
+	
+	<target name="clean">
+		<delete includeemptydirs="true">
+			<fileset file="${file.simple-xml.jar}"/>
+			<fileset file="${file.ext.jar}"/>
+			<fileset dir="${folder.tmp}" includes="**/*" erroronmissingdir="false"/>
+		</delete>
+	</target>
+	
+	<target name="generate-simple-xml-docs">
+			<delete dir="docs/api/simple-xml"/>
+			<javadoc   
+				sourcepath="simple-xml/src"   
+				packagenames="c41.*"   
+				destdir="docs/api/simple-xml"  
+				charset="UTF8"  
+				docencoding="UTF8"  
+				encoding="UTF8"  
+				private="false"  
+				windowtitle="simple-xml"  
+				use="true"
+				failonwarning="true"
+			>
+				<arg value="-notimestamp"/>
+				<classpath>
+					<pathelement location="${file.core.jar}"/>
+				</classpath>
+			</javadoc>  
+	</target>
+	
+	<target name="build" depends="clean,build-simple-xml,build-ext,create-folder"/>
+</project>

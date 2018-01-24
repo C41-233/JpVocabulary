@@ -1,1 +1,1 @@
-ant -buildfile project/build.xml clean
+ant clean
