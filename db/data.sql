@@ -25,7 +25,7 @@ DROP TABLE IF EXISTS `adjective_values`;
 CREATE TABLE `adjective_values` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `index` varchar(255) DEFAULT NULL,
-  `verb_id` bigint(20) DEFAULT NULL,
+  `adjective_id` bigint(20) DEFAULT NULL,
   `value` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=348 DEFAULT CHARSET=utf8;
@@ -236,4 +236,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-01-11 21:55:18
+-- Dump completed on 2018-06-23 22:25:29

@@ -1,10 +1,13 @@
 package controllers.sentences;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlElement;
+
 import c41.utility.linq.Linq;
-import c41.xml.simple.XmlReader;
+import core.config.XmlReader;
 import core.controller.HtmlControllerBase;
 
 public class Greeting extends HtmlControllerBase{
@@ -33,10 +36,16 @@ public class Greeting extends HtmlControllerBase{
 	}
 	
 	private static List<Content> readContents() {
-		XmlReader reader = new XmlReader();
-		List<Content> contents = reader.readList(ContentFile, Content.class, "content");
-		renderArgs.put("contents", contents);
-		return contents;
+		Contents contents = XmlReader.read(ContentFile, Contents.class);
+		renderArgs.put("contents", contents.contents);
+		return contents.contents;
+	}
+	
+	private static class Contents{
+		
+		@XmlElement(name="content")
+		public List<Content> contents = new ArrayList<>();
+		
 	}
 	
 	private static class Content{

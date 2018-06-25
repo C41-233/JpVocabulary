@@ -1,1 +1,0 @@
-ant generate-simple-xml-docs

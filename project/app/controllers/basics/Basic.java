@@ -5,10 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import c41.utility.linq.Linq;
-import c41.xml.simple.XmlReader;
-import c41.xml.simple.annotation.XmlListClass;
-import c41.xml.simple.annotation.XmlTag;
+import core.config.XmlReader;
 import core.controller.HtmlControllerBase;
 import core.logger.Logs;
 
@@ -29,8 +31,7 @@ public class Basic extends HtmlControllerBase{
 		
 		File dataFile = new File("data/basics/"+thisContent.value+".xml");
 		if(dataFile.isFile()) {
-			XmlReader reader = new XmlReader();
-			BasicType basic = reader.read(dataFile, BasicType.class);
+			BasicType basic = XmlReader.read(dataFile, BasicType.class);
 			if(Objects.equals(basic.name, thisContent.name) == false) {
 				Logs.Logic.error("basic not match of %s and %s", basic.name, thisContent.name);
 			}
@@ -41,46 +42,65 @@ public class Basic extends HtmlControllerBase{
 	}
 
 	private static List<ContentGroup> processContent() {
-		XmlReader reader = new XmlReader();
-		List<ContentGroup> groups = reader.readList(new File("data/basics/contents.xml"), ContentGroup.class, "group");
-		renderArgs.put("groups", groups);
-		return groups;
+		Contents contents = XmlReader.read(new File("data/basics/contents.xml"), Contents.class);
+		renderArgs.put("groups", contents.groups);
+		return contents.groups;
 	}
 	
+	@XmlRootElement
+	private static class Contents{
+		
+		@XmlElement(name="group")
+		public List<ContentGroup> groups;
+		
+	}
 	
 	private static class ContentGroup{
+		
+		@XmlAttribute
 		public String name;
 		
-		@XmlListClass(Content.class)
+		@XmlElement(name="content")
 		public List<Content> contents = new ArrayList<>();
 
 		private static class Content{
+			@XmlAttribute
 			public String name;
+			@XmlAttribute
 			public String value;
 		}
 		
 	}
 	
+	@XmlRootElement
 	private static class BasicType{
+		
+		@XmlAttribute
 		public String name;
-		@XmlTag("name-hence")
+		
+		@XmlElement(name="name-hence")
 		public String hence;
-		@XmlTag("name-hint")
+		
+		@XmlElement(name="name-hint")
 		public String hint;
-		@XmlListClass(String.class)
+		
+		@XmlElement(name="usage")
 		public List<String> usages = new ArrayList<>();
 		
-		@XmlListClass(ValueType.class)
+		@XmlElement(name="value")
 		public List<ValueType> values = new ArrayList<>();
 		
 		private static class ValueType{
+			
+			@XmlAttribute
 			public String type;
+			
 			public String meaning;
 			
-			@XmlListClass(ExampleType.class)
+			@XmlElement(name="example")
 			public List<ExampleType> examples = new ArrayList<>();
 			
-			@XmlListClass(UsageType.class)
+			@XmlElement(name="usage")
 			public List<UsageType> usages = new ArrayList<>();
 		}
 		
@@ -90,10 +110,12 @@ public class Basic extends HtmlControllerBase{
 		}
 		
 		private static class UsageType{
-			@XmlListClass(String.class)
+			@XmlElement(name="value")
 			public List<String> values = new ArrayList<>();
+			
 			public String meaning;
-			@XmlListClass(ExampleType.class)
+			
+			@XmlElement(name="example")
 			public List<ExampleType> examples = new ArrayList<>();
 		}
 	}

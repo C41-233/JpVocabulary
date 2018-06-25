@@ -4,9 +4,10 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlElement;
+
 import c41.utility.linq.Linq;
-import c41.xml.simple.XmlReader;
-import c41.xml.simple.annotation.XmlListClass;
+import core.config.XmlReader;
 import core.controller.HtmlControllerBase;
 
 public class FormNoun extends HtmlControllerBase{
@@ -26,8 +27,7 @@ public class FormNoun extends HtmlControllerBase{
 		
 		File file = new File("data/formnouns/"+content.value+".xml");
 		if(file.exists()) {
-			XmlReader reader = new XmlReader();
-			FormNounType data = reader.read(file, FormNounType.class);
+			FormNounType data = XmlReader.read(file, FormNounType.class);
 			renderArgs.put("data", data);
 		}
 		render("other/formnoun");
@@ -35,10 +35,16 @@ public class FormNoun extends HtmlControllerBase{
 	
 	private static List<Content> processContents() {
 		File file = new File("data/formnouns/contents.xml");
-		XmlReader reader = new XmlReader();
-		List<Content> contents = reader.readList(file, Content.class, "content");
-		renderArgs.put("contents", contents);
-		return contents;
+		Contents contents = XmlReader.read(file, Contents.class);
+		renderArgs.put("contents", contents.contents);
+		return contents.contents;
+	}
+	
+	private static class Contents{
+		
+		@XmlElement(name="content")
+		public List<Content> contents = new ArrayList<>();
+		
 	}
 	
 	private static class Content{
@@ -49,13 +55,16 @@ public class FormNoun extends HtmlControllerBase{
 
 	private static class FormNounType{
 		
-		@XmlListClass(ValueType.class)
+		@XmlElement(name="value")
 		public List<ValueType> values = new ArrayList<>();
 		
 		private static class ValueType{
+			
 			public String usage;
+			
 			public String meaning;
-			@XmlListClass(ExampleType.class)
+			
+			@XmlElement(name="example")
 			public List<ExampleType> examples = new ArrayList<>();
 		}
 		
