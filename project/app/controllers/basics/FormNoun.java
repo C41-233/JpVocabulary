@@ -4,7 +4,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import c41.utility.linq.Linq;
 import core.config.XmlReader;
@@ -40,6 +42,7 @@ public class FormNoun extends HtmlControllerBase{
 		return contents.contents;
 	}
 	
+	@XmlRootElement(name="contents")
 	private static class Contents{
 		
 		@XmlElement(name="content")
@@ -48,11 +51,15 @@ public class FormNoun extends HtmlControllerBase{
 	}
 	
 	private static class Content{
+		@XmlAttribute
 		public String name;
+		@XmlAttribute
 		public String align;
+		@XmlAttribute
 		public String value;
 	}
 
+	@XmlRootElement(name="formnoun")
 	private static class FormNounType{
 		
 		@XmlElement(name="value")
