@@ -27,7 +27,7 @@ public class FormNoun extends HtmlControllerBase{
 		}
 		renderArgs.put("index", content);
 		
-		File file = new File("data/formnouns/"+content.value+".xml");
+		File file = new File("../data/formnouns/"+content.value+".xml");
 		if(file.exists()) {
 			FormNounType data = XmlReader.read(file, FormNounType.class);
 			renderArgs.put("data", data);

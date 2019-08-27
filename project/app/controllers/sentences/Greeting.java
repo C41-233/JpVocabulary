@@ -4,7 +4,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import c41.utility.linq.Linq;
 import core.config.XmlReader;
@@ -12,7 +14,7 @@ import core.controller.HtmlControllerBase;
 
 public class Greeting extends HtmlControllerBase{
 
-	private static final File BaseFile = new File("data/greetings");
+	private static final File BaseFile = new File("../data/greetings");
 	private static final File ContentFile = new File(BaseFile, "contents.xml");
 	
 	public static void index() {
@@ -41,6 +43,7 @@ public class Greeting extends HtmlControllerBase{
 		return contents.contents;
 	}
 	
+	@XmlRootElement(name="contents")
 	private static class Contents{
 		
 		@XmlElement(name="content")
@@ -49,7 +52,9 @@ public class Greeting extends HtmlControllerBase{
 	}
 	
 	private static class Content{
+		@XmlAttribute
 		public String name;
+		@XmlAttribute
 		public String value;
 	}
 	

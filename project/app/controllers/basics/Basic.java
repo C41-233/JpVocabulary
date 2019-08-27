@@ -29,7 +29,7 @@ public class Basic extends HtmlControllerBase{
 		}
 		renderArgs.put("index", thisContent);
 		
-		File dataFile = new File("data/basics/"+thisContent.value+".xml");
+		File dataFile = new File("../data/basics/"+thisContent.value+".xml");
 		if(dataFile.isFile()) {
 			BasicType basic = XmlReader.read(dataFile, BasicType.class);
 			if(Objects.equals(basic.name, thisContent.name) == false) {
