@@ -22,11 +22,22 @@
 		<div class="col-lg-9">
 			<h3>${current.name}</h3>
 			<hr/>
+			${include.raw()}
 		</div>
 	</div>
 </div>
 
-#{/body}
-
 #{stylesheet}
+td:first-child{
+	font-weight: bold;
+}
 #{/stylesheet}
+
+#{js}
+$(function(){
+	$("table").addClass("table table-bordered")
+})
+
+#{/js}
+
+#{/body}

@@ -456,5 +456,9 @@
 (function($){
 	$(function(){
 		$(".pre-hide").removeClass("pre-hide").hide()
+		$("ruby").each(function(){
+			this.innerHTML += "<rt>"+this.title+"</rt>";
+			this.title = "";
+		});
 	})
 })(window.jQuery);

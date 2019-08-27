@@ -1,6 +1,7 @@
 package controllers.sentences;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +9,9 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.apache.commons.io.FileUtils;
+
+import c41.core.Core;
 import c41.utility.linq.Linq;
 import core.config.XmlReader;
 import core.controller.HtmlControllerBase;
@@ -22,7 +26,7 @@ public class Greeting extends HtmlControllerBase{
 		page(contents.get(0).name);
 	}
 	
-	public static void page(String name) {
+	public static void page(String name){
 		List<Content> contents = readContents();
 		Content current = Linq.from(contents).findFirst(c->c.name.equals(name));
 		if(current == null) {
@@ -30,8 +34,16 @@ public class Greeting extends HtmlControllerBase{
 		}
 		renderArgs.put("current", current);
 		
-		File file = new File(BaseFile, name+".xml");
+		File file = new File(BaseFile, current.value+".html");
 		if(file.exists()) {
+			try {
+				renderArgs.put("include", FileUtils.readFileToString(file, "utf-8"));
+			} catch (IOException e) {
+				throw Core.throwException(e);
+			}
+		}
+		else {
+			renderArgs.put("include", "源文件缺失：" + file.getName());
 		}
 		
 		render("sentences/greetings");
