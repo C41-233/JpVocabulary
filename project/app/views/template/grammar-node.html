@@ -1,0 +1,13 @@
+<li>
+	#{if node.nodes}
+		${node.name}
+		<ul>
+			#{list items:node.nodes, as:'node'}
+				#{include "template/grammar-node.html"/}
+			#{/list}
+		</ul>
+	#{/if}
+	#{else}
+		<a href="${node.href}">${node.name}</a>
+	#{/else}
+</li>

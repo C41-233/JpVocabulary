@@ -103,5 +103,6 @@ GET		/50										Page._50
 GET		/grammar/verb							Page.verb
 GET		/grammar/other							Page.other
 GET		/grammar/auxiliary						Page.auxiliary
+GET		/grammar								basics.Grammar.index
 
 GET		/test									Test.test

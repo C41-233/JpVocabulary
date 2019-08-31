@@ -36,7 +36,7 @@ public class FormNoun extends HtmlControllerBase{
 	}
 	
 	private static List<Content> processContents() {
-		File file = new File("data/formnouns/contents.xml");
+		File file = new File("../data/formnouns/contents.xml");
 		Contents contents = XmlReader.read(file, Contents.class);
 		renderArgs.put("contents", contents.contents);
 		return contents.contents;
