@@ -39,8 +39,8 @@ public final class KatakanaWordsLogic extends LogicBase{
 		return KatakanaWord.find("value=?1", query).fetch();
 	}
 
-	public static IKatakanaWord findKatakanaWordsByAlias(String query) {
-		return KatakanaWord.find("alias=?1", query).first();
+	public static List<IKatakanaWord> findKatakanaWordsByAlias(String query) {
+		return KatakanaWord.find("alias=?1 or alias like ?2 or alias like ?3 or alias like ?4", query, "% " + query + " %", "% " + query, query + " %").fetch();
 	}
 
 	public static List<IKatakanaWord> findQuantifierKatakanaWords() {

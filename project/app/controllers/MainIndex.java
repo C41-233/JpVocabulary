@@ -198,8 +198,8 @@ public final class MainIndex extends HtmlControllerBase {
     		}
     		
     		for(String alias : aliases) {
-        		IKatakanaWord word = KatakanaWordsLogic.findKatakanaWordsByAlias(alias);
-        		if(word != null) {
+        		List<IKatakanaWord> rst = KatakanaWordsLogic.findKatakanaWordsByAlias(alias);
+        		for(IKatakanaWord word : rst){
         			words.add(word);
         		}
     		}
