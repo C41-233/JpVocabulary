@@ -4,46 +4,7 @@
 
 #{body}
 
-#{css}
-#left>li:before{
-	content:	counter(_1, cjk-ideographic) '、';
-	display:	inline-block;
-	vertical-align:	top;
-}
-#left>li{
-	counter-increment:	_1;
-}
-#left>li>ul>li:before{
-	content:		counter(_2, decimal) '.';
-	display:		inline-block;
-	text-align:		right;
-	width:			20px;
-	padding-right:	5px;
-	vertical-align:	top;
-}
-#left>li>ul>li{
-	counter-increment:	_2;
-}
-#left li{
-	width:			100%;
-	padding:		0;
-	margin:			0;
-	list-style-type : none;
-}
-#left li>a{
-	display:		inline-block;
-	width:			80%;
-	padding:		0px;
-	margin:			0px;
-	text-decoration: none;
-}
-#left>ul{
-	padding-left:	20px;
-}
-#left>li>ul{
-	padding-left:	30px;
-}
-#{/css}
+#{import-css 'other/grammar.css'/}
 
 <div class="container">
 	<div class="row">
@@ -52,7 +13,7 @@
 				#{include "template/grammar-node.html"/}
 			#{/list}
 		</div>
-		<div class="col-lg-9">
+		<div class="col-lg-9" id="right">
 			<h1>${title}</h1>
 			<hr/>
 			${content.raw()}
